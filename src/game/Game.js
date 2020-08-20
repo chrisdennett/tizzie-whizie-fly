@@ -21,12 +21,12 @@ export const Game = ({ spriteSheet }) => {
   }, 1);
 
   const jump = () => {
-    if (gameState.isJumping) return;
     setDoJump(true);
   };
 
   return (
     <div onClick={jump} style={{cursor:"pointer"}}>
+    <div>do a jump: {doJump}</div>
       <canvas
         ref={gameCanvasRef}
         style={canvasStyle}
