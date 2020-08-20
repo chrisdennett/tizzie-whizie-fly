@@ -26,7 +26,7 @@ export const Game = ({ spriteSheet }) => {
   };
 
   return (
-    <div onMouseDown={jump}>
+    <div onClick={jump} style={{cursor:"pointer"}}>
       <canvas
         ref={gameCanvasRef}
         style={canvasStyle}
