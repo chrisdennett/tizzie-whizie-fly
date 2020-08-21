@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Game } from "./game/Game";
+import SpriteSheetMaker from "./spriteSheet/SpriteSheetMaker";
 
 function App() {
   const [sourceImg, setSourceImg] = useState(null);
@@ -12,11 +13,18 @@ function App() {
         setSourceImg(image);
       };
 
-      image.src = "./test.jpg";
+      image.src = "./test-4.jpg";
+      // image.src = "./template.png";
     }
   }, [sourceImg]);
 
-  return <div>{sourceImg && <Game spriteSheet={sourceImg} />}</div>;
+  return (
+    <div>
+      <SpriteSheetMaker sourceImg={sourceImg} />
+
+      {/* {sourceImg && <Game spriteSheet={sourceImg} />} */}
+    </div>
+  );
 }
 
 export default App;

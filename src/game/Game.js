@@ -25,14 +25,18 @@ export const Game = ({ spriteSheet }) => {
   };
 
   return (
-    <div onClick={jump} style={{cursor:"pointer"}}>
-    <div>do a jump: {doJump}</div>
+    <div>
       <canvas
         ref={gameCanvasRef}
         style={canvasStyle}
         width={gameState.gameW}
         height={gameState.gameH}
       />
+      <div>
+        <button onClick={jump} style={{ cursor: "pointer" }}>
+          Jump
+        </button>
+      </div>
     </div>
   );
 };
