@@ -32,22 +32,19 @@ const SpriteSheetMaker = ({ sourceImg }) => {
 
         var markers = detector.detect(imageData);
 
-        console.log("markers: ", markers);
-
         if (markers.length > 0) {
           const screenCtx = screenCanvas.getContext("2d");
 
-          for (let m = 0; m < markers.length; m++) {
-            for (let c = 0; c < markers[m].corners.length; c++) {
-              screenCtx.fillStyle = "#00FF00";
-              screenCtx.fillRect(
-                markers[m].corners[c].x,
-                markers[m].corners[c].y,
-                10,
-                10
-              );
-            }
-          }
+          const [a, b, c, d] = getCornerPositions(markers);
+
+          screenCtx.strokeStyle = "#00FF00";
+          screenCtx.beginPath();
+          screenCtx.moveTo(a.x, a.y);
+          screenCtx.lineTo(b.x, b.y);
+          screenCtx.lineTo(c.x, c.y);
+          screenCtx.lineTo(d.x, d.y);
+          screenCtx.closePath();
+          screenCtx.stroke();
         }
       }
     }
@@ -63,6 +60,31 @@ const SpriteSheetMaker = ({ sourceImg }) => {
 };
 
 export default SpriteSheetMaker;
+
+function getCornerPositions(markers) {
+  let allCorners = [];
+
+  for (let marker of markers) {
+    allCorners = allCorners.concat(marker.corners);
+  }
+
+  allCorners.sort((a, b) => (a.x > b.x ? 1 : -1));
+
+  const rightSideCorners = allCorners.slice(allCorners.length - 4);
+  const leftSideCorners = allCorners.slice(0, 4);
+
+  rightSideCorners.sort((a, b) => (a.y > b.y ? 1 : -1));
+  leftSideCorners.sort((a, b) => (a.y > b.y ? 1 : -1));
+
+  const topLeft = leftSideCorners[0];
+  const topRight = rightSideCorners[0];
+  const bottomRight = rightSideCorners[3];
+  const bottomLeft = leftSideCorners[3];
+
+  const fourCorners = [topLeft, topRight, bottomRight, bottomLeft];
+
+  return fourCorners;
+}
 
 function drawToCanvas(sourceCanvas, targCanvas, w, h) {
   const ctx = targCanvas.getContext("2d");

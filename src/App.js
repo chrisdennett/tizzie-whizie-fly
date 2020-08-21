@@ -13,7 +13,7 @@ function App() {
         setSourceImg(image);
       };
 
-      image.src = "./test-4.jpg";
+      image.src = "./marker-test.jpg";
       // image.src = "./template.png";
     }
   }, [sourceImg]);
