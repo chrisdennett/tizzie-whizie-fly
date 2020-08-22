@@ -2,21 +2,19 @@ import React, { useState, useRef, useEffect } from "react";
 import AR from "../libs/aruco";
 import { mapPolygonToCanvas } from "../webGLStuff/webglThings";
 
-const defaultCornerCoords = {
-  topLeft: [0.0, 0.0],
-  topRight: [1.0, 0.0],
-  bottomLeft: [0.0, 1.0],
-  bottomRight: [1.0, 1.0],
-};
-
-const SpriteSheetMaker = ({ sourceImg }) => {
+const SpriteSheetMaker = ({ sourceImg, setSpriteCanvas }) => {
   const [detector, setDetector] = useState(null);
   const [count, setCount] = useState(0);
   const [markerCorners, setMarkerCorners] = useState(null);
   const sourceCanvasRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const updateCount = () => setCount((prev) => prev + 1);
+  const updateCount = () => {
+    setCount((prev) => prev + 1);
+
+    const webGlCanvas = canvasRef.current;
+    setSpriteCanvas(webGlCanvas);
+  };
 
   useEffect(() => {
     if (markerCorners && sourceCanvasRef && sourceCanvasRef.current) {
@@ -49,7 +47,7 @@ const SpriteSheetMaker = ({ sourceImg }) => {
       screenCtx.closePath();
       screenCtx.stroke();
     }
-  }, [markerCorners, sourceCanvasRef]);
+  }, [markerCorners, sourceCanvasRef, sourceImg]);
 
   useEffect(() => {
     if (sourceCanvasRef && sourceImg) {
@@ -138,14 +136,3 @@ function drawToCanvas(sourceCanvas, targCanvas, w, h) {
     h
   );
 }
-
-// function drawSourceCanvas(sourceCanvas) {
-//   const outCanvas = document.createElement("canvas");
-//   outCanvas.width = sourceCanvas.width;
-//   outCanvas.height = sourceCanvas.height;
-//   const ctx = outCanvas.getContext("2d");
-
-//   ctx.drawImage(sourceCanvas, 0, 0);
-
-//   return outCanvas;
-// }

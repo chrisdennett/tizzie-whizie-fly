@@ -4,6 +4,8 @@ import SpriteSheetMaker from "./spriteSheet/SpriteSheetMaker";
 
 function App() {
   const [sourceImg, setSourceImg] = useState(null);
+  const [spriteCanvas, setSpriteCanvas] = useState(null);
+  const [startGame, setStartGame] = useState(false);
 
   useEffect(() => {
     if (!sourceImg) {
@@ -18,11 +20,18 @@ function App() {
     }
   }, [sourceImg]);
 
+  const doStartGame = () => setStartGame(true);
+
   return (
     <div>
-      <SpriteSheetMaker sourceImg={sourceImg} />
-
-      {/* {sourceImg && <Game spriteSheet={sourceImg} />} */}
+      <button onClick={doStartGame}>START</button>
+      {spriteCanvas && <Game spriteCanvas={spriteCanvas} />}
+      {!startGame && (
+        <SpriteSheetMaker
+          sourceImg={sourceImg}
+          setSpriteCanvas={setSpriteCanvas}
+        />
+      )}
     </div>
   );
 }

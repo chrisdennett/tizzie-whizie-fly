@@ -1,6 +1,3 @@
-import vertexShaderSource from "./vert-shader.glsl";
-import fragmentShaderSource from "./frag-shader.glsl";
-
 const vertSrc = `attribute vec2 a_texCoord;
 attribute vec2 a_position;
 
@@ -35,6 +32,7 @@ export const mapPolygonToCanvas = ({
   topRight,
   bottomLeft,
   bottomRight,
+  callback,
 }) => {
   const cornersArr = [
     ...convertArrToFloats(topLeft),

@@ -1,7 +1,9 @@
-export const drawGame = (gameCanvas, gameState, spriteSheet, spriteData) => {
+export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
   const ctx = gameCanvas.getContext("2d");
   // clear scene
   ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+  // ctx.drawImage(spriteCanvas, 0, 0);
 
   for (let c = 0; c < gameState.cloudsTotal; c++) {
     ctx.fillStyle = "orange";
@@ -13,7 +15,7 @@ export const drawGame = (gameCanvas, gameState, spriteSheet, spriteData) => {
   ctx.scale(-1, 1);
   drawSprite(
     ctx,
-    spriteSheet,
+    spriteCanvas,
     spriteData.shore,
     0 - spriteData.shore.w - gameState.shorelineX,
     gameState.shorelineY - gameState.shorelineH
@@ -22,7 +24,7 @@ export const drawGame = (gameCanvas, gameState, spriteSheet, spriteData) => {
   if (gameState.shorelineX < 0) {
     drawSprite(
       ctx,
-      spriteSheet,
+      spriteCanvas,
       spriteData.shore,
       gameState.shorelineX + gameState.shorelineW,
       gameState.shorelineY - gameState.shorelineH
@@ -30,7 +32,7 @@ export const drawGame = (gameCanvas, gameState, spriteSheet, spriteData) => {
   } else {
     drawSprite(
       ctx,
-      spriteSheet,
+      spriteCanvas,
       spriteData.shore,
       gameState.shorelineX - gameState.shorelineW,
       gameState.shorelineY - gameState.shorelineH
@@ -58,7 +60,7 @@ export const drawGame = (gameCanvas, gameState, spriteSheet, spriteData) => {
   // boat
   drawSprite(
     ctx,
-    spriteSheet,
+    spriteCanvas,
     spriteData.boats[0],
     gameState.boatX,
     gameState.boatY - gameState.boatH
@@ -67,15 +69,15 @@ export const drawGame = (gameCanvas, gameState, spriteSheet, spriteData) => {
   // player
   drawSprite(
     ctx,
-    spriteSheet,
+    spriteCanvas,
     spriteData.player,
     100,
     gameState.playerY - (gameState.playerH + 20)
   );
 };
 
-function drawSprite(ctx, spriteSheet, sprite, targX, targY) {
+function drawSprite(ctx, spriteCanvas, sprite, targX, targY) {
   const { x, y, h, w } = sprite;
 
-  ctx.drawImage(spriteSheet, x, y, w, h, targX, targY, w, h);
+  ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
 }

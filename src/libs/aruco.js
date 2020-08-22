@@ -1,7 +1,5 @@
 // See https://github.com/jcmellado/js-aruco
 
-const { defaultGameState } = require("../game/gameState");
-
 /*
 Copyright (c) 2011 Juan Mellado
 
@@ -32,7 +30,7 @@ References:
   http://incubator.quasimondo.com/processing/fast_blur_deluxe.php
 */
 
-var CV = CV || {};
+var CV = {};
 
 CV.Image = function (width, height, data) {
   this.width = width || 0;
@@ -441,8 +439,8 @@ CV.borderFollowing = function (src, pos, nbd, point, hole, deltas) {
     pos3,
     pos4,
     s,
-    s_end,
-    s_prev;
+    s_end;
+  // s_prev;
 
   contour.hole = hole;
 
@@ -460,7 +458,7 @@ CV.borderFollowing = function (src, pos, nbd, point, hole, deltas) {
     contour.push({ x: point.x, y: point.y });
   } else {
     pos3 = pos;
-    s_prev = s ^ 4;
+    // s_prev = s ^ 4;
 
     while (true) {
       s_end = s;
@@ -479,7 +477,7 @@ CV.borderFollowing = function (src, pos, nbd, point, hole, deltas) {
 
       contour.push({ x: point.x, y: point.y });
 
-      s_prev = s;
+      // s_prev = s;
 
       point.x += CV.neighborhood[s][0];
       point.y += CV.neighborhood[s][1];

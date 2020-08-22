@@ -30,8 +30,8 @@ export const spriteData = {
 };
 
 export const defaultGameState = {
-  gameW: 800,
-  gameH: 600,
+  gameW: 1089,
+  gameH: 760,
 
   gravity: 0.03,
   surface: water,
