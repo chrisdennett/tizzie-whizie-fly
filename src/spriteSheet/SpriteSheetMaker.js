@@ -1,16 +1,59 @@
 import React, { useState, useRef, useEffect } from "react";
 import AR from "../libs/aruco";
+import { mapPolygonToCanvas } from "../webGLStuff/webglThings";
+
+const defaultCornerCoords = {
+  topLeft: [0.0, 0.0],
+  topRight: [1.0, 0.0],
+  bottomLeft: [0.0, 1.0],
+  bottomRight: [1.0, 1.0],
+};
 
 const SpriteSheetMaker = ({ sourceImg }) => {
   const [detector, setDetector] = useState(null);
   const [count, setCount] = useState(0);
+  const [markerCorners, setMarkerCorners] = useState(null);
+  const sourceCanvasRef = useRef(null);
   const canvasRef = useRef(null);
 
   const updateCount = () => setCount((prev) => prev + 1);
 
   useEffect(() => {
-    if (canvasRef && sourceImg) {
-      const screenCanvas = canvasRef.current;
+    if (markerCorners && sourceCanvasRef && sourceCanvasRef.current) {
+      const sourceCanvas = sourceCanvasRef.current;
+      const { width: srcW, height: srcH } = sourceCanvas;
+      const [a, b, c, d] = markerCorners;
+
+      const webGlCanvas = canvasRef.current;
+      const gl = webGlCanvas.getContext("webgl");
+
+      webGlCanvas.width = 1089;
+      webGlCanvas.height = 760;
+
+      mapPolygonToCanvas({
+        gl,
+        image: sourceImg,
+        topLeft: [a.x / srcW, a.y / srcH],
+        topRight: [b.x / srcW, b.y / srcH],
+        bottomRight: [c.x / srcW, c.y / srcH],
+        bottomLeft: [d.x / srcW, d.y / srcH],
+      });
+
+      const screenCtx = sourceCanvas.getContext("2d");
+      screenCtx.strokeStyle = "#00FF00";
+      screenCtx.beginPath();
+      screenCtx.moveTo(a.x, a.y);
+      screenCtx.lineTo(b.x, b.y);
+      screenCtx.lineTo(c.x, c.y);
+      screenCtx.lineTo(d.x, d.y);
+      screenCtx.closePath();
+      screenCtx.stroke();
+    }
+  }, [markerCorners, sourceCanvasRef]);
+
+  useEffect(() => {
+    if (sourceCanvasRef && sourceImg) {
+      const sourceCanvas = sourceCanvasRef.current;
 
       if (!detector && AR) {
         const d = new AR.Detector();
@@ -18,43 +61,33 @@ const SpriteSheetMaker = ({ sourceImg }) => {
       } else {
         drawToCanvas(
           sourceImg,
-          screenCanvas,
+          sourceCanvas,
           sourceImg.width / 4,
           sourceImg.height / 4
         );
-        const ctx = screenCanvas.getContext("2d");
+        const ctx = sourceCanvas.getContext("2d");
         const imageData = ctx.getImageData(
           0,
           0,
-          screenCanvas.width,
-          screenCanvas.height
+          sourceCanvas.width,
+          sourceCanvas.height
         );
 
         var markers = detector.detect(imageData);
 
         if (markers.length > 0) {
-          const screenCtx = screenCanvas.getContext("2d");
-
-          const [a, b, c, d] = getCornerPositions(markers);
-
-          screenCtx.strokeStyle = "#00FF00";
-          screenCtx.beginPath();
-          screenCtx.moveTo(a.x, a.y);
-          screenCtx.lineTo(b.x, b.y);
-          screenCtx.lineTo(c.x, c.y);
-          screenCtx.lineTo(d.x, d.y);
-          screenCtx.closePath();
-          screenCtx.stroke();
+          setMarkerCorners(getCornerPositions(markers));
         }
       }
     }
-  }, [sourceImg, canvasRef, detector, count]);
+  }, [sourceImg, sourceCanvasRef, detector, count]);
 
   return (
-    <div>
+    <div style={{ background: "red" }}>
       <div>{count}</div>
       <button onClick={updateCount}>TICK</button>
-      <canvas ref={canvasRef} style={{ display: "block" }} />
+      <canvas ref={sourceCanvasRef} style={{ display: "block" }} />
+      <canvas ref={canvasRef} style={{ background: "white" }} />
     </div>
   );
 };
