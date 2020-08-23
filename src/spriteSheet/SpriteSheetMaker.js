@@ -6,7 +6,7 @@ const SpriteSheetMaker = ({ sourceImg, setSpriteCanvas, w, h }) => {
   const [detector, setDetector] = useState(null);
   const [markerCorners, setMarkerCorners] = useState(null);
   const [spritesheetMask, setSpritesheetMask] = useState(null);
-  const [preCanvas, setPreCanvas] = useState(null);
+  const [preCanvas] = useState(null);
 
   const sourceCanvasRef = useRef(null);
   const canvasRef = useRef(null);
@@ -193,16 +193,16 @@ function drawToCanvas(sourceCanvas, targCanvas, w, h) {
   );
 }
 
-function drawPreGameCanvas(sourceCanvas, w, h) {
-  const outCanvas = document.createElement("canvas");
-  outCanvas.width = w;
-  outCanvas.height = h;
-  const ctx = outCanvas.getContext("2d");
+// function drawPreGameCanvas(sourceCanvas, w, h) {
+//   const outCanvas = document.createElement("canvas");
+//   outCanvas.width = w;
+//   outCanvas.height = h;
+//   const ctx = outCanvas.getContext("2d");
 
-  ctx.drawImage(sourceCanvas, 0, 0);
+//   ctx.drawImage(sourceCanvas, 0, 0);
 
-  return outCanvas;
-}
+//   return outCanvas;
+// }
 
 function drawAlphaCanvas(w, h) {
   const outCanvas = document.createElement("canvas");
