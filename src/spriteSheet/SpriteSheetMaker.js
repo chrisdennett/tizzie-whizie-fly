@@ -122,18 +122,18 @@ const SpriteSheetMaker = ({ sourceImg, setSpriteCanvas, w, h }) => {
       bottomLeft: [d.x / srcW, d.y / srcH],
     });
 
-    const screenCtx = sourceCanvas.getContext("2d");
-    screenCtx.strokeStyle = "#00FF00";
-    screenCtx.beginPath();
-    screenCtx.moveTo(a.x, a.y);
-    screenCtx.lineTo(b.x, b.y);
-    screenCtx.lineTo(c.x, c.y);
-    screenCtx.lineTo(d.x, d.y);
-    screenCtx.closePath();
-    screenCtx.stroke();
+    // const screenCtx = sourceCanvas.getContext("2d");
+    // screenCtx.strokeStyle = "#00FF00";
+    // screenCtx.beginPath();
+    // screenCtx.moveTo(a.x, a.y);
+    // screenCtx.lineTo(b.x, b.y);
+    // screenCtx.lineTo(c.x, c.y);
+    // screenCtx.lineTo(d.x, d.y);
+    // screenCtx.closePath();
+    // screenCtx.stroke();
 
-    const pCanvas = drawPreGameCanvas(webGlCanvas, w, h);
-    setPreCanvas(pCanvas);
+    // const pCanvas = drawPreGameCanvas(webGlCanvas, w, h);
+    // setPreCanvas(pCanvas);
   };
 
   return (
