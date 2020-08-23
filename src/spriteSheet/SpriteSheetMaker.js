@@ -6,7 +6,7 @@ const SpriteSheetMaker = ({ sourceImg, setSpriteCanvas, w, h }) => {
   const [detector, setDetector] = useState(null);
   const [markerCorners, setMarkerCorners] = useState(null);
   const [spritesheetMask, setSpritesheetMask] = useState(null);
-  const [preCanvas] = useState(null);
+  const [preCanvas, setPreCanvas] = useState(null);
 
   const sourceCanvasRef = useRef(null);
   const canvasRef = useRef(null);
@@ -34,41 +34,41 @@ const SpriteSheetMaker = ({ sourceImg, setSpriteCanvas, w, h }) => {
   }, [spritesheetMask]);
 
   // use webGl to get rectangular image from marker corners
-  // useEffect(() => {
-  //   if (markerCorners && sourceCanvasRef && sourceCanvasRef.current) {
-  //     const sourceCanvas = sourceCanvasRef.current;
-  //     const { width: srcW, height: srcH } = sourceCanvas;
-  //     const [a, b, c, d] = markerCorners;
+  useEffect(() => {
+    if (markerCorners && sourceCanvasRef && sourceCanvasRef.current) {
+      const sourceCanvas = sourceCanvasRef.current;
+      const { width: srcW, height: srcH } = sourceCanvas;
+      const [a, b, c, d] = markerCorners;
 
-  //     const webGlCanvas = canvasRef.current;
-  //     const gl = webGlCanvas.getContext("webgl");
+      const webGlCanvas = canvasRef.current;
+      const gl = webGlCanvas.getContext("webgl");
 
-  //     webGlCanvas.width = w;
-  //     webGlCanvas.height = h;
+      webGlCanvas.width = w;
+      webGlCanvas.height = h;
 
-  //     mapPolygonToCanvas({
-  //       gl,
-  //       image: sourceImg,
-  //       topLeft: [a.x / srcW, a.y / srcH],
-  //       topRight: [b.x / srcW, b.y / srcH],
-  //       bottomRight: [c.x / srcW, c.y / srcH],
-  //       bottomLeft: [d.x / srcW, d.y / srcH],
-  //     });
+      mapPolygonToCanvas({
+        gl,
+        image: sourceImg,
+        topLeft: [a.x / srcW, a.y / srcH],
+        topRight: [b.x / srcW, b.y / srcH],
+        bottomRight: [c.x / srcW, c.y / srcH],
+        bottomLeft: [d.x / srcW, d.y / srcH],
+      });
 
-  //     const screenCtx = sourceCanvas.getContext("2d");
-  //     screenCtx.strokeStyle = "#00FF00";
-  //     screenCtx.beginPath();
-  //     screenCtx.moveTo(a.x, a.y);
-  //     screenCtx.lineTo(b.x, b.y);
-  //     screenCtx.lineTo(c.x, c.y);
-  //     screenCtx.lineTo(d.x, d.y);
-  //     screenCtx.closePath();
-  //     screenCtx.stroke();
+      const screenCtx = sourceCanvas.getContext("2d");
+      screenCtx.strokeStyle = "#00FF00";
+      screenCtx.beginPath();
+      screenCtx.moveTo(a.x, a.y);
+      screenCtx.lineTo(b.x, b.y);
+      screenCtx.lineTo(c.x, c.y);
+      screenCtx.lineTo(d.x, d.y);
+      screenCtx.closePath();
+      screenCtx.stroke();
 
-  //     const pCanvas = drawPreGameCanvas(webGlCanvas, w, h);
-  //     setPreCanvas(pCanvas);
-  //   }
-  // }, [markerCorners, sourceCanvasRef, sourceImg, w, h]);
+      const pCanvas = drawPreGameCanvas(webGlCanvas, w, h);
+      setPreCanvas(pCanvas);
+    }
+  }, [markerCorners, sourceCanvasRef, sourceImg, w, h]);
 
   // use CV with AR detector to find corners
   useEffect(() => {
@@ -102,43 +102,8 @@ const SpriteSheetMaker = ({ sourceImg, setSpriteCanvas, w, h }) => {
     }
   }, [sourceImg, sourceCanvasRef, detector]);
 
-  const nextStep = () => {
-    const sourceCanvas = sourceCanvasRef.current;
-    const { width: srcW, height: srcH } = sourceCanvas;
-    const [a, b, c, d] = markerCorners;
-
-    const webGlCanvas = canvasRef.current;
-    const gl = webGlCanvas.getContext("webgl");
-
-    webGlCanvas.width = w;
-    webGlCanvas.height = h;
-
-    mapPolygonToCanvas({
-      gl,
-      image: sourceImg,
-      topLeft: [a.x / srcW, a.y / srcH],
-      topRight: [b.x / srcW, b.y / srcH],
-      bottomRight: [c.x / srcW, c.y / srcH],
-      bottomLeft: [d.x / srcW, d.y / srcH],
-    });
-
-    // const screenCtx = sourceCanvas.getContext("2d");
-    // screenCtx.strokeStyle = "#00FF00";
-    // screenCtx.beginPath();
-    // screenCtx.moveTo(a.x, a.y);
-    // screenCtx.lineTo(b.x, b.y);
-    // screenCtx.lineTo(c.x, c.y);
-    // screenCtx.lineTo(d.x, d.y);
-    // screenCtx.closePath();
-    // screenCtx.stroke();
-
-    // const pCanvas = drawPreGameCanvas(webGlCanvas, w, h);
-    // setPreCanvas(pCanvas);
-  };
-
   return (
     <div style={{ background: "red" }}>
-      <button onClick={nextStep}>NEXT STEP</button>
       <button onClick={onDone}>DONE</button>
       <canvas ref={sourceCanvasRef} style={{ display: "block" }} />
       <canvas ref={canvasRef} style={{ background: "white" }} />
@@ -193,16 +158,16 @@ function drawToCanvas(sourceCanvas, targCanvas, w, h) {
   );
 }
 
-// function drawPreGameCanvas(sourceCanvas, w, h) {
-//   const outCanvas = document.createElement("canvas");
-//   outCanvas.width = w;
-//   outCanvas.height = h;
-//   const ctx = outCanvas.getContext("2d");
+function drawPreGameCanvas(sourceCanvas, w, h) {
+  const outCanvas = document.createElement("canvas");
+  outCanvas.width = w;
+  outCanvas.height = h;
+  const ctx = outCanvas.getContext("2d");
 
-//   ctx.drawImage(sourceCanvas, 0, 0);
+  ctx.drawImage(sourceCanvas, 0, 0);
 
-//   return outCanvas;
-// }
+  return outCanvas;
+}
 
 function drawAlphaCanvas(w, h) {
   const outCanvas = document.createElement("canvas");
