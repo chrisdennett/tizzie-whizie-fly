@@ -2,20 +2,38 @@ import React, { useState, useRef, useEffect } from "react";
 import AR from "../libs/aruco";
 import { mapPolygonToCanvas } from "../webGLStuff/webglThings";
 
-const SpriteSheetMaker = ({ sourceImg, setSpriteCanvas }) => {
+const SpriteSheetMaker = ({ sourceImg, setSpriteCanvas, w, h }) => {
   const [detector, setDetector] = useState(null);
-  const [count, setCount] = useState(0);
   const [markerCorners, setMarkerCorners] = useState(null);
+  const [spritesheetMask, setSpritesheetMask] = useState(null);
+  const [preCanvas, setPreCanvas] = useState(null);
+
   const sourceCanvasRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const updateCount = () => {
-    setCount((prev) => prev + 1);
+  const onDone = () => {
+    const alphaCanvas = drawAlphaCanvas(w, h);
+    const alphaCtx = alphaCanvas.getContext("2d");
+    alphaCtx.drawImage(spritesheetMask, 0, 0);
+    alphaCtx.globalCompositeOperation = "source-in";
+    alphaCtx.drawImage(preCanvas, 0, 0);
 
-    const webGlCanvas = canvasRef.current;
-    setSpriteCanvas(webGlCanvas);
+    setSpriteCanvas(alphaCanvas);
   };
 
+  useEffect(() => {
+    if (!spritesheetMask) {
+      const image = new Image();
+      image.crossOrigin = "Anonymous";
+      image.onload = () => {
+        setSpritesheetMask(image);
+      };
+
+      image.src = "./spritesheet-mask.png";
+    }
+  }, [spritesheetMask]);
+
+  // use webGl to get rectangular image from marker corners
   useEffect(() => {
     if (markerCorners && sourceCanvasRef && sourceCanvasRef.current) {
       const sourceCanvas = sourceCanvasRef.current;
@@ -25,8 +43,8 @@ const SpriteSheetMaker = ({ sourceImg, setSpriteCanvas }) => {
       const webGlCanvas = canvasRef.current;
       const gl = webGlCanvas.getContext("webgl");
 
-      webGlCanvas.width = 1089;
-      webGlCanvas.height = 760;
+      webGlCanvas.width = w;
+      webGlCanvas.height = h;
 
       mapPolygonToCanvas({
         gl,
@@ -46,9 +64,13 @@ const SpriteSheetMaker = ({ sourceImg, setSpriteCanvas }) => {
       screenCtx.lineTo(d.x, d.y);
       screenCtx.closePath();
       screenCtx.stroke();
-    }
-  }, [markerCorners, sourceCanvasRef, sourceImg]);
 
+      const pCanvas = drawPreGameCanvas(webGlCanvas, w, h);
+      setPreCanvas(pCanvas);
+    }
+  }, [markerCorners, sourceCanvasRef, sourceImg, w, h]);
+
+  // use CV with AR detector to find corners
   useEffect(() => {
     if (sourceCanvasRef && sourceImg) {
       const sourceCanvas = sourceCanvasRef.current;
@@ -78,12 +100,11 @@ const SpriteSheetMaker = ({ sourceImg, setSpriteCanvas }) => {
         }
       }
     }
-  }, [sourceImg, sourceCanvasRef, detector, count]);
+  }, [sourceImg, sourceCanvasRef, detector]);
 
   return (
     <div style={{ background: "red" }}>
-      <div>{count}</div>
-      <button onClick={updateCount}>TICK</button>
+      <button onClick={onDone}>DONE</button>
       <canvas ref={sourceCanvasRef} style={{ display: "block" }} />
       <canvas ref={canvasRef} style={{ background: "white" }} />
     </div>
@@ -135,4 +156,27 @@ function drawToCanvas(sourceCanvas, targCanvas, w, h) {
     w,
     h
   );
+}
+
+function drawPreGameCanvas(sourceCanvas, w, h) {
+  const outCanvas = document.createElement("canvas");
+  outCanvas.width = w;
+  outCanvas.height = h;
+  const ctx = outCanvas.getContext("2d");
+
+  ctx.drawImage(sourceCanvas, 0, 0);
+
+  return outCanvas;
+}
+
+function drawAlphaCanvas(w, h) {
+  const outCanvas = document.createElement("canvas");
+  outCanvas.width = w;
+  outCanvas.height = h;
+  const ctx = outCanvas.getContext("2d");
+
+  ctx.fillStyle = "rgba(0,0,0,0)";
+  ctx.fillRect(0, 0, w, h);
+
+  return outCanvas;
 }
