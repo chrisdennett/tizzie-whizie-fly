@@ -9,10 +9,10 @@ export const spriteData = {
   },
   boats: [
     {
-      x: 410,
-      y: 150,
-      w: 300,
-      h: 110,
+      x: 404,
+      y: 140,
+      w: 305,
+      h: 113,
     },
   ],
   shore: {
@@ -22,9 +22,9 @@ export const spriteData = {
     h: 130,
   },
   player: {
-    x: 450,
-    y: 295,
-    w: 240,
+    x: 445,
+    y: 285,
+    w: 243,
     h: 131,
   },
 };

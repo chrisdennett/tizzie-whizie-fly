@@ -15,7 +15,7 @@ function App() {
         setSourceImg(image);
       };
 
-      image.src = "./marker-test.jpg";
+      image.src = "./spritesheet.jpg";
       // image.src = "./template.png";
     }
   }, [sourceImg]);
