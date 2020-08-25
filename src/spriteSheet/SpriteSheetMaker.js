@@ -82,8 +82,8 @@ const SpriteSheetMaker = ({ sourceImg, setSpriteCanvas, w, h }) => {
         drawToCanvas(
           sourceImg,
           sourceCanvas,
-          sourceImg.width / 4,
-          sourceImg.height / 4
+          sourceImg.width,
+          sourceImg.height
         );
         const ctx = sourceCanvas.getContext("2d");
         const imageData = ctx.getImageData(

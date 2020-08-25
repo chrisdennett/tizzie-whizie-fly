@@ -12,12 +12,11 @@ export const Game = ({ spriteCanvas, gameState, setGameState }) => {
   useInterval(() => {
     const gameCanvas = gameCanvasRef.current;
     if (!gameCanvas || !spriteCanvas) return;
-
     const nextGameState = getNextGameState(gameState, doJump);
     setGameState(nextGameState);
     drawGame(gameCanvas, gameState, spriteCanvas, spriteData);
     setDoJump(false);
-  }, 1);
+  }, 0);
 
   const jump = () => {
     setDoJump(true);
@@ -32,7 +31,7 @@ export const Game = ({ spriteCanvas, gameState, setGameState }) => {
         height={gameState.gameH}
       />
       <div>
-        <button onClick={jump} style={{ cursor: "pointer" }}>
+        <button onClick={jump} style={{ cursor: "pointer", padding: 20 }}>
           Jump
         </button>
       </div>
