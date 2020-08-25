@@ -1,22 +1,19 @@
 import React, { useState } from "react";
 import { useInterval } from "../hooks/useInternval";
-import { drawGame } from "./drawGame";
 import { getNextGameState, spriteData } from "./gameState";
+import { GameCanvas } from "./GameCanvas";
 
 export const Game = ({ spriteCanvas, gameState, setGameState }) => {
   const [doJump, setDoJump] = useState(false);
 
-  const gameCanvasRef = React.useRef(null);
-  const canvasStyle = { border: "red 1px solid" };
-
   useInterval(() => {
-    const gameCanvas = gameCanvasRef.current;
-    if (!gameCanvas || !spriteCanvas) return;
+    if (!spriteCanvas) return;
+
+    if (gameState.isJumping) setDoJump(false);
+
     const nextGameState = getNextGameState(gameState, doJump);
     setGameState(nextGameState);
-    drawGame(gameCanvas, gameState, spriteCanvas, spriteData);
-    setDoJump(false);
-  }, 0);
+  }, 1);
 
   const jump = () => {
     setDoJump(true);
@@ -24,11 +21,10 @@ export const Game = ({ spriteCanvas, gameState, setGameState }) => {
 
   return (
     <div>
-      <canvas
-        ref={gameCanvasRef}
-        style={canvasStyle}
-        width={gameState.gameW}
-        height={gameState.gameH}
+      <GameCanvas
+        spriteCanvas={spriteCanvas}
+        gameState={gameState}
+        spriteData={spriteData}
       />
       <div>
         <button onClick={jump} style={{ cursor: "pointer", padding: 20 }}>
