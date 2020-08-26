@@ -27,7 +27,7 @@ export const Game = ({ spriteCanvas, gameState, setGameState }) => {
         spriteData={spriteData}
       />
       <div>
-        <button onClick={jump} style={{ cursor: "pointer", padding: 20 }}>
+        <button onClick={jump} onTouchStart={jump} style={{ cursor: "pointer", padding: 20 }}>
           Jump
         </button>
       </div>
