@@ -90,7 +90,7 @@ function getObstacleState(prevGameState) {
 }
 
 function getPlayerState(prevGameState, doJump) {
-  if (doJump) console.log("doJump: ", doJump);
+  // if (doJump) console.log("doJump: ", doJump);
 
   if (doJump && !prevGameState.isJumping) {
     return {
