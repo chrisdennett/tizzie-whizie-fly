@@ -67,6 +67,11 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
   );
 
   // player
+  ctx.save();
+  ctx.shadowColor = "rgba(0,0,0,0.3)";
+  ctx.shadowOffsetY = 10;
+  ctx.shadowOffsetX = 10;
+  ctx.shadowBlur = 5;
   drawSprite(
     ctx,
     spriteCanvas,
@@ -74,6 +79,7 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
     100,
     gameState.playerY - (gameState.playerH + 20)
   );
+  ctx.restore();
 };
 
 function drawSprite(ctx, spriteCanvas, sprite, targX, targY) {

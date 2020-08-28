@@ -35,6 +35,18 @@ const SpriteSheetMaker = ({ setSpriteCanvas, w, h }) => {
     }
   }, [spritesheetMask]);
 
+  useEffect(() => {
+    if (!spritesheetMask) {
+      const image = new Image();
+      image.crossOrigin = "Anonymous";
+      image.onload = () => {
+        setSourceImg(image);
+      };
+
+      image.src = "./spritesheet.jpg";
+    }
+  }, [spritesheetMask]);
+
   // use webGl to get rectangular image from marker corners
   useEffect(() => {
     if (markerCorners && sourceCanvasRef && sourceCanvasRef.current) {

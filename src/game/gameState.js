@@ -33,7 +33,7 @@ export const defaultGameState = {
   gameW: 1089,
   gameH: 760,
 
-  gravity: 0.03,
+  gravity: 0.01,
   surface: water,
 
   cloudsMaxY: water - 250,
@@ -54,15 +54,15 @@ export const defaultGameState = {
   playerY: water,
   playerH: 50,
   playerW: 100,
-  playerVelocityY: -4,
+  playerVelocityY: -2,
   isJumping: false,
-  jumpPower: -15,
+  isDiving: false,
 };
 
-export const getNextGameState = (prevGameState, doJump) => {
+export const getNextGameState = (prevGameState, goUp, goDown) => {
   return {
     ...prevGameState,
-    ...getPlayerState(prevGameState, doJump),
+    ...getPlayerState(prevGameState, goUp, goDown),
     ...getObstacleState(prevGameState),
     ...getBackgroundState(prevGameState),
   };
@@ -89,33 +89,56 @@ function getObstacleState(prevGameState) {
   return { boatX: newVal };
 }
 
-function getPlayerState(prevGameState, doJump) {
-  // if (doJump) console.log("doJump: ", doJump);
-
-  if (doJump && !prevGameState.isJumping) {
+function getPlayerState(prevGameState, goUp, goDown) {
+  if (goUp && !prevGameState.isJumping) {
     return {
-      jumpPower: defaultGameState.jumpPower,
       isJumping: true,
       playerVelocityY: defaultGameState.playerVelocityY,
     };
   }
+  if (goDown && !prevGameState.isJumping) {
+    return {
+      isJumping: true,
+      isDiving: true,
+      playerVelocityY: defaultGameState.playerVelocityY * -1,
+    };
+  }
   if (!prevGameState.isJumping) return {};
 
+  // is jumping/diving
   let newPlayerY = prevGameState.playerY;
   let newIsJumping = prevGameState.isJumping;
+  let newIsDiving = prevGameState.isDiving;
   let newPlayerVelocityY = prevGameState.playerVelocityY;
 
   newPlayerY += prevGameState.playerVelocityY;
-  if (newPlayerY >= prevGameState.surface) {
-    newPlayerY = prevGameState.surface;
-    newIsJumping = false;
-    newPlayerVelocityY = defaultGameState.playerVelocityY;
-  }
 
-  newPlayerVelocityY += prevGameState.gravity;
+  // if diving
+  if (prevGameState.isDiving) {
+    if (newPlayerY <= prevGameState.surface) {
+      newPlayerY = prevGameState.surface;
+      newIsJumping = false;
+      newIsDiving = false;
+      newPlayerVelocityY = defaultGameState.playerVelocityY;
+    }
+
+    newPlayerVelocityY -= prevGameState.gravity;
+  }
+  // if jumping
+  else {
+    if (newPlayerY >= prevGameState.surface) {
+      newPlayerY = prevGameState.surface;
+      newIsJumping = false;
+      newIsDiving = false;
+      newPlayerVelocityY = defaultGameState.playerVelocityY;
+    }
+
+    newPlayerVelocityY += prevGameState.gravity;
+  }
 
   return {
     isJumping: newIsJumping,
+    isDiving: newIsDiving,
     playerY: newPlayerY,
     playerVelocityY: newPlayerVelocityY,
   };

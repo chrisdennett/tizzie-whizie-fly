@@ -4,19 +4,32 @@ import { getNextGameState, spriteData } from "./gameState";
 import { GameCanvas } from "./GameCanvas";
 
 export const Game = ({ spriteCanvas, gameState, setGameState }) => {
-  const [doJump, setDoJump] = useState(false);
+  const [flyUp, setFlyUp] = useState(false);
+  const [diveDown, setDiveDown] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useInterval(() => {
-    if (!spriteCanvas) return;
+    if (!spriteCanvas || isPaused) return;
 
-    if (gameState.isJumping) setDoJump(false);
+    if (gameState.isJumping) {
+      setFlyUp(false);
+      setDiveDown(false);
+    }
 
-    const nextGameState = getNextGameState(gameState, doJump);
+    const nextGameState = getNextGameState(gameState, flyUp, diveDown);
     setGameState(nextGameState);
   }, 1);
 
-  const jump = () => {
-    setDoJump(true);
+  const goUp = () => {
+    setFlyUp(true);
+  };
+
+  const goDown = () => {
+    setDiveDown(true);
+  };
+
+  const onPlayPauseToggle = () => {
+    setIsPaused((prev) => !prev);
   };
 
   return (
@@ -27,8 +40,25 @@ export const Game = ({ spriteCanvas, gameState, setGameState }) => {
         spriteData={spriteData}
       />
       <div>
-        <button onClick={jump} onTouchStart={jump} style={{ cursor: "pointer", padding: 20 }}>
-          Jump
+        <button
+          onClick={goUp}
+          onTouchStart={goUp}
+          style={{ cursor: "pointer", padding: 20 }}
+        >
+          UP
+        </button>
+        <button
+          onClick={onPlayPauseToggle}
+          style={{ cursor: "pointer", padding: 20 }}
+        >
+          {isPaused ? "PLAY" : "PAUSE"}
+        </button>
+        <button
+          onClick={goDown}
+          onTouchStart={goDown}
+          style={{ cursor: "pointer", padding: 20 }}
+        >
+          DIVE
         </button>
       </div>
     </div>
