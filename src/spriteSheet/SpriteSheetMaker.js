@@ -245,6 +245,15 @@ function createMaskedCanvas(spriteData, spriteCanvas, maskCanvas) {
     gameSpriteSheet.player.y + gameSpriteSheet.player.h + padding
   );
 
+  // draw shore
+  gameSpriteSheet.shore = drawMaskedSprite(
+    ctx,
+    spriteCanvas,
+    maskCanvas,
+    spriteData.shore,
+    spriteData.shoreMask,
+    gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding
+  );
   // const { playerSrc: p, playerMask: m } = spriteData;
   // // draw the mask
   // ctx.drawImage(maskCanvas, m.x, m.y, m.w, m.h, 0, 0, p.w, p.h);

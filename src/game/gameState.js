@@ -19,11 +19,17 @@ export const spriteData = {
     w: 483.996,
     h: 164.181,
   },
+  shoreMask: {
+    x: 36.201,
+    y: 320.096,
+    w: 1029.128,
+    h: 121.686,
+  },
   shore: {
-    x: 0,
-    y: 80,
-    w: 805,
-    h: 130,
+    x: 41.354 - 16,
+    y: 130.692 - 18,
+    w: 1029.128,
+    h: 121.686,
   },
   playerSrc: {
     x: 198.985 - 16,
@@ -46,9 +52,9 @@ export const defaultGameState = {
 
   shorelineX: 0,
   shorelineY: water - 120,
-  shorelineW: 805,
-  shorelineH: 130,
-  shorelineSpeed: 0.2,
+  shorelineW: spriteData.shore.w,
+  shorelineH: spriteData.shore.h,
+  shorelineSpeed: 0.05,
 
   boatX: 800,
   boatY: water + 10,
