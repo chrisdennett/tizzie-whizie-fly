@@ -11,32 +11,34 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
   }
 
   // shoreline
-  ctx.save();
-  ctx.scale(-1, 1);
-  drawSprite(
-    ctx,
-    spriteCanvas,
-    spriteData.shore,
-    0 - spriteData.shore.w - gameState.shorelineX,
-    gameState.shorelineY - gameState.shorelineH
-  );
-  ctx.restore();
-  if (gameState.shorelineX < 0) {
+  if (spriteData.shore) {
+    ctx.save();
+    ctx.scale(-1, 1);
     drawSprite(
       ctx,
       spriteCanvas,
       spriteData.shore,
-      gameState.shorelineX + gameState.shorelineW,
+      0 - spriteData.shore.w - gameState.shorelineX,
       gameState.shorelineY - gameState.shorelineH
     );
-  } else {
-    drawSprite(
-      ctx,
-      spriteCanvas,
-      spriteData.shore,
-      gameState.shorelineX - gameState.shorelineW,
-      gameState.shorelineY - gameState.shorelineH
-    );
+    ctx.restore();
+    if (gameState.shorelineX < 0) {
+      drawSprite(
+        ctx,
+        spriteCanvas,
+        spriteData.shore,
+        gameState.shorelineX + gameState.shorelineW,
+        gameState.shorelineY - gameState.shorelineH
+      );
+    } else {
+      drawSprite(
+        ctx,
+        spriteCanvas,
+        spriteData.shore,
+        gameState.shorelineX - gameState.shorelineW,
+        gameState.shorelineY - gameState.shorelineH
+      );
+    }
   }
 
   // surface water
@@ -61,7 +63,7 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
   drawSprite(
     ctx,
     spriteCanvas,
-    spriteData.boats[0],
+    spriteData.boat,
     gameState.boatX,
     gameState.boatY - gameState.boatH
   );

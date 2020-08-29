@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import AR from "../libs/aruco";
 import { mapPolygonToCanvas } from "../webGLStuff/webglThings";
 import PhotoSelector from "../components/photoSelector/PhotoSelector";
+import { spriteData } from "../game/gameState";
 
-const SpriteSheetMaker = ({ setSpriteCanvas, w, h }) => {
+const SpriteSheetMaker = ({ setSpriteData, w, h }) => {
   const [sourceImg, setSourceImg] = useState(null);
   const [detector, setDetector] = useState(null);
   const [markerCorners, setMarkerCorners] = useState(null);
@@ -11,17 +12,37 @@ const SpriteSheetMaker = ({ setSpriteCanvas, w, h }) => {
   const [preCanvas, setPreCanvas] = useState(null);
 
   const sourceCanvasRef = useRef(null);
-  const canvasRef = useRef(null);
+  const maskedCanvasRef = useRef(null);
 
   const onDone = () => {
-    const alphaCanvas = drawAlphaCanvas(w, h);
-    const alphaCtx = alphaCanvas.getContext("2d");
-    alphaCtx.drawImage(spritesheetMask, 0, 0);
-    alphaCtx.globalCompositeOperation = "source-in";
-    alphaCtx.drawImage(preCanvas, 0, 0);
-
-    setSpriteCanvas(alphaCanvas);
+    // setSpriteCanvas(alphaCanvas);
   };
+
+  useEffect(() => {
+    if (
+      !preCanvas ||
+      !spritesheetMask ||
+      !maskedCanvasRef ||
+      !maskedCanvasRef.current ||
+      !spriteData
+    )
+      return;
+
+    const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
+      spriteData,
+      preCanvas,
+      spritesheetMask
+    );
+
+    setSpriteData({ data: gameData, canvas: outCanvas });
+
+    const mCanvas = maskedCanvasRef.current;
+    const ctx = mCanvas.getContext("2d");
+    mCanvas.width = outCanvas.width;
+    mCanvas.height = outCanvas.height;
+    ctx.drawImage(outCanvas, 0, 0);
+    // eslint-disable-next-line
+  }, [spritesheetMask, preCanvas, maskedCanvasRef, w, h]);
 
   useEffect(() => {
     if (!spritesheetMask) {
@@ -36,16 +57,16 @@ const SpriteSheetMaker = ({ setSpriteCanvas, w, h }) => {
   }, [spritesheetMask]);
 
   useEffect(() => {
-    if (!spritesheetMask) {
+    if (!sourceImg) {
       const image = new Image();
       image.crossOrigin = "Anonymous";
       image.onload = () => {
         setSourceImg(image);
       };
 
-      image.src = "./spritesheet.jpg";
+      image.src = "./spritesheet.png";
     }
-  }, [spritesheetMask]);
+  }, [sourceImg]);
 
   // use webGl to get rectangular image from marker corners
   useEffect(() => {
@@ -54,7 +75,7 @@ const SpriteSheetMaker = ({ setSpriteCanvas, w, h }) => {
       const { width: srcW, height: srcH } = sourceCanvas;
       const [a, b, c, d] = markerCorners;
 
-      const webGlCanvas = canvasRef.current;
+      const webGlCanvas = document.createElement("canvas");
       const gl = webGlCanvas.getContext("webgl");
 
       webGlCanvas.width = w;
@@ -69,6 +90,7 @@ const SpriteSheetMaker = ({ setSpriteCanvas, w, h }) => {
         bottomLeft: [d.x / srcW, d.y / srcH],
       });
 
+      // show the corners on the source canvas
       const screenCtx = sourceCanvas.getContext("2d");
       screenCtx.strokeStyle = "#00FF00";
       screenCtx.beginPath();
@@ -79,6 +101,7 @@ const SpriteSheetMaker = ({ setSpriteCanvas, w, h }) => {
       screenCtx.closePath();
       screenCtx.stroke();
 
+      // set pre canvas
       const pCanvas = drawPreGameCanvas(webGlCanvas, w, h);
       setPreCanvas(pCanvas);
     }
@@ -123,11 +146,13 @@ const SpriteSheetMaker = ({ setSpriteCanvas, w, h }) => {
   };
 
   return (
-    <div style={{ background: "red" }}>
+    <div style={{ background: "gray" }}>
       <PhotoSelector onPhotoSelected={onPhotoSelected} />
       <button onClick={onDone}>DONE</button>
-      <canvas ref={sourceCanvasRef} style={{ display: "block" }} />
-      <canvas ref={canvasRef} style={{ background: "white" }} />
+      <div>
+        <canvas ref={maskedCanvasRef} style={{ border: "red 1px solid" }} />
+        <canvas ref={sourceCanvasRef} style={{ display: "block" }} />
+      </div>
     </div>
   );
 };
@@ -190,16 +215,81 @@ function drawPreGameCanvas(sourceCanvas, w, h) {
   return outCanvas;
 }
 
-function drawAlphaCanvas(w, h) {
+function createMaskedCanvas(spriteData, spriteCanvas, maskCanvas) {
   const outCanvas = document.createElement("canvas");
-  outCanvas.width = w;
-  outCanvas.height = h;
+  outCanvas.width = 1000; // get widest sprite
+  outCanvas.height = 1000; // add all sprites heights
   const ctx = outCanvas.getContext("2d");
 
-  ctx.fillStyle = "rgba(0,0,0,0)";
-  ctx.fillRect(0, 0, w, h);
+  let startY = 0;
+  const gameSpriteSheet = {};
+  const padding = 10;
 
-  return outCanvas;
+  // Draw player
+  gameSpriteSheet.player = drawMaskedSprite(
+    ctx,
+    spriteCanvas,
+    maskCanvas,
+    spriteData.playerSrc,
+    spriteData.playerMask,
+    startY
+  );
+
+  // Draw boat
+  gameSpriteSheet.boat = drawMaskedSprite(
+    ctx,
+    spriteCanvas,
+    maskCanvas,
+    spriteData.boat,
+    spriteData.boatMask,
+    gameSpriteSheet.player.y + gameSpriteSheet.player.h + padding
+  );
+
+  // const { playerSrc: p, playerMask: m } = spriteData;
+  // // draw the mask
+  // ctx.drawImage(maskCanvas, m.x, m.y, m.w, m.h, 0, 0, p.w, p.h);
+  // ctx.globalCompositeOperation = "source-in";
+  // // draw the sprite
+  // ctx.drawImage(spiteCanvas, p.x, p.y, p.w, p.h, 0, 0, p.w, p.h);
+
+  return { outCanvas, gameSpriteSheet };
+}
+
+function drawMaskedSprite(ctx, spriteCanvas, maskCanvas, sprite, mask, startY) {
+  const tempCanvas = document.createElement("canvas");
+  tempCanvas.width = sprite.w;
+  tempCanvas.height = sprite.h;
+  const tempCtx = tempCanvas.getContext("2d");
+
+  // draw the mask
+  tempCtx.drawImage(
+    maskCanvas,
+    mask.x,
+    mask.y,
+    mask.w,
+    mask.h,
+    0,
+    0,
+    mask.w,
+    mask.h
+  );
+  tempCtx.globalCompositeOperation = "source-in";
+  // draw the sprite
+  tempCtx.drawImage(
+    spriteCanvas,
+    sprite.x,
+    sprite.y,
+    sprite.w,
+    sprite.h,
+    0,
+    0,
+    sprite.w,
+    sprite.h
+  );
+
+  ctx.drawImage(tempCanvas, 0, startY);
+
+  return { x: 0, y: startY, w: sprite.w, h: sprite.h };
 }
 
 ///

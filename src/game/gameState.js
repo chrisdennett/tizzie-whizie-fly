@@ -7,26 +7,31 @@ export const spriteData = {
     w: 130,
     h: 45,
   },
-  boats: [
-    {
-      x: 404,
-      y: 140,
-      w: 305,
-      h: 113,
-    },
-  ],
+  boatMask: {
+    x: 378.43,
+    y: 12,
+    w: 483.992,
+    h: 164.186,
+  },
+  boat: {
+    x: 499.542 - 16,
+    y: 355.688 - 18,
+    w: 483.996,
+    h: 164.181,
+  },
   shore: {
     x: 0,
     y: 80,
     w: 805,
     h: 130,
   },
-  player: {
-    x: 445,
-    y: 285,
-    w: 243,
-    h: 131,
+  playerSrc: {
+    x: 198.985 - 16,
+    y: 346.823 - 18,
+    w: 293.146,
+    h: 165.963,
   },
+  playerMask: { x: 27.53, y: 21.5, w: 293.147, h: 165.955 },
 };
 
 export const defaultGameState = {
@@ -80,7 +85,7 @@ function getBackgroundState(prevGameState) {
 function getObstacleState(prevGameState) {
   let newVal = prevGameState.boatX - prevGameState.boatSpeed;
 
-  const currBoat = spriteData.boats[0];
+  const currBoat = spriteData.boat;
 
   if (newVal < 0 - currBoat.w) {
     newVal = 800;

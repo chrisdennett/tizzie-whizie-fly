@@ -4,26 +4,26 @@ import SpriteSheetMaker from "./spriteSheet/SpriteSheetMaker";
 import { defaultGameState } from "./game/gameState";
 
 function App() {
-  const [spriteCanvas, setSpriteCanvas] = useState(null);
+  const [spriteData, setSpriteData] = useState(null);
   const [gameState, setGameState] = useState(defaultGameState);
 
   return (
     <div>
-      {spriteCanvas && (
+      {spriteData && (
         <Game
-          spriteCanvas={spriteCanvas}
+          spriteData={spriteData}
           gameState={gameState}
           setGameState={setGameState}
         />
       )}
 
-      {!spriteCanvas && (
-        <SpriteSheetMaker
-          setSpriteCanvas={setSpriteCanvas}
-          w={defaultGameState.gameW}
-          h={defaultGameState.gameH}
-        />
-      )}
+      {/* {!spriteData && ( */}
+      <SpriteSheetMaker
+        setSpriteData={setSpriteData}
+        w={defaultGameState.gameW}
+        h={defaultGameState.gameH}
+      />
+      {/* )} */}
     </div>
   );
 }

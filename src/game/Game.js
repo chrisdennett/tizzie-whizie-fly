@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useInterval } from "../hooks/useInternval";
-import { getNextGameState, spriteData } from "./gameState";
+import { getNextGameState } from "./gameState";
 import { GameCanvas } from "./GameCanvas";
 
-export const Game = ({ spriteCanvas, gameState, setGameState }) => {
+export const Game = ({ spriteData, gameState, setGameState }) => {
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
   useInterval(() => {
-    if (!spriteCanvas || isPaused) return;
+    if (!spriteData || isPaused) return;
 
     if (gameState.isJumping) {
       setFlyUp(false);
@@ -35,9 +35,9 @@ export const Game = ({ spriteCanvas, gameState, setGameState }) => {
   return (
     <div>
       <GameCanvas
-        spriteCanvas={spriteCanvas}
+        spriteCanvas={spriteData.canvas}
         gameState={gameState}
-        spriteData={spriteData}
+        spriteData={spriteData.data}
       />
       <div>
         <button
