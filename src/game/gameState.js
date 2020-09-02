@@ -54,7 +54,7 @@ export const defaultGameState = {
   shorelineY: water - 120,
   shorelineW: spriteData.shore.w,
   shorelineH: spriteData.shore.h,
-  shorelineSpeed: 0.05,
+  shorelineSpeed: 0.3,
 
   boatX: 800,
   boatY: water + 10,
@@ -63,7 +63,7 @@ export const defaultGameState = {
   boatLength: 80,
 
   playerY: water,
-  playerH: 50,
+  playerH: 0,
   playerW: 100,
   playerVelocityY: -2,
   isJumping: false,
@@ -82,7 +82,7 @@ export const getNextGameState = (prevGameState, goUp, goDown) => {
 function getBackgroundState(prevGameState) {
   let newVal = prevGameState.shorelineX - prevGameState.shorelineSpeed;
   if (newVal < 0 - prevGameState.shorelineW) {
-    newVal = 800;
+    newVal = prevGameState.shorelineW;
   }
 
   return { shorelineX: newVal };

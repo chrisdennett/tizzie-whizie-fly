@@ -16,8 +16,8 @@ export const GameCanvas = ({ spriteCanvas, gameState, spriteData }) => {
       <canvas
         ref={gameCanvasRef}
         style={canvasStyle}
-        width={gameState.gameW}
-        height={gameState.gameH}
+        width={gameState.gameW - 200}
+        height={gameState.gameH - 200}
       />
     </div>
   );

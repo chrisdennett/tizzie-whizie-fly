@@ -217,8 +217,8 @@ function drawPreGameCanvas(sourceCanvas, w, h) {
 
 function createMaskedCanvas(spriteData, spriteCanvas, maskCanvas) {
   const outCanvas = document.createElement("canvas");
-  outCanvas.width = 1000; // get widest sprite
-  outCanvas.height = 1000; // add all sprites heights
+  outCanvas.width = 1200; // get widest sprite
+  outCanvas.height = 1200; // add all sprites heights
   const ctx = outCanvas.getContext("2d");
 
   let startY = 0;
@@ -232,7 +232,8 @@ function createMaskedCanvas(spriteData, spriteCanvas, maskCanvas) {
     maskCanvas,
     spriteData.playerSrc,
     spriteData.playerMask,
-    startY
+    startY,
+    0.5
   );
 
   // Draw boat
@@ -242,7 +243,8 @@ function createMaskedCanvas(spriteData, spriteCanvas, maskCanvas) {
     maskCanvas,
     spriteData.boat,
     spriteData.boatMask,
-    gameSpriteSheet.player.y + gameSpriteSheet.player.h + padding
+    gameSpriteSheet.player.y + gameSpriteSheet.player.h + padding,
+    0.9
   );
 
   // draw shore
@@ -264,7 +266,15 @@ function createMaskedCanvas(spriteData, spriteCanvas, maskCanvas) {
   return { outCanvas, gameSpriteSheet };
 }
 
-function drawMaskedSprite(ctx, spriteCanvas, maskCanvas, sprite, mask, startY) {
+function drawMaskedSprite(
+  ctx,
+  spriteCanvas,
+  maskCanvas,
+  sprite,
+  mask,
+  startY,
+  scale = 1
+) {
   const tempCanvas = document.createElement("canvas");
   tempCanvas.width = sprite.w;
   tempCanvas.height = sprite.h;
@@ -296,9 +306,19 @@ function drawMaskedSprite(ctx, spriteCanvas, maskCanvas, sprite, mask, startY) {
     sprite.h
   );
 
-  ctx.drawImage(tempCanvas, 0, startY);
+  ctx.drawImage(
+    tempCanvas,
+    0,
+    0,
+    sprite.w,
+    sprite.h,
+    0,
+    startY,
+    sprite.w * scale,
+    sprite.h * scale
+  );
 
-  return { x: 0, y: startY, w: sprite.w, h: sprite.h };
+  return { x: 0, y: startY, w: sprite.w * scale, h: sprite.h * scale };
 }
 
 ///

@@ -42,22 +42,22 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
   }
 
   // surface water
-  ctx.fillStyle = "blue";
-  ctx.fillRect(
-    0,
-    gameState.shorelineY,
-    gameState.gameW,
-    gameState.surface - gameState.shorelineY
-  );
+  // ctx.fillStyle = "blue";
+  // ctx.fillRect(
+  //   0,
+  //   gameState.shorelineY,
+  //   gameState.gameW,
+  //   gameState.surface - gameState.shorelineY
+  // );
 
   //under water
-  ctx.fillStyle = "cyan";
-  ctx.fillRect(
-    0,
-    gameState.surface,
-    gameState.gameW,
-    gameState.gameH - gameState.shorelineY
-  );
+  // ctx.fillStyle = "cyan";
+  // ctx.fillRect(
+  //   0,
+  //   gameState.surface,
+  //   gameState.gameW,
+  //   gameState.gameH - gameState.shorelineY
+  // );
 
   // boat
   drawSprite(
