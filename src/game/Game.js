@@ -37,7 +37,8 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
   return (
     <div>
       <h1>
-        {gameState.gameTick} of {gameState.duration}
+        {gameState.gameTick} of {gameState.duration}, progress:{" "}
+        {gameState.progress}
       </h1>
       <GameCanvas
         spriteCanvas={spriteData.canvas}

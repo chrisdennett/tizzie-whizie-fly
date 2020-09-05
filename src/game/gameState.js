@@ -43,6 +43,7 @@ export const spriteData = {
 const msPerFrame = 1;
 const totalDurationSeconds = 10;
 const msPerSecond = 1000;
+const frequencyOfObstaclesMs = 3000;
 const durationMs = totalDurationSeconds * (msPerSecond / msPerFrame);
 
 export const defaultGameState = {
@@ -50,6 +51,8 @@ export const defaultGameState = {
   msPerFrame,
   duration: durationMs,
   gameOver: false,
+  frequencyOfObstaclesMs,
+  progress: 0,
 
   gameW: 1089,
   gameH: 760,
@@ -93,10 +96,12 @@ export const getNextGameState = (prevGameState, goUp, goDown) => {
 function getGameProgress(prevGameState) {
   const newGameTick = prevGameState.gameTick + 1;
   const newGameOver = newGameTick >= prevGameState.duration;
+  const newProgress = newGameTick / prevGameState.duration;
 
   return {
     gameTick: newGameTick,
     gameOver: newGameOver,
+    progress: newProgress,
   };
 }
 
@@ -115,7 +120,14 @@ function getObstacleState(prevGameState) {
   const currBoat = spriteData.boat;
 
   if (newVal < 0 - currBoat.w) {
-    newVal = 800;
+    const setOffNewObstacle =
+      prevGameState.gameTick % prevGameState.frequencyOfObstaclesMs === 0;
+
+    if (setOffNewObstacle) {
+      newVal = 800;
+    } else {
+      return { boatX: prevGameState.boatX };
+    }
   }
 
   return { boatX: newVal };
