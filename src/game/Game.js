@@ -11,6 +11,8 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
   useInterval(() => {
     if (!spriteData || isPaused) return;
 
+    if (gameState.gameOver) return;
+
     if (gameState.isJumping) {
       setFlyUp(false);
       setDiveDown(false);
@@ -34,6 +36,9 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
 
   return (
     <div>
+      <h1>
+        {gameState.gameTick} of {gameState.duration}
+      </h1>
       <GameCanvas
         spriteCanvas={spriteData.canvas}
         gameState={gameState}

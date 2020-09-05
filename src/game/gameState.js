@@ -40,7 +40,17 @@ export const spriteData = {
   playerMask: { x: 27.53, y: 21.5, w: 293.147, h: 165.955 },
 };
 
+const msPerFrame = 1;
+const totalDurationSeconds = 10;
+const msPerSecond = 1000;
+const durationMs = totalDurationSeconds * (msPerSecond / msPerFrame);
+
 export const defaultGameState = {
+  gameTick: 0,
+  msPerFrame,
+  duration: durationMs,
+  gameOver: false,
+
   gameW: 1089,
   gameH: 760,
 
@@ -76,8 +86,19 @@ export const getNextGameState = (prevGameState, goUp, goDown) => {
     ...getPlayerState(prevGameState, goUp, goDown),
     ...getObstacleState(prevGameState),
     ...getBackgroundState(prevGameState),
+    ...getGameProgress(prevGameState),
   };
 };
+
+function getGameProgress(prevGameState) {
+  const newGameTick = prevGameState.gameTick + 1;
+  const newGameOver = newGameTick >= prevGameState.duration;
+
+  return {
+    gameTick: newGameTick,
+    gameOver: newGameOver,
+  };
+}
 
 function getBackgroundState(prevGameState) {
   let newVal = prevGameState.shorelineX - prevGameState.shorelineSpeed;
