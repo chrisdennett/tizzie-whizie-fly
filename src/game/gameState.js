@@ -1,5 +1,3 @@
-const water = 400;
-
 export const spriteData = {
   cloud: {
     x: 0,
@@ -52,11 +50,25 @@ export const spriteData = {
   playerMask: { x: 27.53, y: 21.5, w: 293.147, h: 165.955 },
 };
 
+const water = 230;
 const msPerFrame = 1;
 const totalDurationSeconds = 10;
 const msPerSecond = 1000;
 const frequencyOfObstaclesMs = 3000;
 const durationMs = totalDurationSeconds * (msPerSecond / msPerFrame);
+
+const obstacles = [
+  {
+    type: "boat",
+    name: "Osprey",
+    triggerMs: 1000,
+  },
+  {
+    type: "island",
+    name: "Belle Isle",
+    triggerMs: 2000,
+  },
+];
 
 export const defaultGameState = {
   gameTick: 0,
@@ -65,6 +77,10 @@ export const defaultGameState = {
   gameOver: false,
   frequencyOfObstaclesMs,
   progress: 0,
+  nextObstacleIndex: 0,
+  obstacleInPlay: false,
+
+  obstacles,
 
   gameW: 1089,
   gameH: 760,
@@ -76,12 +92,12 @@ export const defaultGameState = {
   cloudsTotal: 5,
 
   shorelineX: 0,
-  shorelineY: water - 120,
+  shorelineY: water,
   shorelineW: spriteData.shore.w,
   shorelineH: spriteData.shore.h,
   shorelineSpeed: 0.3,
 
-  boatX: 800,
+  boatX: 900,
   boatY: water + 10,
   boatH: 70,
   boatSpeed: 2,
@@ -127,22 +143,52 @@ function getBackgroundState(prevGameState) {
 }
 
 function getObstacleState(prevGameState) {
-  let newVal = prevGameState.boatX - prevGameState.boatSpeed;
+  let newObstacleInPlay = prevGameState.obstacleInPlay;
+  let newNextObstacleIndex = prevGameState.nextObstacleIndex;
+  if (newNextObstacleIndex >= prevGameState.obstacles.length) return {};
+  const currObstacle = prevGameState.obstacles[newNextObstacleIndex];
+  const obstacleSprite = spriteData[currObstacle.type];
 
-  const currBoat = spriteData.boat;
+  // if animating obstacle
+  if (newObstacleInPlay) {
+    let newObstacleX = prevGameState.boatX - prevGameState.boatSpeed;
 
-  if (newVal < 0 - currBoat.w) {
-    const setOffNewObstacle =
-      prevGameState.gameTick % prevGameState.frequencyOfObstaclesMs === 0;
-
-    if (setOffNewObstacle) {
-      newVal = 800;
-    } else {
-      return { boatX: prevGameState.boatX };
+    if (newObstacleX < 0 - obstacleSprite.w) {
+      newObstacleX = 900;
+      newObstacleInPlay = false;
+      newNextObstacleIndex++;
     }
+
+    return {
+      boatX: newObstacleX,
+      obstacleInPlay: newObstacleInPlay,
+      nextObstacleIndex: newNextObstacleIndex,
+    };
   }
 
-  return { boatX: newVal };
+  // check if it's time to set a new obstacle
+  const setOffNewObstacle = prevGameState.gameTick >= currObstacle.triggerMs;
+
+  if (setOffNewObstacle) {
+    if (newNextObstacleIndex < prevGameState.obstacles.length) {
+      return {
+        obstacleInPlay: true,
+      };
+    } else {
+      // no more obstacles
+      return {};
+    }
+  } else {
+    return {
+      boatX: prevGameState.boatX,
+    };
+  }
+
+  // return {
+  //   boatX: newVal,
+  //   nextObstacleIndex: newNextObstacleIndex,
+  //   obstacleInPlay: newObstacleInPlay,
+  // };
 }
 
 function getPlayerState(prevGameState, goUp, goDown) {

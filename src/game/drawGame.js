@@ -41,32 +41,20 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
     }
   }
 
-  // surface water
-  // ctx.fillStyle = "blue";
-  // ctx.fillRect(
-  //   0,
-  //   gameState.shorelineY,
-  //   gameState.gameW,
-  //   gameState.surface - gameState.shorelineY
-  // );
+  // current obstacle
 
-  //under water
-  // ctx.fillStyle = "cyan";
-  // ctx.fillRect(
-  //   0,
-  //   gameState.surface,
-  //   gameState.gameW,
-  //   gameState.gameH - gameState.shorelineY
-  // );
+  if (gameState.nextObstacleIndex < gameState.obstacles.length) {
+    const currObstacle = gameState.obstacles[gameState.nextObstacleIndex];
+    const currObstacleSprite = spriteData[currObstacle.type];
 
-  // boat
-  drawSprite(
-    ctx,
-    spriteCanvas,
-    spriteData.boat,
-    gameState.boatX,
-    gameState.boatY - gameState.boatH
-  );
+    drawSprite(
+      ctx,
+      spriteCanvas,
+      currObstacleSprite,
+      gameState.boatX,
+      gameState.boatY - gameState.boatH
+    );
+  }
 
   // player
   ctx.save();
