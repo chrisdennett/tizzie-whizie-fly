@@ -7,6 +7,18 @@ export const spriteData = {
     w: 130,
     h: 45,
   },
+  island: {
+    x: 729.714,
+    y: 261.485,
+    w: 317.343,
+    h: 125.057,
+  },
+  islandMask: {
+    x: 723.809,
+    y: 579.699,
+    w: 317.35,
+    h: 125.05,
+  },
   boatMask: {
     x: 378.43,
     y: 12,

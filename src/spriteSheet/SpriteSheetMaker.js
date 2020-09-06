@@ -256,12 +256,17 @@ function createMaskedCanvas(spriteData, spriteCanvas, maskCanvas) {
     spriteData.shoreMask,
     gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding
   );
-  // const { playerSrc: p, playerMask: m } = spriteData;
-  // // draw the mask
-  // ctx.drawImage(maskCanvas, m.x, m.y, m.w, m.h, 0, 0, p.w, p.h);
-  // ctx.globalCompositeOperation = "source-in";
-  // // draw the sprite
-  // ctx.drawImage(spiteCanvas, p.x, p.y, p.w, p.h, 0, 0, p.w, p.h);
+
+  // Draw island
+  gameSpriteSheet.island = drawMaskedSprite(
+    ctx,
+    spriteCanvas,
+    maskCanvas,
+    spriteData.island,
+    spriteData.islandMask,
+    gameSpriteSheet.shore.y + gameSpriteSheet.shore.h + padding,
+    0.9
+  );
 
   return { outCanvas, gameSpriteSheet };
 }
