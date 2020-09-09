@@ -52,21 +52,35 @@ export const spriteData = {
 
 const water = 230;
 const msPerFrame = 1;
-const totalDurationSeconds = 10;
+const totalDurationSeconds = 4.5;
 const msPerSecond = 1000;
-const frequencyOfObstaclesMs = 3000;
 const durationMs = totalDurationSeconds * (msPerSecond / msPerFrame);
 
 const obstacles = [
   {
     type: "boat",
     name: "Osprey",
-    triggerMs: 1000,
+    triggerMs: 500,
   },
   {
     type: "island",
     name: "Belle Isle",
+    triggerMs: 1500,
+  },
+  {
+    type: "island",
+    name: "Isle 2",
     triggerMs: 2000,
+  },
+  {
+    type: "boat",
+    name: "Swallow II",
+    triggerMs: 2500,
+  },
+  {
+    type: "island",
+    name: "Isle 3",
+    triggerMs: 3000,
   },
 ];
 
@@ -75,7 +89,6 @@ export const defaultGameState = {
   msPerFrame,
   duration: durationMs,
   gameOver: false,
-  frequencyOfObstaclesMs,
   progress: 0,
   nextObstacleIndex: 0,
   obstacleInPlay: false,

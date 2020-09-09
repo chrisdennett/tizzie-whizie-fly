@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useInterval } from "../hooks/useInternval";
-import { getNextGameState } from "./gameState";
+import { getNextGameState, defaultGameState } from "./gameState";
 import { GameCanvas } from "./GameCanvas";
 
 export const Game = ({ spriteData, gameState, setGameState }) => {
@@ -34,6 +34,10 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
     setIsPaused((prev) => !prev);
   };
 
+  const replay = () => {
+    setGameState(defaultGameState);
+  };
+
   return (
     <div>
       <h1>
@@ -45,28 +49,43 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
         gameState={gameState}
         spriteData={spriteData.data}
       />
-      <div>
-        <button
-          onClick={goUp}
-          onTouchStart={goUp}
-          style={{ cursor: "pointer", padding: 20 }}
-        >
-          UP
-        </button>
-        <button
-          onClick={onPlayPauseToggle}
-          style={{ cursor: "pointer", padding: 20 }}
-        >
-          {isPaused ? "PLAY" : "PAUSE"}
-        </button>
-        <button
-          onClick={goDown}
-          onTouchStart={goDown}
-          style={{ cursor: "pointer", padding: 20 }}
-        >
-          DIVE
-        </button>
-      </div>
+
+      {gameState.gameOver && (
+        <div>
+          <button
+            onClick={replay}
+            onTouchStart={replay}
+            style={{ cursor: "pointer", padding: 20 }}
+          >
+            REPLAY
+          </button>
+        </div>
+      )}
+
+      {!gameState.gameOver && (
+        <div>
+          <button
+            onClick={goUp}
+            onTouchStart={goUp}
+            style={{ cursor: "pointer", padding: 20 }}
+          >
+            UP
+          </button>
+          <button
+            onClick={onPlayPauseToggle}
+            style={{ cursor: "pointer", padding: 20 }}
+          >
+            {isPaused ? "PLAY" : "PAUSE"}
+          </button>
+          <button
+            onClick={goDown}
+            onTouchStart={goDown}
+            style={{ cursor: "pointer", padding: 20 }}
+          >
+            DIVE
+          </button>
+        </div>
+      )}
     </div>
   );
 };

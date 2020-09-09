@@ -24,10 +24,10 @@
      inkscape:snap-global="false"
      showgrid="false"
      inkscape:document-rotation="0"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      inkscape:document-units="px"
      inkscape:cy="541.06543"
-     inkscape:cx="1292.9178"
+     inkscape:cx="670.57896"
      inkscape:zoom="0.77612608"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -199,7 +199,7 @@
        transform="scale(0.26458333)" />
   </g>
   <g
-     style="display:none"
+     style="display:inline"
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="spritesheet"
@@ -609,7 +609,7 @@
      id="layer5"
      inkscape:groupmode="layer" />
   <g
-     style="display:inline"
+     style="display:none"
      transform="translate(-5,-3.9416666)"
      inkscape:label="mask"
      id="layer3"
