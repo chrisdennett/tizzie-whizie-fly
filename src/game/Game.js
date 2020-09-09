@@ -7,9 +7,10 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [firstGameStarted, setFirstGameStarted] = useState(false);
 
   useInterval(() => {
-    if (!spriteData || isPaused) return;
+    if (!spriteData || isPaused || !firstGameStarted) return;
 
     if (gameState.gameOver) return;
 
@@ -38,17 +39,31 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
     setGameState(defaultGameState);
   };
 
+  const onPlay = () => {
+    setFirstGameStarted(true);
+  };
+
+  const showGameControls = firstGameStarted && !gameState.gameOver;
+
   return (
     <div>
-      <h1>
-        {gameState.gameTick} of {gameState.duration}, progress:{" "}
-        {gameState.progress}
-      </h1>
       <GameCanvas
         spriteCanvas={spriteData.canvas}
         gameState={gameState}
         spriteData={spriteData.data}
       />
+
+      {!firstGameStarted && (
+        <div>
+          <button
+            onClick={onPlay}
+            onTouchStart={onPlay}
+            style={{ cursor: "pointer", padding: 20 }}
+          >
+            PLAY
+          </button>
+        </div>
+      )}
 
       {gameState.gameOver && (
         <div>
@@ -62,7 +77,7 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
         </div>
       )}
 
-      {!gameState.gameOver && (
+      {showGameControls && (
         <div>
           <button
             onClick={goUp}

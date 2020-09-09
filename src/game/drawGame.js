@@ -5,10 +5,10 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
 
   // ctx.drawImage(spriteCanvas, 0, 0);
 
-  for (let c = 0; c < gameState.cloudsTotal; c++) {
-    ctx.fillStyle = "orange";
-    ctx.fillRect(0, 0, 90, 50);
-  }
+  // for (let c = 0; c < gameState.cloudsTotal; c++) {
+  //   ctx.fillStyle = "orange";
+  //   ctx.fillRect(0, 0, 90, 50);
+  // }
 
   // shoreline
   if (spriteData.shore) {

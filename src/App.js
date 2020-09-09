@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Game } from "./game/Game";
 import SpriteSheetMaker from "./spriteSheet/SpriteSheetMaker";
 import { defaultGameState } from "./game/gameState";
+import { Map } from "./components/photoSelector/Map";
+import styled from "styled-components";
 
 function App() {
   const [spriteData, setSpriteData] = useState(null);
@@ -10,11 +12,14 @@ function App() {
   return (
     <div>
       {spriteData && (
-        <Game
-          spriteData={spriteData}
-          gameState={gameState}
-          setGameState={setGameState}
-        />
+        <GamePanel>
+          <Game
+            spriteData={spriteData}
+            gameState={gameState}
+            setGameState={setGameState}
+          />
+          <Map progress={gameState.progress} />
+        </GamePanel>
       )}
 
       {/* {!spriteData && ( */}
@@ -29,3 +34,7 @@ function App() {
 }
 
 export default App;
+
+const GamePanel = styled.div`
+  display: flex;
+`;
