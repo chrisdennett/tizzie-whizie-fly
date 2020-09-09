@@ -18,5 +18,6 @@ export const useAnimationFrame = (callback) => {
   React.useEffect(() => {
     requestRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(requestRef.current);
+    // eslint-disable-next-line
   }, []); // Make sure the effect runs only once
 };
