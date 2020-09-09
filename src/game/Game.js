@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import { useInterval } from "../hooks/useInternval";
+// import { useInterval } from "../hooks/useInternval";
 import { getNextGameState, defaultGameState } from "./gameState";
 import { GameCanvas } from "./GameCanvas";
+import { useAnimationFrame } from "../hooks/useAnimationFrame";
 
 export const Game = ({ spriteData, gameState, setGameState }) => {
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [firstGameStarted, setFirstGameStarted] = useState(false);
+  const [tickCount, setTickCount] = useState(0);
 
-  useInterval(() => {
+  useAnimationFrame((time) => setTickCount((prev) => prev + 1));
+
+  const updateGame = () => {
     if (!spriteData || isPaused || !firstGameStarted) return;
 
     if (gameState.gameOver) return;
@@ -21,7 +25,9 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
 
     const nextGameState = getNextGameState(gameState, flyUp, diveDown);
     setGameState(nextGameState);
-  }, 1);
+  };
+
+  React.useEffect(updateGame, [tickCount]); // Make sure the effect runs only once
 
   const goUp = () => {
     setFlyUp(true);

@@ -60,27 +60,27 @@ const obstacles = [
   {
     type: "boat",
     name: "Osprey",
-    triggerMs: 500,
+    triggerMs: 50,
   },
   {
     type: "island",
     name: "Belle Isle",
-    triggerMs: 1500,
+    triggerMs: 100,
   },
   {
     type: "island",
     name: "Isle 2",
-    triggerMs: 2000,
+    triggerMs: 150,
   },
   {
     type: "boat",
     name: "Swallow II",
-    triggerMs: 2500,
+    triggerMs: 200,
   },
   {
     type: "island",
     name: "Isle 3",
-    triggerMs: 3000,
+    triggerMs: 250,
   },
 ];
 
@@ -98,7 +98,7 @@ export const defaultGameState = {
   gameW: 1089,
   gameH: 760,
 
-  gravity: 0.01,
+  gravity: 0.1,
   surface: water,
 
   cloudsMaxY: water - 250,
@@ -108,18 +108,18 @@ export const defaultGameState = {
   shorelineY: water,
   shorelineW: spriteData.shore.w,
   shorelineH: spriteData.shore.h,
-  shorelineSpeed: 0.5,
+  shorelineSpeed: 2,
 
   boatX: 900,
   boatY: water + 10,
   boatH: 70,
-  boatSpeed: 2,
+  boatSpeed: 7,
   boatLength: 80,
 
   playerY: water,
   playerH: 0,
   playerW: 100,
-  playerVelocityY: -2,
+  playerVelocityY: -5,
   isJumping: false,
   isDiving: false,
 };
