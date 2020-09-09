@@ -37,4 +37,7 @@ export default App;
 
 const GamePanel = styled.div`
   display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 800px;
 `;

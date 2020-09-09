@@ -52,7 +52,7 @@ export const spriteData = {
 
 const water = 230;
 const msPerFrame = 1;
-const totalDurationSeconds = 4.5;
+const totalDurationSeconds = 45;
 const msPerSecond = 1000;
 const durationMs = totalDurationSeconds * (msPerSecond / msPerFrame);
 
@@ -108,7 +108,7 @@ export const defaultGameState = {
   shorelineY: water,
   shorelineW: spriteData.shore.w,
   shorelineH: spriteData.shore.h,
-  shorelineSpeed: 0.3,
+  shorelineSpeed: 0.5,
 
   boatX: 900,
   boatY: water + 10,
