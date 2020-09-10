@@ -51,36 +51,37 @@ export const spriteData = {
 };
 
 const water = 230;
-const msPerFrame = 1;
-const totalDurationSeconds = 45;
+const msPerFrame = 16.7; // this is what use animation frame gives us
 const msPerSecond = 1000;
-const durationMs = totalDurationSeconds * (msPerSecond / msPerFrame);
+const totalDurationSeconds = 20;
+const getFrameFromSeconds = (seconds) => (seconds * msPerSecond) / msPerFrame;
+const durationMs = getFrameFromSeconds(totalDurationSeconds);
 
 const obstacles = [
   {
     type: "boat",
     name: "Osprey",
-    triggerMs: 50,
+    triggerMs: getFrameFromSeconds(2),
   },
   {
     type: "island",
     name: "Belle Isle",
-    triggerMs: 100,
+    triggerMs: getFrameFromSeconds(4),
   },
   {
     type: "island",
     name: "Isle 2",
-    triggerMs: 150,
+    triggerMs: getFrameFromSeconds(4),
   },
   {
     type: "boat",
     name: "Swallow II",
-    triggerMs: 200,
+    triggerMs: getFrameFromSeconds(6),
   },
   {
     type: "island",
     name: "Isle 3",
-    triggerMs: 250,
+    triggerMs: getFrameFromSeconds(8),
   },
 ];
 

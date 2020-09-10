@@ -40,4 +40,5 @@ const GamePanel = styled.div`
   flex-direction: column;
   position: relative;
   width: 800px;
+  max-width: 100%;
 `;
