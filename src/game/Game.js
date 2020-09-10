@@ -8,6 +8,7 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  // TODO - if go away from game and back this resets - move to App maybe
   const [firstGameStarted, setFirstGameStarted] = useState(false);
   const [tickCount, setTickCount] = useState(0);
 
