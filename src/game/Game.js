@@ -28,7 +28,7 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
     setGameState(nextGameState);
   };
 
-  React.useEffect(updateGame, [tickCount]); // Make sure the effect runs only once
+  React.useEffect(updateGame, [tickCount]);
 
   const goUp = () => {
     setFlyUp(true);

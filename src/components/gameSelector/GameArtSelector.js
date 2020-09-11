@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
 
-const GameSelector = ({ gameCreated }) => {
+const GameArtSelector = ({ gameCreated }) => {
   return (
     <div>
       {gameCreated && (
@@ -19,10 +19,11 @@ const GameSelector = ({ gameCreated }) => {
         <li>Collage</li>
         <li>Pablo Picasso</li>
         <li>Piet Mondrian</li>
-        <li>Charcoal</li>
+        <li>Liberty patterns</li>
+        <li>Charcoal etc</li>
       </ul>
     </div>
   );
 };
 
-export default GameSelector;
+export default GameArtSelector;

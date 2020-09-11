@@ -12,8 +12,6 @@ function App() {
   const [gameState, setGameState] = useState(defaultGameState);
 
   const gameProps = { spriteData, setSpriteData, gameState, setGameState };
-  const drawGameProps = { setSpriteData };
-
   const gameCreated = spriteData !== null;
 
   return (
@@ -26,7 +24,7 @@ function App() {
         <Home path="/" gameCreated={gameCreated} />
         <About path="about" />
         <PlayGame path="playgame" {...gameProps} />
-        <DrawGame path="drawgame" {...drawGameProps} />
+        <DrawGame path="drawgame" setSpriteData={setSpriteData} />
       </Router>
     </div>
   );

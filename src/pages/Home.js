@@ -1,12 +1,12 @@
 import React from "react";
-import GameSelector from "../components/gameSelector/GameSelector";
+import GameArtSelector from "../components/gameSelector/GameArtSelector";
 
 const Home = ({ gameCreated }) => {
   return (
     <div>
       <h1>Home</h1>
       <p>Add brief intro to the project here.</p>
-      <GameSelector gameCreated={gameCreated} />
+      <GameArtSelector gameCreated={gameCreated} />
     </div>
   );
 };
