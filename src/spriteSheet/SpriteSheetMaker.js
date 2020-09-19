@@ -32,7 +32,7 @@ const SpriteSheetMaker = ({ setSpriteData, w, h }) => {
       image.onload = () => {
         setSpritesheetMask(image);
       };
-      image.src = "./spritesheet-mask.png";
+      image.src = "./spritesheet-1-mask.png";
     }
   }, [spritesheetMask]);
 
@@ -44,7 +44,7 @@ const SpriteSheetMaker = ({ setSpriteData, w, h }) => {
       image.onload = () => {
         setSourceImg(image);
       };
-      image.src = "./spritesheet.png";
+      image.src = "./spritesheet-1.png";
     }
   }, [sourceImg]);
 

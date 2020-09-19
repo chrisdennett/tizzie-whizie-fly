@@ -1,5 +1,5 @@
 import AR from "../libs/aruco";
-import { spriteData } from "../game/gameState";
+import { spriteData, maskData } from "../game/gameState";
 import { mapPolygonToCanvas } from "../webGLStuff/webglThings";
 import { createCanvasFromSrc } from "./helper";
 
@@ -41,6 +41,7 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
     const userArtCanvas = createCanvasFromSrc(webGlCanvas, w, h);
     const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
       spriteData,
+      maskData,
       userArtCanvas,
       maskImg
     );
@@ -49,6 +50,7 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
   } else {
     const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
       spriteData,
+      maskData,
       sourceCanvas,
       maskImg
     );
@@ -85,7 +87,7 @@ function getCornerPositions(markers) {
   return fourCorners;
 }
 
-function createMaskedCanvas(spriteData, spriteCanvas, maskCanvas) {
+function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
   const outCanvas = document.createElement("canvas");
   outCanvas.width = 1200; // get widest sprite
   outCanvas.height = 1200; // add all sprites heights
@@ -100,8 +102,8 @@ function createMaskedCanvas(spriteData, spriteCanvas, maskCanvas) {
     ctx,
     spriteCanvas,
     maskCanvas,
-    spriteData.playerSrc,
-    spriteData.playerMask,
+    spriteData.player.body,
+    maskData.player.body,
     startY,
     0.5
   );
@@ -112,7 +114,7 @@ function createMaskedCanvas(spriteData, spriteCanvas, maskCanvas) {
     spriteCanvas,
     maskCanvas,
     spriteData.boat,
-    spriteData.boatMask,
+    maskData.boat,
     gameSpriteSheet.player.y + gameSpriteSheet.player.h + padding,
     0.9
   );
@@ -123,7 +125,7 @@ function createMaskedCanvas(spriteData, spriteCanvas, maskCanvas) {
     spriteCanvas,
     maskCanvas,
     spriteData.shore,
-    spriteData.shoreMask,
+    maskData.shore,
     gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding
   );
 
@@ -133,7 +135,7 @@ function createMaskedCanvas(spriteData, spriteCanvas, maskCanvas) {
     spriteCanvas,
     maskCanvas,
     spriteData.island,
-    spriteData.islandMask,
+    maskData.island,
     gameSpriteSheet.shore.y + gameSpriteSheet.shore.h + padding,
     0.9
   );
