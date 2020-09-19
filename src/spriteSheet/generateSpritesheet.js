@@ -107,6 +107,33 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     startY,
     0.5
   );
+  gameSpriteSheet.leg = drawMaskedSprite(
+    ctx,
+    spriteCanvas,
+    maskCanvas,
+    spriteData.player.leg,
+    maskData.player.leg,
+    gameSpriteSheet.player.y + gameSpriteSheet.player.h + padding,
+    0.5
+  );
+  gameSpriteSheet.wing = drawMaskedSprite(
+    ctx,
+    spriteCanvas,
+    maskCanvas,
+    spriteData.player.wing,
+    maskData.player.wing,
+    gameSpriteSheet.leg.y + gameSpriteSheet.leg.h + padding,
+    0.5
+  );
+  gameSpriteSheet.tail = drawMaskedSprite(
+    ctx,
+    spriteCanvas,
+    maskCanvas,
+    spriteData.player.tail,
+    maskData.player.tail,
+    gameSpriteSheet.wing.y + gameSpriteSheet.wing.h + padding,
+    0.5
+  );
 
   // Draw boat
   gameSpriteSheet.boat = drawMaskedSprite(
@@ -115,7 +142,7 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     maskCanvas,
     spriteData.boat,
     maskData.boat,
-    gameSpriteSheet.player.y + gameSpriteSheet.player.h + padding,
+    gameSpriteSheet.tail.y + gameSpriteSheet.tail.h + padding,
     0.9
   );
 

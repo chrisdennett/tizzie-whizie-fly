@@ -21,7 +21,11 @@ function App() {
       </nav>
 
       <Router>
-        <Home path="/" gameCreated={gameCreated} />
+        <Home
+          path="/"
+          gameCreated={gameCreated}
+          setSpriteData={setSpriteData}
+        />
         <About path="about" />
         <PlayGame path="playgame" {...gameProps} />
         <DrawGame path="drawgame" setSpriteData={setSpriteData} />
