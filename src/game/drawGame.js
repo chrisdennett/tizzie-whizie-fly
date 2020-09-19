@@ -51,8 +51,8 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
       ctx,
       spriteCanvas,
       currObstacleSprite,
-      gameState.boatX,
-      gameState.boatY - gameState.boatH
+      gameState.obstacleX,
+      gameState.obstacleY - gameState.boatH
     );
   }
 

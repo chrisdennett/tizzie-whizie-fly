@@ -136,9 +136,38 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     maskCanvas,
     spriteData.island,
     maskData.island,
-    gameSpriteSheet.shore.y + gameSpriteSheet.shore.h + padding,
-    0.9
+    gameSpriteSheet.shore.y + gameSpriteSheet.shore.h + padding
   );
+
+  // Draw pike
+  gameSpriteSheet.pike = drawMaskedSprite(
+    ctx,
+    spriteCanvas,
+    maskCanvas,
+    spriteData.pike,
+    maskData.pike,
+    gameSpriteSheet.island.y + gameSpriteSheet.island.h + padding
+  );
+
+  // Draw bownessie
+  gameSpriteSheet.bownessie = drawMaskedSprite(
+    ctx,
+    spriteCanvas,
+    maskCanvas,
+    spriteData.bownessie,
+    maskData.bownessie,
+    gameSpriteSheet.pike.y + gameSpriteSheet.pike.h + padding
+  );
+
+  // Draw tizzie
+  // gameSpriteSheet.tizzie = drawMaskedSprite(
+  //   ctx,
+  //   spriteCanvas,
+  //   maskCanvas,
+  //   spriteData.player.body,
+  //   maskData.player.body,
+  //   gameSpriteSheet.bownessie.y + gameSpriteSheet.bownessie.h + padding
+  // );
 
   return { outCanvas, gameSpriteSheet };
 }

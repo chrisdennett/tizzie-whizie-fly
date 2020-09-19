@@ -159,20 +159,20 @@ const obstacles = [
     triggerMs: getFrameFromSeconds(4),
   },
   {
-    type: "island",
-    name: "Isle 2",
+    type: "pike",
+    name: "The Pike",
     triggerMs: getFrameFromSeconds(4),
   },
   {
-    type: "boat",
-    name: "Swallow II",
+    type: "bownessie",
+    name: "Bownessie",
     triggerMs: getFrameFromSeconds(6),
   },
-  {
-    type: "island",
-    name: "Isle 3",
-    triggerMs: getFrameFromSeconds(8),
-  },
+  // {
+  //   type: "player.body",
+  //   name: "Tizzie Whizie",
+  //   triggerMs: getFrameFromSeconds(8),
+  // },
 ];
 
 export const defaultGameState = {
@@ -201,8 +201,8 @@ export const defaultGameState = {
   shorelineH: spriteData.shore.h,
   shorelineSpeed: 2,
 
-  boatX: 900,
-  boatY: water + 10,
+  obstacleX: 900,
+  obstacleY: water + 10,
   boatH: 70,
   boatSpeed: 7,
   boatLength: 80,
@@ -255,7 +255,7 @@ function getObstacleState(prevGameState) {
 
   // if animating obstacle
   if (newObstacleInPlay) {
-    let newObstacleX = prevGameState.boatX - prevGameState.boatSpeed;
+    let newObstacleX = prevGameState.obstacleX - prevGameState.boatSpeed;
 
     if (newObstacleX < 0 - obstacleSprite.w) {
       newObstacleX = 900;
@@ -264,7 +264,7 @@ function getObstacleState(prevGameState) {
     }
 
     return {
-      boatX: newObstacleX,
+      obstacleX: newObstacleX,
       obstacleInPlay: newObstacleInPlay,
       nextObstacleIndex: newNextObstacleIndex,
     };
@@ -284,15 +284,9 @@ function getObstacleState(prevGameState) {
     }
   } else {
     return {
-      boatX: prevGameState.boatX,
+      obstacleX: prevGameState.obstacleX,
     };
   }
-
-  // return {
-  //   boatX: newVal,
-  //   nextObstacleIndex: newNextObstacleIndex,
-  //   obstacleInPlay: newObstacleInPlay,
-  // };
 }
 
 function getPlayerState(prevGameState, goUp, goDown) {
