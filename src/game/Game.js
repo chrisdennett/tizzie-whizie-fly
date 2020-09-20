@@ -12,19 +12,24 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
   const [firstGameStarted, setFirstGameStarted] = useState(false);
   const [tickCount, setTickCount] = useState(0);
 
-  useAnimationFrame((time) => setTickCount((prev) => prev + 1));
+  useAnimationFrame(() => setTickCount((prev) => prev + 1));
 
   const updateGame = () => {
     if (!spriteData || isPaused || !firstGameStarted) return;
 
     if (gameState.gameOver) return;
 
-    if (gameState.isJumping) {
+    if (gameState.isMoving) {
       setFlyUp(false);
       setDiveDown(false);
     }
 
-    const nextGameState = getNextGameState(gameState, flyUp, diveDown);
+    const nextGameState = getNextGameState(
+      gameState,
+      flyUp,
+      diveDown,
+      tickCount
+    );
     setGameState(nextGameState);
   };
 

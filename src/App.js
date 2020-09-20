@@ -14,6 +14,8 @@ function App() {
   const gameProps = { spriteData, setSpriteData, gameState, setGameState };
   const gameCreated = spriteData !== null;
 
+  const homeProps = { spriteData, setSpriteData, gameCreated };
+
   return (
     <div>
       <nav>
@@ -21,11 +23,7 @@ function App() {
       </nav>
 
       <Router>
-        <Home
-          path="/"
-          gameCreated={gameCreated}
-          setSpriteData={setSpriteData}
-        />
+        <Home path="/" {...homeProps} />
         <About path="about" />
         <PlayGame path="playgame" {...gameProps} />
         <DrawGame path="drawgame" setSpriteData={setSpriteData} />

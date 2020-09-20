@@ -211,12 +211,15 @@ export const defaultGameState = {
   playerH: 0,
   playerW: 100,
   playerVelocityY: -5,
+
+  isMoving: false,
   isJumping: false,
   isDiving: false,
 };
 
-export const getNextGameState = (prevGameState, goUp, goDown) => {
+export const getNextGameState = (prevGameState, goUp, goDown, tickCount) => {
   return {
+    frame: tickCount,
     ...prevGameState,
     ...getPlayerState(prevGameState, goUp, goDown),
     ...getObstacleState(prevGameState),
@@ -290,23 +293,25 @@ function getObstacleState(prevGameState) {
 }
 
 function getPlayerState(prevGameState, goUp, goDown) {
-  if (goUp && !prevGameState.isJumping) {
+  if (goUp && !prevGameState.isMoving) {
     return {
       isJumping: true,
+      isMoving: true,
       playerVelocityY: defaultGameState.playerVelocityY,
     };
   }
-  if (goDown && !prevGameState.isJumping) {
+  if (goDown && !prevGameState.isMoving) {
     return {
-      isJumping: true,
       isDiving: true,
+      isMoving: true,
       playerVelocityY: defaultGameState.playerVelocityY * -1,
     };
   }
-  if (!prevGameState.isJumping) return {};
+  if (!prevGameState.isMoving) return {};
 
   // is jumping/diving
   let newPlayerY = prevGameState.playerY;
+  let newIsMoving = prevGameState.isMoving;
   let newIsJumping = prevGameState.isJumping;
   let newIsDiving = prevGameState.isDiving;
   let newPlayerVelocityY = prevGameState.playerVelocityY;
@@ -317,7 +322,7 @@ function getPlayerState(prevGameState, goUp, goDown) {
   if (prevGameState.isDiving) {
     if (newPlayerY <= prevGameState.surface) {
       newPlayerY = prevGameState.surface;
-      newIsJumping = false;
+      newIsMoving = false;
       newIsDiving = false;
       newPlayerVelocityY = defaultGameState.playerVelocityY;
     }
@@ -325,11 +330,11 @@ function getPlayerState(prevGameState, goUp, goDown) {
     newPlayerVelocityY -= prevGameState.gravity;
   }
   // if jumping
-  else {
+  else if (prevGameState.isJumping) {
     if (newPlayerY >= prevGameState.surface) {
       newPlayerY = prevGameState.surface;
       newIsJumping = false;
-      newIsDiving = false;
+      newIsMoving = false;
       newPlayerVelocityY = defaultGameState.playerVelocityY;
     }
 
@@ -337,6 +342,7 @@ function getPlayerState(prevGameState, goUp, goDown) {
   }
 
   return {
+    isMoving: newIsMoving,
     isJumping: newIsJumping,
     isDiving: newIsDiving,
     playerY: newPlayerY,

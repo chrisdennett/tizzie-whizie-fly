@@ -36,7 +36,7 @@ export const WebcamFrameGrabber = ({ setCurrFrame, isHidden = false }) => {
         width={videoConstraints.width}
         style={style}
         ref={webcamRef}
-        mirrored={true}
+        mirrored={false}
         screenshotFormat="image/jpeg"
         videoConstraints={videoConstraints}
       />
