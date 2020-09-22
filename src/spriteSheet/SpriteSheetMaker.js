@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import PhotoSelector from "../components/photoSelector/PhotoSelector";
 import { WebcamFrameGrabber } from "../components/WebcamFrameGrabber";
 import { generateSpritesheet } from "./generateSpritesheet";
-import { createCanvasFromFile } from "./helper";
+import { createCanvasFromFile, createMaxSizeCanvas } from "./helper";
+
+const sampleImgName = "crayon2.jpg";
 
 const SpriteSheetMaker = ({ setSpriteData, w, h }) => {
   const [useWebcam, setUseWebcam] = useState(false);
@@ -40,9 +42,13 @@ const SpriteSheetMaker = ({ setSpriteData, w, h }) => {
       const image = new Image();
       image.crossOrigin = "Anonymous";
       image.onload = () => {
-        setSourceImg(image);
+        const c = createMaxSizeCanvas(image);
+
+        console.log("c: ", c);
+
+        setSourceImg(c);
       };
-      image.src = "./spritesheet-1.png";
+      image.src = "./" + sampleImgName;
     }
   }, [sourceImg]);
 
