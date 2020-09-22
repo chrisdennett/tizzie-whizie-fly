@@ -87,15 +87,44 @@ function getCornerPositions(markers) {
   return fourCorners;
 }
 
+function getTotalHeightsFromObj(data, padding) {
+  const spriteKeys = Object.keys(data);
+  let maxWidth = 0;
+  let totalHeight = 0;
+
+  for (let key of spriteKeys) {
+    const s = data[key];
+
+    if (key !== "player") {
+      if (s.w > maxWidth) maxWidth = s.w;
+      totalHeight += s.h + padding;
+    } else {
+      const [playerMaxW, playerTotalH] = getTotalHeightsFromObj(s, padding);
+      if (playerMaxW > maxWidth) maxWidth = playerMaxW;
+      totalHeight += playerTotalH + padding;
+    }
+  }
+
+  return [maxWidth, totalHeight];
+}
+
 function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
+  // calculate the width and height before creating a canvas
+  // that puts all sprite in a single column.
+  const padding = 10;
+  const [maxSpriteWidth, combinedSpritesHeight] = getTotalHeightsFromObj(
+    spriteData,
+    padding
+  );
+
   const outCanvas = document.createElement("canvas");
-  outCanvas.width = 1200; // get widest sprite
-  outCanvas.height = 1200; // add all sprites heights
+  outCanvas.width = maxSpriteWidth; // get widest sprite
+  outCanvas.height = combinedSpritesHeight; // add all sprites heights
+
   const ctx = outCanvas.getContext("2d");
 
   let startY = 0;
   const gameSpriteSheet = {};
-  const padding = 10;
 
   // Draw player
   gameSpriteSheet.player = drawMaskedSprite(
