@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import PhotoSelector from "../components/photoSelector/PhotoSelector";
-import { WebcamFrameGrabber } from "../components/WebcamFrameGrabber";
+import ImageInputSelector from "../components/imageInput/ImageInputSelector";
 import { generateSpritesheet } from "./generateSpritesheet";
-import { createCanvasFromFile, createMaxSizeCanvas } from "./helper";
 
-const sampleImgName = "crayon2.jpg";
-
-const SpriteSheetMaker = ({ setSpriteData, w, h }) => {
-  const [useWebcam, setUseWebcam] = useState(false);
+const SpriteSheetMaker = ({ setSpriteData, w, h, spriteData }) => {
+  const [, setFrameNumber] = useState(0);
   const [sourceImg, setSourceImg] = useState(null);
   const [spritesheetMask, setSpritesheetMask] = useState(null);
 
@@ -36,41 +32,13 @@ const SpriteSheetMaker = ({ setSpriteData, w, h }) => {
     }
   }, [spritesheetMask]);
 
-  // load sample image
-  useEffect(() => {
-    if (!sourceImg) {
-      const image = new Image();
-      image.crossOrigin = "Anonymous";
-      image.onload = () => {
-        const c = createMaxSizeCanvas(image);
-
-        console.log("c: ", c);
-
-        setSourceImg(c);
-      };
-      image.src = "./" + sampleImgName;
-    }
-  }, [sourceImg]);
-
-  const onPhotoSelected = (imgFile) => {
-    createCanvasFromFile(imgFile, (img) => {
-      setSourceImg(img);
-    });
-  };
-
-  const onWebcamFrame = (frameCanvas) => {
-    if (frameCanvas) {
-      setSourceImg(frameCanvas);
-    }
-  };
-
-  const onUseWebcam = () => setUseWebcam((prev) => !prev);
-
   return (
     <div>
-      <button onClick={onUseWebcam}>Use webcam</button>
-      {useWebcam && <WebcamFrameGrabber setCurrFrame={onWebcamFrame} />}
-      <PhotoSelector onPhotoSelected={onPhotoSelected} />
+      <ImageInputSelector
+        setFrameNumber={setFrameNumber}
+        srcImg={spriteData ? spriteData.canvas : null}
+        setSrcImg={setSourceImg}
+      />
     </div>
   );
 };

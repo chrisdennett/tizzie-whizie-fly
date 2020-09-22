@@ -9,7 +9,7 @@ const Home = ({ gameCreated, setSpriteData, spriteData }) => {
       <h1>Home</h1>
       <p>Add brief intro to the project here.</p>
       <SpriteTester spriteData={spriteData} />
-      <DrawGame setSpriteData={setSpriteData} />
+      <DrawGame setSpriteData={setSpriteData} spriteData={spriteData} />
       <GameArtSelector gameCreated={gameCreated} />
     </div>
   );
