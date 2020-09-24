@@ -5,7 +5,7 @@ import PhotoSelector from "../components/imageInput/PhotoSelector";
 import { createMaxSizeCanvas } from "../spriteSheet/helper";
 import { generateSpritesheet } from "../spriteSheet/generateSpritesheet";
 
-const DrawGame = ({ setSpriteData, spriteData }) => {
+const DrawGame = ({ setSpriteData }) => {
   const [sourceImg, setSourceImg] = useState(null);
   const [spritesheetMask, setSpritesheetMask] = useState(null);
 
@@ -36,24 +36,11 @@ const DrawGame = ({ setSpriteData, spriteData }) => {
   // load mask
   useEffect(() => {
     if (!spritesheetMask) {
-      const image = new Image();
-      image.crossOrigin = "Anonymous";
-      image.onload = () => {
-        setSpritesheetMask(image);
-      };
-      image.src = "./spritesheet-1-mask.png";
+      loadImage("./spritesheet-1-mask.png", setSpritesheetMask);
     }
   }, [spritesheetMask]);
 
-  const onSampleSelect = (imgName) => {
-    const image = new Image();
-    image.crossOrigin = "Anonymous";
-    image.onload = () => {
-      const c = createMaxSizeCanvas(image);
-      setSourceImg(c);
-    };
-    image.src = imgName;
-  };
+  const onSampleSelect = (imgName) => loadImage(imgName, setSourceImg, true);
 
   return (
     <div>
@@ -114,3 +101,17 @@ const StepHolder = styled.div`
     border: 1px solid rgba(0, 0, 0, 0.8);
   }
 `;
+
+const loadImage = (imgUrl, callback, setMax = false) => {
+  const image = new Image();
+  image.crossOrigin = "Anonymous";
+  image.onload = () => {
+    if (setMax) {
+      const c = createMaxSizeCanvas(image);
+      callback(c);
+    } else {
+      callback(image);
+    }
+  };
+  image.src = imgUrl;
+};

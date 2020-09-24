@@ -18,7 +18,7 @@ const Home = ({ setSpriteData, spriteData }) => {
         </div>
       )}
 
-      <DrawGame setSpriteData={setSpriteData} spriteData={spriteData} />
+      <DrawGame setSpriteData={setSpriteData} />
       <SpriteTester spriteData={spriteData} />
     </div>
   );
