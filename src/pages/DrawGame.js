@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import SpriteSheetMaker from "../spriteSheet/SpriteSheetMaker";
+import React, { useState, useEffect } from "react";
 import { defaultGameState } from "../game/gameState";
 import styled from "styled-components";
 import PhotoSelector from "../components/imageInput/PhotoSelector";
 import { createMaxSizeCanvas } from "../spriteSheet/helper";
+import { generateSpritesheet } from "../spriteSheet/generateSpritesheet";
 
 const DrawGame = ({ setSpriteData, spriteData }) => {
   const [sourceImg, setSourceImg] = useState(null);
+  const [spritesheetMask, setSpritesheetMask] = useState(null);
+
+  const w = defaultGameState.gameW;
+  const h = defaultGameState.gameH;
 
   const onPrintTemplate = () => {
     console.log("Template");
@@ -15,6 +19,31 @@ const DrawGame = ({ setSpriteData, spriteData }) => {
   const onPhotoSelected = (photo) => {
     setSourceImg(photo);
   };
+
+  useEffect(() => {
+    const generatedSheetData = generateSpritesheet(
+      sourceImg,
+      spritesheetMask,
+      w,
+      h
+    );
+
+    setSpriteData(generatedSheetData);
+
+    // eslint-disable-next-line
+  }, [sourceImg, spritesheetMask, w, h]);
+
+  // load mask
+  useEffect(() => {
+    if (!spritesheetMask) {
+      const image = new Image();
+      image.crossOrigin = "Anonymous";
+      image.onload = () => {
+        setSpritesheetMask(image);
+      };
+      image.src = "./spritesheet-1-mask.png";
+    }
+  }, [spritesheetMask]);
 
   const onSampleSelect = (imgName) => {
     const image = new Image();
@@ -64,14 +93,6 @@ const DrawGame = ({ setSpriteData, spriteData }) => {
           />
         </div>
       </div>
-
-      <SpriteSheetMaker
-        sourceImg={sourceImg}
-        setSpriteData={setSpriteData}
-        spriteData={spriteData}
-        w={defaultGameState.gameW}
-        h={defaultGameState.gameH}
-      />
     </div>
   );
 };

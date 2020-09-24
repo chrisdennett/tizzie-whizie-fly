@@ -12,12 +12,10 @@ function App() {
   const [gameState, setGameState] = useState(defaultGameState);
 
   const gameProps = { spriteData, setSpriteData, gameState, setGameState };
-  const gameCreated = spriteData !== null;
 
   const homeProps = {
     spriteData,
     setSpriteData,
-    gameCreated,
   };
 
   return (
