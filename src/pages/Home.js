@@ -1,16 +1,23 @@
+import { Link } from "@reach/router";
 import React from "react";
-import GameArtSelector from "../components/gameSelector/GameArtSelector";
 import SpriteTester from "../game/SpriteTester";
 import DrawGame from "./DrawGame";
 
 const Home = ({ gameCreated, setSpriteData, spriteData }) => {
   return (
     <div>
-      <h1>Home</h1>
+      <h1>FLY TIZZIE FLY</h1>
+      <h2>Paint your own game</h2>
       <p>Add brief intro to the project here.</p>
-      <SpriteTester spriteData={spriteData} />
+
+      {gameCreated && (
+        <div>
+          <Link to={"/playgame"}>PLAY GAME</Link>
+        </div>
+      )}
+
       <DrawGame setSpriteData={setSpriteData} spriteData={spriteData} />
-      <GameArtSelector gameCreated={gameCreated} />
+      <SpriteTester spriteData={spriteData} />
     </div>
   );
 };

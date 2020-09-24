@@ -41,20 +41,6 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
     }
   }
 
-  // current obstacle
-  if (gameState.nextObstacleIndex < gameState.obstacles.length) {
-    const currObstacle = gameState.obstacles[gameState.nextObstacleIndex];
-    const currObstacleSprite = spriteData[currObstacle.type];
-
-    drawSprite(
-      ctx,
-      spriteCanvas,
-      currObstacleSprite,
-      gameState.obstacleX,
-      gameState.obstacleY - gameState.boatH
-    );
-  }
-
   // player
   drawPlayer(
     ctx,
@@ -66,12 +52,34 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
     gameState.isJumping,
     gameState.isDiving
   );
+
+  // current obstacle
+  if (gameState.nextObstacleIndex < gameState.obstacles.length) {
+    const currObstacle = gameState.obstacles[gameState.nextObstacleIndex];
+    const currObstacleSprite = spriteData[currObstacle.type];
+
+    drawSprite(
+      ctx,
+      spriteCanvas,
+      currObstacleSprite,
+      gameState.obstacleX,
+      gameState.obstacleY - gameState.boatH,
+      true
+    );
+  }
 };
 
-function drawSprite(ctx, spriteCanvas, sprite, targX, targY) {
+function drawSprite(ctx, spriteCanvas, sprite, targX, targY, useShadow = true) {
   const { x, y, h, w } = sprite;
 
-  ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
+  if (useShadow) {
+    ctx.save();
+    addShadow(ctx);
+    ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
+    ctx.restore();
+  } else {
+    ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
+  }
 }
 
 export const drawPlayer = (
@@ -128,10 +136,6 @@ export const drawPlayer = (
   const backLegPos = isDiving ? backLegDive : backLegFly;
 
   ctx.save();
-  // ctx.shadowColor = "rgba(0,0,0,0.3)";
-  // ctx.shadowOffsetY = 10;
-  // ctx.shadowOffsetX = 10;
-  // ctx.shadowBlur = 5;
 
   ctx.translate(playerPos.x, playerPos.y);
   ctx.rotate(playerPos.r);
@@ -150,16 +154,6 @@ export const drawPlayer = (
   drawSprite(ctx, spriteCanvas, tail, -tail.w / 2, -tail.h);
   ctx.restore();
 
-  // body
-  drawSprite(ctx, spriteCanvas, player, body.x, body.y);
-
-  // wing in front
-  ctx.save();
-  ctx.translate(wingPos.x + wing.w / 2, wingPos.y + wing.h);
-  ctx.rotate(wingPos.r2);
-  drawSprite(ctx, spriteCanvas, wing, -wing.w / 2, -wing.h);
-  ctx.restore();
-
   // front leg
   ctx.save();
   ctx.translate(frontLegPos.x + leg.w / 2, frontLegPos.y + leg.h / 2);
@@ -169,13 +163,34 @@ export const drawPlayer = (
 
   // back leg
   ctx.save();
+  addShadow(ctx);
   ctx.translate(backLegPos.x + leg.w / 2, backLegPos.y + leg.h / 2);
   ctx.rotate(backLegPos.r);
   drawSprite(ctx, spriteCanvas, leg, -leg.w / 2, -leg.h / 2);
   ctx.restore();
 
+  // body
+  ctx.save();
+  addShadow(ctx);
+  drawSprite(ctx, spriteCanvas, player, body.x, body.y);
+  ctx.restore();
+
+  // wing in front
+  ctx.save();
+  ctx.translate(wingPos.x + wing.w / 2, wingPos.y + wing.h);
+  ctx.rotate(wingPos.r2);
+  drawSprite(ctx, spriteCanvas, wing, -wing.w / 2, -wing.h);
+  ctx.restore();
+
   // undo rotation and translation for whole player.
   ctx.restore();
+};
+
+const addShadow = (ctx) => {
+  ctx.shadowColor = "rgba(0,0,0,0.45)";
+  ctx.shadowBlur = 2;
+  ctx.shadowOffsetY = -4;
+  ctx.shadowOffsetX = 4;
 };
 
 const degToRad = (deg) => (deg * Math.PI) / 180;

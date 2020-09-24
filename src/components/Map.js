@@ -8,7 +8,7 @@ export const Map = ({ progress = 0 }) => {
       viewBox="0 0 176.301 45.432"
       style={{
         opacity: 0.5,
-        position: "absolute",
+        // position: "absolute",
         top: 0,
         width: "100%",
         left: 0,
