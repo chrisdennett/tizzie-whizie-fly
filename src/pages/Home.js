@@ -3,7 +3,13 @@ import React from "react";
 import SpriteTester from "../game/SpriteTester";
 import DrawGame from "./DrawGame";
 
-const Home = ({ gameCreated, setSpriteData, spriteData }) => {
+const Home = ({
+  gameCreated,
+  setSpriteData,
+  spriteData,
+  setSourceImg,
+  sourceImg,
+}) => {
   return (
     <div>
       <h1>FLY TIZZIE FLY</h1>

@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import ImageInputSelector from "../components/imageInput/ImageInputSelector";
 import { generateSpritesheet } from "./generateSpritesheet";
 
-const SpriteSheetMaker = ({ setSpriteData, w, h, spriteData }) => {
-  const [, setFrameNumber] = useState(0);
-  const [sourceImg, setSourceImg] = useState(null);
+const SpriteSheetMaker = ({ setSpriteData, w, h, sourceImg }) => {
   const [spritesheetMask, setSpritesheetMask] = useState(null);
 
   useEffect(() => {
@@ -32,15 +29,7 @@ const SpriteSheetMaker = ({ setSpriteData, w, h, spriteData }) => {
     }
   }, [spritesheetMask]);
 
-  return (
-    <div>
-      <ImageInputSelector
-        setFrameNumber={setFrameNumber}
-        srcImg={spriteData ? spriteData.canvas : null}
-        setSrcImg={setSourceImg}
-      />
-    </div>
-  );
+  return <div>SpriteSheetMaker</div>;
 };
 
 export default SpriteSheetMaker;

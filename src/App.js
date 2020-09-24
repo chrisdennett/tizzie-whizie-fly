@@ -14,7 +14,11 @@ function App() {
   const gameProps = { spriteData, setSpriteData, gameState, setGameState };
   const gameCreated = spriteData !== null;
 
-  const homeProps = { spriteData, setSpriteData, gameCreated };
+  const homeProps = {
+    spriteData,
+    setSpriteData,
+    gameCreated,
+  };
 
   return (
     <div>
