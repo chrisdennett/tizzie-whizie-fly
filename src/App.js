@@ -12,6 +12,11 @@ function App() {
   const gameCreated = spriteData && spriteData.canvas;
   const gameProps = { spriteData, gameState, setGameState };
 
+  const onEndGame = () => {
+    setSpriteData(null);
+    setGameState(defaultGameState);
+  };
+
   return (
     <div>
       {!gameCreated && (
@@ -24,7 +29,12 @@ function App() {
           <SpriteTester spriteData={spriteData} />
         </div>
       )}
-      {gameCreated && <PlayGame {...gameProps} />}
+      {gameCreated && (
+        <div>
+          <button onClick={onEndGame}>End game</button>
+          <PlayGame {...gameProps} />
+        </div>
+      )}
     </div>
   );
 }
