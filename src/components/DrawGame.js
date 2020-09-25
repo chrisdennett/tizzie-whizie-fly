@@ -19,10 +19,6 @@ const DrawGame = ({ setSpriteData }) => {
     }
   }, [spritesheetMask]);
 
-  const onPrintTemplate = () => {
-    console.log("Template");
-  };
-
   const createSpritesheet = (sourceImg) => {
     const generatedSheetData = generateSpritesheet(
       sourceImg,
