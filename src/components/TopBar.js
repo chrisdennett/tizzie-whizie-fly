@@ -3,12 +3,13 @@ import styled from "styled-components";
 import { FaInfoCircle } from "react-icons/fa";
 import { TizzieLogo } from "./TizzieLogo";
 
-const TopBar = ({ onInfoClick }) => {
+const TopBar = ({ onInfoClick, showTitle }) => {
   return (
     <Container>
       <TizzieLogo height={42} />
 
-      <h1>Fly Tizzie Fly</h1>
+      {showTitle && <h1>Fly Tizzie Fly</h1>}
+
       <button onClick={onInfoClick}>
         <FaInfoCircle />
         <span> INFO</span>

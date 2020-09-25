@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import SpriteTester from "./game/SpriteTester";
+import styled from "styled-components";
 import DrawGame from "./components/DrawGame";
 import PlayGame from "./game/PlayGame";
-
-import { defaultGameState } from "./game/gameState";
+import SpriteTester from "./game/SpriteTester";
 import TopBar from "./components/TopBar";
 import About from "./components/About";
-import styled from "styled-components";
+import { defaultGameState } from "./game/gameState";
+import { useWindowSize } from "./hooks/useWindowSize";
 
 function App() {
   const [showInfo, setShowInfo] = useState(false);
   const [spriteData, setSpriteData] = useState(null);
   const [gameState, setGameState] = useState(defaultGameState);
+
+  const windowSize = useWindowSize();
 
   const gameCreated = spriteData && spriteData.canvas;
   const gameProps = { spriteData, gameState, setGameState };
@@ -23,7 +25,10 @@ function App() {
 
   return (
     <Container>
-      <TopBar onInfoClick={() => setShowInfo(true)} />
+      <TopBar
+        onInfoClick={() => setShowInfo(true)}
+        showTitle={windowSize.width > 400}
+      />
 
       {showInfo && <About onClose={() => setShowInfo(false)} />}
 
@@ -36,7 +41,7 @@ function App() {
               <p>Add brief intro to the project here.</p>
             </header>
 
-            <DrawGame setSpriteData={setSpriteData} />
+            <DrawGame setSpriteData={setSpriteData} windowSize={windowSize} />
             <SpriteTester spriteData={spriteData} />
           </div>
         )}

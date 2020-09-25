@@ -6,7 +6,7 @@ import { createMaxSizeCanvas } from "../spriteSheet/helper";
 import { generateSpritesheet } from "../spriteSheet/generateSpritesheet";
 import ExternalLink from "./ExternalLink";
 
-const DrawGame = ({ setSpriteData }) => {
+const DrawGame = ({ setSpriteData, windowSize }) => {
   const [spritesheetMask, setSpritesheetMask] = useState(null);
 
   const w = defaultGameState.gameW;
