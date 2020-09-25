@@ -65,6 +65,16 @@ const DrawGame = ({ setSpriteData, windowSize }) => {
             alt={"coloured in template sheet"}
           />
         </StepHolder>
+
+        <StepHolder>
+          <h2>3: Play your game!</h2>
+          <p>Once you're finished, take a photo of it to generate your game.</p>
+
+          <img
+            src={"/crayon2_250x141.jpg"}
+            alt={"coloured in template sheet"}
+          />
+        </StepHolder>
       </GameSteps>
 
       <div>
@@ -92,7 +102,8 @@ const StepHolder = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 300px;
+  max-width: 250px;
+  padding: 20px;
 
   img {
     border: 1px solid rgba(0, 0, 0, 0.8);

@@ -7,6 +7,7 @@ import TopBar from "./components/TopBar";
 import About from "./components/About";
 import { defaultGameState } from "./game/gameState";
 import { useWindowSize } from "./hooks/useWindowSize";
+import { TizzieLogo } from "./components/TizzieLogo";
 
 function App() {
   const [showInfo, setShowInfo] = useState(false);
@@ -27,7 +28,8 @@ function App() {
     <Container>
       <TopBar
         onInfoClick={() => setShowInfo(true)}
-        showTitle={windowSize.width > 400}
+        showTitle={false}
+        onHomeClick={onEndGame}
       />
 
       {showInfo && <About onClose={() => setShowInfo(false)} />}
@@ -36,7 +38,8 @@ function App() {
         {!gameCreated && (
           <div>
             <header>
-              <h1>FLY TIZZIE FLY</h1>
+              <TizzieLogo height={80} />
+              <h1>Fly Tizzie Fly</h1>
               <h2>Paint your own game</h2>
               <p>Add brief intro to the project here.</p>
             </header>
@@ -63,7 +66,7 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 
   header {
@@ -72,6 +75,17 @@ const Content = styled.div`
 
     h1 {
       font-size: 64px;
+      margin: 0;
+      font-family: "Cabin Sketch", cursive;
+      line-height: 100%;
+    }
+
+    h2 {
+      margin: 10px 0 0 0;
+    }
+
+    p {
+      margin: 5px 0;
     }
   }
 `;

@@ -3,17 +3,19 @@ import styled from "styled-components";
 import { FaInfoCircle } from "react-icons/fa";
 import { TizzieLogo } from "./TizzieLogo";
 
-const TopBar = ({ onInfoClick, showTitle }) => {
+const TopBar = ({ onHomeClick, onInfoClick, showTitle }) => {
   return (
     <Container>
-      <TizzieLogo height={42} />
+      <HomeButton onClick={onHomeClick}>
+        <TizzieLogo height={42} />
+      </HomeButton>
 
       {showTitle && <h1>Fly Tizzie Fly</h1>}
 
-      <button onClick={onInfoClick}>
+      <InfoButton onClick={onInfoClick}>
         <FaInfoCircle />
         <span> INFO</span>
-      </button>
+      </InfoButton>
     </Container>
   );
 };
@@ -26,12 +28,13 @@ const Container = styled.div`
   left: 0;
   right: 0;
   height: 60px;
-  background: whitesmoke;
+  /* background: rgba(255, 255, 255, 0.9); */
+  background-image: url("/linedpaper.png");
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
 
   h1 {
     font-size: 28px;
@@ -39,17 +42,25 @@ const Container = styled.div`
     margin: 0;
     padding: 0;
   }
+`;
 
-  button {
-    font-size: 18px;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
+const HomeButton = styled.button`
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+`;
 
-    svg {
-      vertical-align: middle;
-    }
+const InfoButton = styled.button`
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  cursor: pointer;
+
+  svg {
+    vertical-align: middle;
   }
 `;
