@@ -4,9 +4,11 @@ import { MdPhotoLibrary } from "react-icons/md";
 import { AiOutlinePicture } from "react-icons/ai";
 // import { VscLoading } from "react-icons/vsc";
 import styled from "styled-components";
-import PhotoSelector, { createMaxSizeCanvas } from "./PhotoSelector";
+import PhotoSelector, {
+  createMaxSizeCanvas,
+} from "../src/components/imageInput/PhotoSelector";
 
-import { WebcamCapture } from "./WebcamCapture";
+import { WebcamCapture } from "../src/components/imageInput/WebcamCapture";
 
 const ImageInputSelector = ({ setSrcImg, setFrameNumber }) => {
   const [currentInput, setCurrentInput] = useState("sample");

@@ -1,35 +1,30 @@
 import React, { useState } from "react";
-import { Router, Link } from "@reach/router";
+import SpriteTester from "./game/SpriteTester";
+import DrawGame from "./components/DrawGame";
+import PlayGame from "./game/PlayGame";
 
-import Home from "./pages/Home";
-import PlayGame from "./pages/PlayGame";
-import DrawGame from "./pages/DrawGame";
-import About from "./pages/About";
 import { defaultGameState } from "./game/gameState";
 
 function App() {
   const [spriteData, setSpriteData] = useState(null);
   const [gameState, setGameState] = useState(defaultGameState);
 
-  const gameProps = { spriteData, setSpriteData, gameState, setGameState };
-
-  const homeProps = {
-    spriteData,
-    setSpriteData,
-  };
+  const gameCreated = spriteData && spriteData.canvas;
+  const gameProps = { spriteData, gameState, setGameState };
 
   return (
     <div>
-      <nav>
-        <Link to="/">Home</Link> | <Link to="about">About</Link>
-      </nav>
+      {!gameCreated && (
+        <div>
+          <h1>FLY TIZZIE FLY</h1>
+          <h2>Paint your own game</h2>
+          <p>Add brief intro to the project here.</p>
 
-      <Router>
-        <Home path="/" {...homeProps} />
-        <About path="about" />
-        <PlayGame path="playgame" {...gameProps} />
-        <DrawGame path="drawgame" setSpriteData={setSpriteData} />
-      </Router>
+          <DrawGame setSpriteData={setSpriteData} />
+          <SpriteTester spriteData={spriteData} />
+        </div>
+      )}
+      {gameCreated && <PlayGame {...gameProps} />}
     </div>
   );
 }

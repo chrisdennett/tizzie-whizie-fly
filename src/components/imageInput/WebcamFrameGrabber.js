@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Webcam from "react-webcam";
-import { useAnimationFrame } from "../hooks/useAnimationFrame";
+import { useAnimationFrame } from "../../hooks/useAnimationFrame";
 
 const videoConstraints = {
   width: 1024,

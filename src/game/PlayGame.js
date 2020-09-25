@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Game } from "../game/Game";
-import { Map } from "../components/Map";
+import { Game } from "./Game";
+import { Map } from "./Map";
 
 const PlayGame = ({ spriteData, gameState, setGameState }) => {
   return (

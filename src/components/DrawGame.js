@@ -1,37 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { defaultGameState } from "../game/gameState";
 import styled from "styled-components";
-import PhotoSelector from "../components/imageInput/PhotoSelector";
+import PhotoSelector from "./imageInput/PhotoSelector";
 import { createMaxSizeCanvas } from "../spriteSheet/helper";
 import { generateSpritesheet } from "../spriteSheet/generateSpritesheet";
+import ExternalLink from "./ExternalLink";
 
 const DrawGame = ({ setSpriteData }) => {
-  const [sourceImg, setSourceImg] = useState(null);
   const [spritesheetMask, setSpritesheetMask] = useState(null);
 
   const w = defaultGameState.gameW;
   const h = defaultGameState.gameH;
-
-  const onPrintTemplate = () => {
-    console.log("Template");
-  };
-
-  const onPhotoSelected = (photo) => {
-    setSourceImg(photo);
-  };
-
-  useEffect(() => {
-    const generatedSheetData = generateSpritesheet(
-      sourceImg,
-      spritesheetMask,
-      w,
-      h
-    );
-
-    setSpriteData(generatedSheetData);
-
-    // eslint-disable-next-line
-  }, [sourceImg, spritesheetMask, w, h]);
 
   // load mask
   useEffect(() => {
@@ -40,7 +19,27 @@ const DrawGame = ({ setSpriteData }) => {
     }
   }, [spritesheetMask]);
 
-  const onSampleSelect = (imgName) => loadImage(imgName, setSourceImg, true);
+  const onPrintTemplate = () => {
+    console.log("Template");
+  };
+
+  const createSpritesheet = (sourceImg) => {
+    const generatedSheetData = generateSpritesheet(
+      sourceImg,
+      spritesheetMask,
+      w,
+      h
+    );
+
+    setSpriteData(generatedSheetData);
+  };
+
+  const onPhotoSelected = (photo) => {
+    createSpritesheet(photo);
+  };
+
+  const onSampleSelect = (imgName) =>
+    loadImage(imgName, createSpritesheet, true);
 
   return (
     <div>
@@ -51,7 +50,9 @@ const DrawGame = ({ setSpriteData }) => {
             Grab yourself a sheet and use paint, pencil, collage, clay, whatever
             you like to create all the bits we need for the game.
           </p>
-          <button onClick={onPrintTemplate}>PRINT TEMPLATE</button>
+          <ExternalLink href={"/tizzie-fly-template.pdf"}>
+            PRINT TEMPLATE
+          </ExternalLink>
           <img src={"/printable-template_250x177.png"} alt={"game template"} />
         </StepHolder>
 
