@@ -10,6 +10,7 @@ import { defaultGameState } from "./game/gameState";
 import { TizzieLogo } from "./components/TizzieLogo";
 
 function App() {
+  const [showGame, setShowGame] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [spriteData, setSpriteData] = useState(null);
   const [gameState, setGameState] = useState(defaultGameState);
@@ -20,7 +21,7 @@ function App() {
   const gameProps = { spriteData, gameState, setGameState };
 
   const onEndGame = () => {
-    setSpriteData(null);
+    setShowGame(false);
     setGameState(defaultGameState);
   };
 
@@ -35,7 +36,7 @@ function App() {
       {showInfo && <About onClose={() => setShowInfo(false)} />}
 
       <Content>
-        {!gameCreated && (
+        {!showGame && (
           <div>
             <header>
               <TizzieLogo height={80} />
@@ -44,11 +45,20 @@ function App() {
               <p>Add brief intro to the project here.</p>
             </header>
 
+            {gameCreated && (
+              <div>
+                <button onClick={() => setShowGame(true)}>
+                  PLAY YOUR GAME
+                </button>
+                <SpriteTester spriteData={spriteData} />
+              </div>
+            )}
+
             <DrawGame setSpriteData={setSpriteData} />
-            <SpriteTester spriteData={spriteData} />
           </div>
         )}
-        {gameCreated && (
+
+        {showGame && (
           <div>
             <button onClick={onEndGame}>End game</button>
             <PlayGame {...gameProps} />
