@@ -6,7 +6,7 @@ import { createMaxSizeCanvas } from "../spriteSheet/helper";
 import { generateSpritesheet } from "../spriteSheet/generateSpritesheet";
 import ExternalLink from "./ExternalLink";
 
-const DrawGame = ({ setSpriteData, windowSize }) => {
+const GameMaker = ({ setSpriteData }) => {
   const [spritesheetMask, setSpritesheetMask] = useState(null);
 
   const w = defaultGameState.gameW;
@@ -94,7 +94,7 @@ const DrawGame = ({ setSpriteData, windowSize }) => {
   );
 };
 
-export default DrawGame;
+export default GameMaker;
 
 const GameSteps = styled.div`
   display: flex;

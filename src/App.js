@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import DrawGame from "./components/DrawGame";
-import PlayGame from "./game/PlayGame";
+import GameMaker from "./components/GameMaker";
 import SpriteTester from "./game/SpriteTester";
 import TopBar from "./components/TopBar";
 import About from "./components/About";
 import { defaultGameState } from "./game/gameState";
 // import { useWindowSize } from "./hooks/useWindowSize";
 import { TizzieLogo } from "./components/TizzieLogo";
+import { Game } from "./game/Game";
 
 function App() {
   const [showGame, setShowGame] = useState(false);
@@ -54,14 +54,14 @@ function App() {
               </div>
             )}
 
-            <DrawGame setSpriteData={setSpriteData} />
+            <GameMaker setSpriteData={setSpriteData} />
           </div>
         )}
 
         {showGame && (
           <div>
             <button onClick={onEndGame}>End game</button>
-            <PlayGame {...gameProps} />
+            <Game {...gameProps} />
           </div>
         )}
       </Content>

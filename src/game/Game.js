@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 // import { useInterval } from "../hooks/useInternval";
+import styled from "styled-components";
+import { useAnimationFrame } from "../hooks/useAnimationFrame";
 import { getNextGameState, defaultGameState } from "./gameState";
 import { GameCanvas } from "./GameCanvas";
-import { useAnimationFrame } from "../hooks/useAnimationFrame";
+import { Map } from "./Map";
 
 export const Game = ({ spriteData, gameState, setGameState }) => {
   const [flyUp, setFlyUp] = useState(false);
@@ -59,60 +61,74 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
 
   return (
     <div>
-      <GameCanvas
-        spriteCanvas={spriteData.canvas}
-        gameState={gameState}
-        spriteData={spriteData.data}
-      />
+      {spriteData && (
+        <GamePanel>
+          <GameCanvas
+            spriteCanvas={spriteData.canvas}
+            gameState={gameState}
+            spriteData={spriteData.data}
+          />
 
-      {!firstGameStarted && (
-        <div>
-          <button
-            onClick={onPlay}
-            onTouchStart={onPlay}
-            style={{ cursor: "pointer", padding: 20 }}
-          >
-            PLAY
-          </button>
-        </div>
-      )}
+          {!firstGameStarted && (
+            <div>
+              <button
+                onClick={onPlay}
+                onTouchStart={onPlay}
+                style={{ cursor: "pointer", padding: 20 }}
+              >
+                PLAY
+              </button>
+            </div>
+          )}
 
-      {gameState.gameOver && (
-        <div>
-          <button
-            onClick={replay}
-            onTouchStart={replay}
-            style={{ cursor: "pointer", padding: 20 }}
-          >
-            REPLAY
-          </button>
-        </div>
-      )}
+          {gameState.gameOver && (
+            <div>
+              <button
+                onClick={replay}
+                onTouchStart={replay}
+                style={{ cursor: "pointer", padding: 20 }}
+              >
+                REPLAY
+              </button>
+            </div>
+          )}
 
-      {showGameControls && (
-        <div>
-          <button
-            onClick={goUp}
-            onTouchStart={goUp}
-            style={{ cursor: "pointer", padding: 20 }}
-          >
-            UP
-          </button>
-          <button
-            onClick={onPlayPauseToggle}
-            style={{ cursor: "pointer", padding: 20 }}
-          >
-            {isPaused ? "PLAY" : "PAUSE"}
-          </button>
-          <button
-            onClick={goDown}
-            onTouchStart={goDown}
-            style={{ cursor: "pointer", padding: 20 }}
-          >
-            DIVE
-          </button>
-        </div>
+          {showGameControls && (
+            <div>
+              <button
+                onClick={goUp}
+                onTouchStart={goUp}
+                style={{ cursor: "pointer", padding: 20 }}
+              >
+                UP
+              </button>
+              <button
+                onClick={onPlayPauseToggle}
+                style={{ cursor: "pointer", padding: 20 }}
+              >
+                {isPaused ? "PLAY" : "PAUSE"}
+              </button>
+              <button
+                onClick={goDown}
+                onTouchStart={goDown}
+                style={{ cursor: "pointer", padding: 20 }}
+              >
+                DIVE
+              </button>
+            </div>
+          )}
+
+          <Map progress={gameState.progress} />
+        </GamePanel>
       )}
     </div>
   );
 };
+
+const GamePanel = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 800px;
+  max-width: 100%;
+`;
