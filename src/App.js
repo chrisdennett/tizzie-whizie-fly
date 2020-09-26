@@ -6,7 +6,7 @@ import SpriteTester from "./game/SpriteTester";
 import TopBar from "./components/TopBar";
 import About from "./components/About";
 import { defaultGameState } from "./game/gameState";
-import { useWindowSize } from "./hooks/useWindowSize";
+// import { useWindowSize } from "./hooks/useWindowSize";
 import { TizzieLogo } from "./components/TizzieLogo";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
   const [spriteData, setSpriteData] = useState(null);
   const [gameState, setGameState] = useState(defaultGameState);
 
-  const windowSize = useWindowSize();
+  // const windowSize = useWindowSize();
 
   const gameCreated = spriteData && spriteData.canvas;
   const gameProps = { spriteData, gameState, setGameState };
@@ -44,7 +44,7 @@ function App() {
               <p>Add brief intro to the project here.</p>
             </header>
 
-            <DrawGame setSpriteData={setSpriteData} windowSize={windowSize} />
+            <DrawGame setSpriteData={setSpriteData} />
             <SpriteTester spriteData={spriteData} />
           </div>
         )}

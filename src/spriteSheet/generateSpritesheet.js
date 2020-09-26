@@ -5,6 +5,9 @@ import { createCanvasFromSrc } from "./helper";
 
 let detector = new AR.Detector();
 
+const gameW = 1089;
+const gameH = 760;
+
 export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
   if (!sourceImg || !maskImg) return;
 
@@ -38,7 +41,7 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
       bottomLeft: [d.x / sourceCanvas.width, d.y / sourceCanvas.height],
     });
 
-    const userArtCanvas = createCanvasFromSrc(webGlCanvas, w, h);
+    const userArtCanvas = createCanvasFromSrc(webGlCanvas, gameW, gameH);
     const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
       spriteData,
       maskData,
