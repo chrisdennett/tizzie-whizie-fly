@@ -2,10 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { FaInfoCircle } from "react-icons/fa";
 import { TizzieLogo } from "./TizzieLogo";
+import { useScroll } from "../hooks/useScroll";
 
 const TopBar = ({ onHomeClick, onInfoClick, showTitle }) => {
+  const { scrollY } = useScroll();
+
   return (
-    <Container>
+    <Container scrollY={scrollY}>
       <HomeButton onClick={onHomeClick}>
         <TizzieLogo height={42} />
       </HomeButton>
@@ -34,7 +37,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: ${(props) =>
+    props.scrollY > 0 ? "0px 3px 3px rgba(0, 0, 0, 0.1)" : ""};
 
   h1 {
     font-size: 28px;
