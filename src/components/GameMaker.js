@@ -16,6 +16,9 @@ const GameMaker = ({ setSpriteData }) => {
   useEffect(() => {
     if (!spritesheetMask) {
       loadImage("./spritesheet-1-mask.png", setSpritesheetMask);
+    } else {
+      // FOR TESTING - LOAD SAMPLE IMMEDIATELY
+      loadImage("./newMarker-3.jpg", createSpritesheet, true);
     }
   }, [spritesheetMask]);
 
@@ -26,6 +29,8 @@ const GameMaker = ({ setSpriteData }) => {
       w,
       h
     );
+
+    console.log("generatedSheetData: ", generatedSheetData);
 
     setSpriteData(generatedSheetData);
   };

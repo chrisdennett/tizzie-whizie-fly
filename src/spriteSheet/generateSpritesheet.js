@@ -29,9 +29,17 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
     webGlCanvas.width = w;
     webGlCanvas.height = h;
 
-    const markerCorners = getCornerPositions(markers);
-    const [a, b, c, d] = markerCorners;
+    const a = markers[0].corners[0];
+    const b = markers[1].corners[0];
+    const d = markers[2].corners[0];
+    const c = markers[3].corners[0];
 
+    const topWidth = b.x - a.x;
+    const bottomWidth = c.x - d.x;
+
+    const wFracChange = 0;
+
+    // unwarp the canvas vertically
     mapPolygonToCanvas({
       gl,
       image: sourceImg,
@@ -41,15 +49,30 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
       bottomLeft: [d.x / sourceCanvas.width, d.y / sourceCanvas.height],
     });
 
-    const userArtCanvas = createCanvasFromSrc(webGlCanvas, gameW, gameH);
+    const unwarpedCanvas = createCanvasFromSrc(webGlCanvas, gameW, gameH);
+    // const widthChange = {
+    //   topWidth,
+    //   bottomWidth,
+    // };
+
+    // const lineUnwarpedCanvas = createLineUnwarpedCanvas(
+    //   webGlCanvas,
+    //   widthChange
+    // );
+
     const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
       spriteData,
       maskData,
-      userArtCanvas,
+      unwarpedCanvas,
       maskImg
     );
 
-    return { data: gameData, canvas: outCanvas };
+    return {
+      data: gameData,
+      canvas: outCanvas,
+      unwarpedCanvas,
+      sourceCanvas,
+    };
   } else {
     const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
       spriteData,
@@ -65,30 +88,34 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
 //
 // HELPER FUNCTIONS
 //
-function getCornerPositions(markers) {
-  let allCorners = [];
 
-  for (let marker of markers) {
-    allCorners = allCorners.concat(marker.corners);
-  }
+// function createLineUnwarpedCanvas(srcCanvas, widthChange) {
+//   const outCanvas = document.createElement("canvas");
 
-  allCorners.sort((a, b) => (a.x > b.x ? 1 : -1));
+//   const { width: w, height: h } = srcCanvas;
+//   outCanvas.width = w;
+//   outCanvas.height = h;
 
-  const rightSideCorners = allCorners.slice(allCorners.length - 4);
-  const leftSideCorners = allCorners.slice(0, 4);
+//   // use amount of horizontal warp to unsquish
+//   const { topWidth, bottomWidth } = widthChange;
+//   const squishFraction = (bottomWidth - topWidth) / bottomWidth;
 
-  rightSideCorners.sort((a, b) => (a.y > b.y ? 1 : -1));
-  leftSideCorners.sort((a, b) => (a.y > b.y ? 1 : -1));
+//   const fracAtTop = 1 + squishFraction;
+//   const fracAtBottom = 1 - squishFraction;
 
-  const topLeft = leftSideCorners[0];
-  const topRight = rightSideCorners[0];
-  const bottomRight = rightSideCorners[3];
-  const bottomLeft = leftSideCorners[3];
+//   const ctx = outCanvas.getContext("2d");
+//   const sliceH = 100;
+//   const totalSlices = h / sliceH;
+//   const squishFractionInc = squishFraction / totalSlices;
 
-  const fourCorners = [topLeft, topRight, bottomRight, bottomLeft];
+//   for (let y = 0; y < h; y += sliceH) {
+//     const currSquishFrac = squishFraction - y * squishFractionInc;
+//     const currSliceH = sliceH + y * squishFractionInc;
+//     ctx.drawImage(srcCanvas, 0, y, w, sliceH, 0, y, w, currSliceH);
+//   }
 
-  return fourCorners;
-}
+//   return outCanvas;
+// }
 
 function getTotalHeightsFromObj(data, padding) {
   const spriteKeys = Object.keys(data);
@@ -285,3 +312,30 @@ function drawMaskedSprite(
 
   return { x: 0, y: startY, w: sprite.w * scale, h: sprite.h * scale };
 }
+
+// function getCornerPositions(markers) {
+//   let allCorners = [];
+
+//   for (let marker of markers) {
+//     allCorners = allCorners.concat(marker.corners);
+//   }
+
+//   allCorners.sort((a, b) => (a.x > b.x ? 1 : -1));
+
+//   const rightSideCorners = allCorners.slice(allCorners.length - 4);
+//   const leftSideCorners = allCorners.slice(0, 4);
+
+//   rightSideCorners.sort((a, b) => (a.y > b.y ? 1 : -1));
+//   leftSideCorners.sort((a, b) => (a.y > b.y ? 1 : -1));
+
+//   const topLeft = leftSideCorners[0];
+//   const topRight = rightSideCorners[0];
+//   const bottomRight = rightSideCorners[3];
+//   const bottomLeft = leftSideCorners[3];
+
+//   console.log("topLeft: ", topLeft);
+
+//   const fourCorners = [topLeft, topRight, bottomRight, bottomLeft];
+
+//   return fourCorners;
+// }
