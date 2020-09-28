@@ -31,10 +31,11 @@ const SpriteTester = ({ spriteData }) => {
       const artCanvas = unwarpedCanvasRef.current;
       artCanvas.width = spriteData.unwarpedCanvas.width;
       artCanvas.height = spriteData.unwarpedCanvas.height;
+
       const ctx = artCanvas.getContext("2d");
       ctx.drawImage(spriteData.unwarpedCanvas, 0, 0);
     }
-  }, [count, spriteData, isJumping, isDiving]);
+  }, [spriteData, isJumping, isDiving]);
 
   useEffect(() => {
     if (
@@ -44,7 +45,7 @@ const SpriteTester = ({ spriteData }) => {
       spriteData.canvas
     ) {
       const previewCanvas = maskedCanvasRef.current;
-      previewCanvas.width = 200;
+      previewCanvas.width = 250;
       previewCanvas.height = 150;
       const ctx = previewCanvas.getContext("2d");
       drawPlayer(
@@ -82,9 +83,9 @@ const SpriteTester = ({ spriteData }) => {
         <button onClick={onNormClick}>NORMAL</button>
         <button onClick={onDiveClick}>DIVE</button>
       </h1>
+      <canvas ref={maskedCanvasRef} />
       <canvas ref={unwarpedCanvasRef} />
       <canvas ref={sourceCanvasRef} />
-      <canvas ref={maskedCanvasRef} />
     </div>
   );
 };

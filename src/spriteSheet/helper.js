@@ -4,7 +4,17 @@ export const createCanvasFromSrc = (sourceCanvas, w, h) => {
   outCanvas.height = h ? h : sourceCanvas.height;
   const ctx = outCanvas.getContext("2d");
 
-  ctx.drawImage(sourceCanvas, 0, 0);
+  ctx.drawImage(
+    sourceCanvas,
+    0,
+    0,
+    sourceCanvas.width,
+    sourceCanvas.height,
+    0,
+    0,
+    outCanvas.width,
+    outCanvas.height
+  );
 
   return outCanvas;
 };

@@ -16,10 +16,12 @@ const GameMaker = ({ setSpriteData }) => {
   useEffect(() => {
     if (!spritesheetMask) {
       loadImage("./spritesheet-1-mask.png", setSpritesheetMask);
-    } else {
-      // FOR TESTING - LOAD SAMPLE IMMEDIATELY
-      loadImage("./newMarker-3.jpg", createSpritesheet, true);
     }
+    // FOR TESTING - LOAD SAMPLE IMMEDIATELY
+    // else {
+    // loadImage("./tizzie-crayon.jpg", createSpritesheet, true);
+    // loadImage("./newMarker-3.jpg", createSpritesheet, true);
+    // }
   }, [spritesheetMask]);
 
   const createSpritesheet = (sourceImg) => {
@@ -29,9 +31,6 @@ const GameMaker = ({ setSpriteData }) => {
       w,
       h
     );
-
-    console.log("generatedSheetData: ", generatedSheetData);
-
     setSpriteData(generatedSheetData);
   };
 
@@ -87,10 +86,10 @@ const GameMaker = ({ setSpriteData }) => {
 
       <div>
         <h2>Or play one we made earlier...</h2>
-        <div onClick={() => onSampleSelect("crayon2.jpg")}>
+        <div onClick={() => onSampleSelect("example-1.png")}>
           <h3>Crayon Wonder</h3>
           <img
-            src={"/crayon2_250x141.jpg"}
+            src={"/example-1_250x174.png"}
             alt={"coloured in template sheet"}
           />
         </div>

@@ -187,7 +187,7 @@ export const drawPlayer = (
 };
 
 const addShadow = (ctx) => {
-  ctx.shadowColor = "rgba(0,0,0,0.45)";
+  ctx.shadowColor = "rgba(0,0,0,0.1)";
   ctx.shadowBlur = 2;
   ctx.shadowOffsetY = -4;
   ctx.shadowOffsetX = 4;

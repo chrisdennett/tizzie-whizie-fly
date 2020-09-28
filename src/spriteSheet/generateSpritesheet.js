@@ -1,6 +1,7 @@
 import AR from "../libs/aruco";
+import fx from "glfx";
 import { spriteData, maskData } from "../game/gameState";
-import { mapPolygonToCanvas } from "../webGLStuff/webglThings";
+// import { mapPolygonToCanvas } from "../webGLStuff/webglThings";
 import { createCanvasFromSrc } from "./helper";
 
 let detector = new AR.Detector();
@@ -24,41 +25,17 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
   var markers = detector.detect(imageData);
 
   if (markers.length === 4) {
-    const webGlCanvas = document.createElement("canvas");
-    const gl = webGlCanvas.getContext("webgl");
-    webGlCanvas.width = w;
-    webGlCanvas.height = h;
+    const a = markers[0].corners[0]; // top left
+    const b = markers[1].corners[0]; // top right
+    const d = markers[2].corners[0]; // bottom left
+    const c = markers[3].corners[0]; // bottom right
 
-    const a = markers[0].corners[0];
-    const b = markers[1].corners[0];
-    const d = markers[2].corners[0];
-    const c = markers[3].corners[0];
-
-    const topWidth = b.x - a.x;
-    const bottomWidth = c.x - d.x;
-
-    const wFracChange = 0;
-
-    // unwarp the canvas vertically
-    mapPolygonToCanvas({
-      gl,
-      image: sourceImg,
-      topLeft: [a.x / sourceCanvas.width, a.y / sourceCanvas.height],
-      topRight: [b.x / sourceCanvas.width, b.y / sourceCanvas.height],
-      bottomRight: [c.x / sourceCanvas.width, c.y / sourceCanvas.height],
-      bottomLeft: [d.x / sourceCanvas.width, d.y / sourceCanvas.height],
-    });
-
-    const unwarpedCanvas = createCanvasFromSrc(webGlCanvas, gameW, gameH);
-    // const widthChange = {
-    //   topWidth,
-    //   bottomWidth,
-    // };
-
-    // const lineUnwarpedCanvas = createLineUnwarpedCanvas(
-    //   webGlCanvas,
-    //   widthChange
-    // );
+    const unwarpedCanvas = getUnwarpedCanvas(
+      sourceCanvas,
+      { a, b, c, d },
+      gameW,
+      gameH
+    );
 
     const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
       spriteData,
@@ -74,16 +51,60 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
       sourceCanvas,
     };
   } else {
+    const fullCanvas = createCanvasFromSrc(sourceCanvas, gameW, gameH);
+
     const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
       spriteData,
       maskData,
-      sourceCanvas,
+      fullCanvas,
       maskImg
     );
 
     return { data: gameData, canvas: outCanvas };
   }
 };
+
+const getUnwarpedCanvas = (sourceCanvas, corners, gameW, gameH) => {
+  const { width: w, height: h } = sourceCanvas;
+  const webGlCanvas = fx.canvas();
+  var texture = webGlCanvas.texture(sourceCanvas);
+
+  const { a, b, c, d } = corners;
+
+  webGlCanvas
+    .draw(texture)
+    .perspective(
+      [a.x, a.y, b.x, b.y, d.x, d.y, c.x, c.y],
+      [0, 0, w, 0, 0, h, w, h]
+    )
+    .update();
+
+  const unwarpedCanvas = createCanvasFromSrc(webGlCanvas, gameW, gameH);
+
+  return unwarpedCanvas;
+};
+
+// const getUnwarpedCanvasOld = (sourceCanvas, corners, gameW, gameH) => {
+//   const webGlCanvas = document.createElement("canvas");
+//   const gl = webGlCanvas.getContext("webgl");
+//   webGlCanvas.width = gameW;
+//   webGlCanvas.height = gameH;
+
+//   const { a, b, c, d } = corners;
+
+//   mapPolygonToCanvas({
+//     gl,
+//     image: sourceCanvas,
+//     topLeft: [a.x / sourceCanvas.width, a.y / sourceCanvas.height],
+//     topRight: [b.x / sourceCanvas.width, b.y / sourceCanvas.height],
+//     bottomRight: [c.x / sourceCanvas.width, c.y / sourceCanvas.height],
+//     bottomLeft: [d.x / sourceCanvas.width, d.y / sourceCanvas.height],
+//   });
+
+//   const unwarpedCanvas = createCanvasFromSrc(webGlCanvas, gameW, gameH);
+
+//   return unwarpedCanvas;
+// };
 
 //
 // HELPER FUNCTIONS
@@ -156,12 +177,19 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
   let startY = 0;
   const gameSpriteSheet = {};
 
+  const { body, leg, wing, tail } = spriteData.player;
+
+  const adjustedBodyProps = { x: body.x, y: body.y, w: body.w, h: body.h };
+  const adjustedTailProps = { x: tail.x, y: tail.y, w: tail.w, h: tail.h };
+  const adjustedWingProps = { x: wing.x, y: wing.y, w: wing.w, h: wing.h };
+  const adjustedLegProps = { x: leg.x, y: leg.y, w: leg.w, h: leg.h };
+
   // Draw player
   gameSpriteSheet.player = drawMaskedSprite(
     ctx,
     spriteCanvas,
     maskCanvas,
-    spriteData.player.body,
+    adjustedBodyProps,
     maskData.player.body,
     startY,
     0.5
@@ -170,7 +198,7 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     ctx,
     spriteCanvas,
     maskCanvas,
-    spriteData.player.leg,
+    adjustedLegProps,
     maskData.player.leg,
     gameSpriteSheet.player.y + gameSpriteSheet.player.h + padding,
     0.5
@@ -179,7 +207,7 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     ctx,
     spriteCanvas,
     maskCanvas,
-    spriteData.player.wing,
+    adjustedWingProps,
     maskData.player.wing,
     gameSpriteSheet.leg.y + gameSpriteSheet.leg.h + padding,
     0.5
@@ -188,7 +216,7 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     ctx,
     spriteCanvas,
     maskCanvas,
-    spriteData.player.tail,
+    adjustedTailProps,
     maskData.player.tail,
     gameSpriteSheet.wing.y + gameSpriteSheet.wing.h + padding,
     0.5
