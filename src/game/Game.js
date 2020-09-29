@@ -6,6 +6,7 @@ import { getNextGameState, defaultGameState } from "./gameState";
 import { GameCanvas } from "./GameCanvas";
 import { Map } from "./Map";
 import GameControls from "./GameControls";
+import CollectionCard from "../collectionCards/CollectionCards";
 
 export const Game = ({ spriteData, gameState, setGameState }) => {
   const [flyUp, setFlyUp] = useState(false);
@@ -87,6 +88,8 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
           </div>
 
           <Map progress={gameState.progress} />
+
+          <CollectionCard />
         </GamePanel>
       )}
     </div>
