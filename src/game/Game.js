@@ -5,6 +5,7 @@ import { useAnimationFrame } from "../hooks/useAnimationFrame";
 import { getNextGameState, defaultGameState } from "./gameState";
 import { GameCanvas } from "./GameCanvas";
 import { Map } from "./Map";
+import GameControls from "./GameControls";
 
 export const Game = ({ spriteData, gameState, setGameState }) => {
   const [flyUp, setFlyUp] = useState(false);
@@ -59,6 +60,18 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
 
   const showGameControls = firstGameStarted && !gameState.gameOver;
 
+  const controlsProps = {
+    gameState,
+    showGameControls,
+    onPlay,
+    replay,
+    onPlayPauseToggle,
+    goUp,
+    goDown,
+    isPaused,
+    firstGameStarted,
+  };
+
   return (
     <div>
       {spriteData && (
@@ -69,54 +82,9 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
             spriteData={spriteData.data}
           />
 
-          {!firstGameStarted && (
-            <div>
-              <button
-                onClick={onPlay}
-                onTouchStart={onPlay}
-                style={{ cursor: "pointer", padding: 20 }}
-              >
-                PLAY
-              </button>
-            </div>
-          )}
-
-          {gameState.gameOver && (
-            <div>
-              <button
-                onClick={replay}
-                onTouchStart={replay}
-                style={{ cursor: "pointer", padding: 20 }}
-              >
-                REPLAY
-              </button>
-            </div>
-          )}
-
-          {showGameControls && (
-            <div>
-              <button
-                onClick={goUp}
-                onTouchStart={goUp}
-                style={{ cursor: "pointer", padding: 20 }}
-              >
-                UP
-              </button>
-              <button
-                onClick={onPlayPauseToggle}
-                style={{ cursor: "pointer", padding: 20 }}
-              >
-                {isPaused ? "PLAY" : "PAUSE"}
-              </button>
-              <button
-                onClick={goDown}
-                onTouchStart={goDown}
-                style={{ cursor: "pointer", padding: 20 }}
-              >
-                DIVE
-              </button>
-            </div>
-          )}
+          <div>
+            <GameControls {...controlsProps} />
+          </div>
 
           <Map progress={gameState.progress} />
         </GamePanel>
