@@ -58,12 +58,18 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
     const currObstacle = gameState.obstacles[gameState.nextObstacleIndex];
     const currObstacleSprite = spriteData[currObstacle.type];
 
+    let yPos = 0;
+    if (currObstacle.type === "boat") yPos = 70;
+    if (currObstacle.type === "island") yPos = 220;
+    if (currObstacle.type === "pike") yPos = 200;
+    if (currObstacle.type === "bownessie") yPos = 185;
+
     drawSprite(
       ctx,
       spriteCanvas,
       currObstacleSprite,
       gameState.obstacleX,
-      gameState.obstacleY - gameState.boatH,
+      yPos,
       true
     );
   }

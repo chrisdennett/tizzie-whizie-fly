@@ -18,10 +18,10 @@ const GameMaker = ({ setSpriteData }) => {
       loadImage("./spritesheet-1-mask.png", setSpritesheetMask);
     }
     // FOR TESTING - LOAD SAMPLE IMMEDIATELY
-    // else {
-    // loadImage("./tizzie-crayon.jpg", createSpritesheet, true);
-    // loadImage("./newMarker-3.jpg", createSpritesheet, true);
-    // }
+    else {
+      loadImage("./tizzie-crayon.jpg", createSpritesheet, true);
+      // loadImage("./newMarker-3.jpg", createSpritesheet, true);
+    }
   }, [spritesheetMask]);
 
   const createSpritesheet = (sourceImg) => {

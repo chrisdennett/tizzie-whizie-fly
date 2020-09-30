@@ -36,6 +36,14 @@ function App() {
       {showInfo && <About onClose={() => setShowInfo(false)} />}
 
       <Content>
+        {/* {showGame && ( */}
+        {gameCreated && (
+          <div>
+            <button onClick={onEndGame}>End game</button>
+            <Game {...gameProps} />
+          </div>
+        )}
+
         {!showGame && (
           <div>
             <header>
@@ -55,13 +63,6 @@ function App() {
             )}
 
             <GameMaker setSpriteData={setSpriteData} />
-          </div>
-        )}
-
-        {showGame && (
-          <div>
-            <button onClick={onEndGame}>End game</button>
-            <Game {...gameProps} />
           </div>
         )}
       </Content>

@@ -138,6 +138,12 @@ export const maskData = {
       h: 29.304,
     },
   },
+  ripples: {
+    x: 62.954,
+    y: 1074.17,
+    w: 1029,
+    h: 199,
+  },
 };
 
 const water = 230;

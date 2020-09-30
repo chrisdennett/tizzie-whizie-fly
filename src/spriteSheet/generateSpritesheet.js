@@ -234,14 +234,23 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
   );
 
   // draw shore
-  gameSpriteSheet.shore = drawMaskedSprite(
+  gameSpriteSheet.shore = drawMaskedShore(
     ctx,
     spriteCanvas,
     maskCanvas,
     spriteData.shore,
     maskData.shore,
+    maskData.ripples,
     gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding
   );
+  // gameSpriteSheet.shore = drawMaskedSprite(
+  //   ctx,
+  //   spriteCanvas,
+  //   maskCanvas,
+  //   spriteData.shore,
+  //   maskData.shore,
+  //   gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding
+  // );
 
   // Draw island
   gameSpriteSheet.island = drawMaskedSprite(
@@ -284,6 +293,107 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
   // );
 
   return { outCanvas, gameSpriteSheet };
+}
+
+function drawMaskedShore(
+  ctx,
+  spriteCanvas,
+  maskCanvas,
+  sprite,
+  mask,
+  ripples,
+  startY,
+  scale = 1
+) {
+  const tempCanvas = document.createElement("canvas");
+  tempCanvas.width = sprite.w;
+  tempCanvas.height = sprite.h;
+  const tempCtx = tempCanvas.getContext("2d");
+
+  console.log("ripples: ", ripples);
+
+  // draw the mask to temp canvas
+  tempCtx.drawImage(
+    maskCanvas,
+    mask.x,
+    mask.y,
+    mask.w,
+    mask.h,
+    0,
+    0,
+    mask.w,
+    mask.h
+  );
+
+  // set to mask
+  tempCtx.globalCompositeOperation = "source-in";
+  // draw the sprite to temp canvas
+  tempCtx.drawImage(
+    spriteCanvas,
+    sprite.x,
+    sprite.y,
+    sprite.w,
+    sprite.h,
+    0,
+    0,
+    sprite.w,
+    sprite.h
+  );
+
+  // draw the temp canvas to the output canvas
+  ctx.drawImage(
+    tempCanvas,
+    0,
+    0,
+    sprite.w,
+    sprite.h,
+    0,
+    startY,
+    sprite.w * scale,
+    sprite.h * scale
+  );
+  // draw the reflection of the temp canvas to output canvas
+
+  const reflectionHeight = sprite.h * 0.5;
+
+  ctx.save();
+  ctx.translate(0, startY + sprite.h + reflectionHeight);
+  ctx.scale(1, -1);
+  ctx.globalAlpha = 0.25;
+  ctx.drawImage(
+    tempCanvas,
+    0,
+    0,
+    sprite.w,
+    sprite.h,
+    0,
+    0,
+    sprite.w,
+    reflectionHeight
+  );
+  ctx.restore();
+
+  // draw ripples over reflection
+  ctx.globalAlpha = 0.1;
+  ctx.drawImage(
+    maskCanvas,
+    ripples.x,
+    ripples.y,
+    ripples.w,
+    ripples.h,
+    0,
+    startY + sprite.h,
+    ripples.w,
+    ripples.h * 0.5
+  );
+  ctx.globalAlpha = 1;
+
+  return {
+    x: 0,
+    y: startY,
+    w: sprite.w,
+    h: ripples.h + sprite.h,
+  };
 }
 
 function drawMaskedSprite(
