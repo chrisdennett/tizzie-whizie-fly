@@ -99,7 +99,7 @@ const Container = styled.div`
   padding-top: 60px;
   min-height: 100vh;
   background-image: ${(props) =>
-    !props.showGame
+    props.showGame
       ? `url("/img/bg/concrete_wall_2.png")`
       : `url("/img/bg/linedpaper.png")`};
 `;

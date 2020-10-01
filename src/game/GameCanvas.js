@@ -41,8 +41,9 @@ const CanvasHolder = styled.div`
   background-image: url("/img/bg/handmadepaper.png");
   /* padding: 20px; */
   line-height: 0;
-  box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.5), 0 0 4px rgba(0, 0, 0, 0.4),
-    0 5px 10px rgba(0, 0, 0, 0.7);
+  margin: 10px;
+  box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.7), 0 0 4px rgba(0, 0, 0, 0.1),
+    0 5px 10px rgba(0, 0, 0, 0.1);
 `;
 
 const StyledCanvas = styled.canvas`
