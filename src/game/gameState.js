@@ -235,6 +235,7 @@ export const defaultGameState = {
   obstacleSpeed: 7,
 
   playerY: water,
+  playerX: 80,
   playerH: 0,
   playerW: 100,
   playerVelocityY: -5.7,

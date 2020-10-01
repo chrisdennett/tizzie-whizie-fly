@@ -267,8 +267,6 @@ function drawMaskedShore(
   tempCanvas.height = sprite.h;
   const tempCtx = tempCanvas.getContext("2d");
 
-  console.log("ripples: ", ripples);
-
   // draw the mask to temp canvas
   tempCtx.drawImage(
     maskCanvas,
@@ -283,6 +281,7 @@ function drawMaskedShore(
   );
 
   // set to mask
+  tempCtx.save();
   tempCtx.globalCompositeOperation = "source-in";
   // draw the sprite to temp canvas
   tempCtx.drawImage(
@@ -296,6 +295,7 @@ function drawMaskedShore(
     sprite.w,
     sprite.h
   );
+  tempCtx.restore();
 
   // draw the temp canvas to the output canvas
   ctx.drawImage(

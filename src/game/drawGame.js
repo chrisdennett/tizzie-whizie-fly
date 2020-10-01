@@ -22,7 +22,7 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
     spriteCanvas,
     spriteData,
     gameState.playerY,
-    80,
+    gameState.playerX,
     gameState.gameTick,
     gameState.isJumping,
     gameState.isDiving
@@ -51,6 +51,20 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
 
   // underwater overlay
   drawUnderwater(ctx, spriteCanvas, spriteData, gameState);
+
+  // draw player bounds
+  // const { player } = spriteData;
+  // const { playerY, playerX } = gameState;
+  // const { w, h } = player;
+  // ctx.beginPath();
+  // ctx.moveTo(playerX, playerY);
+  // ctx.lineTo(playerX + w, playerY);
+  // ctx.lineTo(playerX + w, playerY + h);
+  // ctx.lineTo(playerX, playerY + h);
+  // ctx.closePath();
+  // ctx.stroke();
+
+  // draw obstacle bounds
 };
 
 function drawSprite(ctx, spriteCanvas, sprite, targX, targY, useShadow = true) {
@@ -169,7 +183,7 @@ export const drawPlayer = (
   const wingFly = {
     x: 0 - wing.w / 2,
     y: 0 - wing.h,
-    r1: degToRad(wingFlap ? 60 : 80),
+    r1: degToRad(wingFlap ? 20 : 40),
     r2: degToRad(wingFlap ? 20 : 5),
   };
   const wingDive = {
