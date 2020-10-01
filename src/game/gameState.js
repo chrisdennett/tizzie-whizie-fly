@@ -173,24 +173,25 @@ const durationMs = getFrameFromSeconds(totalDurationSeconds);
 
 const obstacles = [
   {
-    type: "pike",
-    name: "The Pike",
-    triggerMs: getFrameFromSeconds(1),
+    type: "island",
+    name: "Belle Isle",
+    triggerMs: getFrameFromSeconds(4),
   },
   {
     type: "boat",
     name: "Osprey",
     triggerMs: getFrameFromSeconds(2),
   },
-  {
-    type: "island",
-    name: "Belle Isle",
-    triggerMs: getFrameFromSeconds(4),
-  },
+
   {
     type: "bownessie",
     name: "Bownessie",
     triggerMs: getFrameFromSeconds(6),
+  },
+  {
+    type: "pike",
+    name: "The Pike",
+    triggerMs: getFrameFromSeconds(8),
   },
   // {
   //   type: "player.body",

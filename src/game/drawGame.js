@@ -86,9 +86,21 @@ export const drawGame = (
       obstacleBoundsArr = [
         {
           x: obXpos,
-          y: yPos,
+          y: yPos + currObstacleSprite.h - 20,
           w: currObstacleSprite.w,
-          h: currObstacleSprite.h,
+          h: 10,
+        },
+        {
+          x: obXpos + 40,
+          y: yPos + 55,
+          w: 260,
+          h: 50,
+        },
+        {
+          x: obXpos + 100,
+          y: yPos + 10,
+          w: 160,
+          h: 40,
         },
       ];
     }
