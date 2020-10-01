@@ -38,44 +38,121 @@ export const drawGame = (
     const currObstacle = gameState.obstacles[gameState.nextObstacleIndex];
     const currObstacleSprite = spriteData[currObstacle.type];
 
-    let yPos = 0;
-    if (currObstacle.type === "boat") yPos = 85;
-    if (currObstacle.type === "island") yPos = 190;
-    if (currObstacle.type === "pike") yPos = 200;
+    const obXpos =
+      IN_TEST_MODE && gameState.nextObstacleIndex === 0
+        ? gameState.obstacleX - (currObstacleSprite.w + 50)
+        : gameState.obstacleX;
 
-    let obstacleBoundsArr = [
-      {
-        x: gameState.obstacleX,
-        y: yPos,
-        w: currObstacleSprite.w,
-        h: currObstacleSprite.h,
-      },
-    ];
+    let obstacleBoundsArr = [];
+    let yPos = 0;
+    if (currObstacle.type === "boat") {
+      yPos = 85;
+      obstacleBoundsArr = [
+        {
+          x: obXpos,
+          y: yPos + 180,
+          w: currObstacleSprite.w - 30,
+          h: currObstacleSprite.h - 180,
+        },
+        {
+          x: obXpos + 105,
+          y: yPos + 70,
+          w: 40,
+          h: 110,
+        },
+        {
+          x: obXpos + 140,
+          y: yPos,
+          w: 40,
+          h: 110,
+        },
+        {
+          x: obXpos + 160,
+          y: yPos + 145,
+          w: 200,
+          h: 40,
+        },
+        {
+          x: obXpos + 390,
+          y: yPos + 135,
+          w: 20,
+          h: 60,
+        },
+      ];
+    }
+
+    if (currObstacle.type === "island") {
+      yPos = 190;
+      obstacleBoundsArr = [
+        {
+          x: obXpos,
+          y: yPos,
+          w: currObstacleSprite.w,
+          h: currObstacleSprite.h,
+        },
+      ];
+    }
+
+    if (currObstacle.type === "pike") {
+      yPos = 200;
+      obstacleBoundsArr = [
+        {
+          x: obXpos + 30,
+          y: yPos + 20,
+          w: 80,
+          h: 90,
+        },
+        {
+          x: obXpos + 110,
+          y: yPos + 40,
+          w: 80,
+          h: 100,
+        },
+        {
+          x: obXpos + 190,
+          y: yPos + 90,
+          w: 80,
+          h: 80,
+        },
+        {
+          x: obXpos + 270,
+          y: yPos + 120,
+          w: 60,
+          h: 80,
+        },
+        {
+          x: obXpos + 330,
+          y: yPos + 160,
+          w: 60,
+          h: 60,
+        },
+      ];
+    }
 
     if (currObstacle.type === "bownessie") {
       yPos = 195;
 
       obstacleBoundsArr = [
         {
-          x: gameState.obstacleX,
+          x: obXpos,
           y: yPos,
           w: 70,
           h: 40,
         },
         {
-          x: gameState.obstacleX + 40,
+          x: obXpos + 40,
           y: yPos + 40,
           w: 30,
           h: 100,
         },
         {
-          x: gameState.obstacleX + 90,
+          x: obXpos + 90,
           y: yPos + 140,
           w: 80,
           h: 30,
         },
         {
-          x: gameState.obstacleX + 150,
+          x: obXpos + 150,
           y: yPos + 170,
           w: 300,
           h: 60,
@@ -83,14 +160,7 @@ export const drawGame = (
       ];
     }
 
-    drawSprite(
-      ctx,
-      spriteCanvas,
-      currObstacleSprite,
-      gameState.obstacleX,
-      yPos,
-      true
-    );
+    drawSprite(ctx, spriteCanvas, currObstacleSprite, obXpos, yPos, true);
 
     // draw player bounds
     const { playerY, playerX } = gameState;
