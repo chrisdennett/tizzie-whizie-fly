@@ -20,7 +20,7 @@ function App() {
   // const windowSize = useWindowSize();
 
   const gameCreated = spriteData && spriteData.canvas;
-  const gameProps = { spriteData, gameState, setGameState };
+  const gameProps = { spriteData, gameState, setGameState, IN_TEST_MODE };
 
   const onEndGame = () => {
     setShowGame(false);

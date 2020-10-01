@@ -1,9 +1,14 @@
-export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
+export const drawGame = (
+  gameCanvas,
+  gameState,
+  spriteCanvas,
+  spriteData,
+  onCollision,
+  IN_TEST_MODE
+) => {
   const ctx = gameCanvas.getContext("2d");
   // clear scene
   ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-
-  // ctx.drawImage(spriteCanvas, 0, 0);
 
   // for (let c = 0; c < gameState.cloudsTotal; c++) {
   //   ctx.fillStyle = "orange";
@@ -37,7 +42,46 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
     if (currObstacle.type === "boat") yPos = 85;
     if (currObstacle.type === "island") yPos = 190;
     if (currObstacle.type === "pike") yPos = 200;
-    if (currObstacle.type === "bownessie") yPos = 195;
+
+    let obstacleBoundsArr = [
+      {
+        x: gameState.obstacleX,
+        y: yPos,
+        w: currObstacleSprite.w,
+        h: currObstacleSprite.h,
+      },
+    ];
+
+    if (currObstacle.type === "bownessie") {
+      yPos = 195;
+
+      obstacleBoundsArr = [
+        {
+          x: gameState.obstacleX,
+          y: yPos,
+          w: 70,
+          h: 40,
+        },
+        {
+          x: gameState.obstacleX + 40,
+          y: yPos + 40,
+          w: 30,
+          h: 100,
+        },
+        {
+          x: gameState.obstacleX + 90,
+          y: yPos + 140,
+          w: 80,
+          h: 30,
+        },
+        {
+          x: gameState.obstacleX + 150,
+          y: yPos + 170,
+          w: 300,
+          h: 60,
+        },
+      ];
+    }
 
     drawSprite(
       ctx,
@@ -47,25 +91,65 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
       yPos,
       true
     );
+
+    // draw player bounds
+    const { playerY, playerX } = gameState;
+    const { player } = spriteData;
+    const playerBounds = {
+      x: playerX,
+      y: playerY,
+      w: player.w - 15,
+      h: player.h,
+    };
+    // // draw obstacle bounds
+    if (IN_TEST_MODE) {
+      drawBoundsArr(ctx, obstacleBoundsArr);
+      drawBounds(ctx, playerBounds);
+    }
+
+    const isCollision = detectCollision(playerBounds, obstacleBoundsArr);
+    if (isCollision) {
+      onCollision();
+    }
   }
 
   // underwater overlay
   drawUnderwater(ctx, spriteCanvas, spriteData, gameState);
-
-  // draw player bounds
-  // const { player } = spriteData;
-  // const { playerY, playerX } = gameState;
-  // const { w, h } = player;
-  // ctx.beginPath();
-  // ctx.moveTo(playerX, playerY);
-  // ctx.lineTo(playerX + w, playerY);
-  // ctx.lineTo(playerX + w, playerY + h);
-  // ctx.lineTo(playerX, playerY + h);
-  // ctx.closePath();
-  // ctx.stroke();
-
-  // draw obstacle bounds
 };
+
+function drawBoundsArr(ctx, boundsArr) {
+  for (let bounds of boundsArr) {
+    drawBounds(ctx, bounds);
+  }
+}
+
+function detectCollision(bounds1, boundsArr) {
+  let isCollision = false;
+
+  for (let targBounds of boundsArr)
+    if (
+      bounds1.x < targBounds.x + targBounds.w &&
+      bounds1.x + bounds1.w > targBounds.x &&
+      bounds1.y < targBounds.y + targBounds.h &&
+      bounds1.y + bounds1.h > targBounds.y
+    ) {
+      isCollision = true;
+    }
+
+  return isCollision;
+}
+
+function drawBounds(ctx, bounds) {
+  const { x, y, w, h } = bounds;
+
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + w, y);
+  ctx.lineTo(x + w, y + h);
+  ctx.lineTo(x, y + h);
+  ctx.closePath();
+  ctx.stroke();
+}
 
 function drawSprite(ctx, spriteCanvas, sprite, targX, targY, useShadow = true) {
   const { x, y, h, w } = sprite;
@@ -155,7 +239,6 @@ const drawUnderwater = (ctx, spriteCanvas, spriteData, gameState) => {
     );
   }
   ctx.restore();
-  console.log("gameState.underwaterX: ", gameState.underwaterW);
 };
 
 // PLAYER
@@ -265,7 +348,7 @@ export const drawPlayer = (
 
 const addShadow = (ctx) => {
   ctx.shadowColor = "rgba(0,0,0,0.1)";
-  ctx.shadowBlur = 2;
+  ctx.shadowBlur = 1;
   ctx.shadowOffsetY = -4;
   ctx.shadowOffsetX = 4;
 };

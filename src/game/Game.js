@@ -8,7 +8,7 @@ import { Map } from "./Map";
 import GameControls from "./GameControls";
 import CollectionCard from "../collectionCards/CollectionCards";
 
-export const Game = ({ spriteData, gameState, setGameState }) => {
+export const Game = ({ spriteData, gameState, setGameState, IN_TEST_MODE }) => {
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -60,6 +60,10 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
   };
 
   const showGameControls = firstGameStarted && !gameState.gameOver;
+  const onCollision = () => {
+    console.log("HITTTTT!!!!!!!!!!!!!!!!");
+    setIsPaused(true);
+  };
 
   const controlsProps = {
     gameState,
@@ -78,6 +82,8 @@ export const Game = ({ spriteData, gameState, setGameState }) => {
       {spriteData && (
         <GamePanel>
           <GameCanvas
+            IN_TEST_MODE={IN_TEST_MODE}
+            onCollision={onCollision}
             spriteCanvas={spriteData.canvas}
             gameState={gameState}
             spriteData={spriteData.data}

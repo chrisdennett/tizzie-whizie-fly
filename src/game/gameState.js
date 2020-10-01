@@ -173,6 +173,11 @@ const durationMs = getFrameFromSeconds(totalDurationSeconds);
 
 const obstacles = [
   {
+    type: "bownessie",
+    name: "Bownessie",
+    triggerMs: 0,
+  },
+  {
     type: "boat",
     name: "Osprey",
     triggerMs: getFrameFromSeconds(2),
