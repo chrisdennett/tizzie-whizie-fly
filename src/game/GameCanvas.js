@@ -27,17 +27,26 @@ export const GameCanvas = ({
   }, [spriteCanvas, gameState, spriteData]);
 
   return (
-    <div>
+    <CanvasHolder>
       <StyledCanvas
         ref={gameCanvasRef}
         width={gameState.gameW - 200}
         height={gameState.gameH - 300}
       />
-    </div>
+    </CanvasHolder>
   );
 };
 
+const CanvasHolder = styled.div`
+  background-image: url("/img/bg/handmadepaper.png");
+  /* padding: 20px; */
+  line-height: 0;
+  box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.5), 0 0 4px rgba(0, 0, 0, 0.4),
+    0 5px 10px rgba(0, 0, 0, 0.7);
+`;
+
 const StyledCanvas = styled.canvas`
-  border-radius: 20px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+  /* border-radius: 10px; */
+  /* box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); */
+  /* background-color: rgba(255, 255, 255, 0.3); */
 `;

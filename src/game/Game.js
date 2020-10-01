@@ -8,7 +8,13 @@ import { Map } from "./Map";
 import GameControls from "./GameControls";
 import CollectionCard from "../collectionCards/CollectionCards";
 
-export const Game = ({ spriteData, gameState, setGameState, IN_TEST_MODE }) => {
+export const Game = ({
+  spriteData,
+  gameState,
+  setGameState,
+  onEndGame,
+  IN_TEST_MODE,
+}) => {
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -67,6 +73,7 @@ export const Game = ({ spriteData, gameState, setGameState, IN_TEST_MODE }) => {
   const controlsProps = {
     gameState,
     showGameControls,
+    onEndGame,
     onPlay,
     replay,
     onPlayPauseToggle,
@@ -92,9 +99,9 @@ export const Game = ({ spriteData, gameState, setGameState, IN_TEST_MODE }) => {
             <GameControls {...controlsProps} />
           </div>
 
-          <MapHolder>
+          {/* <MapHolder>
             <Map progress={gameState.progress} />
-          </MapHolder>
+          </MapHolder> */}
 
           <CollectionCard />
         </GamePanel>
@@ -107,6 +114,7 @@ const GamePanel = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-top: 50px;
   width: 800px;
   max-width: 100%;
 `;

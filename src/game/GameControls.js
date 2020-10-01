@@ -1,10 +1,19 @@
 import React from "react";
+import {
+  FaPause,
+  FaPlay,
+  FaArrowDown,
+  FaArrowUp,
+  FaWindowClose,
+} from "react-icons/fa";
+import styled from "styled-components";
 
 const GameControls = ({
   gameState,
   isPaused,
   firstGameStarted,
   showGameControls,
+  onEndGame,
   onPlay,
   replay,
   onPlayPauseToggle,
@@ -12,57 +21,66 @@ const GameControls = ({
   goDown,
 }) => {
   return (
-    <div>
+    <Outer>
       {!firstGameStarted && (
-        <div>
-          <button
-            onClick={onPlay}
-            onTouchStart={onPlay}
-            style={{ cursor: "pointer", padding: 20 }}
-          >
-            PLAY
-          </button>
-        </div>
+        <ButtonHolder>
+          <Button onClick={onPlay} onTouchStart={onPlay}>
+            <FaPlay />
+          </Button>
+        </ButtonHolder>
       )}
 
       {gameState.gameOver && (
-        <div>
-          <button
-            onClick={replay}
-            onTouchStart={replay}
-            style={{ cursor: "pointer", padding: 20 }}
-          >
+        <ButtonHolder>
+          <Button onClick={replay} onTouchStart={replay}>
             REPLAY
-          </button>
-        </div>
+          </Button>
+        </ButtonHolder>
       )}
 
       {showGameControls && (
-        <div>
-          <button
-            onClick={goUp}
-            onTouchStart={goUp}
-            style={{ cursor: "pointer", padding: 20 }}
-          >
-            UP
-          </button>
-          <button
-            onClick={onPlayPauseToggle}
-            style={{ cursor: "pointer", padding: 20 }}
-          >
-            {isPaused ? "PLAY" : "PAUSE"}
-          </button>
-          <button
-            onClick={goDown}
-            onTouchStart={goDown}
-            style={{ cursor: "pointer", padding: 20 }}
-          >
-            DIVE
-          </button>
-        </div>
+        <>
+          <ButtonHolder>
+            <Button onClick={goUp} onTouchStart={goUp}>
+              <FaArrowUp />
+            </Button>
+          </ButtonHolder>
+          <ButtonHolder>
+            <Button onClick={goDown} onTouchStart={goDown}>
+              <FaArrowDown />
+            </Button>
+          </ButtonHolder>
+          <ButtonHolder>
+            <Button onClick={onPlayPauseToggle}>
+              {isPaused ? <FaPlay /> : <FaPause />}
+            </Button>
+          </ButtonHolder>
+        </>
       )}
-    </div>
+
+      <ButtonHolder>
+        <Button onClick={onEndGame} style={{ fontSize: 34, padding: 15 }}>
+          <FaWindowClose />
+        </Button>
+      </ButtonHolder>
+    </Outer>
   );
 };
 
 export default GameControls;
+
+const ButtonHolder = styled.div``;
+
+const Outer = styled.div`
+  display: flex;
+`;
+
+const Button = styled.button`
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.6);
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  padding: 20px;
+`;

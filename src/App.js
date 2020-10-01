@@ -19,17 +19,24 @@ function App() {
 
   // const windowSize = useWindowSize();
 
-  const gameCreated = spriteData && spriteData.canvas;
-  const gameProps = { spriteData, gameState, setGameState, IN_TEST_MODE };
-
   const onEndGame = () => {
     setShowGame(false);
     setGameState(defaultGameState);
   };
 
+  const gameCreated = spriteData && spriteData.canvas;
+  const gameProps = {
+    spriteData,
+    gameState,
+    setGameState,
+    onEndGame,
+    IN_TEST_MODE,
+  };
+
   return (
-    <Container>
+    <Container showGame={showGame}>
       <TopBar
+        showGame={showGame}
         onInfoClick={() => setShowInfo(true)}
         showTitle={false}
         onHomeClick={onEndGame}
@@ -40,7 +47,6 @@ function App() {
       <Content>
         {(IN_TEST_MODE || showGame) && (
           <div>
-            <button onClick={onEndGame}>End game</button>
             <Game {...gameProps} />
           </div>
         )}
@@ -55,18 +61,15 @@ function App() {
             </header>
 
             {gameCreated && (
-              <div>
+              <GamePreviewHolder>
                 <button onClick={() => setShowGame(true)}>
                   PLAY YOUR GAME
                 </button>
-              </div>
+              </GamePreviewHolder>
             )}
 
             {IN_TEST_MODE && gameCreated && (
               <div>
-                <button onClick={() => setShowGame(true)}>
-                  PLAY YOUR GAME
-                </button>
                 <SpriteTester spriteData={spriteData} />
               </div>
             )}
@@ -84,8 +87,21 @@ function App() {
 
 export default App;
 
+const GamePreviewHolder = styled.div`
+  padding: 20px;
+  background-image: url("/img/bg/cutting-mat-tile.png");
+  border-radius: 10px;
+  display: flex;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+  border-right: 3px solid rgba(0, 0, 0, 0.5);
+`;
 const Container = styled.div`
-  margin-top: 60px;
+  padding-top: 60px;
+  min-height: 100vh;
+  background-image: ${(props) =>
+    !props.showGame
+      ? `url("/img/bg/concrete_wall_2.png")`
+      : `url("/img/bg/linedpaper.png")`};
 `;
 
 const Content = styled.div`

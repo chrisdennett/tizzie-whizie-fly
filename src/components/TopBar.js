@@ -4,11 +4,12 @@ import { FaInfoCircle } from "react-icons/fa";
 import { TizzieLogo } from "./TizzieLogo";
 import { useScroll } from "../hooks/useScroll";
 
-const TopBar = ({ onHomeClick, onInfoClick, showTitle }) => {
+const TopBar = ({ onHomeClick, onInfoClick, showTitle, showGame }) => {
   const { scrollY } = useScroll();
+  console.log("scrollY: ", scrollY);
 
   return (
-    <Container scrollY={scrollY}>
+    <Container scrollY={scrollY} showGame={showGame}>
       <HomeButton onClick={onHomeClick}>
         <TizzieLogo height={42} />
       </HomeButton>
@@ -32,14 +33,16 @@ const Container = styled.div`
   left: 0;
   right: 0;
   height: 60px;
-  /* background: rgba(255, 255, 255, 0.9); */
-  background-image: url("/linedpaper.png");
+  background-image: ${(props) =>
+    props.showGame
+      ? `url("/img/bg/concrete_wall_2.png")`
+      : `url("/img/bg/linedpaper.png")`};
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
   box-shadow: ${(props) =>
-    props.scrollY > 0 ? "0px 3px 3px rgba(0, 0, 0, 0.1)" : ""};
+    props.scrollY > 10 ? "0px 3px 3px rgba(0, 0, 0, 0.1)" : ""};
 
   h1 {
     font-size: 28px;
