@@ -10,6 +10,9 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
   //   ctx.fillRect(0, 0, 90, 50);
   // }
 
+  // game title
+  drawSprite(ctx, spriteCanvas, spriteData.title, 100, 50, true);
+
   // shoreline
   drawShoreline(ctx, spriteCanvas, spriteData, gameState);
 

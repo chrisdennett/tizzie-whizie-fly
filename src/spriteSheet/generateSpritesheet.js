@@ -130,6 +130,16 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
   const adjustedWingProps = { x: wing.x, y: wing.y, w: wing.w, h: wing.h };
   const adjustedLegProps = { x: leg.x, y: leg.y, w: leg.w, h: leg.h };
 
+  // Draw titles
+  gameSpriteSheet.title = drawMaskedSprite(
+    ctx,
+    spriteCanvas,
+    maskCanvas,
+    spriteData.title,
+    maskData.title,
+    startY
+  );
+
   // Draw player
   gameSpriteSheet.player = drawMaskedSprite(
     ctx,
@@ -137,7 +147,7 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     maskCanvas,
     adjustedBodyProps,
     maskData.player.body,
-    startY,
+    gameSpriteSheet.title.y + gameSpriteSheet.title.h + padding,
     0.5
   );
   gameSpriteSheet.leg = drawMaskedSprite(
