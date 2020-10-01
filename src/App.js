@@ -9,7 +9,7 @@ import { defaultGameState } from "./game/gameState";
 import { TizzieLogo } from "./components/TizzieLogo";
 import { Game } from "./game/Game";
 
-const IN_TEST_MODE = true;
+const IN_TEST_MODE = false;
 
 function App() {
   const [showGame, setShowGame] = useState(false);

@@ -61,7 +61,6 @@ export const Game = ({ spriteData, gameState, setGameState, IN_TEST_MODE }) => {
 
   const showGameControls = firstGameStarted && !gameState.gameOver;
   const onCollision = () => {
-    console.log("HITTTTT!!!!!!!!!!!!!!!!");
     setIsPaused(true);
   };
 

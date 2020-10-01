@@ -173,14 +173,14 @@ const durationMs = getFrameFromSeconds(totalDurationSeconds);
 
 const obstacles = [
   {
-    type: "island",
-    name: "Belle Isle",
-    triggerMs: getFrameFromSeconds(4),
-  },
-  {
     type: "boat",
     name: "Osprey",
     triggerMs: getFrameFromSeconds(2),
+  },
+  {
+    type: "island",
+    name: "Belle Isle",
+    triggerMs: getFrameFromSeconds(4),
   },
 
   {
