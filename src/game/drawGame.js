@@ -11,35 +11,7 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
   // }
 
   // shoreline
-  if (spriteData.shore) {
-    ctx.save();
-    ctx.scale(-1, 1);
-    drawSprite(
-      ctx,
-      spriteCanvas,
-      spriteData.shore,
-      0 - spriteData.shore.w - gameState.shorelineX,
-      gameState.shorelineY - gameState.shorelineH
-    );
-    ctx.restore();
-    if (gameState.shorelineX < 0) {
-      drawSprite(
-        ctx,
-        spriteCanvas,
-        spriteData.shore,
-        gameState.shorelineX + gameState.shorelineW,
-        gameState.shorelineY - gameState.shorelineH
-      );
-    } else {
-      drawSprite(
-        ctx,
-        spriteCanvas,
-        spriteData.shore,
-        gameState.shorelineX - gameState.shorelineW,
-        gameState.shorelineY - gameState.shorelineH
-      );
-    }
-  }
+  drawShoreline(ctx, spriteCanvas, spriteData, gameState);
 
   // player
   drawPlayer(
@@ -73,6 +45,9 @@ export const drawGame = (gameCanvas, gameState, spriteCanvas, spriteData) => {
       true
     );
   }
+
+  // underwater overlay
+  drawUnderwater(ctx, spriteCanvas, spriteData, gameState);
 };
 
 function drawSprite(ctx, spriteCanvas, sprite, targX, targY, useShadow = true) {
@@ -88,6 +63,85 @@ function drawSprite(ctx, spriteCanvas, sprite, targX, targY, useShadow = true) {
   }
 }
 
+// SHORELINE
+const drawShoreline = (ctx, spriteCanvas, spriteData, gameState) => {
+  ctx.save();
+  ctx.scale(-1, 1);
+  drawSprite(
+    ctx,
+    spriteCanvas,
+    spriteData.shore,
+    0 - spriteData.shore.w - gameState.shorelineX,
+    gameState.shorelineY - gameState.shorelineH
+  );
+  ctx.restore();
+  if (gameState.shorelineX < 0) {
+    drawSprite(
+      ctx,
+      spriteCanvas,
+      spriteData.shore,
+      gameState.shorelineX + gameState.shorelineW,
+      gameState.shorelineY - gameState.shorelineH
+    );
+  } else {
+    drawSprite(
+      ctx,
+      spriteCanvas,
+      spriteData.shore,
+      gameState.shorelineX - gameState.shorelineW,
+      gameState.shorelineY - gameState.shorelineH
+    );
+  }
+};
+
+// UNDERWATER
+const drawUnderwater = (ctx, spriteCanvas, spriteData, gameState) => {
+  const underwaterY = 320;
+  // const xPos = Math.round(gameState.underwaterX
+
+  ctx.save();
+  ctx.globalAlpha = 0.6;
+  // ctx.globalCompositeOperation = "source-over"; //
+  // ctx.globalCompositeOperation = "lighten";
+  // ctx.globalCompositeOperation = "color-burn"; // makes color better
+  ctx.globalCompositeOperation = "multiply";
+  // ctx.globalCompositeOperation = "difference";
+
+  // draw flipped copy
+  ctx.save();
+  ctx.scale(-1, 1);
+  drawSprite(
+    ctx,
+    spriteCanvas,
+    spriteData.underwater,
+    0 - spriteData.underwater.w - gameState.underwaterX,
+    underwaterY,
+    false
+  );
+  ctx.restore();
+
+  if (gameState.underwaterX < 0) {
+    drawSprite(
+      ctx,
+      spriteCanvas,
+      spriteData.underwater,
+      gameState.underwaterX + gameState.underwaterW,
+      underwaterY
+    );
+  } else {
+    drawSprite(
+      ctx,
+      spriteCanvas,
+      spriteData.underwater,
+      gameState.underwaterX - gameState.underwaterW - 1,
+      underwaterY
+    );
+  }
+  ctx.restore();
+  console.log("gameState.underwaterX: ", gameState.underwaterW);
+};
+
+// PLAYER
 export const drawPlayer = (
   ctx,
   spriteCanvas,

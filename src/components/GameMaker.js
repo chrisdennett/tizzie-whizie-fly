@@ -6,7 +6,7 @@ import { createMaxSizeCanvas } from "../spriteSheet/helper";
 import { generateSpritesheet } from "../spriteSheet/generateSpritesheet";
 import ExternalLink from "./ExternalLink";
 
-const GameMaker = ({ setSpriteData }) => {
+const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
   const [spritesheetMask, setSpritesheetMask] = useState(null);
 
   const w = defaultGameState.gameW;
@@ -18,11 +18,12 @@ const GameMaker = ({ setSpriteData }) => {
       loadImage("./spritesheet-1-mask.png", setSpritesheetMask);
     }
     // FOR TESTING - LOAD SAMPLE IMMEDIATELY
-    else {
+    else if (IN_TEST_MODE) {
       loadImage("./tizzie-crayon.jpg", createSpritesheet, true);
       // loadImage("./newMarker-3.jpg", createSpritesheet, true);
     }
-  }, [spritesheetMask]);
+    // eslint-disable-next-line
+  }, [spritesheetMask, IN_TEST_MODE]);
 
   const createSpritesheet = (sourceImg) => {
     const generatedSheetData = generateSpritesheet(

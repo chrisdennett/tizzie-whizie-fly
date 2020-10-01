@@ -67,6 +67,18 @@ export const spriteData = {
       h: 29.299,
     },
   },
+  ripples: {
+    x: 62.954,
+    y: 1074.17,
+    w: 1029,
+    h: 199,
+  },
+  underwater: {
+    x: 58,
+    y: 1325,
+    w: 1029,
+    h: 199,
+  },
 };
 
 export const maskData = {
@@ -139,8 +151,14 @@ export const maskData = {
     },
   },
   ripples: {
-    x: 62.954,
-    y: 1074.17,
+    x: 63,
+    y: 1074,
+    w: 1029,
+    h: 199,
+  },
+  underwater: {
+    x: 58,
+    y: 1325,
     w: 1029,
     h: 199,
   },
@@ -205,13 +223,16 @@ export const defaultGameState = {
   shorelineY: water,
   shorelineW: spriteData.shore.w,
   shorelineH: spriteData.shore.h,
-  shorelineSpeed: 2,
+  shorelineSpeed: 0.3,
+
+  underwaterX: 0,
+  underwaterY: water,
+  underwaterW: spriteData.underwater.w,
+  underwaterSpeed: 7,
 
   obstacleX: 900,
   obstacleY: water + 10,
-  boatH: 70,
-  boatSpeed: 7,
-  boatLength: 80,
+  obstacleSpeed: 7,
 
   playerY: water,
   playerH: 0,
@@ -230,6 +251,7 @@ export const getNextGameState = (prevGameState, goUp, goDown, tickCount) => {
     ...getPlayerState(prevGameState, goUp, goDown),
     ...getObstacleState(prevGameState),
     ...getBackgroundState(prevGameState),
+    ...getUnderwaterState(prevGameState),
     ...getGameProgress(prevGameState),
   };
 };
@@ -255,6 +277,15 @@ function getBackgroundState(prevGameState) {
   return { shorelineX: newVal };
 }
 
+function getUnderwaterState(prevGameState) {
+  let newVal = prevGameState.underwaterX - prevGameState.underwaterSpeed;
+  if (newVal < 0 - prevGameState.underwaterW) {
+    newVal = prevGameState.underwaterW;
+  }
+
+  return { underwaterX: newVal };
+}
+
 function getObstacleState(prevGameState) {
   let newObstacleInPlay = prevGameState.obstacleInPlay;
   let newNextObstacleIndex = prevGameState.nextObstacleIndex;
@@ -264,7 +295,7 @@ function getObstacleState(prevGameState) {
 
   // if animating obstacle
   if (newObstacleInPlay) {
-    let newObstacleX = prevGameState.obstacleX - prevGameState.boatSpeed;
+    let newObstacleX = prevGameState.obstacleX - prevGameState.obstacleSpeed;
 
     if (newObstacleX < 0 - obstacleSprite.w) {
       newObstacleX = 900;

@@ -84,60 +84,6 @@ const getUnwarpedCanvas = (sourceCanvas, corners, gameW, gameH) => {
   return unwarpedCanvas;
 };
 
-// const getUnwarpedCanvasOld = (sourceCanvas, corners, gameW, gameH) => {
-//   const webGlCanvas = document.createElement("canvas");
-//   const gl = webGlCanvas.getContext("webgl");
-//   webGlCanvas.width = gameW;
-//   webGlCanvas.height = gameH;
-
-//   const { a, b, c, d } = corners;
-
-//   mapPolygonToCanvas({
-//     gl,
-//     image: sourceCanvas,
-//     topLeft: [a.x / sourceCanvas.width, a.y / sourceCanvas.height],
-//     topRight: [b.x / sourceCanvas.width, b.y / sourceCanvas.height],
-//     bottomRight: [c.x / sourceCanvas.width, c.y / sourceCanvas.height],
-//     bottomLeft: [d.x / sourceCanvas.width, d.y / sourceCanvas.height],
-//   });
-
-//   const unwarpedCanvas = createCanvasFromSrc(webGlCanvas, gameW, gameH);
-
-//   return unwarpedCanvas;
-// };
-
-//
-// HELPER FUNCTIONS
-//
-
-// function createLineUnwarpedCanvas(srcCanvas, widthChange) {
-//   const outCanvas = document.createElement("canvas");
-
-//   const { width: w, height: h } = srcCanvas;
-//   outCanvas.width = w;
-//   outCanvas.height = h;
-
-//   // use amount of horizontal warp to unsquish
-//   const { topWidth, bottomWidth } = widthChange;
-//   const squishFraction = (bottomWidth - topWidth) / bottomWidth;
-
-//   const fracAtTop = 1 + squishFraction;
-//   const fracAtBottom = 1 - squishFraction;
-
-//   const ctx = outCanvas.getContext("2d");
-//   const sliceH = 100;
-//   const totalSlices = h / sliceH;
-//   const squishFractionInc = squishFraction / totalSlices;
-
-//   for (let y = 0; y < h; y += sliceH) {
-//     const currSquishFrac = squishFraction - y * squishFractionInc;
-//     const currSliceH = sliceH + y * squishFractionInc;
-//     ctx.drawImage(srcCanvas, 0, y, w, sliceH, 0, y, w, currSliceH);
-//   }
-
-//   return outCanvas;
-// }
-
 function getTotalHeightsFromObj(data, padding) {
   const spriteKeys = Object.keys(data);
   let maxWidth = 0;
@@ -243,6 +189,15 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     maskData.ripples,
     gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding
   );
+
+  // draw underwater
+  gameSpriteSheet.underwater = drawUnderwater(
+    ctx,
+    maskCanvas,
+    maskData.underwater,
+    gameSpriteSheet.shore.y + gameSpriteSheet.shore.h + padding
+  );
+
   // gameSpriteSheet.shore = drawMaskedSprite(
   //   ctx,
   //   spriteCanvas,
@@ -259,7 +214,7 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     maskCanvas,
     spriteData.island,
     maskData.island,
-    gameSpriteSheet.shore.y + gameSpriteSheet.shore.h + padding
+    gameSpriteSheet.underwater.y + gameSpriteSheet.underwater.h + padding
   );
 
   // Draw pike
@@ -396,6 +351,42 @@ function drawMaskedShore(
   };
 }
 
+///
+////
+// ctx,
+// maskCanvas,
+// maskData.underwater,
+// gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding
+///
+///
+function drawUnderwater(ctx, maskCanvas, underwater, startY) {
+  // draw ripples over reflection
+  ctx.globalAlpha = 1;
+  ctx.drawImage(
+    maskCanvas,
+    underwater.x,
+    underwater.y,
+    underwater.w,
+    underwater.h,
+    0,
+    startY,
+    underwater.w,
+    underwater.h
+  );
+  ctx.globalAlpha = 1;
+
+  return {
+    x: 0,
+    y: startY,
+    w: underwater.w,
+    h: underwater.h,
+  };
+}
+////
+///
+///
+///
+
 function drawMaskedSprite(
   ctx,
   spriteCanvas,
@@ -476,4 +467,58 @@ function drawMaskedSprite(
 //   const fourCorners = [topLeft, topRight, bottomRight, bottomLeft];
 
 //   return fourCorners;
+// }
+
+// const getUnwarpedCanvasOld = (sourceCanvas, corners, gameW, gameH) => {
+//   const webGlCanvas = document.createElement("canvas");
+//   const gl = webGlCanvas.getContext("webgl");
+//   webGlCanvas.width = gameW;
+//   webGlCanvas.height = gameH;
+
+//   const { a, b, c, d } = corners;
+
+//   mapPolygonToCanvas({
+//     gl,
+//     image: sourceCanvas,
+//     topLeft: [a.x / sourceCanvas.width, a.y / sourceCanvas.height],
+//     topRight: [b.x / sourceCanvas.width, b.y / sourceCanvas.height],
+//     bottomRight: [c.x / sourceCanvas.width, c.y / sourceCanvas.height],
+//     bottomLeft: [d.x / sourceCanvas.width, d.y / sourceCanvas.height],
+//   });
+
+//   const unwarpedCanvas = createCanvasFromSrc(webGlCanvas, gameW, gameH);
+
+//   return unwarpedCanvas;
+// };
+
+//
+// HELPER FUNCTIONS
+//
+
+// function createLineUnwarpedCanvas(srcCanvas, widthChange) {
+//   const outCanvas = document.createElement("canvas");
+
+//   const { width: w, height: h } = srcCanvas;
+//   outCanvas.width = w;
+//   outCanvas.height = h;
+
+//   // use amount of horizontal warp to unsquish
+//   const { topWidth, bottomWidth } = widthChange;
+//   const squishFraction = (bottomWidth - topWidth) / bottomWidth;
+
+//   const fracAtTop = 1 + squishFraction;
+//   const fracAtBottom = 1 - squishFraction;
+
+//   const ctx = outCanvas.getContext("2d");
+//   const sliceH = 100;
+//   const totalSlices = h / sliceH;
+//   const squishFractionInc = squishFraction / totalSlices;
+
+//   for (let y = 0; y < h; y += sliceH) {
+//     const currSquishFrac = squishFraction - y * squishFractionInc;
+//     const currSliceH = sliceH + y * squishFractionInc;
+//     ctx.drawImage(srcCanvas, 0, y, w, sliceH, 0, y, w, currSliceH);
+//   }
+
+//   return outCanvas;
 // }

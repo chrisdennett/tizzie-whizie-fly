@@ -9,6 +9,8 @@ import { defaultGameState } from "./game/gameState";
 import { TizzieLogo } from "./components/TizzieLogo";
 import { Game } from "./game/Game";
 
+const IN_TEST_MODE = false;
+
 function App() {
   const [showGame, setShowGame] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
@@ -36,8 +38,7 @@ function App() {
       {showInfo && <About onClose={() => setShowInfo(false)} />}
 
       <Content>
-        {/* {showGame && ( */}
-        {gameCreated && (
+        {(IN_TEST_MODE || showGame) && (
           <div>
             <button onClick={onEndGame}>End game</button>
             <Game {...gameProps} />
@@ -58,11 +59,22 @@ function App() {
                 <button onClick={() => setShowGame(true)}>
                   PLAY YOUR GAME
                 </button>
+              </div>
+            )}
+
+            {IN_TEST_MODE && gameCreated && (
+              <div>
+                <button onClick={() => setShowGame(true)}>
+                  PLAY YOUR GAME
+                </button>
                 <SpriteTester spriteData={spriteData} />
               </div>
             )}
 
-            <GameMaker setSpriteData={setSpriteData} />
+            <GameMaker
+              setSpriteData={setSpriteData}
+              IN_TEST_MODE={IN_TEST_MODE}
+            />
           </div>
         )}
       </Content>
