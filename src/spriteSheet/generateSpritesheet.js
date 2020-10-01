@@ -208,15 +208,6 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     gameSpriteSheet.shore.y + gameSpriteSheet.shore.h + padding
   );
 
-  // gameSpriteSheet.shore = drawMaskedSprite(
-  //   ctx,
-  //   spriteCanvas,
-  //   maskCanvas,
-  //   spriteData.shore,
-  //   maskData.shore,
-  //   gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding
-  // );
-
   // Draw island
   gameSpriteSheet.island = drawMaskedSprite(
     ctx,
@@ -244,7 +235,8 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     maskCanvas,
     spriteData.bownessie,
     maskData.bownessie,
-    gameSpriteSheet.pike.y + gameSpriteSheet.pike.h + padding
+    gameSpriteSheet.pike.y + gameSpriteSheet.pike.h + padding,
+    0.75
   );
 
   // Draw tizzie

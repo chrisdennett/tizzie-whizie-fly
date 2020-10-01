@@ -237,7 +237,7 @@ export const defaultGameState = {
   playerY: water,
   playerH: 0,
   playerW: 100,
-  playerVelocityY: -5,
+  playerVelocityY: -5.7,
 
   isMoving: false,
   isJumping: false,
