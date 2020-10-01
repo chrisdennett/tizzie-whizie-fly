@@ -92,7 +92,9 @@ export const Game = ({ spriteData, gameState, setGameState, IN_TEST_MODE }) => {
             <GameControls {...controlsProps} />
           </div>
 
-          <Map progress={gameState.progress} />
+          <MapHolder>
+            <Map progress={gameState.progress} />
+          </MapHolder>
 
           <CollectionCard />
         </GamePanel>
@@ -107,4 +109,9 @@ const GamePanel = styled.div`
   position: relative;
   width: 800px;
   max-width: 100%;
+`;
+
+const MapHolder = styled.div`
+  position: absolute;
+  transform: rotate(270deg) translate(-165px, 595px) scale(1.3);
 `;

@@ -16,7 +16,7 @@ export const drawGame = (
   // }
 
   // game title
-  drawSprite(ctx, spriteCanvas, spriteData.title, 100, 50, true);
+  drawSprite(ctx, spriteCanvas, spriteData.title, 50, 45, true);
 
   // shoreline
   drawShoreline(ctx, spriteCanvas, spriteData, gameState);
