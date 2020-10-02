@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import SketchyButton from "../components/sketchy/SketchyButton";
 import SketchyCloseButton from "../components/sketchy/CloseButton";
+import useSound from "use-sound";
 
 const GameControls = ({
   gameState,
@@ -15,6 +16,24 @@ const GameControls = ({
   goUp,
   goDown,
 }) => {
+  const [playPlip] = useSound("/sounds/plip.wav", { volume: 1 });
+  const [playWhoosh] = useSound(
+    "/sounds/zapsplat_cartoon_swipe_fast_swish_001_49164.mp3",
+    {
+      volume: 1,
+    }
+  );
+
+  const onGoDown = () => {
+    goDown();
+    setTimeout(() => playPlip(), 100);
+  };
+
+  const onGoUp = () => {
+    goUp();
+    playWhoosh();
+  };
+
   return (
     <Outer>
       {!firstGameStarted && (
@@ -34,10 +53,10 @@ const GameControls = ({
       {showGameControls && (
         <>
           <ButtonHolder>
-            <SketchyButton onClick={goUp} icon="up" />
+            <SketchyButton onClick={onGoUp} icon="up" />
           </ButtonHolder>
           <ButtonHolder>
-            <SketchyButton onClick={goDown} icon="down" />
+            <SketchyButton onClick={onGoDown} icon="down" />
           </ButtonHolder>
           <ButtonHolder>
             <SketchyButton

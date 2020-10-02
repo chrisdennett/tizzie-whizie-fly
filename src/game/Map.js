@@ -2,18 +2,19 @@ import React from "react";
 
 export const Map = ({ progress = 0 }) => {
   const lakeOutline = `rgba(0, 0, 0, 0.5)`;
-  const lakeFill = `rgba(0, 0, 0, 0.1)`;
-  const islandFill = `rgba(255,255,255,0.7)`;
-  const progressStroke = `black`;
+  const lakeFill = `rgba(0, 0, 0, 0.3)`;
+  const islandFill = `rgba(255,255,255,0.8)`;
+  // without this there's a tiny blob at the line at the start
+  const progressStroke = progress > 0 ? `rgba(5, 5, 5, 1)` : "rgba(0, 0, 0, 0)";
   const dashedStroke = `white`;
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
-      viewBox="0 0 176.301 45.432"
+      viewBox="-4 0 180.301 45.432"
       width="100%"
-      opacity={0.55}
+      // opacity={0.55}
     >
       <g
         fillOpacity="1"
@@ -176,7 +177,6 @@ export const Map = ({ progress = 0 }) => {
       <g display="inline" transform="translate(65.43 -65.43)">
         <path
           fill="none"
-          fillOpacity="0.133"
           stroke={dashedStroke}
           strokeDasharray="1.058 2.117"
           strokeDashoffset="0"
@@ -204,7 +204,7 @@ export const Map = ({ progress = 0 }) => {
           strokeLinejoin="round"
           strokeMiterlimit="4"
           strokeOpacity="1"
-          strokeWidth="0.529"
+          strokeWidth="1"
           d="M-65.074 86.755c2.67 1.464 12.57 1.462 20.27.714 10.92-1.061 24.245-2.732 33.509 1.622C.477 94.756 6.14 91.48 14.225 93.399c7.227 1.717 6.724 3.365 12.191 4.411 6.482 1.24 8.362-5.732 13.228-2.67 18.155 11.42 28.599 5.983 40.17-4.263 9.508-11.298 22.471-11.143 30.684-13.037"
           color="#000"
           display="inline"

@@ -7,10 +7,13 @@ import { GameCanvas } from "./GameCanvas";
 import { Map } from "./Map";
 import GameControls from "./GameControls";
 import CollectionCard from "../collectionCards/CollectionCards";
+import useSound from "use-sound";
 
-const IN_INVINCIBLE_MODE = true;
+const IN_INVINCIBLE_MODE = false;
 
 export const Game = ({ spriteData, gameState, setGameState, onEndGame }) => {
+  const [playLoseSound] = useSound("/sounds/zapsplat_lose.mp3", { volume: 1 });
+
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -66,6 +69,7 @@ export const Game = ({ spriteData, gameState, setGameState, onEndGame }) => {
     if (!IN_INVINCIBLE_MODE) {
       setIsPaused(true);
     }
+    playLoseSound();
   };
 
   const controlsProps = {
@@ -119,6 +123,6 @@ const MapHolder = styled.div`
   bottom: 0;
   width: 70%;
   right: 30px;
-  bottom: 30px;
+  bottom: 15px;
   /* transform: rotate(270deg) translate(-165px, 595px) scale(1.3); */
 `;
