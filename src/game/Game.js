@@ -8,13 +8,9 @@ import { Map } from "./Map";
 import GameControls from "./GameControls";
 import CollectionCard from "../collectionCards/CollectionCards";
 
-export const Game = ({
-  spriteData,
-  gameState,
-  setGameState,
-  onEndGame,
-  IN_TEST_MODE,
-}) => {
+const IN_INVINCIBLE_MODE = true;
+
+export const Game = ({ spriteData, gameState, setGameState, onEndGame }) => {
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -67,7 +63,9 @@ export const Game = ({
 
   const showGameControls = firstGameStarted && !gameState.gameOver;
   const onCollision = () => {
-    setIsPaused(true);
+    if (!IN_INVINCIBLE_MODE) {
+      setIsPaused(true);
+    }
   };
 
   const controlsProps = {
@@ -87,25 +85,23 @@ export const Game = ({
     <div>
       {spriteData && (
         <GamePanel>
+          <MapHolder>
+            <Map progress={gameState.progress} />
+          </MapHolder>
+
           <GameCanvas
-            IN_TEST_MODE={IN_TEST_MODE}
             onCollision={onCollision}
             spriteCanvas={spriteData.canvas}
             gameState={gameState}
             spriteData={spriteData.data}
           />
-
-          <div>
-            <GameControls {...controlsProps} />
-          </div>
-
-          {/* <MapHolder>
-            <Map progress={gameState.progress} />
-          </MapHolder> */}
-
-          <CollectionCard />
         </GamePanel>
       )}
+      <div>
+        <GameControls {...controlsProps} />
+      </div>
+
+      <CollectionCard />
     </div>
   );
 };
@@ -114,11 +110,15 @@ const GamePanel = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-top: 50px;
+  margin-top: 5vh;
   max-width: 100%;
 `;
 
 const MapHolder = styled.div`
   position: absolute;
-  transform: rotate(270deg) translate(-165px, 595px) scale(1.3);
+  bottom: 0;
+  width: 70%;
+  right: 30px;
+  bottom: 30px;
+  /* transform: rotate(270deg) translate(-165px, 595px) scale(1.3); */
 `;

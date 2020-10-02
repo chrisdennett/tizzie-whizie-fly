@@ -3,9 +3,10 @@ export const drawGame = (
   gameState,
   spriteCanvas,
   spriteData,
-  onCollision,
-  IN_TEST_MODE
+  onCollision
 ) => {
+  const IN_DRAWING_TEST_MODE = false;
+
   const ctx = gameCanvas.getContext("2d");
   // clear scene
   ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
@@ -16,7 +17,7 @@ export const drawGame = (
   // }
 
   // game title
-  drawSprite(ctx, spriteCanvas, spriteData.title, 50, 45, true);
+  drawSprite(ctx, spriteCanvas, spriteData.title, 90, 45, true);
 
   // shoreline
   drawShoreline(ctx, spriteCanvas, spriteData, gameState);
@@ -39,7 +40,7 @@ export const drawGame = (
     const currObstacleSprite = spriteData[currObstacle.type];
 
     const obXpos =
-      IN_TEST_MODE && gameState.nextObstacleIndex === 0
+      IN_DRAWING_TEST_MODE && gameState.nextObstacleIndex === 0
         ? gameState.obstacleX - (currObstacleSprite.w + 50)
         : gameState.obstacleX;
 
@@ -184,7 +185,7 @@ export const drawGame = (
       h: player.h,
     };
     // // draw obstacle bounds
-    if (IN_TEST_MODE) {
+    if (IN_DRAWING_TEST_MODE) {
       drawBoundsArr(ctx, obstacleBoundsArr);
       drawBounds(ctx, playerBounds);
     }

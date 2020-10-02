@@ -4,7 +4,8 @@ export const Map = ({ progress = 0 }) => {
   const lakeOutline = `rgba(0, 0, 0, 0.5)`;
   const lakeFill = `rgba(0, 0, 0, 0.1)`;
   const islandFill = `rgba(255,255,255,0.7)`;
-  const progressStroke = `red`;
+  const progressStroke = `black`;
+  const dashedStroke = `white`;
 
   return (
     <svg
@@ -12,6 +13,7 @@ export const Map = ({ progress = 0 }) => {
       version="1.1"
       viewBox="0 0 176.301 45.432"
       width="100%"
+      opacity={0.55}
     >
       <g
         fillOpacity="1"
@@ -175,7 +177,7 @@ export const Map = ({ progress = 0 }) => {
         <path
           fill="none"
           fillOpacity="0.133"
-          stroke="#b3b3b3"
+          stroke={dashedStroke}
           strokeDasharray="1.058 2.117"
           strokeDashoffset="0"
           strokeLinecap="round"

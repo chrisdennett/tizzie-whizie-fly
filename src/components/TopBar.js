@@ -6,7 +6,6 @@ import { useScroll } from "../hooks/useScroll";
 
 const TopBar = ({ onHomeClick, onInfoClick, showTitle, showGame }) => {
   const { scrollY } = useScroll();
-  console.log("scrollY: ", scrollY);
 
   return (
     <Container scrollY={scrollY} showGame={showGame}>
@@ -33,10 +32,7 @@ const Container = styled.div`
   left: 0;
   right: 0;
   height: 60px;
-  background-image: ${(props) =>
-    props.showGame
-      ? `url("/img/bg/concrete_wall_2.png")`
-      : `url("/img/bg/linedpaper.png")`};
+  background-image: url("/img/bg/linedpaper.png");
   display: flex;
   align-items: center;
   justify-content: space-between;

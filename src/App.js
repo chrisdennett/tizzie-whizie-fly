@@ -9,7 +9,7 @@ import { defaultGameState } from "./game/gameState";
 import { TizzieLogo } from "./components/TizzieLogo";
 import { Game } from "./game/Game";
 
-const IN_TEST_MODE = false;
+const IN_TEST_MODE = true;
 
 function App() {
   const [showGame, setShowGame] = useState(false);
@@ -30,7 +30,6 @@ function App() {
     gameState,
     setGameState,
     onEndGame,
-    IN_TEST_MODE,
   };
 
   return (
@@ -98,10 +97,7 @@ const GamePreviewHolder = styled.div`
 const Container = styled.div`
   padding-top: 60px;
   min-height: 100vh;
-  background-image: ${(props) =>
-    props.showGame
-      ? `url("/img/bg/concrete_wall_2.png")`
-      : `url("/img/bg/linedpaper.png")`};
+  background-image: url("/img/bg/linedpaper.png");
 `;
 
 const Content = styled.div`

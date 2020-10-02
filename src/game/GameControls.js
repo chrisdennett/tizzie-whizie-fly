@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  FaPause,
-  FaPlay,
-  FaArrowDown,
-  FaArrowUp,
-  FaWindowClose,
-} from "react-icons/fa";
 import styled from "styled-components";
+import SketchyButton from "../components/sketchy/SketchyButton";
+import SketchyCloseButton from "../components/sketchy/CloseButton";
 
 const GameControls = ({
   gameState,
@@ -24,9 +19,7 @@ const GameControls = ({
     <Outer>
       {!firstGameStarted && (
         <ButtonHolder>
-          <Button onClick={onPlay} onTouchStart={onPlay}>
-            <FaPlay />
-          </Button>
+          <SketchyButton onClick={onPlay} icon="play" />
         </ButtonHolder>
       )}
 
@@ -41,27 +34,22 @@ const GameControls = ({
       {showGameControls && (
         <>
           <ButtonHolder>
-            <Button onClick={goUp} onTouchStart={goUp}>
-              <FaArrowUp />
-            </Button>
+            <SketchyButton onClick={goUp} icon="up" />
           </ButtonHolder>
           <ButtonHolder>
-            <Button onClick={goDown} onTouchStart={goDown}>
-              <FaArrowDown />
-            </Button>
+            <SketchyButton onClick={goDown} icon="down" />
           </ButtonHolder>
           <ButtonHolder>
-            <Button onClick={onPlayPauseToggle}>
-              {isPaused ? <FaPlay /> : <FaPause />}
-            </Button>
+            <SketchyButton
+              onClick={onPlayPauseToggle}
+              icon={isPaused ? "play" : "pause"}
+            />
           </ButtonHolder>
         </>
       )}
 
       <ButtonHolder>
-        <Button onClick={onEndGame} style={{ fontSize: 34, padding: 15 }}>
-          <FaWindowClose />
-        </Button>
+        <SketchyCloseButton onClick={onEndGame} />
       </ButtonHolder>
     </Outer>
   );
