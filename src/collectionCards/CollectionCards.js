@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Card } from "./Card";
 
 const cards = [
   {
@@ -13,40 +14,16 @@ const cards = [
 
 const CollectionCards = ({ data }) => {
   return (
-    <div>
-      <CardList>
-        <Card data={cards[0]} />
-      </CardList>
-    </div>
+    <CardList>
+      <Card data={cards[0]} />
+    </CardList>
   );
 };
 
 export default CollectionCards;
 
 const CardList = styled.div`
+  margin: 30px;
   display: flex;
   flex-wrap: wrap;
-`;
-
-const Card = ({ data }) => {
-  return (
-    <CardHolder>
-      <img src={data.img} alt="" />
-      <h2>{data.name}</h2>
-      <p dangerouslySetInnerHTML={{ __html: data.info }} />
-    </CardHolder>
-  );
-};
-
-const CardHolder = styled.div`
-  padding: 20px;
-  max-width: 240px;
-  /* border-top: 2px solid rgba(255, 255, 255, 1); */
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
-
-  img {
-    max-width: 100%;
-  }
 `;
