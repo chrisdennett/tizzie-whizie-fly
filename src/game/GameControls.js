@@ -3,6 +3,7 @@ import styled from "styled-components";
 import SketchyButton from "../components/sketchy/SketchyButton";
 import SketchyCloseButton from "../components/sketchy/CloseButton";
 import useSound from "use-sound";
+import { useKeyboardBindings } from "../hooks/useKeyboardBindings";
 
 const GameControls = ({
   gameState,
@@ -23,6 +24,10 @@ const GameControls = ({
       volume: 1,
     }
   );
+  useKeyboardBindings({
+    ArrowUp: () => onGoUp(),
+    ArrowDown: () => onGoDown(),
+  });
 
   const onGoDown = () => {
     goDown();
