@@ -321,6 +321,7 @@ const drawUnderwater = (ctx, spriteCanvas, spriteData, gameState) => {
       underwaterY
     );
   }
+  ctx.globalCompositeOperation = "source-in";
   ctx.restore();
 };
 

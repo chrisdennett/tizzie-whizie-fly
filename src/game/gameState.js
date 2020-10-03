@@ -171,34 +171,38 @@ const totalDurationSeconds = 20;
 const getFrameFromSeconds = (seconds) => (seconds * msPerSecond) / msPerFrame;
 const durationMs = getFrameFromSeconds(totalDurationSeconds);
 
-const obstacles = [
-  {
-    type: "boat",
-    name: "Osprey",
-    triggerMs: getFrameFromSeconds(2),
-  },
-  {
-    type: "island",
-    name: "Belle Isle",
-    triggerMs: getFrameFromSeconds(4),
-  },
+const obstacles = () => {
+  const obstacleArr = [
+    {
+      type: "boat",
+      name: "Osprey",
+    },
+    {
+      type: "island",
+      name: "Belle Isle",
+    },
 
-  {
-    type: "bownessie",
-    name: "Bownessie",
-    triggerMs: getFrameFromSeconds(6),
-  },
-  {
-    type: "pike",
-    name: "The Pike",
-    triggerMs: getFrameFromSeconds(8),
-  },
-  // {
-  //   type: "player.body",
-  //   name: "Tizzie Whizie",
-  //   triggerMs: getFrameFromSeconds(8),
-  // },
-];
+    {
+      type: "bownessie",
+      name: "Bownessie",
+    },
+    {
+      type: "pike",
+      name: "The Pike",
+    },
+    // {
+    //   type: "player.body",
+    //   name: "Tizzie Whizie",
+    //   triggerMs: getFrameFromSeconds(8),
+    // },
+  ];
+
+  const arrWithTimings = obstacleArr.map((obs, i) => {
+    return { ...obs, triggerMs: getFrameFromSeconds(2 + i * 2) };
+  });
+
+  return arrWithTimings;
+};
 
 export const defaultGameState = {
   gameTick: 0,
@@ -209,7 +213,7 @@ export const defaultGameState = {
   nextObstacleIndex: 0,
   obstacleInPlay: false,
 
-  obstacles,
+  obstacles: obstacles(),
 
   gameW: 1089,
   gameH: 760,

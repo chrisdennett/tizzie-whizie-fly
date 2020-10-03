@@ -12,7 +12,9 @@ import useSound from "use-sound";
 const IN_INVINCIBLE_MODE = false;
 
 export const Game = ({ spriteData, gameState, setGameState, onEndGame }) => {
-  const [playLoseSound] = useSound("/sounds/zapsplat_lose.mp3", { volume: 1 });
+  const [playLoseSound] = useSound("/sounds/zapsplat_impact.mp3", {
+    volume: 1,
+  });
 
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
