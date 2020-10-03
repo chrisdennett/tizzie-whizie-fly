@@ -16,6 +16,7 @@ export const Game = ({ spriteData, gameState, setGameState, onEndGame }) => {
     volume: 1,
   });
 
+  const [showCollectionCards, setShowCollectionCards] = useState(false);
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -87,6 +88,8 @@ export const Game = ({ spriteData, gameState, setGameState, onEndGame }) => {
     firstGameStarted,
   };
 
+  const onShowCardsCollected = () => setShowCollectionCards((prev) => !prev);
+
   return (
     <div>
       {spriteData && (
@@ -107,7 +110,14 @@ export const Game = ({ spriteData, gameState, setGameState, onEndGame }) => {
         <GameControls {...controlsProps} />
       </div>
 
-      <CollectionCard />
+      <button onClick={onShowCardsCollected}>Show Cards Collected</button>
+
+      {showCollectionCards && (
+        <CollectionCard
+          gameItems={gameState.obstacles}
+          gameTime={gameState.gameTick}
+        />
+      )}
     </div>
   );
 };

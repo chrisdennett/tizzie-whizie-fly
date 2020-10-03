@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PhotoCorner from "../components/PhotoCorner";
 
-export const Card = ({ data }) => {
+export const Card = ({ data, showCard }) => {
   return (
     <Outer>
       <Corner style={{ top: 0, left: 0 }}>
@@ -20,7 +20,7 @@ export const Card = ({ data }) => {
 
       <CardHolder>
         <img src={data.img} alt="" />
-        <h2>{data.name}</h2>
+        <h2>{showCard ? data.name : "?"}</h2>
         <p dangerouslySetInnerHTML={{ __html: data.info }} />
       </CardHolder>
     </Outer>
@@ -29,6 +29,7 @@ export const Card = ({ data }) => {
 
 const Outer = styled.div`
   position: relative;
+  margin: 5px;
 `;
 
 const Corner = styled.div`

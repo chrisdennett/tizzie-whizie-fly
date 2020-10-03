@@ -1,3 +1,5 @@
+import { obstacles, getFrameFromSeconds } from "./gameItems";
+
 export const spriteData = {
   title: {
     x: 182.308,
@@ -165,48 +167,11 @@ export const maskData = {
 };
 
 const water = 230;
-const msPerFrame = 16.7; // this is what use animation frame gives us
-const msPerSecond = 1000;
-const totalDurationSeconds = 20;
-const getFrameFromSeconds = (seconds) => (seconds * msPerSecond) / msPerFrame;
+const totalDurationSeconds = 100;
 const durationMs = getFrameFromSeconds(totalDurationSeconds);
-
-const obstacles = () => {
-  const obstacleArr = [
-    {
-      type: "boat",
-      name: "Osprey",
-    },
-    {
-      type: "island",
-      name: "Belle Isle",
-    },
-
-    {
-      type: "bownessie",
-      name: "Bownessie",
-    },
-    {
-      type: "pike",
-      name: "The Pike",
-    },
-    // {
-    //   type: "player.body",
-    //   name: "Tizzie Whizie",
-    //   triggerMs: getFrameFromSeconds(8),
-    // },
-  ];
-
-  const arrWithTimings = obstacleArr.map((obs, i) => {
-    return { ...obs, triggerMs: getFrameFromSeconds(2 + i * 2) };
-  });
-
-  return arrWithTimings;
-};
 
 export const defaultGameState = {
   gameTick: 0,
-  msPerFrame,
   duration: durationMs,
   gameOver: false,
   progress: 0,
