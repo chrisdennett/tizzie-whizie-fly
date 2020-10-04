@@ -415,7 +415,7 @@ function drawMaskedSprite(
     mask.w,
     mask.h
   );
-  tempCtx.globalCompositeOperation = "source-in";
+  // tempCtx.globalCompositeOperation = "source-in";
   // draw the sprite
   tempCtx.drawImage(
     spriteCanvas,
