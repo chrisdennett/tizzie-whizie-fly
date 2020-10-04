@@ -12,14 +12,14 @@ import { Card } from "./Card";
 //   },
 // ];
 
-const CollectionCards = ({ gameItems, gameTime }) => {
+const CollectionCards = ({ gameItems, maxIndexCollected }) => {
   return (
     <CardList>
-      {gameItems.map((item) => (
+      {gameItems.map((item, index) => (
         <Card
           key={item.name}
           data={item}
-          showCard={gameTime >= item.triggerMs}
+          showCard={index <= maxIndexCollected}
         />
       ))}
     </CardList>

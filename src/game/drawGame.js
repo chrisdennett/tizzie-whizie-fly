@@ -35,6 +35,7 @@ export const drawGame = (
   );
 
   // current obstacle
+  // feels like much of this should be in gamestate function, not here
   if (gameState.nextObstacleIndex < gameState.obstacles.length) {
     const currObstacle = gameState.obstacles[gameState.nextObstacleIndex];
     const currObstacleSprite = spriteData[currObstacle.type];
@@ -194,6 +195,12 @@ export const drawGame = (
     if (isCollision) {
       onCollision();
     }
+
+    // const obstacleAchieved =
+    //   gameState.obstacleX + currObstacleSprite.w < player.x;
+    // if (obstacleAchieved) {
+    //   console.log("obstacleAchieved: ", obstacleAchieved);
+    // }
   }
 
   // underwater overlay

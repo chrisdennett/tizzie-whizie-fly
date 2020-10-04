@@ -177,6 +177,8 @@ export const defaultGameState = {
   progress: 0,
   nextObstacleIndex: 0,
   obstacleInPlay: false,
+  maxObstacleIndexCollected: -1,
+  soundOn: false,
 
   obstacles: obstacles(),
 
@@ -260,6 +262,7 @@ function getUnderwaterState(prevGameState) {
 function getObstacleState(prevGameState) {
   let newObstacleInPlay = prevGameState.obstacleInPlay;
   let newNextObstacleIndex = prevGameState.nextObstacleIndex;
+  let newMaxObstacleIndexCollected = prevGameState.maxObstacleIndexCollected;
   if (newNextObstacleIndex >= prevGameState.obstacles.length) return {};
   const currObstacle = prevGameState.obstacles[newNextObstacleIndex];
   const obstacleSprite = spriteData[currObstacle.type];
@@ -268,7 +271,12 @@ function getObstacleState(prevGameState) {
   if (newObstacleInPlay) {
     let newObstacleX = prevGameState.obstacleX - prevGameState.obstacleSpeed;
 
+    // if obstacle has gone off the left side of the screen
     if (newObstacleX < 0 - obstacleSprite.w) {
+      // add it to the collected items array
+      newMaxObstacleIndexCollected = newNextObstacleIndex;
+
+      // get a new obstacle ready.
       newObstacleX = 900;
       newObstacleInPlay = false;
       newNextObstacleIndex++;
@@ -278,6 +286,7 @@ function getObstacleState(prevGameState) {
       obstacleX: newObstacleX,
       obstacleInPlay: newObstacleInPlay,
       nextObstacleIndex: newNextObstacleIndex,
+      maxObstacleIndexCollected: newMaxObstacleIndexCollected,
     };
   }
 

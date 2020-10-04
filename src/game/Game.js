@@ -9,7 +9,7 @@ import GameControls from "./GameControls";
 import CollectionCard from "../collectionCards/CollectionCards";
 import useSound from "use-sound";
 
-const IN_INVINCIBLE_MODE = false;
+const IN_INVINCIBLE_MODE = true;
 
 export const Game = ({ spriteData, gameState, setGameState, onEndGame }) => {
   const [playLoseSound] = useSound("/sounds/zapsplat_impact.mp3", {
@@ -47,32 +47,21 @@ export const Game = ({ spriteData, gameState, setGameState, onEndGame }) => {
 
   React.useEffect(updateGame, [tickCount]);
 
-  const goUp = () => {
-    setFlyUp(true);
-  };
-
-  const goDown = () => {
-    setDiveDown(true);
-  };
-
-  const onPlayPauseToggle = () => {
-    setIsPaused((prev) => !prev);
-  };
-
-  const replay = () => {
-    setGameState(defaultGameState);
-  };
-
-  const onPlay = () => {
-    setFirstGameStarted(true);
-  };
+  const goUp = () => setFlyUp(true);
+  const goDown = () => setDiveDown(true);
+  const onPlayPauseToggle = () => setIsPaused((prev) => !prev);
+  const replay = () => setGameState(defaultGameState);
+  const onPlay = () => setFirstGameStarted(true);
 
   const showGameControls = firstGameStarted && !gameState.gameOver;
   const onCollision = () => {
     if (!IN_INVINCIBLE_MODE) {
       setIsPaused(true);
     }
-    playLoseSound();
+
+    if (gameState.soundOn) {
+      playLoseSound();
+    }
   };
 
   const controlsProps = {
@@ -115,7 +104,7 @@ export const Game = ({ spriteData, gameState, setGameState, onEndGame }) => {
       {showCollectionCards && (
         <CollectionCard
           gameItems={gameState.obstacles}
-          gameTime={gameState.gameTick}
+          maxIndexCollected={gameState.maxObstacleIndexCollected}
         />
       )}
     </div>

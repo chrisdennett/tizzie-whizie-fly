@@ -31,12 +31,12 @@ const GameControls = ({
 
   const onGoDown = () => {
     goDown();
-    setTimeout(() => playPlip(), 100);
+    if (gameState.soundOn) setTimeout(() => playPlip(), 100);
   };
 
   const onGoUp = () => {
     goUp();
-    playWhoosh();
+    if (gameState.soundOn) playWhoosh();
   };
 
   return (
