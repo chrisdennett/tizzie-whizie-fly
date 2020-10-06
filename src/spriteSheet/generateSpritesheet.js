@@ -293,6 +293,8 @@ function drawMaskedShore(
   tempCtx
 ) {
   tempCtx.save();
+  tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+
   // draw the mask to temp canvas
   tempCtx.drawImage(
     maskCanvas,
@@ -368,7 +370,7 @@ function drawMaskedShore(
     ripples.h * 0.5
   );
   ctx.globalAlpha = 1;
-  tempCtx.restore();
+  ctx.restore();
 
   return {
     x: 0,
