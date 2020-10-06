@@ -427,10 +427,22 @@ function drawMaskedSprite(
   //   sprite.h
   // );
 
+  // ctx.drawImage(
+  //   tempCanvas,
+  //   0,
+  //   0,
+  //   sprite.w,
+  //   sprite.h,
+  //   0,
+  //   startY,
+  //   sprite.w,
+  //   sprite.h
+  // );
+
   ctx.drawImage(
-    tempCanvas,
-    0,
-    0,
+    spriteCanvas,
+    sprite.x,
+    sprite.y,
     sprite.w,
     sprite.h,
     0,
