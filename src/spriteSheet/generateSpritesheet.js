@@ -371,6 +371,7 @@ function drawMaskedShore(
   );
   ctx.globalAlpha = 1;
   ctx.restore();
+  tempCtx.restore();
 
   return {
     x: 0,
