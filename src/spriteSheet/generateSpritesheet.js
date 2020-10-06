@@ -207,18 +207,29 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
   );
 
   // draw shore
-  gameSpriteSheet.shore = drawMaskedShore(
+  gameSpriteSheet.shore = drawMaskedSprite(
     ctx,
     spriteCanvas,
     maskCanvas,
     spriteData.shore,
     maskData.shore,
-    maskData.ripples,
     gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding,
-    1,
+    0.9,
     tempCanvas,
     tempCtx
   );
+  // gameSpriteSheet.shore = drawMaskedShore(
+  //   ctx,
+  //   spriteCanvas,
+  //   maskCanvas,
+  //   spriteData.shore,
+  //   maskData.shore,
+  //   maskData.ripples,
+  //   gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding,
+  //   1,
+  //   tempCanvas,
+  //   tempCtx
+  // );
 
   // draw underwater
   gameSpriteSheet.underwater = drawUnderwater(
