@@ -207,29 +207,18 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
   );
 
   // draw shore
-  gameSpriteSheet.shore = drawMaskedSprite(
+  gameSpriteSheet.shore = drawMaskedShore(
     ctx,
     spriteCanvas,
     maskCanvas,
     spriteData.shore,
     maskData.shore,
+    maskData.ripples,
     gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding,
-    0.9,
+    1,
     tempCanvas,
     tempCtx
   );
-  // gameSpriteSheet.shore = drawMaskedShore(
-  //   ctx,
-  //   spriteCanvas,
-  //   maskCanvas,
-  //   spriteData.shore,
-  //   maskData.shore,
-  //   maskData.ripples,
-  //   gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding,
-  //   1,
-  //   tempCanvas,
-  //   tempCtx
-  // );
 
   // draw underwater
   gameSpriteSheet.underwater = drawUnderwater(
@@ -303,11 +292,11 @@ function drawMaskedShore(
   tempCanvas,
   tempCtx
 ) {
+  ctx.save();
   tempCtx.save();
-
   tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
 
-  // draw the mask
+  // draw the mask to temp canvas
   tempCtx.drawImage(
     maskCanvas,
     mask.x,
@@ -319,6 +308,9 @@ function drawMaskedShore(
     mask.w,
     mask.h
   );
+
+  // set to mask
+
   tempCtx.globalCompositeOperation = "source-in";
   // draw the sprite to temp canvas
   tempCtx.drawImage(
@@ -347,41 +339,47 @@ function drawMaskedShore(
   );
   // draw the reflection of the temp canvas to output canvas
 
-  // const reflectionHeight = sprite.h * 0.5;
+  const reflectionHeight = sprite.h * 0.5;
 
-  // ctx.translate(0, startY + sprite.h + reflectionHeight);
-  // ctx.scale(1, -1);
-  // ctx.globalAlpha = 0.25;
-  // ctx.drawImage(
-  //   tempCanvas,
-  //   0,
-  //   0,
-  //   sprite.w,
-  //   sprite.h,
-  //   0,
-  //   0,
-  //   sprite.w,
-  //   reflectionHeight
-  // );
-
+  ctx.translate(0, startY + sprite.h + reflectionHeight);
+  ctx.scale(1, -1);
+  ctx.globalAlpha = 0.25;
+  ctx.drawImage(
+    tempCanvas,
+    0,
+    0,
+    sprite.w,
+    sprite.h,
+    0,
+    0,
+    sprite.w,
+    reflectionHeight
+  );
+  ctx.restore();
   // draw ripples over reflection
-  // ctx.globalAlpha = 0.1;
-  // ctx.drawImage(
-  //   maskCanvas,
-  //   ripples.x,
-  //   ripples.y,
-  //   ripples.w,
-  //   ripples.h,
-  //   0,
-  //   startY + sprite.h,
-  //   ripples.w,
-  //   ripples.h * 0.5
-  // );
-  // ctx.globalAlpha = 1;
-
+  ctx.save();
+  ctx.globalAlpha = 0.1;
+  ctx.drawImage(
+    maskCanvas,
+    ripples.x,
+    ripples.y,
+    ripples.w,
+    ripples.h,
+    0,
+    startY + sprite.h,
+    ripples.w,
+    ripples.h * 0.5
+  );
+  ctx.globalAlpha = 1;
+  ctx.restore();
   tempCtx.restore();
 
-  return { x: 0, y: startY, w: sprite.w * scale, h: sprite.h * scale };
+  return {
+    x: 0,
+    y: startY,
+    w: sprite.w,
+    h: ripples.h + sprite.h,
+  };
 }
 
 ///
