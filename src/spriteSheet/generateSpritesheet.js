@@ -119,6 +119,7 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
   outCanvas.height = combinedSpritesHeight; // add all sprites heights
 
   const ctx = outCanvas.getContext("2d");
+  const tempCanvas = document.createElement("canvas");
 
   let startY = 0;
   const gameSpriteSheet = {};
@@ -137,7 +138,9 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     maskCanvas,
     spriteData.title,
     maskData.title,
-    startY
+    startY,
+    1,
+    tempCanvas
   );
 
   // Draw player
@@ -148,7 +151,8 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     adjustedBodyProps,
     maskData.player.body,
     gameSpriteSheet.title.y + gameSpriteSheet.title.h + padding,
-    0.5
+    0.5,
+    tempCanvas
   );
   gameSpriteSheet.leg = drawMaskedSprite(
     ctx,
@@ -157,7 +161,8 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     adjustedLegProps,
     maskData.player.leg,
     gameSpriteSheet.player.y + gameSpriteSheet.player.h + padding,
-    0.5
+    0.5,
+    tempCanvas
   );
   gameSpriteSheet.wing = drawMaskedSprite(
     ctx,
@@ -166,7 +171,8 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     adjustedWingProps,
     maskData.player.wing,
     gameSpriteSheet.leg.y + gameSpriteSheet.leg.h + padding,
-    0.5
+    0.5,
+    tempCanvas
   );
   gameSpriteSheet.tail = drawMaskedSprite(
     ctx,
@@ -175,7 +181,8 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     adjustedTailProps,
     maskData.player.tail,
     gameSpriteSheet.wing.y + gameSpriteSheet.wing.h + padding,
-    0.5
+    0.5,
+    tempCanvas
   );
 
   // Draw boat
@@ -186,7 +193,8 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     spriteData.boat,
     maskData.boat,
     gameSpriteSheet.tail.y + gameSpriteSheet.tail.h + padding,
-    0.9
+    0.9,
+    tempCanvas
   );
 
   // draw shore
@@ -197,7 +205,9 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     spriteData.shore,
     maskData.shore,
     maskData.ripples,
-    gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding
+    gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding,
+    1,
+    tempCanvas
   );
 
   // draw underwater
@@ -215,7 +225,9 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     maskCanvas,
     spriteData.island,
     maskData.island,
-    gameSpriteSheet.underwater.y + gameSpriteSheet.underwater.h + padding
+    gameSpriteSheet.underwater.y + gameSpriteSheet.underwater.h + padding,
+    1,
+    tempCanvas
   );
 
   // Draw pike
@@ -225,7 +237,9 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     maskCanvas,
     spriteData.pike,
     maskData.pike,
-    gameSpriteSheet.island.y + gameSpriteSheet.island.h + padding
+    gameSpriteSheet.island.y + gameSpriteSheet.island.h + padding,
+    1,
+    tempCanvas
   );
 
   // Draw bownessie
@@ -236,7 +250,8 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     spriteData.bownessie,
     maskData.bownessie,
     gameSpriteSheet.pike.y + gameSpriteSheet.pike.h + padding,
-    0.75
+    0.75,
+    tempCanvas
   );
 
   // Draw tizzie
@@ -394,9 +409,10 @@ function drawMaskedSprite(
   sprite,
   mask,
   startY,
-  scale = 1
+  scale = 1,
+  tempCanvas
 ) {
-  const tempCanvas = document.createElement("canvas");
+  // const tempCanvas = document.createElement("canvas");
   tempCanvas.width = sprite.w;
   tempCanvas.height = sprite.h;
   const tempCtx = tempCanvas.getContext("2d");
@@ -413,42 +429,30 @@ function drawMaskedSprite(
     mask.w,
     mask.h
   );
-  // tempCtx.globalCompositeOperation = "source-in";
+  tempCtx.globalCompositeOperation = "source-in";
   // draw the sprite
-  // tempCtx.drawImage(
-  //   spriteCanvas,
-  //   sprite.x,
-  //   sprite.y,
-  //   sprite.w,
-  //   sprite.h,
-  //   0,
-  //   0,
-  //   sprite.w,
-  //   sprite.h
-  // );
-
-  // ctx.drawImage(
-  //   tempCanvas,
-  //   0,
-  //   0,
-  //   sprite.w,
-  //   sprite.h,
-  //   0,
-  //   startY,
-  //   sprite.w,
-  //   sprite.h
-  // );
-
-  ctx.drawImage(
+  tempCtx.drawImage(
     spriteCanvas,
     sprite.x,
     sprite.y,
     sprite.w,
     sprite.h,
     0,
-    startY,
+    0,
     sprite.w,
     sprite.h
+  );
+
+  ctx.drawImage(
+    tempCanvas,
+    0,
+    0,
+    sprite.w,
+    sprite.h,
+    0,
+    startY,
+    sprite.w * scale,
+    sprite.h * scale
   );
 
   return { x: 0, y: startY, w: sprite.w * scale, h: sprite.h * scale };
