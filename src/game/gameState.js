@@ -28,7 +28,7 @@ export const spriteData = {
   shore: {
     x: 25.354,
     y: 120.692,
-    w: 1029.124,
+    w: 1029,
     h: 121.686,
   },
   pike: {
@@ -111,7 +111,7 @@ export const maskData = {
   shore: {
     x: 36.201,
     y: 320.096,
-    w: 1029.124,
+    w: 1029,
     h: 121.686,
   },
   pike: {

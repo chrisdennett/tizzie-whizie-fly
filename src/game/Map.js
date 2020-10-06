@@ -8,6 +8,13 @@ export const Map = ({ progress = 0 }) => {
   const progressStroke = progress > 0 ? `rgba(5, 5, 5, 1)` : "rgba(0, 0, 0, 0)";
   const dashedStroke = `white`;
 
+  // var path = document.querySelector(".path");
+  // if (path) {
+  //   var length = path.getTotalLength();
+  //   console.log("length: ", length);
+  // }
+  const len = 186.47337341308594;
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -194,10 +201,11 @@ export const Map = ({ progress = 0 }) => {
       </g>
       <g display="inline" transform="translate(65.43 -65.43)">
         <path
+          className="path"
           fill="none"
-          pathLength="1"
-          strokeDasharray="1"
-          strokeDashoffset={1 - progress}
+          pathLength={len}
+          strokeDasharray={len}
+          strokeDashoffset={len - progress * len}
           fillOpacity="0.133"
           stroke={progressStroke}
           strokeLinecap="round"

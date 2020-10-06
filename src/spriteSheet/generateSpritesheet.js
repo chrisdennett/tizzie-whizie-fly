@@ -121,7 +121,7 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
   const ctx = outCanvas.getContext("2d");
   const tempCanvas = document.createElement("canvas");
   tempCanvas.width = maxSpriteWidth;
-  tempCanvas.height = combinedSpritesHeight;
+  tempCanvas.height = maxSpriteWidth;
   const tempCtx = tempCanvas.getContext("2d");
 
   let startY = 0;
@@ -206,15 +206,28 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     tempCtx
   );
 
+  // Draw pike
+  gameSpriteSheet.pike = drawMaskedSprite(
+    ctx,
+    spriteCanvas,
+    maskCanvas,
+    spriteData.pike,
+    maskData.pike,
+    gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding,
+    1,
+    tempCanvas,
+    tempCtx
+  );
+
   // draw shore
   gameSpriteSheet.shore = drawMaskedShore(
     ctx,
     spriteCanvas,
     maskCanvas,
-    spriteData.shore,
-    maskData.shore,
+    { ...spriteData.shore, w: 1029 },
+    { ...maskData.shore, w: 1029 },
     maskData.ripples,
-    gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding,
+    gameSpriteSheet.pike.y + gameSpriteSheet.pike.h + padding,
     1,
     tempCanvas,
     tempCtx
@@ -241,19 +254,6 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     tempCtx
   );
 
-  // Draw pike
-  gameSpriteSheet.pike = drawMaskedSprite(
-    ctx,
-    spriteCanvas,
-    maskCanvas,
-    spriteData.pike,
-    maskData.pike,
-    gameSpriteSheet.island.y + gameSpriteSheet.island.h + padding,
-    1,
-    tempCanvas,
-    tempCtx
-  );
-
   // Draw bownessie
   gameSpriteSheet.bownessie = drawMaskedSprite(
     ctx,
@@ -261,7 +261,7 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     maskCanvas,
     spriteData.bownessie,
     maskData.bownessie,
-    gameSpriteSheet.pike.y + gameSpriteSheet.pike.h + padding,
+    gameSpriteSheet.island.y + gameSpriteSheet.island.h + padding,
     0.75,
     tempCanvas,
     tempCtx
