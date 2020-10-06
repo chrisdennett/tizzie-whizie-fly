@@ -435,8 +435,8 @@ function drawMaskedSprite(
     sprite.h,
     0,
     startY,
-    sprite.w * scale,
-    sprite.h * scale
+    sprite.w,
+    sprite.h
   );
 
   return { x: 0, y: startY, w: sprite.w * scale, h: sprite.h * scale };
