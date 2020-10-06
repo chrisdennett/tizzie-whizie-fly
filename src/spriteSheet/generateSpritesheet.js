@@ -292,6 +292,7 @@ function drawMaskedShore(
   tempCanvas,
   tempCtx
 ) {
+  ctx.save();
   tempCtx.save();
   tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
 
@@ -338,40 +339,40 @@ function drawMaskedShore(
   );
   // draw the reflection of the temp canvas to output canvas
 
-  const reflectionHeight = sprite.h * 0.5;
+  // const reflectionHeight = sprite.h * 0.5;
 
-  ctx.save();
-  ctx.translate(0, startY + sprite.h + reflectionHeight);
-  ctx.scale(1, -1);
-  ctx.globalAlpha = 0.25;
-  ctx.drawImage(
-    tempCanvas,
-    0,
-    0,
-    sprite.w,
-    sprite.h,
-    0,
-    0,
-    sprite.w,
-    reflectionHeight
-  );
+  // ctx.translate(0, startY + sprite.h + reflectionHeight);
+  // ctx.scale(1, -1);
+  // ctx.globalAlpha = 0.25;
+  // ctx.drawImage(
+  //   tempCanvas,
+  //   0,
+  //   0,
+  //   sprite.w,
+  //   sprite.h,
+  //   0,
+  //   0,
+  //   sprite.w,
+  //   reflectionHeight
+  // );
 
   // draw ripples over reflection
-  ctx.globalAlpha = 0.1;
-  ctx.drawImage(
-    maskCanvas,
-    ripples.x,
-    ripples.y,
-    ripples.w,
-    ripples.h,
-    0,
-    startY + sprite.h,
-    ripples.w,
-    ripples.h * 0.5
-  );
-  ctx.globalAlpha = 1;
-  ctx.restore();
+  // ctx.globalAlpha = 0.1;
+  // ctx.drawImage(
+  //   maskCanvas,
+  //   ripples.x,
+  //   ripples.y,
+  //   ripples.w,
+  //   ripples.h,
+  //   0,
+  //   startY + sprite.h,
+  //   ripples.w,
+  //   ripples.h * 0.5
+  // );
+  // ctx.globalAlpha = 1;
+
   tempCtx.restore();
+  ctx.restore();
 
   return {
     x: 0,
