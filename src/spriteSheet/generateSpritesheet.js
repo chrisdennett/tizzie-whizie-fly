@@ -399,10 +399,47 @@ function drawMaskedSprite(
   const tempCanvas = document.createElement("canvas");
   tempCanvas.width = sprite.w;
   tempCanvas.height = sprite.h;
-  const tempCtx = tempCanvas.getContext("2d");
+  // const tempCtx = tempCanvas.getContext("2d");
 
   // draw the mask
-  tempCtx.drawImage(
+  // tempCtx.drawImage(
+  //   maskCanvas,
+  //   mask.x,
+  //   mask.y,
+  //   mask.w,
+  //   mask.h,
+  //   0,
+  //   0,
+  //   mask.w,
+  //   mask.h
+  // );
+  // tempCtx.globalCompositeOperation = "source-in";
+  // draw the sprite
+  // tempCtx.drawImage(
+  //   spriteCanvas,
+  //   sprite.x,
+  //   sprite.y,
+  //   sprite.w,
+  //   sprite.h,
+  //   0,
+  //   0,
+  //   sprite.w,
+  //   sprite.h
+  // );
+
+  // ctx.drawImage(
+  //   tempCanvas,
+  //   0,
+  //   0,
+  //   sprite.w,
+  //   sprite.h,
+  //   0,
+  //   startY,
+  //   sprite.w * scale,
+  //   sprite.h * scale
+  // );
+
+  ctx.drawImage(
     maskCanvas,
     mask.x,
     mask.y,
@@ -412,31 +449,6 @@ function drawMaskedSprite(
     0,
     mask.w,
     mask.h
-  );
-  tempCtx.globalCompositeOperation = "source-in";
-  // draw the sprite
-  tempCtx.drawImage(
-    spriteCanvas,
-    sprite.x,
-    sprite.y,
-    sprite.w,
-    sprite.h,
-    0,
-    0,
-    sprite.w,
-    sprite.h
-  );
-
-  ctx.drawImage(
-    tempCanvas,
-    0,
-    0,
-    sprite.w,
-    sprite.h,
-    0,
-    startY,
-    sprite.w * scale,
-    sprite.h * scale
   );
 
   return { x: 0, y: startY, w: sprite.w * scale, h: sprite.h * scale };
