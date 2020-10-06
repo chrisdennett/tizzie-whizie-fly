@@ -292,6 +292,7 @@ function drawMaskedShore(
   tempCanvas,
   tempCtx
 ) {
+  tempCtx.save();
   // draw the mask to temp canvas
   tempCtx.drawImage(
     maskCanvas,
@@ -306,7 +307,7 @@ function drawMaskedShore(
   );
 
   // set to mask
-  tempCtx.save();
+
   tempCtx.globalCompositeOperation = "source-in";
   // draw the sprite to temp canvas
   tempCtx.drawImage(
@@ -320,7 +321,6 @@ function drawMaskedShore(
     sprite.w,
     sprite.h
   );
-  tempCtx.restore();
 
   // draw the temp canvas to the output canvas
   ctx.drawImage(
@@ -353,7 +353,6 @@ function drawMaskedShore(
     sprite.w,
     reflectionHeight
   );
-  ctx.restore();
 
   // draw ripples over reflection
   ctx.globalAlpha = 0.1;
@@ -369,6 +368,7 @@ function drawMaskedShore(
     ripples.h * 0.5
   );
   ctx.globalAlpha = 1;
+  tempCtx.restore();
 
   return {
     x: 0,
@@ -424,6 +424,8 @@ function drawMaskedSprite(
   tempCtx
 ) {
   tempCtx.save();
+
+  tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
 
   // draw the mask
   tempCtx.drawImage(
