@@ -275,9 +275,10 @@ function drawMaskedShore(
   mask,
   ripples,
   startY,
-  scale = 1
+  scale = 1,
+  tempCanvas
 ) {
-  const tempCanvas = document.createElement("canvas");
+  // const tempCanvas = document.createElement("canvas");
   tempCanvas.width = sprite.w;
   tempCanvas.height = sprite.h;
   const tempCtx = tempCanvas.getContext("2d");
@@ -416,6 +417,7 @@ function drawMaskedSprite(
   tempCanvas.width = sprite.w;
   tempCanvas.height = sprite.h;
   const tempCtx = tempCanvas.getContext("2d");
+  tempCtx.save();
 
   // draw the mask
   tempCtx.drawImage(
@@ -454,6 +456,7 @@ function drawMaskedSprite(
     sprite.w * scale,
     sprite.h * scale
   );
+  tempCtx.restore();
 
   return { x: 0, y: startY, w: sprite.w * scale, h: sprite.h * scale };
 }
