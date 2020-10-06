@@ -292,11 +292,11 @@ function drawMaskedShore(
   tempCanvas,
   tempCtx
 ) {
-  ctx.save();
   tempCtx.save();
+
   tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
 
-  // draw the mask to temp canvas
+  // draw the mask
   tempCtx.drawImage(
     maskCanvas,
     mask.x,
@@ -308,9 +308,6 @@ function drawMaskedShore(
     mask.w,
     mask.h
   );
-
-  // set to mask
-
   tempCtx.globalCompositeOperation = "source-in";
   // draw the sprite to temp canvas
   tempCtx.drawImage(
@@ -372,14 +369,8 @@ function drawMaskedShore(
   // ctx.globalAlpha = 1;
 
   tempCtx.restore();
-  ctx.restore();
 
-  return {
-    x: 0,
-    y: startY,
-    w: sprite.w,
-    h: ripples.h + sprite.h,
-  };
+  return { x: 0, y: startY, w: sprite.w * scale, h: sprite.h * scale };
 }
 
 ///
