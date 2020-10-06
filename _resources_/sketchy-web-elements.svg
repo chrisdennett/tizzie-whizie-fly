@@ -225,9 +225,9 @@
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="393.07405"
-     inkscape:cx="-51.877907"
-     inkscape:zoom="0.53567073"
+     inkscape:cy="91.180648"
+     inkscape:cx="-577.60224"
+     inkscape:zoom="1.0713415"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -2349,7 +2349,48 @@ zPw1RRcAAAAASUVORK5CYII=
        preserveAspectRatio="none"
        height="99.48333"
        width="90.222916"
-       x="-127.59761"
-       y="-17.142347" />
+       x="-132.6393"
+       y="-16.895382" />
+    <path
+       sodipodi:nodetypes="cccc"
+       d="m -159.53908,-8.8907233 h 13.2126 c -5.17476,3.325412 -9.6829,7.5841051 -13.2126,13.2126051 z"
+       style="color:#000000;overflow:visible;fill:#decd87;fill-opacity:0.516129;stroke:none;stroke-width:0.265;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       id="rect2534" />
+    <use
+       style="fill:#ffeeaa"
+       height="100%"
+       width="100%"
+       transform="translate(33.146553,-1.693514)"
+       id="use2537"
+       xlink:href="#rect2534"
+       y="0"
+       x="0" />
+    <use
+       style="fill:#ffeeaa"
+       x="0"
+       y="0"
+       xlink:href="#rect2534"
+       id="use2539"
+       transform="matrix(-1,0,0,1,-208.68979,-1.693514)"
+       width="100%"
+       height="100%" />
+    <use
+       style="fill:#ffeeaa"
+       x="0"
+       y="0"
+       xlink:href="#rect2534"
+       id="use2541"
+       transform="matrix(1,0,0,-1,33.146553,68.879316)"
+       width="100%"
+       height="100%" />
+    <use
+       style="fill:#ffeeaa"
+       height="100%"
+       width="100%"
+       transform="rotate(180,-104.34489,34.439652)"
+       id="use2543"
+       xlink:href="#rect2534"
+       y="0"
+       x="0" />
   </g>
 </svg>

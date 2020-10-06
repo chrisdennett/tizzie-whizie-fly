@@ -363,7 +363,6 @@ function drawMaskedShore(
 ///
 function drawUnderwater(ctx, maskCanvas, underwater, startY) {
   // draw ripples over reflection
-  ctx.globalAlpha = 1;
   ctx.drawImage(
     maskCanvas,
     underwater.x,
@@ -375,7 +374,6 @@ function drawUnderwater(ctx, maskCanvas, underwater, startY) {
     underwater.w,
     underwater.h
   );
-  ctx.globalAlpha = 1;
 
   return {
     x: 0,
@@ -415,7 +413,7 @@ function drawMaskedSprite(
     mask.w,
     mask.h
   );
-  // tempCtx.globalCompositeOperation = "source-in";
+  tempCtx.globalCompositeOperation = "source-in";
   // draw the sprite
   tempCtx.drawImage(
     spriteCanvas,

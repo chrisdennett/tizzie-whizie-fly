@@ -8,6 +8,7 @@ const SpriteTester = ({ spriteData }) => {
   const [isJumping, setIsJumping] = useState(false);
 
   const maskedCanvasRef = useRef(null);
+  const spriteCanvasRef = useRef(null);
   const unwarpedCanvasRef = useRef(null);
   const sourceCanvasRef = useRef(null);
 
@@ -31,9 +32,15 @@ const SpriteTester = ({ spriteData }) => {
       const artCanvas = unwarpedCanvasRef.current;
       artCanvas.width = spriteData.unwarpedCanvas.width;
       artCanvas.height = spriteData.unwarpedCanvas.height;
-
       const ctx = artCanvas.getContext("2d");
       ctx.drawImage(spriteData.unwarpedCanvas, 0, 0);
+
+      // SPRITE CANVAS
+      const spriteCanvas = spriteCanvasRef.current;
+      spriteCanvas.width = spriteData.canvas.width;
+      spriteCanvas.height = spriteData.canvas.height;
+      const ctx3 = spriteCanvas.getContext("2d");
+      ctx3.drawImage(spriteData.canvas, 0, 0);
     }
   }, [spriteData, isJumping, isDiving]);
 
@@ -84,6 +91,7 @@ const SpriteTester = ({ spriteData }) => {
         <button onClick={onDiveClick}>DIVE</button>
       </h1>
       <canvas ref={maskedCanvasRef} />
+      <canvas ref={spriteCanvasRef} />
       <canvas ref={unwarpedCanvasRef} />
       <canvas ref={sourceCanvasRef} />
     </div>
