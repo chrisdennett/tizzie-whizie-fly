@@ -1,7 +1,6 @@
 import AR from "../libs/aruco";
 import fx from "glfx";
 import { spriteData, maskData } from "../game/gameState";
-// import { mapPolygonToCanvas } from "../webGLStuff/webglThings";
 import { createCanvasFromSrc } from "./helper";
 
 let detector = new AR.Detector();
@@ -382,14 +381,6 @@ function drawMaskedShore(
   };
 }
 
-///
-////
-// ctx,
-// maskCanvas,
-// maskData.underwater,
-// gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding
-///
-///
 function drawUnderwater(ctx, maskCanvas, underwater, startY) {
   // draw ripples over reflection
   ctx.drawImage(
@@ -411,10 +402,6 @@ function drawUnderwater(ctx, maskCanvas, underwater, startY) {
     h: underwater.h,
   };
 }
-////
-///
-///
-///
 
 function drawMaskedSprite(
   ctx,
@@ -472,84 +459,3 @@ function drawMaskedSprite(
 
   return { x: 0, y: startY, w: sprite.w * scale, h: sprite.h * scale };
 }
-
-// function getCornerPositions(markers) {
-//   let allCorners = [];
-
-//   for (let marker of markers) {
-//     allCorners = allCorners.concat(marker.corners);
-//   }
-
-//   allCorners.sort((a, b) => (a.x > b.x ? 1 : -1));
-
-//   const rightSideCorners = allCorners.slice(allCorners.length - 4);
-//   const leftSideCorners = allCorners.slice(0, 4);
-
-//   rightSideCorners.sort((a, b) => (a.y > b.y ? 1 : -1));
-//   leftSideCorners.sort((a, b) => (a.y > b.y ? 1 : -1));
-
-//   const topLeft = leftSideCorners[0];
-//   const topRight = rightSideCorners[0];
-//   const bottomRight = rightSideCorners[3];
-//   const bottomLeft = leftSideCorners[3];
-
-//   console.log("topLeft: ", topLeft);
-
-//   const fourCorners = [topLeft, topRight, bottomRight, bottomLeft];
-
-//   return fourCorners;
-// }
-
-// const getUnwarpedCanvasOld = (sourceCanvas, corners, gameW, gameH) => {
-//   const webGlCanvas = document.createElement("canvas");
-//   const gl = webGlCanvas.getContext("webgl");
-//   webGlCanvas.width = gameW;
-//   webGlCanvas.height = gameH;
-
-//   const { a, b, c, d } = corners;
-
-//   mapPolygonToCanvas({
-//     gl,
-//     image: sourceCanvas,
-//     topLeft: [a.x / sourceCanvas.width, a.y / sourceCanvas.height],
-//     topRight: [b.x / sourceCanvas.width, b.y / sourceCanvas.height],
-//     bottomRight: [c.x / sourceCanvas.width, c.y / sourceCanvas.height],
-//     bottomLeft: [d.x / sourceCanvas.width, d.y / sourceCanvas.height],
-//   });
-
-//   const unwarpedCanvas = createCanvasFromSrc(webGlCanvas, gameW, gameH);
-
-//   return unwarpedCanvas;
-// };
-
-//
-// HELPER FUNCTIONS
-//
-
-// function createLineUnwarpedCanvas(srcCanvas, widthChange) {
-//   const outCanvas = document.createElement("canvas");
-
-//   const { width: w, height: h } = srcCanvas;
-//   outCanvas.width = w;
-//   outCanvas.height = h;
-
-//   // use amount of horizontal warp to unsquish
-//   const { topWidth, bottomWidth } = widthChange;
-//   const squishFraction = (bottomWidth - topWidth) / bottomWidth;
-
-//   const fracAtTop = 1 + squishFraction;
-//   const fracAtBottom = 1 - squishFraction;
-
-//   const ctx = outCanvas.getContext("2d");
-//   const sliceH = 100;
-//   const totalSlices = h / sliceH;
-//   const squishFractionInc = squishFraction / totalSlices;
-
-//   for (let y = 0; y < h; y += sliceH) {
-//     const currSquishFrac = squishFraction - y * squishFractionInc;
-//     const currSliceH = sliceH + y * squishFractionInc;
-//     ctx.drawImage(srcCanvas, 0, y, w, sliceH, 0, y, w, currSliceH);
-//   }
-
-//   return outCanvas;
-// }
