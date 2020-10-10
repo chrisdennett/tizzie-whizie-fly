@@ -29,5 +29,5 @@ const Button = styled.button`
   outline: none;
   background: none;
   width: 70px;
-  height: 70px;
+  height: 100%;
 `;

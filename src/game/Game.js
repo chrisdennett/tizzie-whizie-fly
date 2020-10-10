@@ -1,78 +1,65 @@
 import React, { useState } from "react";
 // import { useInterval } from "../hooks/useInternval";
 import styled from "styled-components";
-import { useAnimationFrame } from "../hooks/useAnimationFrame";
-import { getNextGameState, defaultGameState } from "./gameState";
-import { GameCanvas } from "./GameCanvas";
-import { Map } from "./Map";
-import GameControls from "./GameControls";
-import CollectionCard from "../collectionCards/CollectionCards";
-import useSound from "use-sound";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import GameControlsRight from "./GameControlsRight";
+// import CollectionCard from "../collectionCards/CollectionCards";
+// import useSound from "use-sound";
+import GameControlsLeft from "./GameControlsLeft";
+import GameScreen from "./GameScreen";
 
 const IN_INVINCIBLE_MODE = true;
 
-export const Game = ({ spriteData, gameState, setGameState, onEndGame }) => {
-  const [playLoseSound] = useSound("/sounds/zapsplat_impact.mp3", {
-    volume: 1,
-  });
+export const Game = ({ spriteData, onEndGame }) => {
+  console.log("GAME");
+  // const [playLoseSound] = useSound("/sounds/zapsplat_impact.mp3", {
+  //   volume: 1,
+  // });
 
-  const [showCollectionCards, setShowCollectionCards] = useState(false);
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
+  const [, setShowCollectionCards] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   // TODO - if go away from game and back this resets - move to App maybe
   const [firstGameStarted, setFirstGameStarted] = useState(false);
-  const [tickCount, setTickCount] = useState(0);
 
-  useAnimationFrame(() => setTickCount((prev) => prev + 1));
-
-  const updateGame = () => {
-    if (!spriteData || isPaused || !firstGameStarted) return;
-
-    if (gameState.gameOver) return;
-
-    if (gameState.isMoving) {
-      setFlyUp(false);
-      setDiveDown(false);
-    }
-
-    const nextGameState = getNextGameState(
-      gameState,
-      flyUp,
-      diveDown,
-      tickCount
-    );
-    setGameState(nextGameState);
-  };
-
-  React.useEffect(updateGame, [tickCount]);
+  const fullScreenHandle = useFullScreenHandle();
 
   const goUp = () => setFlyUp(true);
   const goDown = () => setDiveDown(true);
   const onPlayPauseToggle = () => setIsPaused((prev) => !prev);
-  const replay = () => setGameState(defaultGameState);
+  const replay = () => {
+    // setGameState(defaultGameState);
+  };
   const onPlay = () => setFirstGameStarted(true);
 
-  const showGameControls = firstGameStarted && !gameState.gameOver;
+  // const showGameControls = firstGameStarted && !gameState.gameOver;
   const onCollision = () => {
     if (!IN_INVINCIBLE_MODE) {
       setIsPaused(true);
     }
 
-    if (gameState.soundOn) {
-      playLoseSound();
-    }
+    // if (gameState.soundOn) {
+    //   playLoseSound();
+    // }
   };
 
-  const controlsProps = {
-    gameState,
-    showGameControls,
-    onEndGame,
+  const onCloseGame = () => {
+    setIsPaused(true);
+    // setGameState(defaultGameState);
+    onEndGame();
+  };
+
+  const leftControlsProps = {
+    goUp,
+    goDown,
+  };
+
+  const rightControlsProps = {
+    onEndGame: onCloseGame,
     onPlay,
     replay,
     onPlayPauseToggle,
-    goUp,
-    goDown,
     isPaused,
     firstGameStarted,
   };
@@ -82,48 +69,79 @@ export const Game = ({ spriteData, gameState, setGameState, onEndGame }) => {
   return (
     <div>
       {spriteData && (
-        <GamePanel>
-          <MapHolder>
-            <Map progress={gameState.progress} />
-          </MapHolder>
+        <FullScreen handle={fullScreenHandle}>
+          <ConsoleContainer>
+            <GameConsole>
+              <GameTopBar>TOP BAR</GameTopBar>
+              <MainGamePanel>
+                <GameControlsLeft {...leftControlsProps} />
 
-          <GameCanvas
-            onCollision={onCollision}
-            spriteCanvas={spriteData.canvas}
-            gameState={gameState}
-            spriteData={spriteData.data}
-          />
-        </GamePanel>
+                <GameScreen
+                  spriteData={spriteData}
+                  firstGameStarted={firstGameStarted}
+                  isPaused={isPaused}
+                  setFlyUp={setFlyUp}
+                  setDiveDown={setDiveDown}
+                  flyUp={flyUp}
+                  diveDown={diveDown}
+                  onCollision={onCollision}
+                />
+
+                <GameControlsRight
+                  {...rightControlsProps}
+                  onFullScreen={fullScreenHandle.enter}
+                  fullScreenActive={fullScreenHandle.active}
+                  onExitFullScreen={fullScreenHandle.exit}
+                />
+              </MainGamePanel>
+              <GameBottomBar>Bottom BAR</GameBottomBar>
+            </GameConsole>
+          </ConsoleContainer>
+        </FullScreen>
       )}
-      <div>
-        <GameControls {...controlsProps} />
-      </div>
 
       <button onClick={onShowCardsCollected}>Show Cards Collected</button>
 
-      {showCollectionCards && (
+      {/* {showCollectionCards && (
         <CollectionCard
           gameItems={gameState.obstacles}
           maxIndexCollected={gameState.maxObstacleIndexCollected}
         />
-      )}
+      )} */}
     </div>
   );
 };
 
-const GamePanel = styled.div`
-  display: flex;
-  flex-direction: column;
+const ConsoleContainer = styled.div`
   position: relative;
-  margin-top: 5vh;
-  max-width: 100%;
+  height: 100vh;
+  width: 100vw;
+  max-width: 900px;
+  max-height: 550px;
 `;
 
-const MapHolder = styled.div`
+const GameConsole = styled.div`
   position: absolute;
+  top: 0;
+  left: 0;
   bottom: 0;
-  width: 70%;
-  right: 30px;
-  bottom: 15px;
-  /* transform: rotate(270deg) translate(-165px, 595px) scale(1.3); */
+  right: 0;
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+`;
+
+const GameTopBar = styled.div`
+  flex: 1;
+`;
+
+const GameBottomBar = styled.div`
+  flex: 1;
+`;
+
+const MainGamePanel = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  background-image: url("/img/bg/linedpaper.png");
 `;

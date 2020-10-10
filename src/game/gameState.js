@@ -167,7 +167,7 @@ export const maskData = {
 };
 
 const water = 230;
-const totalDurationSeconds = 100;
+const totalDurationSeconds = 150;
 const durationMs = getFrameFromSeconds(totalDurationSeconds);
 
 export const defaultGameState = {

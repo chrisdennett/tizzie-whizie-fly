@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SketchyGameBox from "../components/sketchy/SketchyGameBox";
+// import SketchyGameBox from "../components/sketchy/SketchyGameBox";
 import { drawGame } from "./drawGame";
 
 export const GameCanvas = ({
@@ -21,11 +21,11 @@ export const GameCanvas = ({
 
   return (
     <Container>
-      <SketchyGameBox />
+      {/* <SketchyGameBox /> */}
       <StyledCanvas
         ref={gameCanvasRef}
-        width={gameState.gameW - 200}
-        height={gameState.gameH - 305}
+        width={gameState.gameW - 270}
+        height={gameState.gameH - 250}
       />
     </Container>
   );
@@ -40,9 +40,5 @@ const Container = styled.div`
 `;
 
 const StyledCanvas = styled.canvas`
-  border-radius: 42px;
-  margin: 1%;
-  width: 98%;
-  /* box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); */
-  /* background-color: rgba(255, 255, 255, 0.3); */
+  border: 1px solid rgba(0, 0, 0, 0.2);
 `;

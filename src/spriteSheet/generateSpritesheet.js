@@ -46,8 +46,8 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
     return {
       data: gameData,
       canvas: outCanvas,
-      unwarpedCanvas,
-      sourceCanvas,
+      // unwarpedCanvas,
+      // sourceCanvas,
     };
   } else {
     const fullCanvas = createCanvasFromSrc(sourceCanvas, gameW, gameH);
@@ -59,7 +59,7 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
       maskImg
     );
 
-    return { data: gameData, canvas: outCanvas };
+    return { data: gameData, canvas: outCanvas, sourceCanvas };
   }
 };
 
@@ -200,7 +200,7 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
     spriteData.boat,
     maskData.boat,
     gameSpriteSheet.tail.y + gameSpriteSheet.tail.h + padding,
-    0.9,
+    0.8,
     tempCanvas,
     tempCtx
   );

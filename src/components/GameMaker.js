@@ -7,6 +7,7 @@ import { generateSpritesheet } from "../spriteSheet/generateSpritesheet";
 import ExternalLink from "./ExternalLink";
 
 const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
+  console.log("GAME_MAKER");
   const [spritesheetMask, setSpritesheetMask] = useState(null);
 
   const w = defaultGameState.gameW;

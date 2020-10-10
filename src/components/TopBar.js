@@ -32,11 +32,11 @@ const Container = styled.div`
   left: 0;
   right: 0;
   height: 60px;
-  background-image: url("/img/bg/linedpaper.png");
+  /* background-image: url("/img/bg/linedpaper.png"); */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 10px;
   box-shadow: ${(props) =>
     props.scrollY > 10 ? "0px 3px 3px rgba(0, 0, 0, 0.1)" : ""};
 

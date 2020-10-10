@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import GameMaker from "./components/GameMaker";
-import SpriteTester from "./game/SpriteTester";
-import TopBar from "./components/TopBar";
+// import SpriteTester from "./game/SpriteTester";
 import About from "./components/About";
-import { defaultGameState } from "./game/gameState";
 // import { useWindowSize } from "./hooks/useWindowSize";
 import { TizzieLogo } from "./components/TizzieLogo";
 import { Game } from "./game/Game";
@@ -12,35 +10,27 @@ import { Game } from "./game/Game";
 const IN_TEST_MODE = true;
 
 function App() {
+  console.log("APP");
   const [showGame, setShowGame] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [spriteData, setSpriteData] = useState(null);
-  const [gameState, setGameState] = useState(defaultGameState);
+  //const [gameState, setGameState] = useState(defaultGameState);
 
   // const windowSize = useWindowSize();
 
   const onEndGame = () => {
     setShowGame(false);
-    setGameState(defaultGameState);
+    // setGameState(defaultGameState);
   };
 
   const gameCreated = spriteData && spriteData.canvas;
   const gameProps = {
     spriteData,
-    gameState,
-    setGameState,
     onEndGame,
   };
 
   return (
     <Container showGame={showGame}>
-      <TopBar
-        showGame={showGame}
-        onInfoClick={() => setShowInfo(true)}
-        showTitle={false}
-        onHomeClick={onEndGame}
-      />
-
       {showInfo && <About onClose={() => setShowInfo(false)} />}
 
       <Content>
@@ -68,9 +58,7 @@ function App() {
             )}
 
             {IN_TEST_MODE && gameCreated && (
-              <div>
-                <SpriteTester spriteData={spriteData} />
-              </div>
+              <div>{/* <SpriteTester spriteData={spriteData} /> */}</div>
             )}
 
             <GameMaker
@@ -95,7 +83,7 @@ const GamePreviewHolder = styled.div`
   border-right: 3px solid rgba(0, 0, 0, 0.5);
 `;
 const Container = styled.div`
-  padding-top: 60px;
+  /* padding-top: 60px; */
   min-height: 100vh;
   background-image: url("/img/bg/linedpaper.png");
 `;
