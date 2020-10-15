@@ -2,11 +2,12 @@ import React, { useState } from "react";
 // import { useInterval } from "../hooks/useInternval";
 import styled from "styled-components";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import GameControlsRight from "./GameControlsRight";
+import GameControlsRight from "../gameControls/GameControlsRight";
 // import CollectionCard from "../collectionCards/CollectionCards";
 // import useSound from "use-sound";
-import GameControlsLeft from "./GameControlsLeft";
+import GameControlsLeft from "../gameControls/GameControlsLeft";
 import GameScreen from "./GameScreen";
+import ScoreBoard from "../scoreboard/ScoreBoard";
 
 const IN_INVINCIBLE_MODE = true;
 
@@ -72,7 +73,9 @@ export const Game = ({ spriteData, onEndGame }) => {
         <FullScreen handle={fullScreenHandle}>
           <ConsoleContainer>
             <GameConsole>
-              <GameTopBar>TOP BAR</GameTopBar>
+              <GameTopBar>
+                <ScoreBoard />
+              </GameTopBar>
               <MainGamePanel>
                 <GameControlsLeft {...leftControlsProps} />
 
@@ -126,7 +129,6 @@ const GameConsole = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: aquamarine;
   display: flex;
   flex-direction: column;
 `;

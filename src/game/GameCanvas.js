@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 // import SketchyGameBox from "../components/sketchy/SketchyGameBox";
-import { drawGame } from "./drawGame";
+import { drawGame } from "../gameLogic/drawGame";
 
 export const GameCanvas = ({
   spriteCanvas,

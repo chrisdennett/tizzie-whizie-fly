@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { defaultGameState } from "../game/gameState";
+import { defaultGameState } from "../gameLogic/gameState";
 import styled from "styled-components";
 import PhotoSelector from "./imageInput/PhotoSelector";
 import { createMaxSizeCanvas } from "../spriteSheet/helper";

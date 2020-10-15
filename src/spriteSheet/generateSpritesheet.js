@@ -1,6 +1,6 @@
 import AR from "../libs/aruco";
 import fx from "glfx";
-import { spriteData, maskData } from "../game/gameState";
+import { spriteData, maskData } from "../gameLogic/gameState";
 import { createCanvasFromSrc } from "./helper";
 
 let detector = new AR.Detector();

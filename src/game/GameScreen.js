@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useAnimationFrame } from "../hooks/useAnimationFrame";
 import { GameCanvas } from "./GameCanvas";
-import { getNextGameState, defaultGameState } from "./gameState";
-import { Map } from "./Map";
+import { getNextGameState, defaultGameState } from "../gameLogic/gameState";
+import { Map } from "../Map/Map";
 
 const GameScreen = ({
   spriteData,
