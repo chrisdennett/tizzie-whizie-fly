@@ -22,7 +22,7 @@ export const GameCanvas = ({
   return (
     <Container>
       {/* <SketchyGameBox /> */}
-      {/* <GameOutline /> */}
+      <GameOutline />
 
       <StyledCanvas
         ref={gameCanvasRef}
@@ -38,10 +38,14 @@ const Container = styled.div`
 
   svg {
     position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 `;
 
 const StyledCanvas = styled.canvas`
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 28px;
+  /* border: 1px solid rgba(0, 0, 0, 0.2); */
+  border-radius: 50px;
 `;
