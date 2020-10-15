@@ -3,6 +3,7 @@ import styled from "styled-components";
 import SketchyButton from "../components/sketchy/SketchyButton";
 // import useSound from "use-sound";
 import { useKeyboardBindings } from "../hooks/useKeyboardBindings";
+import { ArrowButton } from "./ArrowButtons";
 
 const GameControlsLeft = ({ gameState, goUp, goDown }) => {
   // const [playPlip] = useSound("/sounds/plip.wav", { volume: 1 });
@@ -29,11 +30,11 @@ const GameControlsLeft = ({ gameState, goUp, goDown }) => {
 
   return (
     <Outer>
-      <ButtonHolder onClick={onGoUp}>
-        <SketchyButton icon="up" />
+      <ButtonHolder>
+        <ArrowButton type="up" onClick={onGoUp} />
       </ButtonHolder>
-      <ButtonHolder onClick={onGoDown}>
-        <SketchyButton icon="down" />
+      <ButtonHolder>
+        <ArrowButton type="down" onClick={onGoDown} />
       </ButtonHolder>
     </Outer>
   );
@@ -42,12 +43,14 @@ const GameControlsLeft = ({ gameState, goUp, goDown }) => {
 export default GameControlsLeft;
 
 const ButtonHolder = styled.div`
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: 1px solid;
+  :first-child {
+    margin-bottom: 5px;
+  }
 `;
 
 const Outer = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 0 10px;
+  justify-content: center;
 `;

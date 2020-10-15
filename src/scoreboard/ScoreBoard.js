@@ -5,9 +5,9 @@ import { ScoreBoardIcon } from "./ScoreBoardIcons";
 function ScoreBoard() {
   return (
     <Container>
-      <ScoreElement type="boat" label="Boat" score={0} max={19} />
-      <ScoreElement type="island" label="Island" score={5} max={21} />
-      <ScoreElement type="story" label="Story" score={1} max={17} />
+      <ScoreElement type="boat" label="Boats" score={0} max={19} />
+      <ScoreElement type="island" label="Islands" score={5} max={21} />
+      <ScoreElement type="story" label="Stories" score={1} max={17} />
     </Container>
   );
 }

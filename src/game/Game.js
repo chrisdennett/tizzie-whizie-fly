@@ -73,9 +73,9 @@ export const Game = ({ spriteData, onEndGame }) => {
         <FullScreen handle={fullScreenHandle}>
           <ConsoleContainer>
             <GameConsole>
-              <GameTopBar>
+              {/* <GameTopBar>
                 <ScoreBoard />
-              </GameTopBar>
+              </GameTopBar> */}
               <MainGamePanel>
                 <GameControlsLeft {...leftControlsProps} />
 
@@ -97,7 +97,9 @@ export const Game = ({ spriteData, onEndGame }) => {
                   onExitFullScreen={fullScreenHandle.exit}
                 />
               </MainGamePanel>
-              <GameBottomBar>Bottom BAR</GameBottomBar>
+              <GameBottomBar>
+                <ScoreBoard />
+              </GameBottomBar>
             </GameConsole>
           </ConsoleContainer>
         </FullScreen>
@@ -125,7 +127,7 @@ const ConsoleContainer = styled.div`
 
 const GameConsole = styled.div`
   position: absolute;
-  top: 0;
+  top: 20px;
   left: 0;
   bottom: 0;
   right: 0;

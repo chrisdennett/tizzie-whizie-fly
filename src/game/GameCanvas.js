@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-// import SketchyGameBox from "../components/sketchy/SketchyGameBox";
 import { drawGame } from "../gameLogic/drawGame";
+import { GameOutline } from "./GameOutline";
 
 export const GameCanvas = ({
   spriteCanvas,
@@ -22,6 +22,8 @@ export const GameCanvas = ({
   return (
     <Container>
       {/* <SketchyGameBox /> */}
+      {/* <GameOutline /> */}
+
       <StyledCanvas
         ref={gameCanvasRef}
         width={gameState.gameW - 270}
@@ -41,4 +43,5 @@ const Container = styled.div`
 
 const StyledCanvas = styled.canvas`
   border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 28px;
 `;
