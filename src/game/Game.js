@@ -135,10 +135,6 @@ const GameConsole = styled.div`
   flex-direction: column;
 `;
 
-const GameTopBar = styled.div`
-  flex: 1;
-`;
-
 const GameBottomBar = styled.div`
   flex: 1;
 `;

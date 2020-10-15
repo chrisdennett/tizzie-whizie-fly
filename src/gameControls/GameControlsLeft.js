@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import SketchyButton from "../components/sketchy/SketchyButton";
 // import useSound from "use-sound";
 import { useKeyboardBindings } from "../hooks/useKeyboardBindings";
 import { ArrowButton } from "./ArrowButtons";

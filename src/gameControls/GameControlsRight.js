@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SketchyButton from "../components/sketchy/SketchyButton";
 import { RoundButton } from "./RoundButtons";
-// import SketchyCloseButton from "../components/sketchy/CloseButton";
 
 const GameControlsRight = ({
   gameOver,

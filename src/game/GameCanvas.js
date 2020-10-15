@@ -21,7 +21,6 @@ export const GameCanvas = ({
 
   return (
     <Container>
-      {/* <SketchyGameBox /> */}
       <GameOutline />
 
       <StyledCanvas
