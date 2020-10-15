@@ -24,6 +24,8 @@ const GameControlsRight = ({
     }
   };
 
+  const onHelp = () => console.log("HELP PRESSED: ");
+
   return (
     <Outer>
       <TopSection>
@@ -34,7 +36,10 @@ const GameControlsRight = ({
 
       <MainSection>
         <ButtonHolder>
-          <RoundButton onClick={onFullScreenClick} type="fullscreen" />
+          <RoundButton
+            onClick={onFullScreenClick}
+            type={fullScreenActive ? "closeFullscreen" : "fullscreen"}
+          />
         </ButtonHolder>
 
         {firstGameStarted ? (
@@ -51,7 +56,7 @@ const GameControlsRight = ({
         )}
 
         <ButtonHolder>
-          <RoundButton onClick={onFullScreenClick} type="help" />
+          <RoundButton onClick={onHelp} type="help" />
         </ButtonHolder>
 
         {gameOver && (

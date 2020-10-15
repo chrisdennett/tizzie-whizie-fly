@@ -11,3 +11,11 @@ canvas {
   user-select: none;
   max-width: 100%;
 }
+
+.fullscreen-enabled {
+  min-height: 100vh;
+  background-image: url("/img/bg/linedpaper.png");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

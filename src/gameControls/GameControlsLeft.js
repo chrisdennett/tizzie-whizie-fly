@@ -51,13 +51,3 @@ const Outer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-// const Button = styled.button`
-//   font-size: 24px;
-//   color: rgba(0, 0, 0, 0.6);
-//   border: none;
-//   outline: none;
-//   background: none;
-//   cursor: pointer;
-//   padding: 20px;
-// `;
