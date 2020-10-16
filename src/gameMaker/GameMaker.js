@@ -63,6 +63,9 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
                 src={"/printable-template_250x177.png"}
                 alt={"game template"}
               />
+              <NextStepButton onClick={() => setCurrStep(1)}>
+                Next
+              </NextStepButton>
             </StepHolder>
           )}
 
@@ -71,13 +74,18 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
               <h2>Create your artwork</h2>
               <p>
                 Use paint, pencil, collage, clay. Whatever you like, just stay
-                clear of those weird corner bits
+                clear of those weird corner bits because they need to be clearer
+                clean for the magic to happen!
               </p>
 
               <img
                 src={"/crayon2_250x141.jpg"}
                 alt={"coloured in template sheet"}
               />
+
+              <NextStepButton onClick={() => setCurrStep(2)}>
+                Next
+              </NextStepButton>
             </StepHolder>
           )}
 
@@ -96,14 +104,19 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
                 src={"/crayon2_250x141.jpg"}
                 alt={"coloured in template sheet"}
               />
+
+              <NextStepButton onClick={() => setCurrStep(3)}>
+                Next
+              </NextStepButton>
             </StepHolder>
           )}
 
           {currStep === 3 && (
             <StepHolder>
-              <h2>Snap a photo</h2>
+              <h2>Play your game</h2>
               <p>
-                Once you're finished, take a photo of it to generate your game.
+                If all has gone how it should pressing this button should open
+                your game.
               </p>
             </StepHolder>
           )}
@@ -127,6 +140,7 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
 export default GameMaker;
 
 const GameSteps = styled.div``;
+const NextStepButton = styled.button``;
 
 const StepHolder = styled.div`
   padding: 20px;
