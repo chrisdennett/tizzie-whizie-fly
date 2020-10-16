@@ -119,10 +119,10 @@ export const Game = ({ spriteData, onEndGame }) => {
 
 const ConsoleContainer = styled.div`
   position: relative;
-  height: 100vh;
-  width: 100vw;
-  max-width: 900px;
-  max-height: 550px;
+  max-height: 100vh;
+  max-width: 100vw;
+  width: 900px;
+  height: 550px;
 `;
 
 const GameConsole = styled.div`

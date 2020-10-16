@@ -3,8 +3,6 @@ import fx from "glfx";
 import { spriteData, maskData } from "../gameLogic/gameState";
 import { createCanvasFromSrc } from "./helper";
 
-let detector = new AR.Detector();
-
 const gameW = 1089;
 const gameH = 760;
 
@@ -21,6 +19,7 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
     sourceCanvas.height
   );
 
+  let detector = new AR.Detector();
   var markers = detector.detect(imageData);
 
   if (markers.length === 4) {
@@ -29,12 +28,25 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
     const d = markers[2].corners[0]; // bottom left
     const c = markers[3].corners[0]; // bottom right
 
-    const unwarpedCanvas = getUnwarpedCanvas(
+    let unwarpedCanvas = getUnwarpedCanvas(
       sourceCanvas,
       { a, b, c, d },
       gameW,
       gameH
     );
+
+    if (!unwarpedCanvas) {
+      const fullCanvas = createCanvasFromSrc(sourceCanvas, gameW, gameH);
+
+      const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
+        spriteData,
+        maskData,
+        fullCanvas,
+        maskImg
+      );
+
+      return { data: gameData, canvas: outCanvas, sourceCanvas };
+    }
 
     const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
       spriteData,
@@ -65,22 +77,30 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
 
 const getUnwarpedCanvas = (sourceCanvas, corners, gameW, gameH) => {
   const { width: w, height: h } = sourceCanvas;
-  const webGlCanvas = fx.canvas();
-  var texture = webGlCanvas.texture(sourceCanvas);
+  console.log("fx: ", fx);
 
-  const { a, b, c, d } = corners;
+  try {
+    const webGlCanvas = fx.canvas();
 
-  webGlCanvas
-    .draw(texture)
-    .perspective(
-      [a.x, a.y, b.x, b.y, d.x, d.y, c.x, c.y],
-      [0, 0, w, 0, 0, h, w, h]
-    )
-    .update();
+    var texture = webGlCanvas.texture(sourceCanvas);
 
-  const unwarpedCanvas = createCanvasFromSrc(webGlCanvas, gameW, gameH);
+    const { a, b, c, d } = corners;
 
-  return unwarpedCanvas;
+    webGlCanvas
+      .draw(texture)
+      .perspective(
+        [a.x, a.y, b.x, b.y, d.x, d.y, c.x, c.y],
+        [0, 0, w, 0, 0, h, w, h]
+      )
+      .update();
+
+    const unwarpedCanvas = createCanvasFromSrc(webGlCanvas, gameW, gameH);
+
+    return unwarpedCanvas;
+  } catch (e) {
+    console.log("e: ", e);
+    return null;
+  }
 };
 
 function getTotalHeightsFromObj(data, padding) {
