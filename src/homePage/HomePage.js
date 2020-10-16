@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import GameMaker from "../components/GameMaker";
+import GameMaker from "../gameMaker/GameMaker";
 import { TizzieLogo } from "../components/TizzieLogo";
 import { InfoButton } from "../components/InfoButton";
 import About from "../components/About";
