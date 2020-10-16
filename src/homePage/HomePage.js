@@ -17,14 +17,19 @@ export const HomePage = ({
   const gameCreated = spriteData && spriteData.canvas;
 
   return (
-    <HomePageContainer>
+    <div>
       {showInfo && <About onClose={() => setShowInfo(false)} />}
       <InfoButton onClick={() => setShowInfo(true)} />
       <header>
         <TizzieLogo height={80} />
         <h1>Fly Tizzie Fly</h1>
-        <h2>Paint your own game</h2>
-        <p>Add brief intro to the project here.</p>
+        <Intro>
+          <h2>Paint your own game</h2>
+          <p>
+            This is an experimental art project made to use your paper artworks
+            to generate the game you play. Have a bash to see what I mean!
+          </p>
+        </Intro>
       </header>
 
       {gameCreated && (
@@ -40,11 +45,14 @@ export const HomePage = ({
       )}
 
       <GameMaker setSpriteData={setSpriteData} IN_TEST_MODE={IN_TEST_MODE} />
-    </HomePageContainer>
+    </div>
   );
 };
 
-const HomePageContainer = styled.div``;
+const Intro = styled.div`
+  max-width: 600px;
+  margin: 20px auto;
+`;
 
 const GamePreviewHolder = styled.div`
   padding: 20px;
