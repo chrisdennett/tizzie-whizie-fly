@@ -5,9 +5,11 @@ import GameMaker from "./components/GameMaker";
 import About from "./components/About";
 // import { useWindowSize } from "./hooks/useWindowSize";
 import { TizzieLogo } from "./components/TizzieLogo";
+import TopBar from "./components/TopBar";
 import { Game } from "./game/Game";
+import { InfoButton } from "./components/InfoButton";
 
-const IN_TEST_MODE = true;
+const IN_TEST_MODE = false;
 
 function App() {
   console.log("APP");
@@ -41,7 +43,8 @@ function App() {
         )}
 
         {!showGame && (
-          <div>
+          <HomePage>
+            <InfoButton onClick={() => setShowInfo(true)} />
             <header>
               <TizzieLogo height={80} />
               <h1>Fly Tizzie Fly</h1>
@@ -65,7 +68,7 @@ function App() {
               setSpriteData={setSpriteData}
               IN_TEST_MODE={IN_TEST_MODE}
             />
-          </div>
+          </HomePage>
         )}
       </Content>
     </Container>
@@ -87,6 +90,8 @@ const Container = styled.div`
   min-height: 100vh;
   background-image: url("/img/bg/linedpaper.png");
 `;
+
+const HomePage = styled.div``;
 
 const Content = styled.div`
   max-width: 900px;

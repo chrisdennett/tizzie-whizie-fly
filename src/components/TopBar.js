@@ -32,7 +32,7 @@ const Container = styled.div`
   left: 0;
   right: 0;
   height: 60px;
-  /* background-image: url("/img/bg/linedpaper.png"); */
+  background-image: url("/img/bg/linedpaper.png");
   display: flex;
   align-items: center;
   justify-content: space-between;

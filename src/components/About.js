@@ -68,7 +68,7 @@ const Container = styled.div`
 
 const Content = styled.div`
   background: whitesmoke;
-  max-width: 800px;
+  max-width: 600px;
   border-radius: 10px;
   padding: 10px 30px;
   position: relative;
