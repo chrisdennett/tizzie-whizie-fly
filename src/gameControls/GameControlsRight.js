@@ -74,7 +74,7 @@ export default GameControlsRight;
 const Outer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 15px;
+  padding: 0 15px 0 7px;
 `;
 
 const ButtonHolder = styled.div``;

@@ -2,7 +2,7 @@ import React from "react";
 
 export const ScoreBoardIcon = ({ type }) => {
   return (
-    <svg viewBox="0 0 13.2 13.2" width={50} height={50}>
+    <svg viewBox="0 0 13.2 13.2" width={40} height={40}>
       <g
         fill="gray"
         fillOpacity="0.1"

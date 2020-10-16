@@ -73,9 +73,9 @@ export const Game = ({ spriteData, onEndGame }) => {
         <FullScreen handle={fullScreenHandle}>
           <ConsoleContainer>
             <GameConsole>
-              {/* <GameTopBar>
+              <GameTopBar>
                 <ScoreBoard />
-              </GameTopBar> */}
+              </GameTopBar>
               <MainGamePanel>
                 <GameControlsLeft {...leftControlsProps} />
 
@@ -97,9 +97,10 @@ export const Game = ({ spriteData, onEndGame }) => {
                   onExitFullScreen={fullScreenHandle.exit}
                 />
               </MainGamePanel>
-              <GameBottomBar>
+
+              {/* <GameBottomBar>
                 <ScoreBoard />
-              </GameBottomBar>
+              </GameBottomBar> */}
             </GameConsole>
           </ConsoleContainer>
         </FullScreen>
@@ -119,15 +120,19 @@ export const Game = ({ spriteData, onEndGame }) => {
 
 const ConsoleContainer = styled.div`
   position: relative;
-  max-height: 100vh;
+  margin-top: 1vh;
+  max-height: 98vh;
   max-width: 100vw;
   width: 900px;
   height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const GameConsole = styled.div`
   position: absolute;
-  top: 20px;
+  top: 0;
   left: 0;
   bottom: 0;
   right: 0;
@@ -135,13 +140,17 @@ const GameConsole = styled.div`
   flex-direction: column;
 `;
 
-const GameBottomBar = styled.div`
-  flex: 1;
+const GameTopBar = styled.div`
+  margin-bottom: -15px;
+
+  @media (max-width: 700px) {
+    margin-bottom: -5px;
+  }
 `;
 
 const MainGamePanel = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
-  background-image: url("/img/bg/linedpaper.png");
+  /* background-image: url("/img/bg/linedpaper.png"); */
 `;

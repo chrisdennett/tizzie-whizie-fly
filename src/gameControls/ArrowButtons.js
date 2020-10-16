@@ -5,7 +5,7 @@ export const ArrowButton = ({ type, onClick }) => {
   return (
     <SVGButton
       viewBox={`0 0 15.87 30.91`}
-      style={{ minWidth: 50 }}
+      width={45}
       height="100%"
       onClick={onClick}
     >

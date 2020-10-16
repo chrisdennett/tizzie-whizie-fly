@@ -17,7 +17,6 @@ export default ScoreBoard;
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  padding: 10px;
 `;
 
 const ScoreElement = ({ type, label, score, max }) => (
@@ -34,7 +33,7 @@ const ScoreElement = ({ type, label, score, max }) => (
 
 const ScoreElementContainer = styled.div`
   display: flex;
-  margin: 0 10px;
+  margin: 0 5px;
 `;
 
 const ScoreElementTextHolder = styled.div`
@@ -45,6 +44,7 @@ const ScoreElementTextHolder = styled.div`
 
   h3 {
     margin: 0;
+    font-size: 1em;
   }
 
   p {

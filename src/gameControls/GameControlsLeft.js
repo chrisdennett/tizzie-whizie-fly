@@ -50,6 +50,6 @@ const ButtonHolder = styled.div`
 const Outer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 10px;
+  padding: 0 7px;
   justify-content: center;
 `;
