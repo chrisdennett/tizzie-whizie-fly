@@ -76,6 +76,8 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
 };
 
 const getUnwarpedCanvas = (sourceCanvas, corners, gameW, gameH) => {
+  console.log("sourceCanvas: ", sourceCanvas);
+
   const { width: w, height: h } = sourceCanvas;
   console.log("fx: ", fx);
 

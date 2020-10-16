@@ -40,8 +40,9 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
     createSpritesheet(photo);
   };
 
-  const onSampleSelect = (imgName) =>
+  const onSampleSelect = (imgName) => {
     loadImage(imgName, createSpritesheet, true);
+  };
 
   return (
     <div>
