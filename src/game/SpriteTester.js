@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useInterval } from "../hooks/useInternval";
-import { drawPlayer } from "../game/drawGame";
+import { useInterval } from "../hooks/useInterval";
+import { drawPlayer } from "../gameLogic/drawGame";
 
 const SpriteTester = ({ spriteData }) => {
   const [count, setCount] = useState(0);

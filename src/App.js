@@ -1,74 +1,37 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import GameMaker from "./components/GameMaker";
-// import SpriteTester from "./game/SpriteTester";
-import About from "./components/About";
 // import { useWindowSize } from "./hooks/useWindowSize";
-import { TizzieLogo } from "./components/TizzieLogo";
-import TopBar from "./components/TopBar";
 import { Game } from "./game/Game";
-import { InfoButton } from "./components/InfoButton";
+import { HomePage } from "./homePage/HomePage";
 
 const IN_TEST_MODE = false;
 
 function App() {
   console.log("APP");
   const [showGame, setShowGame] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
   const [spriteData, setSpriteData] = useState(null);
-  //const [gameState, setGameState] = useState(defaultGameState);
-
   // const windowSize = useWindowSize();
 
   const onEndGame = () => {
     setShowGame(false);
-    // setGameState(defaultGameState);
-  };
-
-  const gameCreated = spriteData && spriteData.canvas;
-  const gameProps = {
-    spriteData,
-    onEndGame,
   };
 
   return (
     <Container showGame={showGame}>
-      {showInfo && <About onClose={() => setShowInfo(false)} />}
-
       <Content>
         {(IN_TEST_MODE || showGame) && (
           <div>
-            <Game {...gameProps} />
+            <Game spriteData={spriteData} onEndGame={onEndGame} />
           </div>
         )}
 
         {!showGame && (
-          <HomePage>
-            <InfoButton onClick={() => setShowInfo(true)} />
-            <header>
-              <TizzieLogo height={80} />
-              <h1>Fly Tizzie Fly</h1>
-              <h2>Paint your own game</h2>
-              <p>Add brief intro to the project here.</p>
-            </header>
-
-            {gameCreated && (
-              <GamePreviewHolder>
-                <button onClick={() => setShowGame(true)}>
-                  PLAY YOUR GAME
-                </button>
-              </GamePreviewHolder>
-            )}
-
-            {IN_TEST_MODE && gameCreated && (
-              <div>{/* <SpriteTester spriteData={spriteData} /> */}</div>
-            )}
-
-            <GameMaker
-              setSpriteData={setSpriteData}
-              IN_TEST_MODE={IN_TEST_MODE}
-            />
-          </HomePage>
+          <HomePage
+            spriteData={spriteData}
+            setSpriteData={setSpriteData}
+            setShowGame={setShowGame}
+            IN_TEST_MODE={IN_TEST_MODE}
+          />
         )}
       </Content>
     </Container>
@@ -77,21 +40,10 @@ function App() {
 
 export default App;
 
-const GamePreviewHolder = styled.div`
-  padding: 20px;
-  background-image: url("/img/bg/cutting-mat-tile.png");
-  border-radius: 10px;
-  display: flex;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.5);
-  border-right: 3px solid rgba(0, 0, 0, 0.5);
-`;
 const Container = styled.div`
-  /* padding-top: 60px; */
   min-height: 100vh;
   background-image: url("/img/bg/linedpaper.png");
 `;
-
-const HomePage = styled.div``;
 
 const Content = styled.div`
   max-width: 900px;
