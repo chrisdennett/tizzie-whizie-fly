@@ -4,6 +4,7 @@ import {
   findSheetCorners,
   getUnwarpedCanvas,
 } from "../spriteSheet/generateSpritesheet";
+import GameStartCanvas from "./GameStartCanvas";
 
 export const CreateGameStep = ({
   spriteData,
@@ -57,7 +58,10 @@ export const CreateGameStep = ({
       )}
 
       {spriteData && (
-        <button onClick={() => setShowGame(true)}>PLAY YOUR GAME</button>
+        <div>
+          <GameStartCanvas spriteData={spriteData} />
+          <button onClick={() => setShowGame(true)}>PLAY YOUR GAME</button>
+        </div>
       )}
 
       {/* {!spriteData && <button onClick={onCreateGame}>CREATE GAME</button>}
