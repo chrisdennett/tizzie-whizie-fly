@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import PreviewCanvas from "./PreviewCanvas";
 
 const maxOutputCanvasSize = 1000;
 
 const PhotoSelector = ({ setPhotoCanvas, photoCanvas, children }) => {
-  // const [photoCanvas, setPhotoCanvas] = useState(null);
-
   const onFileSelect = (e) => {
     e.preventDefault();
     if (e.target.files[0]) {
       const selected = e.target.files;
 
       createCanvasFromFile(selected[0], (canvas) => {
-        // setPhotoCanvas(canvas);
         setPhotoCanvas(canvas);
       });
     }
