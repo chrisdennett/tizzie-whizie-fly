@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { defaultGameState } from "../gameLogic/gameState";
+// import { defaultGameState } from "../gameLogic/gameState";
 import styled from "styled-components";
 import PhotoSelector from "../components/imageInput/PhotoSelector";
 import { createMaxSizeCanvas } from "../spriteSheet/helper";
-import { generateSpritesheet } from "../spriteSheet/generateSpritesheet";
+import {
+  generateSpritesheet,
+  generateSpritesheetFromScratch,
+} from "../spriteSheet/generateSpritesheet";
 import ExternalLink from "../components/ExternalLink";
 import { StepSelector } from "./StepSelector";
 import { CreateGameStep } from "./CreateGameStep";
@@ -20,9 +23,6 @@ const GameMaker = ({
   const [spritesheetMask, setSpritesheetMask] = useState(null);
   const [currStep, setCurrStep] = useState(3);
 
-  const w = defaultGameState.gameW;
-  const h = defaultGameState.gameH;
-
   // load mask
   useEffect(() => {
     if (!spritesheetMask) {
@@ -37,17 +37,19 @@ const GameMaker = ({
   }, [spritesheetMask, IN_TEST_MODE]);
 
   const createSpritesheet = (sourceImg) => {
-    const generatedSheetData = generateSpritesheet(
+    const generatedSheetData = generateSpritesheetFromScratch(
       sourceImg,
-      spritesheetMask,
-      w,
-      h
+      spritesheetMask
     );
     setSpriteData(generatedSheetData);
   };
 
-  const onCreateGame = () => {
-    createSpritesheet(photoCanvas);
+  const onCreateGame = (unwarpedCanvas) => {
+    const generatedSheetData = generateSpritesheet(
+      unwarpedCanvas,
+      spritesheetMask
+    );
+    setSpriteData(generatedSheetData);
   };
 
   const onSampleSelect = (imgName) => {
@@ -131,6 +133,7 @@ const GameMaker = ({
                 your game.
               </p>
               <CreateGameStep
+                photoCanvas={photoCanvas}
                 spriteData={spriteData}
                 onCreateGame={onCreateGame}
                 setShowGame={setShowGame}

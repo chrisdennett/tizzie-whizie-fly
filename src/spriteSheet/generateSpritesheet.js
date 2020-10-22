@@ -6,11 +6,11 @@ import { createCanvasFromSrc } from "./helper";
 const gameW = 1089;
 const gameH = 760;
 
-export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
-  if (!sourceImg || !maskImg) return;
+// FIND CORNERS - using AR aruco markers
+export const findSheetCorners = (sourceImg) => {
+  if (!sourceImg) return;
 
   const sourceCanvas = createCanvasFromSrc(sourceImg);
-
   const ctx = sourceCanvas.getContext("2d");
   const imageData = ctx.getImageData(
     0,
@@ -21,61 +21,62 @@ export const generateSpritesheet = (sourceImg, maskImg, w, h) => {
 
   let detector = new AR.Detector();
   var markers = detector.detect(imageData);
+  let a, b, c, d;
 
   if (markers.length === 4) {
-    const a = markers[0].corners[0]; // top left
-    const b = markers[1].corners[0]; // top right
-    const d = markers[2].corners[0]; // bottom left
-    const c = markers[3].corners[0]; // bottom right
-
-    let unwarpedCanvas = getUnwarpedCanvas(
-      sourceCanvas,
-      { a, b, c, d },
-      gameW,
-      gameH
-    );
-
-    if (!unwarpedCanvas) {
-      const fullCanvas = createCanvasFromSrc(sourceCanvas, gameW, gameH);
-
-      const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
-        spriteData,
-        maskData,
-        fullCanvas,
-        maskImg
-      );
-
-      return { data: gameData, canvas: outCanvas, sourceCanvas };
-    }
-
-    const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
-      spriteData,
-      maskData,
-      unwarpedCanvas,
-      maskImg
-    );
-
-    return {
-      data: gameData,
-      canvas: outCanvas,
-      // unwarpedCanvas,
-      // sourceCanvas,
-    };
+    a = markers[0].corners[0]; // top left
+    b = markers[1].corners[0]; // top right
+    c = markers[3].corners[0]; // bottom right
+    d = markers[2].corners[0]; // bottom left
   } else {
-    const fullCanvas = createCanvasFromSrc(sourceCanvas, gameW, gameH);
-
-    const { outCanvas, gameSpriteSheet: gameData } = createMaskedCanvas(
-      spriteData,
-      maskData,
-      fullCanvas,
-      maskImg
-    );
-
-    return { data: gameData, canvas: outCanvas, sourceCanvas };
+    a = { x: 0, y: 0 }; // top left
+    b = { x: sourceCanvas.width, y: 0 }; // top right
+    c = { x: sourceCanvas.width, y: sourceCanvas.height }; // bottom right
+    d = { x: 0, y: sourceCanvas.height }; // bottom left
   }
+
+  return { a, b, c, d };
 };
 
-const getUnwarpedCanvas = (sourceCanvas, corners, gameW, gameH) => {
+export const generateSpritesheet = (unwarpedCanvas, maskImg) => {
+  if (!unwarpedCanvas || !maskImg) return;
+
+  const gameData = createGameData(
+    spriteData,
+    maskData,
+    unwarpedCanvas,
+    maskImg
+  );
+
+  return {
+    data: gameData.gameSpriteSheet,
+    canvas: gameData.outCanvas,
+    // unwarpedCanvas,
+    // sourceCanvas,
+  };
+};
+
+export const generateSpritesheetFromScratch = (sourceImg, maskImg) => {
+  if (!sourceImg || !maskImg) return;
+
+  const corners = findSheetCorners(sourceImg);
+  let unwarpedCanvas = getUnwarpedCanvas(sourceImg, corners, gameW, gameH);
+  const gameData = createGameData(
+    spriteData,
+    maskData,
+    unwarpedCanvas,
+    maskImg
+  );
+
+  return {
+    data: gameData.gameSpriteSheet,
+    canvas: gameData.outCanvas,
+    // unwarpedCanvas,
+    // sourceCanvas,
+  };
+};
+
+export const getUnwarpedCanvas = (sourceCanvas, corners) => {
   const { width: w, height: h } = sourceCanvas;
 
   try {
@@ -98,7 +99,8 @@ const getUnwarpedCanvas = (sourceCanvas, corners, gameW, gameH) => {
     return unwarpedCanvas;
   } catch (e) {
     console.log("e: ", e);
-    return null;
+    const fullCanvas = createCanvasFromSrc(sourceCanvas, gameW, gameH);
+    return fullCanvas;
   }
 };
 
@@ -123,7 +125,12 @@ function getTotalHeightsFromObj(data, padding) {
   return [maxWidth, totalHeight];
 }
 
-function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
+export const createGameData = (
+  spriteData,
+  maskData,
+  spriteCanvas,
+  maskCanvas
+) => {
   // calculate the width and height before creating a canvas
   // that puts all sprite in a single column.
   const padding = 10;
@@ -296,7 +303,7 @@ function createMaskedCanvas(spriteData, maskData, spriteCanvas, maskCanvas) {
   // );
 
   return { outCanvas, gameSpriteSheet };
-}
+};
 
 function drawMaskedShore(
   ctx,
