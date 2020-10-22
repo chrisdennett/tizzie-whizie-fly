@@ -11,7 +11,7 @@ import ExternalLink from "../components/ExternalLink";
 import { StepSelector } from "./StepSelector";
 import { CreateGameStep } from "./CreateGameStep";
 
-const IN_LOCAL_TEST_MODE = true;
+const IN_LOCAL_TEST_MODE = false;
 
 const GameMaker = ({
   spriteData,
@@ -21,7 +21,7 @@ const GameMaker = ({
 }) => {
   const [photoCanvas, setPhotoCanvas] = useState(null);
   const [spritesheetMask, setSpritesheetMask] = useState(null);
-  const [currStep, setCurrStep] = useState(3);
+  const [currStep, setCurrStep] = useState(0);
 
   // load mask
   useEffect(() => {
