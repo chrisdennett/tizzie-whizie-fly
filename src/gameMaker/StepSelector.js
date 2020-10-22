@@ -1,7 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-export const StepSelector = ({ currStep, setCurrStep, children }) => {
+export const StepSelector = ({
+  currStep,
+  setCurrStep,
+  children,
+  playTabDisabled,
+}) => {
+  const onPlayTabClicked = () => {
+    if (playTabDisabled) return;
+
+    setCurrStep(3);
+  };
+
   return (
     <Container>
       <Tabs>
@@ -14,7 +25,11 @@ export const StepSelector = ({ currStep, setCurrStep, children }) => {
         <Tab isSelected={currStep === 2} onClick={() => setCurrStep(2)}>
           SNAP
         </Tab>
-        <Tab isSelected={currStep === 3} onClick={() => setCurrStep(3)}>
+        <Tab
+          disabled={playTabDisabled}
+          isSelected={currStep === 3}
+          onClick={onPlayTabClicked}
+        >
           PLAY
         </Tab>
       </Tabs>
@@ -42,6 +57,7 @@ const Tabs = styled.div`
 `;
 
 const Tab = styled.div`
+  opacity: ${(props) => (props.disabled ? 0.3 : 1)};
   font-size: 1.1em;
   background-color: ${(props) =>
     props.isSelected ? "rgba(0, 0, 0, 0.8)" : "white"};
@@ -52,7 +68,7 @@ const Tab = styled.div`
 
   padding: 5px 10px;
   font-weight: bold;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   border-top: 1px solid rgba(0, 0, 0, 0.8);
   border-right: 1px solid rgba(0, 0, 0, 0.8);
   border-left: 1px solid rgba(0, 0, 0, 0.8);

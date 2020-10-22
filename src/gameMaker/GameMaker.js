@@ -49,7 +49,11 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
   return (
     <div>
       <GameSteps>
-        <StepSelector currStep={currStep} setCurrStep={setCurrStep}>
+        <StepSelector
+          currStep={currStep}
+          setCurrStep={setCurrStep}
+          playTabDisabled={photoCanvas === null}
+        >
           {currStep === 0 && (
             <StepHolder>
               <h2>Print the template</h2>
@@ -148,6 +152,7 @@ const NextStepButton = styled.button`
 
 const StepHolder = styled.div`
   padding: 20px;
+  opacity: ${(props) => (props.disabled ? 0.7 : 1)};
 
   h2 {
     margin: 0;
