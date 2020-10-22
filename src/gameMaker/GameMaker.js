@@ -6,6 +6,7 @@ import { createMaxSizeCanvas } from "../spriteSheet/helper";
 import { generateSpritesheet } from "../spriteSheet/generateSpritesheet";
 import ExternalLink from "../components/ExternalLink";
 import { StepSelector } from "./StepSelector";
+import { CreateGameStep } from "./CreateGameStep";
 
 const IN_LOCAL_TEST_MODE = true;
 
@@ -129,15 +130,11 @@ const GameMaker = ({
                 If all has gone how it should pressing this button should open
                 your game.
               </p>
-              {!spriteData && (
-                <button onClick={onCreateGame}>CREATE GAME</button>
-              )}
-
-              {spriteData && (
-                <button onClick={() => setShowGame(true)}>
-                  PLAY YOUR GAME
-                </button>
-              )}
+              <CreateGameStep
+                spriteData={spriteData}
+                onCreateGame={onCreateGame}
+                setShowGame={setShowGame}
+              />
             </StepHolder>
           )}
         </StepSelector>
