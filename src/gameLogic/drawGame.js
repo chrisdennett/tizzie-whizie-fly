@@ -241,18 +241,26 @@ function drawBounds(ctx, bounds) {
   ctx.stroke();
 }
 
-function drawSprite(ctx, spriteCanvas, sprite, targX, targY, useShadow = true) {
+export const drawSprite = (
+  ctx,
+  spriteCanvas,
+  sprite,
+  targX,
+  targY,
+  useShadow = true,
+  scale = 1
+) => {
   const { x, y, h, w } = sprite;
 
   if (useShadow) {
     ctx.save();
     addShadow(ctx);
-    ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
+    ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w * scale, h * scale);
     ctx.restore();
   } else {
-    ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
+    ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w * scale, h * scale);
   }
-}
+};
 
 // SHORELINE
 const drawShoreline = (ctx, spriteCanvas, spriteData, gameState) => {

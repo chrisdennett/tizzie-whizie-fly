@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useInterval } from "../hooks/useInterval";
-import { drawPlayer } from "../gameLogic/drawGame";
+import { drawPlayer, drawSprite } from "../gameLogic/drawGame";
+import styled from "styled-components";
 
 const GameStartCanvas = ({ spriteData }) => {
   const [count, setCount] = useState(0);
@@ -17,18 +18,31 @@ const GameStartCanvas = ({ spriteData }) => {
       spriteData.canvas
     ) {
       const previewCanvas = maskedCanvasRef.current;
-      previewCanvas.width = 250;
-      previewCanvas.height = 150;
+      previewCanvas.width = 500;
+      previewCanvas.height = 170;
       const ctx = previewCanvas.getContext("2d");
-      drawPlayer(ctx, spriteData.canvas, spriteData.data, 50, 80, count);
+      drawSprite(
+        ctx,
+        spriteData.canvas,
+        spriteData.data.title,
+        10,
+        10,
+        true,
+        0.6
+      );
+      drawPlayer(ctx, spriteData.canvas, spriteData.data, 70, 180, count);
     }
   }, [count, spriteData]);
 
   return (
-    <div>
+    <CanvasHolder>
       <canvas ref={maskedCanvasRef} />
-    </div>
+    </CanvasHolder>
   );
 };
 
 export default GameStartCanvas;
+
+const CanvasHolder = styled.div`
+  text-align: center;
+`;
