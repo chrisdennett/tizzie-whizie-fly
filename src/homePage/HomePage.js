@@ -32,19 +32,18 @@ export const HomePage = ({
         </Intro>
       </header>
 
-      {gameCreated && (
-        <GamePreviewHolder>
-          <button onClick={() => setShowGame(true)}>PLAY YOUR GAME</button>
-        </GamePreviewHolder>
-      )}
-
       {IN_TEST_MODE && gameCreated && (
         <div>
           <SpriteTester spriteData={spriteData} />
         </div>
       )}
 
-      <GameMaker setSpriteData={setSpriteData} IN_TEST_MODE={IN_TEST_MODE} />
+      <GameMaker
+        setShowGame={setShowGame}
+        spriteData={spriteData}
+        setSpriteData={setSpriteData}
+        IN_TEST_MODE={IN_TEST_MODE}
+      />
     </div>
   );
 };
@@ -54,11 +53,11 @@ const Intro = styled.div`
   margin: 20px auto;
 `;
 
-const GamePreviewHolder = styled.div`
-  padding: 20px;
-  background-image: url("/img/bg/cutting-mat-tile.png");
-  border-radius: 10px;
-  display: flex;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.5);
-  border-right: 3px solid rgba(0, 0, 0, 0.5);
-`;
+// const GamePreviewHolder = styled.div`
+//   padding: 20px;
+//   background-image: url("/img/bg/cutting-mat-tile.png");
+//   border-radius: 10px;
+//   display: flex;
+//   border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+//   border-right: 3px solid rgba(0, 0, 0, 0.5);
+// `;

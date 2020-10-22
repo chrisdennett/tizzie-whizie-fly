@@ -7,10 +7,17 @@ import { generateSpritesheet } from "../spriteSheet/generateSpritesheet";
 import ExternalLink from "../components/ExternalLink";
 import { StepSelector } from "./StepSelector";
 
-const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
+const IN_LOCAL_TEST_MODE = true;
+
+const GameMaker = ({
+  spriteData,
+  setSpriteData,
+  setShowGame,
+  IN_TEST_MODE,
+}) => {
   const [photoCanvas, setPhotoCanvas] = useState(null);
   const [spritesheetMask, setSpritesheetMask] = useState(null);
-  const [currStep, setCurrStep] = useState(2);
+  const [currStep, setCurrStep] = useState(3);
 
   const w = defaultGameState.gameW;
   const h = defaultGameState.gameH;
@@ -21,9 +28,9 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
       loadImage("./spritesheet-1-mask.png", setSpritesheetMask);
     }
     // FOR TESTING - LOAD SAMPLE IMMEDIATELY
-    else if (IN_TEST_MODE) {
-      loadImage("./tizzie-crayon.jpg", createSpritesheet, true);
-      // loadImage("./newMarker-3.jpg", createSpritesheet, true);
+    else if (IN_TEST_MODE || IN_LOCAL_TEST_MODE) {
+      loadImage("./tizzie-crayon.jpg", setPhotoCanvas, true);
+      // loadImage("./tizzie-crayon.jpg", createSpritesheet, true);
     }
     // eslint-disable-next-line
   }, [spritesheetMask, IN_TEST_MODE]);
@@ -88,7 +95,7 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
                 alt={"coloured in template sheet"}
               />
 
-              <NextStepButton onClick={() => setCurrStep(2)} disabled="true">
+              <NextStepButton onClick={() => setCurrStep(2)}>
                 Next
               </NextStepButton>
             </StepHolder>
@@ -122,7 +129,15 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
                 If all has gone how it should pressing this button should open
                 your game.
               </p>
-              <button onClick={onCreateGame}>CREATE GAME</button>
+              {!spriteData && (
+                <button onClick={onCreateGame}>CREATE GAME</button>
+              )}
+
+              {spriteData && (
+                <button onClick={() => setShowGame(true)}>
+                  PLAY YOUR GAME
+                </button>
+              )}
             </StepHolder>
           )}
         </StepSelector>
