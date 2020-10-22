@@ -8,8 +8,9 @@ import ExternalLink from "../components/ExternalLink";
 import { StepSelector } from "./StepSelector";
 
 const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
+  const [photoCanvas, setPhotoCanvas] = useState(null);
   const [spritesheetMask, setSpritesheetMask] = useState(null);
-  const [currStep, setCurrStep] = useState(0);
+  const [currStep, setCurrStep] = useState(2);
 
   const w = defaultGameState.gameW;
   const h = defaultGameState.gameH;
@@ -37,8 +38,8 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
     setSpriteData(generatedSheetData);
   };
 
-  const onPhotoSelected = (photo) => {
-    createSpritesheet(photo);
+  const onCreateGame = () => {
+    createSpritesheet(photoCanvas);
   };
 
   const onSampleSelect = (imgName) => {
@@ -83,7 +84,7 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
                 alt={"coloured in template sheet"}
               />
 
-              <NextStepButton onClick={() => setCurrStep(2)}>
+              <NextStepButton onClick={() => setCurrStep(2)} disabled="true">
                 Next
               </NextStepButton>
             </StepHolder>
@@ -96,18 +97,17 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
                 Once you're finished, take a photo of it to generate your game.
               </p>
 
-              <PhotoSelector onPhotoSelected={onPhotoSelected}>
-                <button>ADD PHOTO</button>
+              <PhotoSelector
+                setPhotoCanvas={setPhotoCanvas}
+                photoCanvas={photoCanvas}
+              >
+                <NextStepButton
+                  disabled={photoCanvas === null}
+                  onClick={() => setCurrStep(3)}
+                >
+                  NEXT
+                </NextStepButton>
               </PhotoSelector>
-
-              <img
-                src={"/crayon2_250x141.jpg"}
-                alt={"coloured in template sheet"}
-              />
-
-              <NextStepButton onClick={() => setCurrStep(3)}>
-                Next
-              </NextStepButton>
             </StepHolder>
           )}
 
@@ -118,6 +118,7 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
                 If all has gone how it should pressing this button should open
                 your game.
               </p>
+              <button onClick={onCreateGame}>CREATE GAME</button>
             </StepHolder>
           )}
         </StepSelector>
@@ -140,7 +141,10 @@ const GameMaker = ({ setSpriteData, IN_TEST_MODE }) => {
 export default GameMaker;
 
 const GameSteps = styled.div``;
-const NextStepButton = styled.button``;
+
+const NextStepButton = styled.button`
+  opacity: ${(props) => (props.disabled ? 0.7 : 1)};
+`;
 
 const StepHolder = styled.div`
   padding: 20px;

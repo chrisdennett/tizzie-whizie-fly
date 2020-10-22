@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import PreviewCanvas from "./PreviewCanvas";
 
 const maxOutputCanvasSize = 1000;
 
-const PhotoSelector = ({ onPhotoSelected, children }) => {
+const PhotoSelector = ({ setPhotoCanvas, photoCanvas, children }) => {
+  // const [photoCanvas, setPhotoCanvas] = useState(null);
+
   const onFileSelect = (e) => {
     e.preventDefault();
     if (e.target.files[0]) {
       const selected = e.target.files;
 
-      createCanvasFromFile(selected[0], (img) => {
-        onPhotoSelected(img);
+      createCanvasFromFile(selected[0], (canvas) => {
+        // setPhotoCanvas(canvas);
+        setPhotoCanvas(canvas);
       });
     }
   };
@@ -20,28 +24,56 @@ const PhotoSelector = ({ onPhotoSelected, children }) => {
     e.target.value = "";
   };
 
-  return (
-    <Holder>
-      <input
-        onClick={onInputClick}
-        onChange={onFileSelect}
-        multiple={false}
-        capture="environment"
-        type="file"
-        accept="image/*;capture=camera"
-        name={"photo-selector"}
-        id={"photo-selector"}
-      />
+  const onClearCanvas = () => {
+    setPhotoCanvas(null);
+  };
 
-      <label htmlFor={"photo-selector"}>{children}</label>
-    </Holder>
+  return (
+    <Container>
+      <InputPreviewArea>
+        {photoCanvas && <PreviewCanvas source={photoCanvas} />}
+
+        {!photoCanvas && (
+          <InputHolder>
+            {/* hidden */}
+            <input
+              onClick={onInputClick}
+              onChange={onFileSelect}
+              multiple={false}
+              capture="environment"
+              type="file"
+              accept="image/*;capture=camera"
+              name={"photo-selector"}
+              id={"photo-selector"}
+            />
+
+            <label htmlFor={"photo-selector"}>
+              <button>ADD PHOTO</button>
+            </label>
+          </InputHolder>
+        )}
+      </InputPreviewArea>
+
+      {photoCanvas && <button onClick={onClearCanvas}>Clear Canvas</button>}
+      {children}
+    </Container>
   );
 };
 
 export default PhotoSelector;
 
-const Holder = styled.div`
-  display: inline-block;
+const Container = styled.div``;
+const InputPreviewArea = styled.div`
+  max-width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  min-height: 150px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const InputHolder = styled.div`
   position: relative;
 
   input {
@@ -59,6 +91,7 @@ const Holder = styled.div`
   }
 
   button {
+    padding: 10px 15px;
     pointer-events: none;
   }
 `;
