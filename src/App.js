@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// import { useWindowSize } from "./hooks/useWindowSize";
+import { useWindowSize } from "./hooks/useWindowSize";
 import { Game } from "./game/Game";
 import { HomePage } from "./homePage/HomePage";
 
@@ -10,7 +10,7 @@ function App() {
   console.log("APP");
   const [showGame, setShowGame] = useState(false);
   const [spriteData, setSpriteData] = useState(null);
-  // const windowSize = useWindowSize();
+  const windowSize = useWindowSize();
 
   const onEndGame = () => {
     setShowGame(false);
@@ -18,13 +18,17 @@ function App() {
 
   return (
     <Container showGame={showGame}>
-      <Content>
-        {(IN_TEST_MODE || showGame) && (
-          <div>
-            <Game spriteData={spriteData} onEndGame={onEndGame} />
-          </div>
-        )}
+      {(IN_TEST_MODE || showGame) && (
+        <>
+          <Game
+            spriteData={spriteData}
+            onEndGame={onEndGame}
+            windowSize={windowSize}
+          />
+        </>
+      )}
 
+      <Content>
         {!showGame && (
           <HomePage
             spriteData={spriteData}

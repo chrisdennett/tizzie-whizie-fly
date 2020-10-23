@@ -3,7 +3,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PhotoSelector from "../components/imageInput/PhotoSelector";
 import { createMaxSizeCanvas } from "../spriteSheet/helper";
-import { generateSpritesheet } from "../spriteSheet/generateSpritesheet";
+import {
+  generateSpritesheet,
+  generateSpritesheetFromScratch,
+} from "../spriteSheet/generateSpritesheet";
 import ExternalLink from "../components/ExternalLink";
 import { StepSelector } from "./StepSelector";
 import { CreateGameStep } from "./CreateGameStep";
@@ -29,19 +32,21 @@ const GameMaker = ({
     }
     // FOR TESTING - LOAD SAMPLE IMMEDIATELY
     else if (IN_TEST_MODE || IN_LOCAL_TEST_MODE) {
-      loadImage("./tizzie-crayon.jpg", setPhotoCanvas, true);
+      loadImage("./tizzie-crayon.jpg", createSpritesheet, true);
       // loadImage("./tizzie-crayon.jpg", createSpritesheet, true);
     }
     // eslint-disable-next-line
   }, [spritesheetMask, IN_TEST_MODE]);
 
-  // const createSpritesheet = (sourceImg) => {
-  //   const generatedSheetData = generateSpritesheetFromScratch(
-  //     sourceImg,
-  //     spritesheetMask
-  //   );
-  //   setSpriteData(generatedSheetData);
-  // };
+  // USED IN TEST TO GO STRAIGHT TO A GAME
+  const createSpritesheet = (sourceImg) => {
+    const generatedSheetData = generateSpritesheetFromScratch(
+      sourceImg,
+      spritesheetMask
+    );
+    setSpriteData(generatedSheetData);
+    setShowGame(true);
+  };
 
   const onCreateGame = (unwarpedCanvas) => {
     const generatedSheetData = generateSpritesheet(
