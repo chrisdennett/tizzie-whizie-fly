@@ -21,7 +21,7 @@ const GameMaker = ({
 }) => {
   const [photoCanvas, setPhotoCanvas] = useState(null);
   const [spritesheetMask, setSpritesheetMask] = useState(null);
-  const [currStep, setCurrStep] = useState(0);
+  const [currStep, setCurrStep] = useState(1);
 
   // load mask
   useEffect(() => {
@@ -161,9 +161,9 @@ const NextButtonHolder = styled.div`
 `;
 
 const NextStepButton = styled.button`
-  padding: 10px;
+  padding: 10px 15px;
   opacity: ${(props) => (props.disabled ? 0.7 : 1)};
-  background-color: #6e9a3bc4;
+  background-color: ${(props) => (props.disabled ? "#ccc" : "#78b92cb0")};
   border: 1px solid black;
   border-radius: 3px;
   font-size: 1.1em;
