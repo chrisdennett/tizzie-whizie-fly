@@ -26,8 +26,8 @@ export const HomePage = ({
         <Intro>
           <h2>Paint your own game</h2>
           <p>
-            This is an experimental art project made to use your paper artworks
-            to generate the game you play. Have a bash to see what I mean!
+            This is an experimental art project where you get to paint your own
+            game and then play it to generate the game you play.
           </p>
         </Intro>
       </header>

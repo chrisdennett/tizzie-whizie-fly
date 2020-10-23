@@ -1,36 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-export const StepSelector = ({
-  currStep,
-  setCurrStep,
-  children,
-  playTabDisabled,
-}) => {
-  const onPlayTabClicked = () => {
-    if (playTabDisabled) return;
-
-    setCurrStep(3);
-  };
-
+export const StepSelector = ({ currStep, setCurrStep, children }) => {
   return (
     <Container>
       <Tabs>
         <Tab isSelected={currStep === 0} onClick={() => setCurrStep(0)}>
-          PRINT
+          1. Print & Make
         </Tab>
         <Tab isSelected={currStep === 1} onClick={() => setCurrStep(1)}>
-          CREATE
-        </Tab>
-        <Tab isSelected={currStep === 2} onClick={() => setCurrStep(2)}>
-          SNAP
-        </Tab>
-        <Tab
-          disabled={playTabDisabled}
-          isSelected={currStep === 3}
-          onClick={onPlayTabClicked}
-        >
-          PLAY
+          2. Snap & Play
         </Tab>
       </Tabs>
 
@@ -58,7 +37,7 @@ const Tabs = styled.div`
 
 const Tab = styled.div`
   opacity: ${(props) => (props.disabled ? 0.3 : 1)};
-  font-size: 1.1em;
+  font-size: 1em;
   background-color: ${(props) =>
     props.isSelected ? "rgba(0, 0, 0, 0.8)" : "white"};
   color: ${(props) => (props.isSelected ? "white" : "rgba(0, 0, 0, 0.8)")};
@@ -66,7 +45,7 @@ const Tab = styled.div`
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 
-  padding: 5px 10px;
+  padding: 15px 10px;
   font-weight: bold;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   border-top: 1px solid rgba(0, 0, 0, 0.8);

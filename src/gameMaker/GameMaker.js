@@ -66,78 +66,59 @@ const GameMaker = ({
         >
           {currStep === 0 && (
             <StepHolder>
-              <h2>Print the template</h2>
+              <h2>1) Print & Make</h2>
               <p>
-                To make your game, you'll need to grab a template. All the
-                things on it will be used in the game.{" "}
+                Print and decorate however you like - paint, pencil, collage,
+                clay, whatever!
               </p>
-              <ExternalLink href={"/tizzie-fly-template.pdf"}>
+              <p>
+                <b>Just keep clear of those weird corner bits</b>. Those need to
+                be clearly visible for the magic to happen!
+              </p>
+
+              <StyledExternalLink href={"/tizzie-fly-template.pdf"}>
                 GET THE TEMPLATE
-              </ExternalLink>
-              <img
-                src={"/printable-template_250x177.png"}
-                alt={"game template"}
-              />
-              <NextStepButton onClick={() => setCurrStep(1)}>
-                Next
-              </NextStepButton>
+              </StyledExternalLink>
+
+              <NextButtonHolder>
+                <NextStepButton onClick={() => setCurrStep(1)}>
+                  Next
+                </NextStepButton>
+              </NextButtonHolder>
             </StepHolder>
           )}
 
           {currStep === 1 && (
             <StepHolder>
-              <h2>Create your artwork</h2>
-              <p>
-                Use paint, pencil, collage, clay. Whatever you like, just stay
-                clear of those weird corner bits because they need to be clearer
-                clean for the magic to happen!
-              </p>
-
-              <img
-                src={"/crayon2_250x141.jpg"}
-                alt={"coloured in template sheet"}
-              />
-
-              <NextStepButton onClick={() => setCurrStep(2)}>
-                Next
-              </NextStepButton>
-            </StepHolder>
-          )}
-
-          {currStep === 2 && (
-            <StepHolder>
-              <h2>Snap a photo</h2>
+              <h2>2) Snap & Play</h2>
               <p>
                 Once you're finished, take a photo of it to generate your game.
               </p>
 
-              <PhotoSelector
-                setPhotoCanvas={setPhotoCanvas}
-                photoCanvas={photoCanvas}
-              >
-                <NextStepButton
-                  disabled={photoCanvas === null}
-                  onClick={() => setCurrStep(3)}
+              {photoCanvas === null && (
+                <PhotoSelector
+                  setPhotoCanvas={setPhotoCanvas}
+                  photoCanvas={photoCanvas}
                 >
-                  NEXT
-                </NextStepButton>
-              </PhotoSelector>
-            </StepHolder>
-          )}
+                  <NextButtonHolder>
+                    <NextStepButton
+                      disabled={photoCanvas === null}
+                      onClick={() => setCurrStep(3)}
+                    >
+                      NEXT
+                    </NextStepButton>
+                  </NextButtonHolder>
+                </PhotoSelector>
+              )}
 
-          {currStep === 3 && (
-            <StepHolder>
-              <h2>Play your game</h2>
-              <p>
-                If all has gone how it should pressing this button should open
-                your game.
-              </p>
-              <CreateGameStep
-                photoCanvas={photoCanvas}
-                spriteData={spriteData}
-                onCreateGame={onCreateGame}
-                setShowGame={setShowGame}
-              />
+              {photoCanvas && (
+                <CreateGameStep
+                  photoCanvas={photoCanvas}
+                  spriteData={spriteData}
+                  onCreateGame={onCreateGame}
+                  setShowGame={setShowGame}
+                />
+              )}
             </StepHolder>
           )}
         </StepSelector>
@@ -161,8 +142,31 @@ export default GameMaker;
 
 const GameSteps = styled.div``;
 
+const StyledExternalLink = styled(ExternalLink)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+  font-weight: bold;
+  border: 1px solid black;
+  width: 250px;
+  height: 177px;
+  background-image: url("/spritesheet-for-pdf_250x177.png");
+`;
+
+const NextButtonHolder = styled.div`
+  margin-top: 15px;
+  width: 100%;
+  text-align: right;
+`;
+
 const NextStepButton = styled.button`
+  padding: 10px;
   opacity: ${(props) => (props.disabled ? 0.7 : 1)};
+  background-color: #6e9a3bc4;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 1.1em;
 `;
 
 const StepHolder = styled.div`

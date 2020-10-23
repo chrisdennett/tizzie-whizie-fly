@@ -42,7 +42,6 @@ const drawSourceToCanvas = (source, canvas, corners) => {
   );
 
   if (corners) {
-    console.log("corners: ", corners);
     const { a, b, c, d } = corners;
     ctx.beginPath();
     ctx.moveTo(a.x, a.y);
