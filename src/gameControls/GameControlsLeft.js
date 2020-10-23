@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useKeyboardBindings } from "../hooks/useKeyboardBindings";
 import { ArrowButton } from "./ArrowButtons";
 
-const GameControlsLeft = ({ gameState, goUp, goDown }) => {
+const GameControlsLeft = ({ gameState, goUp, goDown, showAsRow }) => {
   // const [playPlip] = useSound("/sounds/plip.wav", { volume: 1 });
   // const [playWhoosh] = useSound(
   //   "/sounds/zapsplat_cartoon_swipe_fast_swish_001_49164.mp3",
@@ -28,12 +28,12 @@ const GameControlsLeft = ({ gameState, goUp, goDown }) => {
   };
 
   return (
-    <Outer>
-      <ButtonHolder>
-        <ArrowButton type="up" onClick={onGoUp} />
+    <Outer showAsRow={showAsRow}>
+      <ButtonHolder showAsRow={showAsRow} onClick={onGoUp}>
+        <ArrowButton type="up" hideBorder={showAsRow} />
       </ButtonHolder>
-      <ButtonHolder>
-        <ArrowButton type="down" onClick={onGoDown} />
+      <ButtonHolder showAsRow={showAsRow} onClick={onGoDown}>
+        <ArrowButton type="down" hideBorder={showAsRow} />
       </ButtonHolder>
     </Outer>
   );
@@ -42,14 +42,21 @@ const GameControlsLeft = ({ gameState, goUp, goDown }) => {
 export default GameControlsLeft;
 
 const ButtonHolder = styled.div`
+  text-align: center;
+  flex: ${(props) => (props.showAsRow ? 1 : 0)};
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-width: ${(props) => (props.showAsRow ? 1 : 0)}px;
+  background: ${(props) => (props.showAsRow ? "rgba(0,0,0,0.1)" : "none")};
   :first-child {
-    margin-bottom: 5px;
+    margin-bottom: ${(props) => (props.showAsRow ? 0 : 5)}px;
+    margin-left: ${(props) => (props.showAsRow ? 5 : 0)}px;
   }
 `;
 
 const Outer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${(props) => (props.showAsRow ? "row-reverse" : "column")};
   padding: 0 7px;
-  justify-content: center;
+  justify-content: ${(props) => (props.showAsRow ? "stretch" : "center")};
 `;

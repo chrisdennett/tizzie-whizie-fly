@@ -65,7 +65,6 @@ export default GameScreen;
 
 const GameScreenOuter = styled.div`
   position: relative;
-  /* margin-top: 5vh; */
   max-width: 100%;
 `;
 

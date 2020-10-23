@@ -17,7 +17,8 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
   //   volume: 1,
   // });
 
-  console.log("windowSize: ", windowSize);
+  const showPortraitMode =
+    windowSize.width < windowSize.height && windowSize.width < 600;
 
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
@@ -69,61 +70,74 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
 
   // const onShowCardsCollected = () => setShowCollectionCards((prev) => !prev);
 
+  const showInstructions = !firstGameStarted;
+
   return (
-    <GameScreenOuter id="GameScreenOuter">
+    <GameScreenOuter
+      id="GameScreenOuter"
+      style={{ maxWidth: windowSize.width, maxHeight: windowSize.height }}
+    >
       {spriteData && (
         <FullScreen handle={fullScreenHandle}>
-          <ConsoleContainer>
-            {!firstGameStarted && (
-              <InstructionsPanel>
-                <Instructions>
-                  <h2>How to Play</h2>
-                  <ul>
-                    <li>
-                      Use the up and down arrows buttons or keyboard arrow to
-                      avoid the obstacles.
-                    </li>
-                    <li>Win points for every obstacle you pass.</li>
-                    <li>Complete the full length of Windermere to WIN!</li>
-                  </ul>
-                  <CallToActionButton onClick={onPlay}>
-                    START GAME
-                  </CallToActionButton>
-                </Instructions>
-              </InstructionsPanel>
+          {showInstructions && (
+            <InstructionsPanel>
+              <Instructions>
+                <h2>How to Play</h2>
+                <ul>
+                  <li>
+                    Use the up and down arrows buttons or keyboard arrow to
+                    avoid the obstacles.
+                  </li>
+                  <li>Win points for every obstacle you pass.</li>
+                  <li>Complete the full length of Windermere to WIN!</li>
+                </ul>
+                <CallToActionButton onClick={onPlay}>
+                  START GAME
+                </CallToActionButton>
+              </Instructions>
+            </InstructionsPanel>
+          )}
+
+          {showPortraitMode && (
+            <GameControlsRight
+              {...rightControlsProps}
+              onFullScreen={fullScreenHandle.enter}
+              fullScreenActive={fullScreenHandle.active}
+              onExitFullScreen={fullScreenHandle.exit}
+              showAsRow={true}
+            />
+          )}
+
+          <GameTopBar>
+            <ScoreBoard hideIcons={windowSize.width < 400} />
+          </GameTopBar>
+          <MainGamePanel showPortraitMode={showPortraitMode}>
+            <GameControlsLeft
+              {...leftControlsProps}
+              showAsRow={showPortraitMode}
+            />
+
+            <GameScreen
+              spriteData={spriteData}
+              firstGameStarted={firstGameStarted}
+              isPaused={isPaused}
+              setFlyUp={setFlyUp}
+              setDiveDown={setDiveDown}
+              flyUp={flyUp}
+              diveDown={diveDown}
+              onCollision={onCollision}
+            />
+
+            {!showPortraitMode && (
+              <GameControlsRight
+                {...rightControlsProps}
+                onFullScreen={fullScreenHandle.enter}
+                fullScreenActive={fullScreenHandle.active}
+                onExitFullScreen={fullScreenHandle.exit}
+                showAsRow={false}
+              />
             )}
-
-            <GameConsole>
-              <GameTopBar>
-                <ScoreBoard />
-              </GameTopBar>
-              <MainGamePanel>
-                <GameControlsLeft {...leftControlsProps} />
-
-                <GameScreen
-                  spriteData={spriteData}
-                  firstGameStarted={firstGameStarted}
-                  isPaused={isPaused}
-                  setFlyUp={setFlyUp}
-                  setDiveDown={setDiveDown}
-                  flyUp={flyUp}
-                  diveDown={diveDown}
-                  onCollision={onCollision}
-                />
-
-                <GameControlsRight
-                  {...rightControlsProps}
-                  onFullScreen={fullScreenHandle.enter}
-                  fullScreenActive={fullScreenHandle.active}
-                  onExitFullScreen={fullScreenHandle.exit}
-                />
-              </MainGamePanel>
-
-              {/* <GameBottomBar>
-                <ScoreBoard />
-              </GameBottomBar> */}
-            </GameConsole>
-          </ConsoleContainer>
+          </MainGamePanel>
         </FullScreen>
       )}
 
@@ -179,29 +193,8 @@ const GameScreenOuter = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-`;
-
-const ConsoleContainer = styled.div`
-  position: relative;
-  margin-top: 1vh;
-  max-height: 98vh;
-  max-width: 100vw;
-  width: 900px;
-  height: 550px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const GameConsole = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
+  height: 100vh;
 `;
 
 const GameTopBar = styled.div`
@@ -213,8 +206,9 @@ const GameTopBar = styled.div`
 `;
 
 const MainGamePanel = styled.div`
-  position: relative;
+  /* position: relative; */
   display: flex;
-  flex-direction: row;
-  /* background-image: url("/img/bg/linedpaper.png"); */
+  max-width: 100%;
+  flex-direction: ${(props) =>
+    props.showPortraitMode ? "column-reverse" : "row"};
 `;

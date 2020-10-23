@@ -16,7 +16,11 @@ const PreviewCanvas = ({ source, corners }) => {
     }
   }, [source, canvasRef, corners]);
 
-  return <StyledCanvas ref={canvasRef} />;
+  return (
+    <Holder>
+      <StyledCanvas ref={canvasRef} />;
+    </Holder>
+  );
 };
 
 export default PreviewCanvas;
@@ -55,8 +59,13 @@ const drawSourceToCanvas = (source, canvas, corners) => {
   }
 };
 
+const Holder = styled.div`
+  text-align: center;
+`;
+
 const StyledCanvas = styled.canvas`
-  max-width: 100%;
+  width: 100%;
+  max-width: 450px;
   background-color: rgba(255, 255, 255, 0.9);
   border: 1px solid black;
   border-radius: 3px;

@@ -13,6 +13,7 @@ const GameControlsRight = ({
   onFullScreen,
   fullScreenActive,
   onExitFullScreen,
+  showAsRow,
 }) => {
   const onFullScreenClick = () => {
     if (fullScreenActive) {
@@ -25,15 +26,15 @@ const GameControlsRight = ({
   const onHelp = () => console.log("HELP PRESSED: ");
 
   return (
-    <Outer>
+    <Outer showAsRow={showAsRow}>
       <TopSection>
         <ButtonHolder>
           <RoundButton onClick={onEndGame} type="close" />
         </ButtonHolder>
       </TopSection>
 
-      <MainSection>
-        <ButtonHolder>
+      <MainSection showAsRow={showAsRow}>
+        <ButtonHolder showAsRow={showAsRow}>
           <RoundButton
             onClick={onFullScreenClick}
             type={fullScreenActive ? "closeFullscreen" : "fullscreen"}
@@ -41,24 +42,24 @@ const GameControlsRight = ({
         </ButtonHolder>
 
         {firstGameStarted ? (
-          <ButtonHolder>
+          <ButtonHolder showAsRow={showAsRow}>
             <RoundButton
               onClick={onPlayPauseToggle}
               type={isPaused ? "play" : "pause"}
             />
           </ButtonHolder>
         ) : (
-          <ButtonHolder>
+          <ButtonHolder showAsRow={showAsRow}>
             <RoundButton onClick={onPlay} type="play" />
           </ButtonHolder>
         )}
 
-        <ButtonHolder>
+        <ButtonHolder showAsRow={showAsRow}>
           <RoundButton onClick={onHelp} type="help" />
         </ButtonHolder>
 
         {gameOver && (
-          <ButtonHolder>
+          <ButtonHolder showAsRow={showAsRow}>
             <Button onClick={replay} onTouchStart={replay}>
               REPLAY
             </Button>
@@ -73,11 +74,13 @@ export default GameControlsRight;
 
 const Outer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${(props) => (props.showAsRow ? "row-reverse" : "column")};
   padding: 0 15px 0 7px;
 `;
 
-const ButtonHolder = styled.div``;
+const ButtonHolder = styled.div`
+  margin-left: ${(props) => (props.showAsRow ? 10 : 0)}px;
+`;
 
 const Button = styled.button`
   font-size: 24px;
@@ -94,6 +97,7 @@ const TopSection = styled.div``;
 const MainSection = styled.div`
   flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${(props) => (props.showAsRow ? "row-reverse" : "column")};
   justify-content: center;
+  justify-content: ${(props) => (props.showAsRow ? "flex-end" : "center")};
 `;

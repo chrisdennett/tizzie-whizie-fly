@@ -2,12 +2,30 @@ import React from "react";
 import styled from "styled-components";
 import { ScoreBoardIcon } from "./ScoreBoardIcons";
 
-function ScoreBoard() {
+function ScoreBoard({ hideIcons }) {
   return (
     <Container>
-      <ScoreElement type="boat" label="Boats" score={0} max={19} />
-      <ScoreElement type="island" label="Islands" score={5} max={21} />
-      <ScoreElement type="story" label="Stories" score={1} max={17} />
+      <ScoreElement
+        hideIcons={hideIcons}
+        type="boat"
+        label="Boats"
+        score={0}
+        max={19}
+      />
+      <ScoreElement
+        hideIcons={hideIcons}
+        type="island"
+        label="Islands"
+        score={5}
+        max={21}
+      />
+      <ScoreElement
+        hideIcons={hideIcons}
+        type="story"
+        label="Stories"
+        score={1}
+        max={17}
+      />
     </Container>
   );
 }
@@ -19,9 +37,9 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const ScoreElement = ({ type, label, score, max }) => (
+const ScoreElement = ({ type, label, score, max, hideIcons }) => (
   <ScoreElementContainer>
-    <ScoreBoardIcon type={type} />
+    {!hideIcons && <ScoreBoardIcon type={type} />}
     <ScoreElementTextHolder>
       <h3>{label}</h3>
       <p>
