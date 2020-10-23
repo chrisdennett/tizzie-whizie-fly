@@ -3,10 +3,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PhotoSelector from "../components/imageInput/PhotoSelector";
 import { createMaxSizeCanvas } from "../spriteSheet/helper";
-import {
-  generateSpritesheet,
-  generateSpritesheetFromScratch,
-} from "../spriteSheet/generateSpritesheet";
+import { generateSpritesheet } from "../spriteSheet/generateSpritesheet";
 import ExternalLink from "../components/ExternalLink";
 import { StepSelector } from "./StepSelector";
 import { CreateGameStep } from "./CreateGameStep";
@@ -38,13 +35,13 @@ const GameMaker = ({
     // eslint-disable-next-line
   }, [spritesheetMask, IN_TEST_MODE]);
 
-  const createSpritesheet = (sourceImg) => {
-    const generatedSheetData = generateSpritesheetFromScratch(
-      sourceImg,
-      spritesheetMask
-    );
-    setSpriteData(generatedSheetData);
-  };
+  // const createSpritesheet = (sourceImg) => {
+  //   const generatedSheetData = generateSpritesheetFromScratch(
+  //     sourceImg,
+  //     spritesheetMask
+  //   );
+  //   setSpriteData(generatedSheetData);
+  // };
 
   const onCreateGame = (unwarpedCanvas) => {
     const generatedSheetData = generateSpritesheet(
@@ -55,7 +52,7 @@ const GameMaker = ({
   };
 
   const onSampleSelect = (imgName) => {
-    loadImage(imgName, createSpritesheet, true);
+    loadImage(imgName, setPhotoCanvas, true);
   };
 
   const onChangePhoto = () => {
