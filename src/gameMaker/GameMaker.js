@@ -10,6 +10,7 @@ import {
 import ExternalLink from "../components/ExternalLink";
 import { StepSelector } from "./StepSelector";
 import { CreateGameStep } from "./CreateGameStep";
+import { CallToActionButton } from "../components/CallToActionButton";
 
 const IN_LOCAL_TEST_MODE = false;
 
@@ -81,9 +82,9 @@ const GameMaker = ({
               </StyledExternalLink>
 
               <NextButtonHolder>
-                <NextStepButton onClick={() => setCurrStep(1)}>
+                <CallToActionButton onClick={() => setCurrStep(1)}>
                   Next
-                </NextStepButton>
+                </CallToActionButton>
               </NextButtonHolder>
             </StepHolder>
           )}
@@ -92,23 +93,15 @@ const GameMaker = ({
             <StepHolder>
               <h2>2) Snap & Play</h2>
               <p>
-                Once you're finished, take a photo of it to generate your game.
+                Take of photo of your sheet{" "}
+                <b>making sure all four magic corner squares can be seen</b>.
               </p>
 
               {photoCanvas === null && (
                 <PhotoSelector
                   setPhotoCanvas={setPhotoCanvas}
                   photoCanvas={photoCanvas}
-                >
-                  <NextButtonHolder>
-                    <NextStepButton
-                      disabled={photoCanvas === null}
-                      onClick={() => setCurrStep(3)}
-                    >
-                      NEXT
-                    </NextStepButton>
-                  </NextButtonHolder>
-                </PhotoSelector>
+                />
               )}
 
               {photoCanvas && (
@@ -158,15 +151,6 @@ const NextButtonHolder = styled.div`
   margin-top: 15px;
   width: 100%;
   text-align: right;
-`;
-
-const NextStepButton = styled.button`
-  padding: 10px 15px;
-  opacity: ${(props) => (props.disabled ? 0.7 : 1)};
-  background-color: ${(props) => (props.disabled ? "#ccc" : "#78b92cb0")};
-  border: 1px solid black;
-  border-radius: 3px;
-  font-size: 1.1em;
 `;
 
 const StepHolder = styled.div`

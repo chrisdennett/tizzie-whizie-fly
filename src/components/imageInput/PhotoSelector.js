@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { CallToActionButton } from "../CallToActionButton";
 import PreviewCanvas from "./PreviewCanvas";
 
 const maxOutputCanvasSize = 1000;
@@ -45,7 +46,7 @@ const PhotoSelector = ({ setPhotoCanvas, photoCanvas, children }) => {
             />
 
             <label htmlFor={"photo-selector"}>
-              <button>Add Photo</button>
+              <CallToActionButton>Add Photo</CallToActionButton>
             </label>
           </InputHolder>
         )}
@@ -91,13 +92,7 @@ const InputHolder = styled.div`
   }
 
   button {
-    padding: 10px 15px;
     pointer-events: none;
-    background-color: #78b92cb0;
-    border: 1px solid black;
-    opacity: 0.9;
-    border-radius: 3px;
-    font-size: 1.1em;
   }
 `;
 
