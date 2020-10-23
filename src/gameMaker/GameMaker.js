@@ -11,6 +11,7 @@ import ExternalLink from "../components/ExternalLink";
 import { StepSelector } from "./StepSelector";
 import { CreateGameStep } from "./CreateGameStep";
 import { CallToActionButton } from "../components/CallToActionButton";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const IN_LOCAL_TEST_MODE = false;
 
@@ -22,7 +23,7 @@ const GameMaker = ({
 }) => {
   const [photoCanvas, setPhotoCanvas] = useState(null);
   const [spritesheetMask, setSpritesheetMask] = useState(null);
-  const [currStep, setCurrStep] = useState(1);
+  const [currStep, setCurrStep] = useLocalStorage("currentStep", 0);
 
   // load mask
   useEffect(() => {
@@ -56,6 +57,13 @@ const GameMaker = ({
   const onSampleSelect = (imgName) => {
     loadImage(imgName, createSpritesheet, true);
   };
+
+  const onChangePhoto = () => {
+    setSpriteData(null);
+    setPhotoCanvas(null);
+  };
+
+  const showGameCreateStep = spriteData !== null || photoCanvas !== null;
 
   return (
     <div>
@@ -97,15 +105,16 @@ const GameMaker = ({
                 <b>making sure all four magic corner squares can be seen</b>.
               </p>
 
-              {photoCanvas === null && (
+              {!showGameCreateStep && (
                 <PhotoSelector
                   setPhotoCanvas={setPhotoCanvas}
                   photoCanvas={photoCanvas}
                 />
               )}
 
-              {photoCanvas && (
+              {showGameCreateStep && (
                 <CreateGameStep
+                  onChangePhoto={onChangePhoto}
                   photoCanvas={photoCanvas}
                   spriteData={spriteData}
                   onCreateGame={onCreateGame}

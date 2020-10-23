@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+import { CallToActionButton } from "../components/CallToActionButton";
 import PreviewCanvas from "../components/imageInput/PreviewCanvas";
 import {
   findSheetCorners,
@@ -11,6 +13,7 @@ export const CreateGameStep = ({
   onCreateGame,
   setShowGame,
   photoCanvas,
+  onChangePhoto,
 }) => {
   const [currStep, setCurrStep] = useState(0);
   const [corners, setCorners] = useState(null);
@@ -52,15 +55,25 @@ export const CreateGameStep = ({
               corners={corners}
             />
           )}
-
-          <button onClick={nextStep}>{steps[currStep].label}</button>
+          <NextButtonHolder>
+            <ReplcePhotoButton onClick={onChangePhoto}>Redo</ReplcePhotoButton>
+            <CallToActionButton onClick={nextStep}>
+              {steps[currStep].label}
+            </CallToActionButton>
+          </NextButtonHolder>
         </div>
       )}
 
       {spriteData && (
         <div>
           <GameStartCanvas spriteData={spriteData} />
-          <button onClick={() => setShowGame(true)}>PLAY YOUR GAME</button>
+          <NextButtonHolder>
+            <ReplcePhotoButton onClick={onChangePhoto}>Redo</ReplcePhotoButton>
+
+            <CallToActionButton onClick={() => setShowGame(true)}>
+              PLAY YOUR GAME
+            </CallToActionButton>
+          </NextButtonHolder>
         </div>
       )}
 
@@ -72,3 +85,22 @@ export const CreateGameStep = ({
     </div>
   );
 };
+
+const NextButtonHolder = styled.div`
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  /* flex-wrap: wrap; */
+`;
+
+const ReplcePhotoButton = styled.button`
+  padding: 5px 10px;
+  opacity: ${(props) => (props.disabled ? 0.7 : 1)};
+  background-color: ${(props) => (props.disabled ? "#ccc" : "#b92c2cb0")};
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 1.1em;
+  word-wrap: break-word;
+`;

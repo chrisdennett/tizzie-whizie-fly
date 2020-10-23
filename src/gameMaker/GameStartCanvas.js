@@ -25,12 +25,12 @@ const GameStartCanvas = ({ spriteData }) => {
         ctx,
         spriteData.canvas,
         spriteData.data.title,
-        10,
-        10,
+        40,
+        20,
         true,
         0.6
       );
-      drawPlayer(ctx, spriteData.canvas, spriteData.data, 70, 180, count);
+      drawPlayer(ctx, spriteData.canvas, spriteData.data, 100, 180, count);
     }
   }, [count, spriteData]);
 
@@ -45,4 +45,8 @@ export default GameStartCanvas;
 
 const CanvasHolder = styled.div`
   text-align: center;
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 20px;
 `;
