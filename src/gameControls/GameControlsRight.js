@@ -5,15 +5,14 @@ import { RoundButton } from "./RoundButtons";
 const GameControlsRight = ({
   gameOver,
   isPaused,
-  firstGameStarted,
   onEndGame,
-  onPlay,
   replay,
   onPlayPauseToggle,
   onFullScreen,
   fullScreenActive,
   onExitFullScreen,
   showAsRow,
+  onHelp,
 }) => {
   const onFullScreenClick = () => {
     if (fullScreenActive) {
@@ -22,8 +21,6 @@ const GameControlsRight = ({
       onFullScreen();
     }
   };
-
-  const onHelp = () => console.log("HELP PRESSED: ");
 
   return (
     <Outer showAsRow={showAsRow}>
@@ -41,18 +38,12 @@ const GameControlsRight = ({
           />
         </ButtonHolder>
 
-        {firstGameStarted ? (
-          <ButtonHolder showAsRow={showAsRow}>
-            <RoundButton
-              onClick={onPlayPauseToggle}
-              type={isPaused ? "play" : "pause"}
-            />
-          </ButtonHolder>
-        ) : (
-          <ButtonHolder showAsRow={showAsRow}>
-            <RoundButton onClick={onPlay} type="play" />
-          </ButtonHolder>
-        )}
+        <ButtonHolder showAsRow={showAsRow}>
+          <RoundButton
+            onClick={onPlayPauseToggle}
+            type={isPaused ? "play" : "pause"}
+          />
+        </ButtonHolder>
 
         <ButtonHolder showAsRow={showAsRow}>
           <RoundButton onClick={onHelp} type="help" />

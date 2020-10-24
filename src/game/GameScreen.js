@@ -7,7 +7,6 @@ import { Map } from "../Map/Map";
 
 const GameScreen = ({
   spriteData,
-  firstGameStarted,
   isPaused,
   flyUp,
   diveDown,
@@ -25,7 +24,7 @@ const GameScreen = ({
   });
 
   const updateGame = () => {
-    if (!spriteData || isPaused || !firstGameStarted) return;
+    if (!spriteData || isPaused) return;
 
     if (gameState.gameOver) return;
 

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-// import { useInterval } from "../hooks/useInternval";
 import styled from "styled-components";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import { CallToActionButton } from "../components/CallToActionButton";
+
 import GameControlsRight from "../gameControls/GameControlsRight";
 // import CollectionCard from "../collectionCards/CollectionCards";
 // import useSound from "use-sound";
+
 import GameControlsLeft from "../gameControls/GameControlsLeft";
 import GameScreen from "./GameScreen";
 import ScoreBoard from "../scoreboard/ScoreBoard";
+import GameInstructions from "./GameInstructions";
 
 const IN_INVINCIBLE_MODE = true;
 
@@ -23,9 +24,9 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
   // const [, setShowCollectionCards] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(true);
+  const [isPaused, setIsPaused] = useState(true);
   // TODO - if go away from game and back this resets - move to App maybe
-  const [firstGameStarted, setFirstGameStarted] = useState(false);
 
   const fullScreenHandle = useFullScreenHandle();
 
@@ -35,9 +36,7 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
   const replay = () => {
     // setGameState(defaultGameState);
   };
-  const onPlay = () => setFirstGameStarted(true);
 
-  // const showGameControls = firstGameStarted && !gameState.gameOver;
   const onCollision = () => {
     if (!IN_INVINCIBLE_MODE) {
       setIsPaused(true);
@@ -54,6 +53,17 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
     onEndGame();
   };
 
+  // const onShowCardsCollected = () => setShowCollectionCards((prev) => !prev);
+
+  const onHelp = () => {
+    setIsPaused(true);
+    setShowInstructions(true);
+  };
+  const onPlay = () => {
+    setIsPaused(false);
+    setShowInstructions(false);
+  };
+
   const leftControlsProps = {
     goUp,
     goDown,
@@ -61,16 +71,11 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
 
   const rightControlsProps = {
     onEndGame: onCloseGame,
-    onPlay,
     replay,
     onPlayPauseToggle,
     isPaused,
-    firstGameStarted,
+    onHelp: onHelp,
   };
-
-  // const onShowCardsCollected = () => setShowCollectionCards((prev) => !prev);
-
-  const showInstructions = !firstGameStarted;
 
   return (
     <GameScreenOuter
@@ -80,22 +85,14 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
       {spriteData && (
         <FullScreen handle={fullScreenHandle}>
           {showInstructions && (
-            <InstructionsPanel>
-              <Instructions>
-                <h2>How to Play</h2>
-                <ul>
-                  <li>
-                    Use the up and down arrows buttons or keyboard arrow to
-                    avoid the obstacles.
-                  </li>
-                  <li>Win points for every obstacle you pass.</li>
-                  <li>Complete the full length of Windermere to WIN!</li>
-                </ul>
-                <CallToActionButton onClick={onPlay}>
-                  START GAME
-                </CallToActionButton>
-              </Instructions>
-            </InstructionsPanel>
+            <GameInstructions
+              onPlay={onPlay}
+              onHelp={onHelp}
+              onCloseGame={onCloseGame}
+              onFullScreen={fullScreenHandle.enter}
+              fullScreenActive={fullScreenHandle.active}
+              onExitFullScreen={fullScreenHandle.exit}
+            />
           )}
 
           {showPortraitMode && (
@@ -119,7 +116,6 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
 
             <GameScreen
               spriteData={spriteData}
-              firstGameStarted={firstGameStarted}
               isPaused={isPaused}
               setFlyUp={setFlyUp}
               setDiveDown={setDiveDown}
@@ -152,42 +148,6 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
     </GameScreenOuter>
   );
 };
-
-const InstructionsPanel = styled.div`
-  background-color: rgba(255, 255, 255, 0.4);
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  z-index: 100;
-  padding: 2%;
-`;
-
-const Instructions = styled.div`
-  padding: 4% 2%;
-  max-width: 600px;
-  background-color: whitesmoke;
-  margin: auto;
-  text-align: center;
-  border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-
-  h2 {
-    margin-top: 0;
-  }
-
-  ul {
-    text-align: left;
-    padding-left: 20px;
-
-    li {
-      padding-bottom: 10px;
-    }
-  }
-`;
 
 const GameScreenOuter = styled.div`
   display: flex;

@@ -7,7 +7,6 @@ import { HomePage } from "./homePage/HomePage";
 const IN_TEST_MODE = false;
 
 function App() {
-  console.log("APP");
   const [showGame, setShowGame] = useState(false);
   const [spriteData, setSpriteData] = useState(null);
   const windowSize = useWindowSize();

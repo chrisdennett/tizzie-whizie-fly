@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-export const RoundButton = ({ onClick, type }) => {
+export const RoundButton = ({ onClick, type, width = 50, height = 50 }) => {
   return (
     <SVGButton
       viewBox="0 0 16.07 15.9"
-      width={50}
-      height={50}
+      width={width}
+      height={height}
       onClick={onClick}
     >
       <g
