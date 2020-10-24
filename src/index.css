@@ -6,6 +6,7 @@ button {
   font-family: "Short Stack", cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 110%;
 }
 
 canvas {
@@ -20,4 +21,11 @@ canvas {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 430px) {
+  body,
+  button {
+    font-size: 100%;
+  }
 }

@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { MdPhotoCamera } from "react-icons/md";
 import { CallToActionButton } from "../CallToActionButton";
-import PreviewCanvas from "./PreviewCanvas";
+import PreviewCanvas from "../../gameMaker/PreviewCanvas";
 
 const maxOutputCanvasSize = 1000;
 
@@ -46,7 +47,9 @@ const PhotoSelector = ({ setPhotoCanvas, photoCanvas, children }) => {
             />
 
             <label htmlFor={"photo-selector"}>
-              <CallToActionButton>Add Photo</CallToActionButton>
+              <CallToActionButton>
+                <b>3)</b> <MdPhotoCamera /> <span>Add Photo</span>
+              </CallToActionButton>
             </label>
           </InputHolder>
         )}

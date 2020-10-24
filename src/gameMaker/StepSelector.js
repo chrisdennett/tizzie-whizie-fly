@@ -6,10 +6,13 @@ export const StepSelector = ({ currStep, setCurrStep, children }) => {
     <Container>
       <Tabs>
         <Tab isSelected={currStep === 0} onClick={() => setCurrStep(0)}>
-          1. Print & Make
+          Intro
         </Tab>
         <Tab isSelected={currStep === 1} onClick={() => setCurrStep(1)}>
-          2. Snap & Play
+          MAKE
+        </Tab>
+        <Tab isSelected={currStep === 2} onClick={() => setCurrStep(2)}>
+          About
         </Tab>
       </Tabs>
 
@@ -19,36 +22,34 @@ export const StepSelector = ({ currStep, setCurrStep, children }) => {
 };
 
 const Container = styled.div`
+  padding-top: 20px;
   width: 100%;
 `;
 
 const ContentHolder = styled.div`
   width: 100%;
-  border: 2px solid rgba(0, 0, 0, 0.8);
-  border-radius: 5px;
+  /* border-top: 2px solid rgba(0, 0, 0, 0.8); */
+  /* border-radius: 5px; */
 `;
 
 const Tabs = styled.div`
   display: flex;
   margin: auto;
-  justify-content: space-around;
-  max-width: 400px;
+  justify-content: center;
 `;
 
 const Tab = styled.div`
+  margin: 0 5px;
   opacity: ${(props) => (props.disabled ? 0.3 : 1)};
   font-size: 1em;
   background-color: ${(props) =>
     props.isSelected ? "rgba(0, 0, 0, 0.8)" : "white"};
   color: ${(props) => (props.isSelected ? "white" : "rgba(0, 0, 0, 0.8)")};
 
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 5px;
 
-  padding: 15px 10px;
+  padding: 10px 10px;
   font-weight: bold;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  border-top: 1px solid rgba(0, 0, 0, 0.8);
-  border-right: 1px solid rgba(0, 0, 0, 0.8);
-  border-left: 1px solid rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
 `;

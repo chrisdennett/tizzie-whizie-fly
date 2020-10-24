@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { CallToActionButton } from "../components/CallToActionButton";
-import PreviewCanvas from "../components/imageInput/PreviewCanvas";
+import PreviewCanvas from "./PreviewCanvas";
 import {
   findSheetCorners,
   getUnwarpedCanvas,
@@ -61,7 +61,7 @@ export const CreateGameStep = ({
   const currLabel = steps[currStep].label;
 
   return (
-    <div>
+    <Container>
       {!spriteData && (
         <div>
           {photoCanvas && (
@@ -104,9 +104,11 @@ export const CreateGameStep = ({
       {spriteData && (
         <button onClick={() => setShowGame(true)}>PLAY YOUR GAME</button>
       )} */}
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div``;
 
 const NextButtonHolder = styled.div`
   margin-top: 15px;

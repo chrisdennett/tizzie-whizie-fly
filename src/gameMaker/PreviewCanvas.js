@@ -18,7 +18,7 @@ const PreviewCanvas = ({ source, corners }) => {
 
   return (
     <Holder>
-      <StyledCanvas ref={canvasRef} />;
+      <StyledCanvas ref={canvasRef} />
     </Holder>
   );
 };

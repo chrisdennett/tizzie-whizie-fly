@@ -80,7 +80,7 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
   return (
     <GameScreenOuter
       id="GameScreenOuter"
-      style={{ maxWidth: windowSize.width, maxHeight: windowSize.height }}
+      style={{ maxWidth: windowSize.width, maxHeight: windowSize.height - 10 }}
     >
       {spriteData && (
         <FullScreen handle={fullScreenHandle}>
@@ -150,6 +150,7 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
 };
 
 const GameScreenOuter = styled.div`
+  padding-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
