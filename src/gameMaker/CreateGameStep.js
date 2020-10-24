@@ -82,9 +82,6 @@ export const CreateGameStep = ({
             <CallToActionButton onClick={startSequence} disabled={isRunning}>
               {isRunning ? "Making Game" : "Create Game"}
             </CallToActionButton>
-            {/* <CallToActionButton onClick={nextStep}>
-              {steps[currStep].label}
-            </CallToActionButton> */}
           </NextButtonHolder>
         </div>
       )}

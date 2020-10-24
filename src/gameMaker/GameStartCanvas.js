@@ -1,14 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useInterval } from "../hooks/useInterval";
+import React, { useRef, useEffect } from "react";
 import { drawPlayer, drawSprite } from "../gameLogic/drawGame";
 import styled from "styled-components";
 
 const GameStartCanvas = ({ spriteData }) => {
-  const [count, setCount] = useState(0);
-
   const maskedCanvasRef = useRef(null);
-
-  useInterval(() => setCount((prev) => prev + 1));
 
   useEffect(() => {
     if (
@@ -30,9 +25,9 @@ const GameStartCanvas = ({ spriteData }) => {
         true,
         0.6
       );
-      drawPlayer(ctx, spriteData.canvas, spriteData.data, 100, 180, count);
+      drawPlayer(ctx, spriteData.canvas, spriteData.data, 100, 180);
     }
-  }, [count, spriteData]);
+  });
 
   return (
     <CanvasHolder>
