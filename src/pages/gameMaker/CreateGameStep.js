@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { CallToActionButton } from "../components/CallToActionButton";
+import { CallToActionButton } from "../../components/CallToActionButton";
 import PreviewCanvas from "./PreviewCanvas";
 import {
   findSheetCorners,
-  getUnwarpedCanvas,
-} from "../spriteSheet/generateSpritesheet";
+  getUnwarpedCanvas
+} from "../../spriteSheet/generateSpritesheet";
 import GameStartCanvas from "./GameStartCanvas";
 
 export const CreateGameStep = ({
@@ -13,7 +13,7 @@ export const CreateGameStep = ({
   onCreateGame,
   setShowGame,
   photoCanvas,
-  onChangePhoto,
+  onChangePhoto
 }) => {
   const [currStep, setCurrStep] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
@@ -24,7 +24,7 @@ export const CreateGameStep = ({
     { label: "Finding Corners" },
     { label: "Straightening out the sheet" },
     { label: "Creating game characters" },
-    { label: "Play Game" },
+    { label: "Play Game" }
   ];
 
   useEffect(() => {

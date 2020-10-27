@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import GameMaker from "../gameMaker/GameMaker";
-import About from "../components/About";
+import About from "../About";
 import SpriteTester from "../game/SpriteTester";
 import { StepSelector } from "../gameMaker/StepSelector";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 import Intro from "./Intro";
 
 export const HomePage = ({
   spriteData,
   setSpriteData,
   setShowGame,
-  IN_TEST_MODE,
+  IN_TEST_MODE
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [currStep, setCurrStep] = useLocalStorage("currentStep", 0);

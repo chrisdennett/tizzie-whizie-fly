@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { FaArrowUp, FaArrowDown, FaTrophy } from "react-icons/fa";
-import { CallToActionButton } from "../components/CallToActionButton";
-import { RoundButton } from "../gameControls/RoundButtons";
+import { CallToActionButton } from "../../components/CallToActionButton";
+import { RoundButton } from "./gameControls/RoundButtons";
 
 const GameInstructions = ({
   onPlay,
@@ -10,7 +10,7 @@ const GameInstructions = ({
   onFullScreen,
   fullScreenActive,
   onExitFullScreen,
-  onCloseGame,
+  onCloseGame
 }) => {
   return (
     <InstructionsPanel>

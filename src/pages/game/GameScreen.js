@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useAnimationFrame } from "../hooks/useAnimationFrame";
+import { useAnimationFrame } from "../../hooks/useAnimationFrame";
 import { GameCanvas } from "./GameCanvas";
-import { getNextGameState, defaultGameState } from "../gameLogic/gameState";
-import { Map } from "../Map/Map";
+import { getNextGameState, defaultGameState } from "./gameLogic/gameState";
+import { Map } from "./Map/Map";
 
 const GameScreen = ({
   spriteData,
@@ -12,7 +12,7 @@ const GameScreen = ({
   diveDown,
   setFlyUp,
   setDiveDown,
-  onCollision,
+  onCollision
 }) => {
   const [gameState, setGameState] = useState(defaultGameState);
   const [tickCount, setTickCount] = useState(0);

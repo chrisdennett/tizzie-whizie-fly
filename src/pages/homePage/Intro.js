@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { CallToActionButton } from "../components/CallToActionButton";
-import { TizzieLogo } from "../components/TizzieLogo";
+import { CallToActionButton } from "../../components/CallToActionButton";
+import { TizzieLogo } from "../../components/TizzieLogo";
 
 const Intro = ({ onGetMaking }) => {
   return (

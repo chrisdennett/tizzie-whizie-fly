@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
-import GameControlsRight from "../gameControls/GameControlsRight";
+import GameControlsRight from "./gameControls/GameControlsRight";
 // import CollectionCard from "../collectionCards/CollectionCards";
 // import useSound from "use-sound";
 
-import GameControlsLeft from "../gameControls/GameControlsLeft";
+import GameControlsLeft from "./gameControls/GameControlsLeft";
 import GameScreen from "./GameScreen";
-import ScoreBoard from "../scoreboard/ScoreBoard";
+import ScoreBoard from "./scoreboard/ScoreBoard";
 import GameInstructions from "./GameInstructions";
 
 const IN_INVINCIBLE_MODE = true;
@@ -66,7 +66,7 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
 
   const leftControlsProps = {
     goUp,
-    goDown,
+    goDown
   };
 
   const rightControlsProps = {
@@ -74,7 +74,7 @@ export const Game = ({ spriteData, onEndGame, windowSize }) => {
     replay,
     onPlayPauseToggle,
     isPaused,
-    onHelp: onHelp,
+    onHelp: onHelp
   };
 
   return (

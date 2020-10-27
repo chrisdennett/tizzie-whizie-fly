@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 // import useSound from "use-sound";
-import { useKeyboardBindings } from "../hooks/useKeyboardBindings";
+import { useKeyboardBindings } from "../../../hooks/useKeyboardBindings";
 import { ArrowButton } from "./ArrowButtons";
 
 const GameControlsLeft = ({ gameState, goUp, goDown, showAsRow }) => {
@@ -14,7 +14,7 @@ const GameControlsLeft = ({ gameState, goUp, goDown, showAsRow }) => {
   // );
   useKeyboardBindings({
     ArrowUp: () => onGoUp(),
-    ArrowDown: () => onGoDown(),
+    ArrowDown: () => onGoDown()
   });
 
   const onGoDown = () => {

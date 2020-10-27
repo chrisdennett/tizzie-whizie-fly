@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useWindowSize } from "./hooks/useWindowSize";
-import { Game } from "./game/Game";
-import { HomePage } from "./homePage/HomePage";
+import { Game } from "./pages/game/Game";
+import { HomePage } from "./pages/homePage/HomePage";
 import { Border } from "./components/Border";
 
 const IN_TEST_MODE = false;

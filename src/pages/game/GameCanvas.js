@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { drawGame } from "../gameLogic/drawGame";
+import { drawGame } from "./gameLogic/drawGame";
 
 export const GameCanvas = ({
   spriteCanvas,
   gameState,
   spriteData,
-  onCollision,
+  onCollision
 }) => {
   const gameCanvasRef = React.useRef(null);
 

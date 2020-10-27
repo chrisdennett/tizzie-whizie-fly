@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { drawPlayer, drawSprite } from "../gameLogic/drawGame";
+import { drawPlayer, drawSprite } from "../game/gameLogic/drawGame";
 import styled from "styled-components";
 
 const GameStartCanvas = ({ spriteData }) => {
