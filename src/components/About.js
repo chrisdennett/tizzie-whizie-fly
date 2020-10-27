@@ -42,4 +42,8 @@ export default About;
 const Content = styled.div`
   max-width: 900px;
   margin: 0 auto;
+
+  li {
+    padding-bottom: 15px;
+  }
 `;
