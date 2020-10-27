@@ -22,7 +22,7 @@ export const obstacles = () => {
     },
     { type: "island", name: "Silver Holme.", position: "4", link: "" },
     {
-      type: "boat",
+      type: "pike",
       name: "Raven",
       position: "5",
       date: "1871",
@@ -38,7 +38,7 @@ export const obstacles = () => {
     },
     { type: "island", name: "Grass Holme,", position: "8", link: "" },
     {
-      type: "boat",
+      type: "bownessie",
       name: "Kittiwake",
       position: "9",
       date: "1898",

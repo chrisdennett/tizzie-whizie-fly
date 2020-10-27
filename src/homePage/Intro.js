@@ -12,8 +12,8 @@ const Intro = ({ onGetMaking }) => {
         <StyledIntro>
           <h2>Paint your own game</h2>
           <p>
-            This is an experimental art project where you get to paint your own
-            game and then play it to generate the game you play.
+            An experimental art project where you get to paint and play your own
+            online game.
           </p>
         </StyledIntro>
       </header>

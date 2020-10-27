@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-// import { defaultGameState } from "../gameLogic/gameState";
-import styled from "styled-components";
 import PhotoSelector from "../components/imageInput/PhotoSelector";
 import { createMaxSizeCanvas } from "../spriteSheet/helper";
 import {
   generateSpritesheet,
   generateSpritesheetFromScratch,
 } from "../spriteSheet/generateSpritesheet";
-import ExternalLink from "../components/ExternalLink";
-import { StepSelector } from "./StepSelector";
 import { CreateGameStep } from "./CreateGameStep";
 import { CallToActionButton } from "../components/CallToActionButton";
+import { SampleCard, SampleCards } from "./SampleCard";
+import styled from "styled-components";
 
 const IN_LOCAL_TEST_MODE = false;
 
@@ -66,64 +64,98 @@ const GameMaker = ({
   const showGameCreateStep = spriteData !== null || photoCanvas !== null;
 
   return (
-    <div>
+    <Container>
       <h1>Get making!</h1>
-
-      <p>
-        <b>1)</b> Print the{" "}
-        <CallToActionButton href={"/tizzie-fly-template.pdf"}>
-          Template
-        </CallToActionButton>
-      </p>
-
-      <p>
-        <b>2)</b> Paint or decorate.
-      </p>
-
       {!showGameCreateStep && (
-        <PhotoSelector
-          setPhotoCanvas={setPhotoCanvas}
-          photoCanvas={photoCanvas}
-        />
+        <div>
+          <Section>
+            <h4>Create your own...</h4>
+            <ol>
+              <li>
+                Print the{" "}
+                <CallToActionButton href={"/tizzie-fly-template.pdf"}>
+                  template
+                </CallToActionButton>
+              </li>
+              <li>Paint or decorate however you like.</li>
+              <li>
+                {" "}
+                <PhotoSelector
+                  setPhotoCanvas={setPhotoCanvas}
+                  photoCanvas={photoCanvas}
+                />{" "}
+                showing your finished sheet.
+              </li>
+            </ol>
+          </Section>
+
+          <Section>
+            <h4>Or try on one of these beauties...</h4>
+            <p>[Add artwork from the sixth formers here...]</p>
+
+            <SampleCards>
+              <SampleCard
+                onSelect={onSampleSelect}
+                img={"example-1.png"}
+                thumb={"example-1_250x174.png"}
+                label={"Crayon Wonder"}
+                details={"by me!"}
+              />
+            </SampleCards>
+          </Section>
+
+          <Section>
+            <h3>Tips:</h3>
+            <p>
+              <b>Just keep clear of those weird corner bits</b>. Those need to
+              be clearly visible for the magic to happen!
+            </p>
+          </Section>
+        </div>
       )}
 
       {showGameCreateStep && (
-        <CreateGameStep
-          onChangePhoto={onChangePhoto}
-          photoCanvas={photoCanvas}
-          spriteData={spriteData}
-          onCreateGame={onCreateGame}
-          setShowGame={setShowGame}
-        />
+        <div>
+          <h4>Generate the game...</h4>
+          <CreateGameStep
+            onChangePhoto={onChangePhoto}
+            photoCanvas={photoCanvas}
+            spriteData={spriteData}
+            onCreateGame={onCreateGame}
+            setShowGame={setShowGame}
+          />
+        </div>
       )}
-
-      <div>
-        <h3>Tips:</h3>
-        <h4>Painting / decorating</h4>
-        <p>
-          <b>Just keep clear of those weird corner bits</b>. Those need to be
-          clearly visible for the magic to happen!
-        </p>
-
-        <h4>Taking the photo</h4>
-        <p>
-          <b>making sure all four magic corner squares can be seen</b>.
-        </p>
-      </div>
-
-      <h2>Or play one we made earlier...</h2>
-      <div onClick={() => onSampleSelect("example-1.png")}>
-        <h3>Crayon Wonder</h3>
-        <img
-          src={"/example-1_250x174.png"}
-          alt={"coloured in template sheet"}
-        />
-      </div>
-    </div>
+    </Container>
   );
 };
 
 export default GameMaker;
+
+const Container = styled.div`
+  h1 {
+    margin: 0 0 30px 0;
+  }
+  h4 {
+    margin: 0 0 10px 0;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+
+  ol {
+    li {
+      padding-bottom: 10px;
+    }
+  }
+`;
+
+const Section = styled.div`
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  padding-top: 25px;
+  margin: 0 0 25px 0;
+`;
 
 const loadImage = (imgUrl, callback, setMax = false) => {
   const image = new Image();

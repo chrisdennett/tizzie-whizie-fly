@@ -48,7 +48,7 @@ const PhotoSelector = ({ setPhotoCanvas, photoCanvas, children }) => {
 
             <label htmlFor={"photo-selector"}>
               <CallToActionButton>
-                <b>3)</b> <MdPhotoCamera /> <span>Add Photo</span>
+                <MdPhotoCamera /> <span>Add a Photo</span>
               </CallToActionButton>
             </label>
           </InputHolder>
@@ -63,10 +63,12 @@ const PhotoSelector = ({ setPhotoCanvas, photoCanvas, children }) => {
 
 export default PhotoSelector;
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: inline-block;
+`;
 
 const InputPreviewArea = styled.div`
-  max-width: 100%;
+  /* max-width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
   border: 1px solid black;
   border-radius: 3px;
@@ -74,7 +76,7 @@ const InputPreviewArea = styled.div`
   padding: 10px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 `;
 
 const InputHolder = styled.div`

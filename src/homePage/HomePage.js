@@ -6,7 +6,6 @@ import SpriteTester from "../game/SpriteTester";
 import { StepSelector } from "../gameMaker/StepSelector";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import Intro from "./Intro";
-import { Border } from "../components/Border";
 
 export const HomePage = ({
   spriteData,
@@ -21,7 +20,6 @@ export const HomePage = ({
 
   return (
     <Container>
-      {/* <Border type={"top"} /> */}
       {showInfo && <About onClose={() => setShowInfo(false)} />}
       {/* <InfoButton onClick={() => setShowInfo(true)} /> */}
 
@@ -53,8 +51,6 @@ export const HomePage = ({
           <SpriteTester spriteData={spriteData} />
         </div>
       )}
-
-      {/* <Border /> */}
     </Container>
   );
 };
@@ -66,16 +62,6 @@ const Container = styled.div`
 
 const StepHolder = styled.div`
   padding: 20px;
-  opacity: ${(props) => (props.disabled ? 0.7 : 1)};
-
-  h2 {
-    margin: 0;
-    text-align: center;
-  }
-
-  img {
-    border: 1px solid rgba(0, 0, 0, 0.8);
-  }
 `;
 
 // const GamePreviewHolder = styled.div`

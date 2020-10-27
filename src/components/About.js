@@ -43,13 +43,3 @@ const Content = styled.div`
   max-width: 900px;
   margin: 0 auto;
 `;
-
-const CloseButton = styled.button`
-  position: absolute;
-  right: 10px;
-  border: none;
-  background: none;
-  outline: none;
-  font-size: 36px;
-  cursor: pointer;
-`;

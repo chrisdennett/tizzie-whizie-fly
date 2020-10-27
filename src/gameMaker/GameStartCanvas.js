@@ -31,17 +31,25 @@ const GameStartCanvas = ({ spriteData }) => {
 
   return (
     <CanvasHolder>
-      <canvas ref={maskedCanvasRef} />
+      <StyledCanvas ref={maskedCanvasRef} />
     </CanvasHolder>
   );
 };
 
 export default GameStartCanvas;
 
+const StyledCanvas = styled.canvas`
+  width: 100%;
+  max-width: 450px;
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  /* border: 1px solid black; */
+  /* border-radius: 3px; */
+`;
+
 const CanvasHolder = styled.div`
   text-align: center;
   /* background-color: rgba(255, 255, 255, 0.9); */
-  border: 1px solid black;
+  /* border: 1px solid black;
   border-radius: 3px;
-  padding: 20px;
+  padding: 20px; */
 `;

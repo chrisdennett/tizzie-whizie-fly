@@ -29,7 +29,7 @@ export const CreateGameStep = ({
 
   useEffect(() => {
     if (currStep > 0) {
-      setTimeout(nextStep, 1300);
+      setTimeout(nextStep, 900);
     }
     // eslint-disable-next-line
   }, [currStep]);
@@ -78,9 +78,11 @@ export const CreateGameStep = ({
             </PreviewCanvasHolder>
           )}
           <NextButtonHolder>
-            <ReplcePhotoButton onClick={onChangePhoto}>Redo</ReplcePhotoButton>
+            <ReplcePhotoButton onClick={onChangePhoto}>
+              Cancel
+            </ReplcePhotoButton>
             <CallToActionButton onClick={startSequence} disabled={isRunning}>
-              {isRunning ? "Making Game" : "Create Game"}
+              {isRunning ? "Making Game" : "DO IT!"}
             </CallToActionButton>
           </NextButtonHolder>
         </div>
@@ -90,7 +92,9 @@ export const CreateGameStep = ({
         <div>
           <GameStartCanvas spriteData={spriteData} />
           <NextButtonHolder>
-            <ReplcePhotoButton onClick={onChangePhoto}>Redo</ReplcePhotoButton>
+            <ReplcePhotoButton onClick={onChangePhoto}>
+              Cancel
+            </ReplcePhotoButton>
 
             <CallToActionButton onClick={() => setShowGame(true)}>
               PLAY YOUR GAME
@@ -98,12 +102,6 @@ export const CreateGameStep = ({
           </NextButtonHolder>
         </div>
       )}
-
-      {/* {!spriteData && <button onClick={onCreateGame}>CREATE GAME</button>}
-
-      {spriteData && (
-        <button onClick={() => setShowGame(true)}>PLAY YOUR GAME</button>
-      )} */}
     </Container>
   );
 };
