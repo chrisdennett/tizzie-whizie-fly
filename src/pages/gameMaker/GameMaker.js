@@ -96,10 +96,17 @@ const GameMaker = ({
             <SampleCards>
               <SampleCard
                 onSelect={onSampleSelect}
-                img={"example-1.png"}
-                thumb={"example-1_250x174.png"}
+                img={"tizzie-crayon.jpg"}
+                thumb={"tizzie-crayon_250x141.jpg"}
                 label={"Crayon Wonder"}
                 details={"by me!"}
+              />
+              <SampleCard
+                onSelect={onSampleSelect}
+                img={"extreme.jpg"}
+                thumb={"extreme_250x141.jpg"}
+                label={"Extreme Test"}
+                details={"by A.Bad Photographer"}
               />
             </SampleCards>
           </Section>
