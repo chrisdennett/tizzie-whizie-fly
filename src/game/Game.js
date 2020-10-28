@@ -11,9 +11,12 @@ import GameScreen from "./GameScreen";
 import ScoreBoard from "../scoreboard/ScoreBoard";
 import GameInstructions from "./GameInstructions";
 
-const IN_INVINCIBLE_MODE = true;
-
-export const Game = ({ spriteData, onEndGame, windowSize }) => {
+export const Game = ({
+  spriteData,
+  onEndGame,
+  windowSize,
+  IN_INVINCIBLE_MODE,
+}) => {
   // const [playLoseSound] = useSound("/sounds/zapsplat_impact.mp3", {
   //   volume: 1,
   // });

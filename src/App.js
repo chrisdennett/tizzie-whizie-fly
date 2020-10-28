@@ -6,6 +6,7 @@ import { HomePage } from "./homePage/HomePage";
 import { Border } from "./components/Border";
 
 const IN_TEST_MODE = false;
+const IN_INVINCIBLE_MODE = false;
 
 function App() {
   const [showGame, setShowGame] = useState(false);
@@ -25,6 +26,7 @@ function App() {
             spriteData={spriteData}
             onEndGame={onEndGame}
             windowSize={windowSize}
+            IN_INVINCIBLE_MODE={IN_INVINCIBLE_MODE}
           />
         </>
       )}
