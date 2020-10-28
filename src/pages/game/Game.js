@@ -69,7 +69,7 @@ export const Game = ({
 
   const leftControlsProps = {
     goUp,
-    goDown
+    goDown,
   };
 
   const rightControlsProps = {
@@ -77,14 +77,16 @@ export const Game = ({
     replay,
     onPlayPauseToggle,
     isPaused,
-    onHelp: onHelp
+    onHelp: onHelp,
   };
 
+  const outerStyle =
+    windowSize.width > 0
+      ? { maxWidth: windowSize.width, maxHeight: windowSize.height - 10 }
+      : {};
+
   return (
-    <GameScreenOuter
-      id="GameScreenOuter"
-      style={{ maxWidth: windowSize.width, maxHeight: windowSize.height - 10 }}
-    >
+    <GameScreenOuter id="GameScreenOuter" style={outerStyle}>
       {spriteData && (
         <FullScreen handle={fullScreenHandle}>
           {showInstructions && (

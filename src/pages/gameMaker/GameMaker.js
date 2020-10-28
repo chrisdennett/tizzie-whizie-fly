@@ -3,7 +3,7 @@ import PhotoSelector from "../../components/imageInput/PhotoSelector";
 import { createMaxSizeCanvas } from "../../spriteSheet/helper";
 import {
   generateSpritesheet,
-  generateSpritesheetFromScratch
+  generateSpritesheetFromScratch,
 } from "../../spriteSheet/generateSpritesheet";
 import { CreateGameStep } from "./CreateGameStep";
 import { CallToActionButton } from "../../components/CallToActionButton";
@@ -16,7 +16,7 @@ const GameMaker = ({
   spriteData,
   setSpriteData,
   setShowGame,
-  IN_TEST_MODE
+  IN_TEST_MODE,
 }) => {
   const [photoCanvas, setPhotoCanvas] = useState(null);
   const [spritesheetMask, setSpritesheetMask] = useState(null);

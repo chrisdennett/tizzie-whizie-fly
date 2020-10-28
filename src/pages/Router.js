@@ -1,28 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import GameMaker from "../gameMaker/GameMaker";
-import About from "../About";
-import SpriteTester from "../game/SpriteTester";
-import { StepSelector } from "../gameMaker/StepSelector";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
-import Intro from "./Intro";
+import GameMaker from "./gameMaker/GameMaker";
+import About from "./about/About";
+import SpriteTester from "./game/SpriteTester";
+import { StepSelector } from "./gameMaker/StepSelector";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import Intro from "./intro/Intro";
 
-export const HomePage = ({
+export const Router = ({
   spriteData,
   setSpriteData,
   setShowGame,
-  IN_TEST_MODE
+  IN_TEST_MODE,
 }) => {
-  const [showInfo, setShowInfo] = useState(false);
   const [currStep, setCurrStep] = useLocalStorage("currentStep", 0);
 
   const gameCreated = spriteData && spriteData.canvas;
 
   return (
     <Container>
-      {showInfo && <About onClose={() => setShowInfo(false)} />}
-      {/* <InfoButton onClick={() => setShowInfo(true)} /> */}
-
       <StepSelector currStep={currStep} setCurrStep={setCurrStep}>
         {currStep === 0 && (
           <StepHolder>
