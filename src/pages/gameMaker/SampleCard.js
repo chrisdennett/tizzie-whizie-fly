@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { CallToActionButton } from "../components/CallToActionButton";
+import { CallToActionButton } from "../../components/CallToActionButton";
 
 export const SampleCard = ({ onSelect, img, thumb, label, details }) => {
   return (

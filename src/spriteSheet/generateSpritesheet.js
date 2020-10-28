@@ -1,6 +1,6 @@
 import AR from "../libs/aruco";
 import fx from "glfx";
-import { spriteData, maskData } from "../gameLogic/gameState";
+import { spriteData, maskData } from "../pages/game/gameLogic/gameState";
 import { createCanvasFromSrc } from "./helper";
 
 const gameW = 1089;
@@ -50,7 +50,7 @@ export const generateSpritesheet = (unwarpedCanvas, maskImg) => {
 
   return {
     data: gameData.gameSpriteSheet,
-    canvas: gameData.outCanvas,
+    canvas: gameData.outCanvas
     // unwarpedCanvas,
     // sourceCanvas,
   };
@@ -70,7 +70,7 @@ export const generateSpritesheetFromScratch = (sourceImg, maskImg) => {
 
   return {
     data: gameData.gameSpriteSheet,
-    canvas: gameData.outCanvas,
+    canvas: gameData.outCanvas
     // unwarpedCanvas,
     // sourceCanvas,
   };
@@ -403,7 +403,7 @@ function drawMaskedShore(
     x: 0,
     y: startY,
     w: sprite.w,
-    h: ripples.h + sprite.h,
+    h: ripples.h + sprite.h
   };
 }
 
@@ -425,7 +425,7 @@ function drawUnderwater(ctx, maskCanvas, underwater, startY) {
     x: 0,
     y: startY,
     w: underwater.w,
-    h: underwater.h,
+    h: underwater.h
   };
 }
 

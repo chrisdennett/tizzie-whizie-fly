@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { MdPhotoCamera } from "react-icons/md";
 import { CallToActionButton } from "../CallToActionButton";
-import PreviewCanvas from "../../gameMaker/PreviewCanvas";
+import PreviewCanvas from "../../pages/gameMaker/PreviewCanvas";
 
 const maxOutputCanvasSize = 1000;
 

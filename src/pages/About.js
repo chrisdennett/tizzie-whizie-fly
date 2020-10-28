@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ExternalLink from "./ExternalLink";
+import ExternalLink from "../components/ExternalLink";
 
 const About = () => {
   return (
@@ -42,4 +42,8 @@ export default About;
 const Content = styled.div`
   max-width: 900px;
   margin: 0 auto;
+
+  li {
+    padding-bottom: 15px;
+  }
 `;
