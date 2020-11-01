@@ -88,10 +88,8 @@ const MapHolder = styled.div`
 `;
 
 const GameTopBar = styled.div`
-  margin-bottom: -15px;
+  margin-top: -10px;
   position: absolute;
-  bottom: 0;
-  width: 70%;
-  right: 30px;
-  bottom: 15px;
+  top: 0;
+  right: 20px;
 `;

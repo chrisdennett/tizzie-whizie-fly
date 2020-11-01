@@ -7,8 +7,9 @@ import { Border } from "./components/Border";
 import { GameEndScreen } from "./pages/game/GameEndScreen";
 import { defaultGameState } from "./pages/game/gameLogic/gameState";
 
-const IN_TEST_MODE = false;
-const IN_INVINCIBLE_MODE = false;
+const IN_TEST_MODE = true;
+const IN_INVINCIBLE_MODE = true;
+const AUTO_PLAY_GAME = true;
 
 function App() {
   const [showGame, setShowGame] = useState(false);
@@ -43,6 +44,7 @@ function App() {
             spriteData={spriteData}
             onCloseGame={onCloseGame}
             windowSize={windowSize}
+            AUTO_PLAY_GAME={AUTO_PLAY_GAME}
             IN_INVINCIBLE_MODE={IN_INVINCIBLE_MODE}
           />
         </>

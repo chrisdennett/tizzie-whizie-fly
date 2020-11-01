@@ -38,9 +38,14 @@ export default ScoreBoard;
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  font-size: 1.3em;
 
   p {
     margin: 0 20px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 1em;
   }
 `;
 

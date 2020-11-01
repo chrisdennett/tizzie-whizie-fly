@@ -14,6 +14,7 @@ export const Game = ({
   onCloseGame,
   windowSize,
   onGameOver,
+  AUTO_PLAY_GAME,
   IN_INVINCIBLE_MODE,
 }) => {
   // const [playLoseSound] = useSound("/sounds/zapsplat_impact.mp3", {
@@ -28,8 +29,8 @@ export const Game = ({
   // const [, setShowCollectionCards] = useState(false);
 
   // const [endState, setEndState] = useState(defaultGameState);
-  const [showInstructions, setShowInstructions] = useState(true);
-  const [isPaused, setIsPaused] = useState(true);
+  const [showInstructions, setShowInstructions] = useState(!AUTO_PLAY_GAME);
+  const [isPaused, setIsPaused] = useState(!AUTO_PLAY_GAME);
   // TODO - if go away from game and back this resets - move to App maybe
 
   const goUp = () => setFlyUp(true);
