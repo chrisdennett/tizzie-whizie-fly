@@ -16,11 +16,7 @@ const CollectionCards = ({ gameItems, maxIndexCollected }) => {
   return (
     <CardList>
       {gameItems.map((item, index) => (
-        <Card
-          key={item.name}
-          data={item}
-          showCard={index <= maxIndexCollected}
-        />
+        <Card key={index} data={item} showCard={index <= maxIndexCollected} />
       ))}
     </CardList>
   );

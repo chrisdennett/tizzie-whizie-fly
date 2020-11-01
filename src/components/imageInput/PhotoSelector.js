@@ -39,9 +39,9 @@ const PhotoSelector = ({ setPhotoCanvas, photoCanvas, children }) => {
               onClick={onInputClick}
               onChange={onFileSelect}
               multiple={false}
-              capture="environment"
               type="file"
-              accept="image/*;capture=camera"
+              capture="environment"
+              accept="image/*"
               name={"photo-selector"}
               id={"photo-selector"}
             />

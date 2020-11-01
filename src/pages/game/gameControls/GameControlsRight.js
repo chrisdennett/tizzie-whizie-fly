@@ -8,19 +8,16 @@ const GameControlsRight = ({
   onEndGame,
   replay,
   onPlayPauseToggle,
-  onFullScreen,
-  fullScreenActive,
-  onExitFullScreen,
   showAsRow,
   onHelp,
 }) => {
-  const onFullScreenClick = () => {
-    if (fullScreenActive) {
-      onExitFullScreen();
-    } else {
-      onFullScreen();
-    }
-  };
+  // const onFullScreenClick = () => {
+  //   if (fullScreenActive) {
+  //     onExitFullScreen();
+  //   } else {
+  //     onFullScreen();
+  //   }
+  // };
 
   return (
     <Outer showAsRow={showAsRow}>
@@ -31,12 +28,12 @@ const GameControlsRight = ({
       </TopSection>
 
       <MainSection showAsRow={showAsRow}>
-        <ButtonHolder showAsRow={showAsRow}>
+        {/* <ButtonHolder showAsRow={showAsRow}>
           <RoundButton
             onClick={onFullScreenClick}
             type={fullScreenActive ? "closeFullscreen" : "fullscreen"}
           />
-        </ButtonHolder>
+        </ButtonHolder> */}
 
         <ButtonHolder showAsRow={showAsRow}>
           <RoundButton

@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
-
 import GameControlsRight from "./gameControls/GameControlsRight";
 // import CollectionCard from "../collectionCards/CollectionCards";
 // import useSound from "use-sound";
 
 import GameControlsLeft from "./gameControls/GameControlsLeft";
 import GameScreen from "./GameScreen";
-import ScoreBoard from "./scoreboard/ScoreBoard";
 import GameInstructions from "./GameInstructions";
+import { defaultGameState } from "./gameLogic/gameState";
 
 export const Game = ({
   spriteData,
-  onEndGame,
+  onCloseGame,
   windowSize,
+  onGameOver,
   IN_INVINCIBLE_MODE,
 }) => {
   // const [playLoseSound] = useSound("/sounds/zapsplat_impact.mp3", {
@@ -27,11 +26,11 @@ export const Game = ({
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
   // const [, setShowCollectionCards] = useState(false);
+
+  // const [endState, setEndState] = useState(defaultGameState);
   const [showInstructions, setShowInstructions] = useState(true);
   const [isPaused, setIsPaused] = useState(true);
   // TODO - if go away from game and back this resets - move to App maybe
-
-  const fullScreenHandle = useFullScreenHandle();
 
   const goUp = () => setFlyUp(true);
   const goDown = () => setDiveDown(true);
@@ -40,8 +39,9 @@ export const Game = ({
     // setGameState(defaultGameState);
   };
 
-  const onCollision = () => {
+  const onCollision = (gameState) => {
     if (!IN_INVINCIBLE_MODE) {
+      onGameOver(gameState);
       setIsPaused(true);
     }
 
@@ -50,10 +50,10 @@ export const Game = ({
     // }
   };
 
-  const onCloseGame = () => {
+  const onPauseAndCloseGame = () => {
     setIsPaused(true);
     // setGameState(defaultGameState);
-    onEndGame();
+    onCloseGame();
   };
 
   // const onShowCardsCollected = () => setShowCollectionCards((prev) => !prev);
@@ -73,7 +73,7 @@ export const Game = ({
   };
 
   const rightControlsProps = {
-    onEndGame: onCloseGame,
+    onCloseGame: onPauseAndCloseGame,
     replay,
     onPlayPauseToggle,
     isPaused,
@@ -85,34 +85,27 @@ export const Game = ({
       ? { maxWidth: windowSize.width, maxHeight: windowSize.height - 10 }
       : {};
 
+  const onReplay = () => {
+    onGameOver(defaultGameState);
+    setShowInstructions(true);
+  };
+
   return (
     <GameScreenOuter id="GameScreenOuter" style={outerStyle}>
       {spriteData && (
-        <FullScreen handle={fullScreenHandle}>
+        <>
           {showInstructions && (
             <GameInstructions
               onPlay={onPlay}
               onHelp={onHelp}
               onCloseGame={onCloseGame}
-              onFullScreen={fullScreenHandle.enter}
-              fullScreenActive={fullScreenHandle.active}
-              onExitFullScreen={fullScreenHandle.exit}
             />
           )}
 
           {showPortraitMode && (
-            <GameControlsRight
-              {...rightControlsProps}
-              onFullScreen={fullScreenHandle.enter}
-              fullScreenActive={fullScreenHandle.active}
-              onExitFullScreen={fullScreenHandle.exit}
-              showAsRow={true}
-            />
+            <GameControlsRight {...rightControlsProps} showAsRow={true} />
           )}
 
-          <GameTopBar>
-            <ScoreBoard hideIcons={windowSize.width < 400} />
-          </GameTopBar>
           <MainGamePanel showPortraitMode={showPortraitMode}>
             <GameControlsLeft
               {...leftControlsProps}
@@ -122,6 +115,8 @@ export const Game = ({
             <GameScreen
               spriteData={spriteData}
               isPaused={isPaused}
+              onGameOver={onGameOver}
+              onReplay={onReplay}
               setFlyUp={setFlyUp}
               setDiveDown={setDiveDown}
               flyUp={flyUp}
@@ -130,16 +125,10 @@ export const Game = ({
             />
 
             {!showPortraitMode && (
-              <GameControlsRight
-                {...rightControlsProps}
-                onFullScreen={fullScreenHandle.enter}
-                fullScreenActive={fullScreenHandle.active}
-                onExitFullScreen={fullScreenHandle.exit}
-                showAsRow={false}
-              />
+              <GameControlsRight {...rightControlsProps} showAsRow={false} />
             )}
           </MainGamePanel>
-        </FullScreen>
+        </>
       )}
 
       {/* <button onClick={onShowCardsCollected}>Show Cards Collected</button> */}
@@ -157,18 +146,11 @@ export const Game = ({
 const GameScreenOuter = styled.div`
   padding-top: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   height: 100vh;
-`;
-
-const GameTopBar = styled.div`
-  margin-bottom: -15px;
-
-  @media (max-width: 700px) {
-    margin-bottom: -5px;
-  }
 `;
 
 const MainGamePanel = styled.div`

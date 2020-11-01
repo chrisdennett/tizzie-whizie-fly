@@ -4,14 +4,7 @@ import { FaArrowUp, FaArrowDown, FaTrophy } from "react-icons/fa";
 import { CallToActionButton } from "../../components/CallToActionButton";
 import { RoundButton } from "./gameControls/RoundButtons";
 
-const GameInstructions = ({
-  onPlay,
-  onHelp,
-  onFullScreen,
-  fullScreenActive,
-  onExitFullScreen,
-  onCloseGame
-}) => {
+const GameInstructions = ({ onPlay, onHelp, onCloseGame }) => {
   return (
     <InstructionsPanel>
       <Instructions>
@@ -23,7 +16,11 @@ const GameInstructions = ({
         <p>
           Fly the full length of Windermere to WIN! <FaTrophy />
         </p>
+        <ButtonHolder>
+          <CallToActionButton onClick={onPlay}>START GAME</CallToActionButton>
+        </ButtonHolder>
         <ul>
+          {/* <>
           {!fullScreenActive && (
             <li>
               <RoundButton
@@ -44,6 +41,8 @@ const GameInstructions = ({
               Exit full screen mode.
             </li>
           )}
+          </> */}
+
           <li>
             <RoundButton type="close" height={40} onClick={onCloseGame} />
             End the game
@@ -57,8 +56,6 @@ const GameInstructions = ({
             screen again.
           </li>
         </ul>
-
-        <CallToActionButton onClick={onPlay}>START GAME</CallToActionButton>
       </Instructions>
     </InstructionsPanel>
   );
@@ -109,5 +106,11 @@ const Instructions = styled.div`
         margin-right: 10px;
       }
     }
+  }
+`;
+
+const ButtonHolder = styled.div`
+  button {
+    margin: auto;
   }
 `;

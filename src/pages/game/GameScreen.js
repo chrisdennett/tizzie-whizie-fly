@@ -4,15 +4,17 @@ import { useAnimationFrame } from "../../hooks/useAnimationFrame";
 import { GameCanvas } from "./GameCanvas";
 import { getNextGameState, defaultGameState } from "./gameLogic/gameState";
 import { Map } from "./Map/Map";
+import ScoreBoard from "./scoreboard/ScoreBoard";
 
 const GameScreen = ({
   spriteData,
   isPaused,
   flyUp,
+  onGameOver,
   diveDown,
   setFlyUp,
   setDiveDown,
-  onCollision
+  onCollision,
 }) => {
   const [gameState, setGameState] = useState(defaultGameState);
   const [tickCount, setTickCount] = useState(0);
@@ -26,12 +28,17 @@ const GameScreen = ({
   const updateGame = () => {
     if (!spriteData || isPaused) return;
 
-    if (gameState.gameOver) return;
+    if (gameState.gameOver) {
+      onGameOver(gameState);
+      return;
+    }
 
     if (gameState.isMoving) {
       setFlyUp(false);
       setDiveDown(false);
     }
+
+    console.log("gameState.nextObstacleIndex: ", gameState.nextObstacleIndex);
 
     const nextGameState = getNextGameState(
       gameState,
@@ -46,12 +53,16 @@ const GameScreen = ({
 
   return (
     <GameScreenOuter>
+      <GameTopBar>
+        <ScoreBoard />
+      </GameTopBar>
+
       <MapHolder>
         <Map progress={gameState.progress} />
       </MapHolder>
 
       <GameCanvas
-        onCollision={onCollision}
+        onCollision={() => onCollision(gameState)}
         spriteCanvas={spriteData.canvas}
         gameState={gameState}
         spriteData={spriteData.data}
@@ -74,4 +85,13 @@ const MapHolder = styled.div`
   right: 30px;
   bottom: 15px;
   /* transform: rotate(270deg) translate(-165px, 595px) scale(1.3); */
+`;
+
+const GameTopBar = styled.div`
+  margin-bottom: -15px;
+  position: absolute;
+  bottom: 0;
+  width: 70%;
+  right: 30px;
+  bottom: 15px;
 `;
