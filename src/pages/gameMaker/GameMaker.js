@@ -123,7 +123,7 @@ const GameMaker = ({
 
       {showGameCreateStep && (
         <div>
-          <h4>Generate the game...</h4>
+          <h4>Make the game...</h4>
           <CreateGameStep
             onChangePhoto={onChangePhoto}
             photoCanvas={photoCanvas}

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Card } from "./Card";
+import { obstacleArr } from "../pages/game/gameLogic/gameItems";
 
 // const cards = [
 //   {
@@ -12,10 +13,11 @@ import { Card } from "./Card";
 //   },
 // ];
 
-const CollectionCards = ({ gameItems, maxIndexCollected }) => {
+const CollectionCards = ({ maxIndexCollected = 0 }) => {
   return (
     <CardList>
-      {gameItems.map((item, index) => (
+      {obstacleArr.map((item, index) => (
+        // <Card key={index} data={item} showCard={true} />
         <Card key={index} data={item} showCard={index <= maxIndexCollected} />
       ))}
     </CardList>

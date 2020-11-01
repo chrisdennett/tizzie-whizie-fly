@@ -48,11 +48,19 @@ const Container = styled.div`
 const Cards = styled.p`
   margin: 0 10px 0 0;
   width: 130px;
+
+  @media (max-width: 600px) {
+    width: 100px;
+  }
 `;
 
 const Points = styled.p`
   margin: 0;
   width: 195px;
+
+  @media (max-width: 600px) {
+    width: 140px;
+  }
 `;
 
 // const ScoreElement = ({ type, label, score, max, hideIcons }) => (

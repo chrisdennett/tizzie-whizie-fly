@@ -62,7 +62,10 @@ export default GameControlsRight;
 
 const Outer = styled.div`
   display: flex;
+  margin-bottom: ${(props) => (props.showAsRow ? "10px" : "0")};
   flex-direction: ${(props) => (props.showAsRow ? "row-reverse" : "column")};
+  width: ${(props) => (props.showAsRow ? "100%" : "auto")};
+  justify-content: space-between;
   padding: 0 15px 0 7px;
 `;
 

@@ -3,20 +3,26 @@ import styled from "styled-components";
 import { CallToActionButton } from "../../components/CallToActionButton";
 import CollectionCards from "../../collectionCards/CollectionCards";
 
-export const GameEndScreen = ({ onReplay, endState }) => {
+export const GameEndScreen = ({ onReplay, endState, onFinish }) => {
   return (
     <Container>
       <Content>
         <Header>
-          <h2>Game Over</h2>
+          <CallToActionButton
+            style={{ background: "#d86a6a" }}
+            onClick={onFinish}
+          >
+            FINISH
+          </CallToActionButton>
           <CallToActionButton onClick={onReplay}>REPLAY</CallToActionButton>
         </Header>
+        <h2>Game Over</h2>
         <p>
-          <b>SCORE:</b> {endState.pointsWon} out of {endState.topScore}
+          <b>SCORE:</b> {endState.pointsWon | 0} out of {endState.topScore}
         </p>
-        <h3>
-          CARDS: <span>{endState.cardsWon} out of 42</span>
-        </h3>
+        <p>
+          <b>CARDS:</b> <span>{endState.cardsWon | 0} out of 42</span>
+        </p>
         <CollectionCards
           gameItems={endState.obstacles}
           maxIndexCollected={endState.maxObstacleIndexCollected}
@@ -42,6 +48,7 @@ const Container = styled.div`
 
 const Content = styled.div`
   padding: 4% 3% 4% 6%;
+  text-align: center;
   /* max-width: 450px; */
   /* background-color: whitesmoke; */
   /* margin: auto;
@@ -60,10 +67,6 @@ const Content = styled.div`
     span {
       font-weight: normal;
     }
-  }
-
-  p {
-    text-align: left;
   }
 
   ul {
@@ -86,4 +89,5 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  margin: 10px 0 20px 0;
 `;

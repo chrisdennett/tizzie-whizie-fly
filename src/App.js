@@ -7,15 +7,16 @@ import { Border } from "./components/Border";
 import { GameEndScreen } from "./pages/game/GameEndScreen";
 import { defaultGameState } from "./pages/game/gameLogic/gameState";
 
-const IN_TEST_MODE = true;
+const IN_TEST_MODE = false;
 const IN_INVINCIBLE_MODE = false;
-const AUTO_PLAY_GAME = true;
+const AUTO_PLAY_GAME = false;
+const SHOW_END_SCREEN = false;
 
 function App() {
   const [showGame, setShowGame] = useState(false);
   const [endState, setEndState] = useState(defaultGameState);
   const [spriteData, setSpriteData] = useState(null);
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(SHOW_END_SCREEN);
 
   const onGameOver = (endState) => {
     setEndState(endState);
@@ -24,19 +25,29 @@ function App() {
 
   const windowSize = useWindowSize();
 
-  const onCloseGame = () => setShowGame(false);
+  const onCloseGame = () => {
+    setGameOver(false);
+    setShowGame(false);
+  };
 
   const onReplay = () => {
     setGameOver(false);
   };
 
   const gameActive = (IN_TEST_MODE || showGame) && !gameOver;
+  const showRouter = !gameActive && !gameOver;
 
   return (
     <Container>
       <Border type={"top"} />
 
-      {gameOver && <GameEndScreen onReplay={onReplay} endState={endState} />}
+      {gameOver && (
+        <GameEndScreen
+          onReplay={onReplay}
+          endState={endState}
+          onFinish={onCloseGame}
+        />
+      )}
 
       {gameActive && (
         <>
@@ -51,7 +62,7 @@ function App() {
         </>
       )}
 
-      {!showGame && (
+      {showRouter && (
         <Router
           spriteData={spriteData}
           setSpriteData={setSpriteData}

@@ -74,7 +74,7 @@ export const Game = ({
   };
 
   const rightControlsProps = {
-    onCloseGame: onPauseAndCloseGame,
+    onEndGame: onPauseAndCloseGame,
     replay,
     onPlayPauseToggle,
     isPaused,

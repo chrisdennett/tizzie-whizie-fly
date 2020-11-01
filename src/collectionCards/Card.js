@@ -19,9 +19,31 @@ export const Card = ({ data, showCard }) => {
       </Corner>
 
       <CardHolder>
-        <img src={data.img} alt="" />
-        <h2>{showCard ? data.name : "?"}</h2>
-        <p dangerouslySetInnerHTML={{ __html: data.info }} />
+        {!showCard && <h2>?</h2>}
+
+        {showCard && (
+          <Content>
+            <img src={data.img} alt="" />
+            <h3>{data.name}</h3>
+            <div>
+              <p>TYPE: {data.type}</p>
+
+              {data.date && <p>DATE: {data.date}</p>}
+
+              {data.info && (
+                <p dangerouslySetInnerHTML={{ __html: data.info }} />
+              )}
+
+              {data.link && (
+                <p>
+                  <a href={data.link} target="_blank" rel="noopener noreferrer">
+                    Find out more
+                  </a>
+                </p>
+              )}
+            </div>
+          </Content>
+        )}
       </CardHolder>
     </Outer>
   );
@@ -39,10 +61,17 @@ const Corner = styled.div`
   position: absolute;
 `;
 
+const Content = styled.div`
+  p,
+  h3 {
+    margin: 0 0 10px 0;
+  }
+`;
+
 const CardHolder = styled.div`
   margin: 5px;
   padding: 20px;
-  max-width: 240px;
+  width: 240px;
   /* border-top: 2px solid rgba(255, 255, 255, 1); */
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.85);

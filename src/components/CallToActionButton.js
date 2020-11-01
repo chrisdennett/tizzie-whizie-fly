@@ -8,6 +8,7 @@ export const CallToActionButton = ({
   disabled,
   href,
   className,
+  style,
   icon,
 }) => {
   if (href) {
@@ -15,6 +16,7 @@ export const CallToActionButton = ({
       <StyledAnchor
         href={href}
         className={className}
+        style={style}
         target="_blank"
         rel="noopener noreferrer"
         disabled={disabled}
@@ -25,7 +27,7 @@ export const CallToActionButton = ({
   }
 
   return (
-    <StyledButton onClick={onClick} disabled={disabled}>
+    <StyledButton onClick={onClick} disabled={disabled} style={style}>
       {children}
     </StyledButton>
   );
