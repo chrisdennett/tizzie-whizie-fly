@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 // import { ScoreBoardIcon } from "./ScoreBoardIcons";
 
-function ScoreBoard({ score = 0, cards = 0 / 42 }) {
+function ScoreBoard({ pointsWon = 0, cardsWon = 0 }) {
   return (
     <Container>
-      <p>SCORE: {score}</p>
-      <p>CARDS: {cards}</p>
+      <Cards>CARDS: {cardsWon}</Cards>
+      <Points>POINTS: {pointsWon}</Points>
 
       {/* <ScoreElement
         hideIcons={hideIcons}
@@ -40,13 +40,19 @@ const Container = styled.div`
   justify-content: center;
   font-size: 1.3em;
 
-  p {
-    margin: 0 20px;
-  }
-
   @media (max-width: 600px) {
     font-size: 1em;
   }
+`;
+
+const Cards = styled.p`
+  margin: 0 10px 0 0;
+  width: 130px;
+`;
+
+const Points = styled.p`
+  margin: 0;
+  width: 195px;
 `;
 
 // const ScoreElement = ({ type, label, score, max, hideIcons }) => (

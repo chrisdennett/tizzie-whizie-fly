@@ -12,10 +12,10 @@ export const GameEndScreen = ({ onReplay, endState }) => {
           <CallToActionButton onClick={onReplay}>REPLAY</CallToActionButton>
         </Header>
         <p>
-          <b>SCORE:</b> 0 out of 10001
+          <b>SCORE:</b> {endState.pointsWon} out of {endState.topScore}
         </p>
         <h3>
-          CARDS: <span>0 out of 4</span>
+          CARDS: <span>{endState.cardsWon} out of 42</span>
         </h3>
         <CollectionCards
           gameItems={endState.obstacles}

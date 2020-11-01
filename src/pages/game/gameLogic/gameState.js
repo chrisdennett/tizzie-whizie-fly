@@ -167,10 +167,11 @@ export const maskData = {
 };
 
 const water = 230;
-const totalDurationSeconds = 150;
+const totalDurationSeconds = 10;
 const durationMs = getFrameFromSeconds(totalDurationSeconds);
 
 export const defaultGameState = {
+  topScore: 123456,
   gameTick: 0,
   duration: durationMs,
   gameOver: false,
@@ -233,11 +234,18 @@ function getGameProgress(prevGameState) {
   const newGameTick = prevGameState.gameTick + 1;
   const newGameOver = newGameTick >= prevGameState.duration;
   const newProgress = newGameTick / prevGameState.duration;
+  const cardsWon = prevGameState.nextObstacleIndex;
+  const pointsWon =
+    newProgress >= 1
+      ? prevGameState.topScore
+      : Math.round(newProgress * prevGameState.topScore);
 
   return {
     gameTick: newGameTick,
     gameOver: newGameOver,
     progress: newProgress,
+    cardsWon,
+    pointsWon,
   };
 }
 

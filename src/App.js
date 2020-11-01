@@ -8,7 +8,7 @@ import { GameEndScreen } from "./pages/game/GameEndScreen";
 import { defaultGameState } from "./pages/game/gameLogic/gameState";
 
 const IN_TEST_MODE = true;
-const IN_INVINCIBLE_MODE = true;
+const IN_INVINCIBLE_MODE = false;
 const AUTO_PLAY_GAME = true;
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
   const windowSize = useWindowSize();
 
   const onCloseGame = () => setShowGame(false);
+
   const onReplay = () => {
     setGameOver(false);
   };

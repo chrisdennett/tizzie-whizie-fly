@@ -38,8 +38,6 @@ const GameScreen = ({
       setDiveDown(false);
     }
 
-    console.log("gameState.nextObstacleIndex: ", gameState.nextObstacleIndex);
-
     const nextGameState = getNextGameState(
       gameState,
       flyUp,
@@ -54,7 +52,10 @@ const GameScreen = ({
   return (
     <GameScreenOuter>
       <GameTopBar>
-        <ScoreBoard />
+        <ScoreBoard
+          pointsWon={gameState.pointsWon}
+          cardsWon={gameState.cardsWon}
+        />
       </GameTopBar>
 
       <MapHolder>
