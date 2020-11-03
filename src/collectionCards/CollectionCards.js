@@ -13,21 +13,21 @@ import { obstacleArr } from "../pages/game/gameLogic/gameItems";
 //   },
 // ];
 
-const CollectionCards = ({ maxIndexCollected = 0 }) => {
+export const CollectionCards = ({ maxIndexCollected = 0 }) => {
   return (
-    <CardList>
-      {obstacleArr.map((item, index) => (
-        // <Card key={index} data={item} showCard={true} />
-        <Card key={index} data={item} showCard={index <= maxIndexCollected} />
-      ))}
-    </CardList>
+    <div>
+      <CardList>
+        {obstacleArr.map((item, index) => (
+          <Card key={index} data={item} showCard={index <= maxIndexCollected} />
+        ))}
+      </CardList>
+    </div>
   );
 };
 
-export default CollectionCards;
-
 const CardList = styled.div`
   margin: 30px;
+  min-height: 300px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

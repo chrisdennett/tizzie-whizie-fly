@@ -4,7 +4,7 @@ import { CallToActionButton } from "../../components/CallToActionButton";
 import PreviewCanvas from "./PreviewCanvas";
 import {
   findSheetCorners,
-  getUnwarpedCanvas
+  getUnwarpedCanvas,
 } from "../../spriteSheet/generateSpritesheet";
 import GameStartCanvas from "./GameStartCanvas";
 
@@ -13,7 +13,7 @@ export const CreateGameStep = ({
   onCreateGame,
   setShowGame,
   photoCanvas,
-  onChangePhoto
+  onChangePhoto,
 }) => {
   const [currStep, setCurrStep] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
@@ -24,7 +24,7 @@ export const CreateGameStep = ({
     { label: "Finding Corners" },
     { label: "Straightening out the sheet" },
     { label: "Creating game characters" },
-    { label: "Play Game" }
+    { label: "Play Game" },
   ];
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export const CreateGameStep = ({
             </ReplcePhotoButton>
 
             <CallToActionButton onClick={() => setShowGame(true)}>
-              PLAY YOUR GAME
+              LAUNCH GAME
             </CallToActionButton>
           </NextButtonHolder>
         </div>

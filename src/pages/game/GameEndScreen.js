@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { CallToActionButton } from "../../components/CallToActionButton";
-import CollectionCards from "../../collectionCards/CollectionCards";
+import { CollectionCards } from "../../collectionCards/CollectionCards";
 
 export const GameEndScreen = ({ onReplay, endState, onFinish }) => {
   return (
@@ -24,7 +24,6 @@ export const GameEndScreen = ({ onReplay, endState, onFinish }) => {
           <b>CARDS:</b> <span>{endState.cardsWon | 0} out of 42</span>
         </p>
         <CollectionCards
-          gameItems={endState.obstacles}
           maxIndexCollected={endState.maxObstacleIndexCollected}
         />
       </Content>

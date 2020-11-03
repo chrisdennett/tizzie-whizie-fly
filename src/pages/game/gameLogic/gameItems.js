@@ -31,11 +31,11 @@ export const obstacleArr = [
   },
   { type: "island", name: "Silver Holme.", position: "4", link: "" },
   {
-    type: "pike",
-    name: "Raven",
+    type: "story",
+    name: "The Pike",
     position: "5",
-    date: "1871",
-    link: "https://lakelandarts.org.uk/items/raven-1871/",
+    date: "XXXX",
+    link: "XXXX",
   },
   { type: "island", name: "Crag Holme", position: "6", link: "" },
   {
