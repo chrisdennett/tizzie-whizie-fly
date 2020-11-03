@@ -31,7 +31,7 @@ export const obstacleArr = [
   },
   { type: "island", name: "Silver Holme.", position: "4", link: "" },
   {
-    type: "story",
+    type: "pike",
     name: "The Pike",
     position: "5",
     date: "XXXX",
