@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { MdPhotoCamera } from "react-icons/md";
 import { CallToActionButton } from "../CallToActionButton";
-import PreviewCanvas from "../../pages/gameMaker/PreviewCanvas";
 
 const maxOutputCanvasSize = 1000;
 
-const PhotoSelector = ({ setPhotoCanvas, photoCanvas, children }) => {
+const PhotoSelector = ({
+  setPhotoCanvas,
+  photoCanvas,
+  children,
+  isFileSelector = false,
+}) => {
   const onFileSelect = (e) => {
     e.preventDefault();
     if (e.target.files[0]) {
@@ -23,16 +26,33 @@ const PhotoSelector = ({ setPhotoCanvas, photoCanvas, children }) => {
     e.target.value = "";
   };
 
-  const onClearCanvas = () => {
-    setPhotoCanvas(null);
-  };
+  // const onClearCanvas = () => {
+  //   setPhotoCanvas(null);
+  // };
 
   return (
     <Container>
       <InputPreviewArea>
-        {photoCanvas && <PreviewCanvas source={photoCanvas} />}
+        {isFileSelector && (
+          <InputHolder>
+            {/* hidden */}
+            <input
+              onClick={onInputClick}
+              onChange={onFileSelect}
+              multiple={false}
+              type="file"
+              accept="image/*"
+              name={"image-selector"}
+              id={"image-selector"}
+            />
 
-        {!photoCanvas && (
+            <label htmlFor={"image-selector"}>
+              <CallToActionButton>{children}</CallToActionButton>
+            </label>
+          </InputHolder>
+        )}
+
+        {!isFileSelector && (
           <InputHolder>
             {/* hidden */}
             <input
@@ -47,16 +67,11 @@ const PhotoSelector = ({ setPhotoCanvas, photoCanvas, children }) => {
             />
 
             <label htmlFor={"photo-selector"}>
-              <CallToActionButton>
-                <MdPhotoCamera /> <span>Add a Photo</span>
-              </CallToActionButton>
+              <CallToActionButton>{children}</CallToActionButton>
             </label>
           </InputHolder>
         )}
       </InputPreviewArea>
-
-      {photoCanvas && <button onClick={onClearCanvas}>Clear Canvas</button>}
-      {children}
     </Container>
   );
 };
@@ -65,6 +80,7 @@ export default PhotoSelector;
 
 const Container = styled.div`
   display: inline-block;
+  margin: 0 5px;
 `;
 
 const InputPreviewArea = styled.div`

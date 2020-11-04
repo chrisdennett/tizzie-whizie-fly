@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { isMobile } from "react-device-detect";
 import PhotoSelector from "../../components/imageInput/PhotoSelector";
 import { createMaxSizeCanvas } from "../../spriteSheet/helper";
 import {
@@ -9,6 +10,8 @@ import { CreateGameStep } from "./CreateGameStep";
 import { CallToActionButton } from "../../components/CallToActionButton";
 import { SampleCard, SampleCards } from "./SampleCard";
 import styled from "styled-components";
+import { MdPhotoCamera } from "react-icons/md";
+import { FaRegImages } from "react-icons/fa";
 
 const IN_LOCAL_TEST_MODE = false;
 
@@ -74,17 +77,31 @@ const GameMaker = ({
               <li>
                 Print the{" "}
                 <CallToActionButton href={"/tizzie-fly-template.pdf"}>
-                  template
+                  Template
                 </CallToActionButton>
               </li>
               <li>Paint or decorate however you like.</li>
               <li>
-                {" "}
+                {isMobile && (
+                  <>
+                    <PhotoSelector
+                      setPhotoCanvas={setPhotoCanvas}
+                      photoCanvas={photoCanvas}
+                    >
+                      <MdPhotoCamera /> <span>Snap</span>
+                    </PhotoSelector>
+                    or{" "}
+                  </>
+                )}
+                {!isMobile && <>Snap and </>}
                 <PhotoSelector
                   setPhotoCanvas={setPhotoCanvas}
                   photoCanvas={photoCanvas}
-                />{" "}
-                showing your finished sheet.
+                  isFileSelector={true}
+                >
+                  <FaRegImages /> <span>Select</span>
+                </PhotoSelector>
+                your finished sheet.
               </li>
             </ol>
           </Section>
