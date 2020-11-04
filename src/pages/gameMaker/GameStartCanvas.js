@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { drawPlayer, drawSprite } from "../game/gameLogic/drawGame";
+import { drawPlayer } from "../game/gameLogic/drawGame";
 import styled from "styled-components";
 
 const GameStartCanvas = ({ spriteData }) => {
@@ -16,15 +16,13 @@ const GameStartCanvas = ({ spriteData }) => {
       previewCanvas.width = 500;
       previewCanvas.height = 170;
       const ctx = previewCanvas.getContext("2d");
-      drawSprite(
-        ctx,
-        spriteData.canvas,
-        spriteData.data.title,
-        40,
-        20,
-        true,
-        0.6
-      );
+
+      const { x, y, w, h } = spriteData.data.title;
+
+      // Draw title
+      ctx.drawImage(spriteData.canvas, x, y, w, h, 10, 20, w * 0.65, h * 0.65);
+
+      // Draw Tizzy
       drawPlayer(ctx, spriteData.canvas, spriteData.data, 100, 180);
     }
   });

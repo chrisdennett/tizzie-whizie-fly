@@ -241,27 +241,10 @@ function drawBounds(ctx, bounds) {
   ctx.stroke();
 }
 
-export const drawSprite = (
-  ctx,
-  spriteCanvas,
-  sprite,
-  targX,
-  targY,
-  useShadow = true,
-  scale = 1
-) => {
+export const drawSprite = (ctx, spriteCanvas, sprite, targX, targY) => {
   const { x, y, h, w } = sprite;
 
-  if (useShadow) {
-    ctx.save();
-    addShadow(ctx);
-    // ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w * scale, h * scale);
-    ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
-    ctx.restore();
-  } else {
-    // ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w * scale, h * scale);
-    ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
-  }
+  ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
 };
 
 // SHORELINE
@@ -424,7 +407,6 @@ export const drawPlayer = (
 
   // back leg
   ctx.save();
-  addShadow(ctx);
   ctx.translate(backLegPos.x + leg.w / 2, backLegPos.y + leg.h / 2);
   ctx.rotate(backLegPos.r);
   drawSprite(ctx, spriteCanvas, leg, -leg.w / 2, -leg.h / 2);
@@ -432,7 +414,6 @@ export const drawPlayer = (
 
   // body
   ctx.save();
-  addShadow(ctx);
   drawSprite(ctx, spriteCanvas, player, body.x, body.y);
   ctx.restore();
 
@@ -445,13 +426,6 @@ export const drawPlayer = (
 
   // undo rotation and translation for whole player.
   ctx.restore();
-};
-
-const addShadow = (ctx) => {
-  // ctx.shadowColor = "rgba(0,0,0,0.1)";
-  // ctx.shadowBlur = 1;
-  // ctx.shadowOffsetY = -4;
-  // ctx.shadowOffsetX = 4;
 };
 
 const degToRad = (deg) => (deg * Math.PI) / 180;
