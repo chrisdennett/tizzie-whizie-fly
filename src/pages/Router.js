@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import GameMaker from "./gameMaker/GameMaker";
 import About from "./about/About";
-import SpriteTester from "./game/SpriteTester";
+// import SpriteTester from "./game/SpriteTester";
 import { StepSelector } from "./gameMaker/StepSelector";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import Intro from "./intro/Intro";
@@ -14,18 +14,19 @@ export const Router = ({
   IN_TEST_MODE,
 }) => {
   const [currStep, setCurrStep] = useLocalStorage("currentStep", 0);
+  const _currStep = IN_TEST_MODE ? 1 : currStep;
 
-  const gameCreated = spriteData && spriteData.canvas;
+  // const gameCreated = spriteData && spriteData.canvas;
 
   return (
     <Container>
       <StepSelector currStep={currStep} setCurrStep={setCurrStep}>
-        {currStep === 0 && (
+        {_currStep === 0 && (
           <StepHolder>
             <Intro onGetMaking={() => setCurrStep(1)} />
           </StepHolder>
         )}
-        {currStep === 1 && (
+        {_currStep === 1 && (
           <StepHolder>
             <GameMaker
               setShowGame={setShowGame}
@@ -35,18 +36,18 @@ export const Router = ({
             />
           </StepHolder>
         )}
-        {currStep === 2 && (
+        {_currStep === 2 && (
           <StepHolder>
             <About />
           </StepHolder>
         )}
       </StepSelector>
 
-      {IN_TEST_MODE && gameCreated && (
+      {/* {IN_TEST_MODE && gameCreated && (
         <div>
           <SpriteTester spriteData={spriteData} />
         </div>
-      )}
+      )} */}
     </Container>
   );
 };

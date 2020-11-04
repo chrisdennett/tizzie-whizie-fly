@@ -11,7 +11,7 @@ export const findSheetCorners = (sourceImg) => {
   if (!sourceImg) return;
 
   const sourceCanvas = createCanvasFromSrc(sourceImg);
-  const ctx = sourceCanvas.getContext("2d");
+  const ctx = sourceCanvas.getContext("2d", { alpha: false });
   const imageData = ctx.getImageData(
     0,
     0,
@@ -50,7 +50,7 @@ export const generateSpritesheet = (unwarpedCanvas, maskImg) => {
 
   return {
     data: gameData.gameSpriteSheet,
-    canvas: gameData.outCanvas
+    canvas: gameData.outCanvas,
     // unwarpedCanvas,
     // sourceCanvas,
   };
@@ -70,7 +70,7 @@ export const generateSpritesheetFromScratch = (sourceImg, maskImg) => {
 
   return {
     data: gameData.gameSpriteSheet,
-    canvas: gameData.outCanvas
+    canvas: gameData.outCanvas,
     // unwarpedCanvas,
     // sourceCanvas,
   };
@@ -147,7 +147,7 @@ export const createGameData = (
   const tempCanvas = document.createElement("canvas");
   tempCanvas.width = maxSpriteWidth;
   tempCanvas.height = maxSpriteWidth;
-  const tempCtx = tempCanvas.getContext("2d");
+  const tempCtx = tempCanvas.getContext("2d", { alpha: false });
 
   let startY = 0;
   const gameSpriteSheet = {};
@@ -303,8 +303,54 @@ export const createGameData = (
   // );
 
   return { outCanvas, gameSpriteSheet };
+
+  //   const canvasToScreenScale = 0.5;
+  //   const { scaledCanvas, scaledData } = scaleSpriteSheet(
+  //     outCanvas,
+  //     gameSpriteSheet,
+  //     canvasToScreenScale
+  //   );
+
+  //   return { outCanvas: scaledCanvas, gameSpriteSheet: scaledData };
 };
 
+// function scaleSpriteSheet(srcCanvas, srcData, scale) {
+//   const { width: srcWidth, height: srcHeight } = srcCanvas;
+//   const scaledWidth = Math.floor(srcWidth * scale);
+//   const scaledHeight = Math.floor(srcHeight * scale);
+
+//   const scaledCanvas = document.createElement("canvas");
+//   scaledCanvas.width = scaledWidth;
+//   scaledCanvas.height = scaledHeight;
+
+//   const ctx = scaledCanvas.getContext("2d");
+//   ctx.drawImage(
+//     srcCanvas,
+//     0,
+//     0,
+//     srcWidth,
+//     srcHeight,
+//     0,
+//     0,
+//     scaledWidth,
+//     scaledHeight
+//   );
+
+//   const scaledData = {};
+//   const keys = Object.keys(srcData);
+
+//   for (let k of keys) {
+//     scaledData[k] = {};
+//     scaledData[k].x = srcData[k].x * scale;
+//     scaledData[k].y = srcData[k].y * scale;
+//     scaledData[k].w = srcData[k].w * scale;
+//     scaledData[k].h = srcData[k].h * scale;
+//   }
+
+//   return { scaledCanvas, scaledData };
+// }
+
+// DRAW MASKED SHORE AND RETURN DATA
 function drawMaskedShore(
   ctx,
   spriteCanvas,
@@ -403,10 +449,11 @@ function drawMaskedShore(
     x: 0,
     y: startY,
     w: sprite.w,
-    h: ripples.h + sprite.h
+    h: ripples.h + sprite.h,
   };
 }
 
+// DRAW MASKED UNDERWATER AND RETURN DATA
 function drawUnderwater(ctx, maskCanvas, underwater, startY) {
   // draw ripples over reflection
   ctx.drawImage(
@@ -425,10 +472,11 @@ function drawUnderwater(ctx, maskCanvas, underwater, startY) {
     x: 0,
     y: startY,
     w: underwater.w,
-    h: underwater.h
+    h: underwater.h,
   };
 }
 
+// DRAW MASKED SPRITE AND RETURN DATA
 function drawMaskedSprite(
   ctx,
   spriteCanvas,
@@ -478,10 +526,15 @@ function drawMaskedSprite(
     sprite.h,
     0,
     startY,
-    sprite.w * scale,
-    sprite.h * scale
+    Math.round(sprite.w * scale),
+    Math.round(sprite.h * scale)
   );
   tempCtx.restore();
 
-  return { x: 0, y: startY, w: sprite.w * scale, h: sprite.h * scale };
+  return {
+    x: 0,
+    y: startY,
+    w: Math.round(sprite.w * scale),
+    h: Math.round(sprite.h * scale),
+  };
 }

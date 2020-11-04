@@ -3,11 +3,12 @@ export const drawGame = (
   gameState,
   spriteCanvas,
   spriteData,
-  onCollision
+  onCollision,
+  scale = 0.5
 ) => {
   const IN_DRAWING_TEST_MODE = false;
 
-  const ctx = gameCanvas.getContext("2d");
+  const ctx = gameCanvas.getContext("2d", { alpha: false });
   // clear scene
   ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
 
@@ -255,10 +256,12 @@ export const drawSprite = (
   if (useShadow) {
     ctx.save();
     addShadow(ctx);
-    ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w * scale, h * scale);
+    // ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w * scale, h * scale);
+    ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
     ctx.restore();
   } else {
-    ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w * scale, h * scale);
+    // ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w * scale, h * scale);
+    ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
   }
 };
 
@@ -446,10 +449,10 @@ export const drawPlayer = (
 };
 
 const addShadow = (ctx) => {
-  ctx.shadowColor = "rgba(0,0,0,0.1)";
-  ctx.shadowBlur = 1;
-  ctx.shadowOffsetY = -4;
-  ctx.shadowOffsetX = 4;
+  // ctx.shadowColor = "rgba(0,0,0,0.1)";
+  // ctx.shadowBlur = 1;
+  // ctx.shadowOffsetY = -4;
+  // ctx.shadowOffsetX = 4;
 };
 
 const degToRad = (deg) => (deg * Math.PI) / 180;

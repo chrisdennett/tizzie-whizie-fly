@@ -34,7 +34,7 @@ function App() {
     setGameOver(false);
   };
 
-  const gameActive = (IN_TEST_MODE || showGame) && !gameOver;
+  const gameActive = showGame && !gameOver;
   const showRouter = !gameActive && !gameOver;
 
   return (
@@ -62,7 +62,7 @@ function App() {
         </>
       )}
 
-      {showRouter && (
+      {showRouter && !gameOver && (
         <Router
           spriteData={spriteData}
           setSpriteData={setSpriteData}

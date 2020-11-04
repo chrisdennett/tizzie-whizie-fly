@@ -6,7 +6,7 @@ export const GameCanvas = ({
   spriteCanvas,
   gameState,
   spriteData,
-  onCollision
+  onCollision,
 }) => {
   const gameCanvasRef = React.useRef(null);
 

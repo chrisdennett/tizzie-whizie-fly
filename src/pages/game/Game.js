@@ -131,15 +131,6 @@ export const Game = ({
           </MainGamePanel>
         </>
       )}
-
-      {/* <button onClick={onShowCardsCollected}>Show Cards Collected</button> */}
-
-      {/* {showCollectionCards && (
-        <CollectionCard
-          gameItems={gameState.obstacles}
-          maxIndexCollected={gameState.maxObstacleIndexCollected}
-        />
-      )} */}
     </GameScreenOuter>
   );
 };

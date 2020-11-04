@@ -2,7 +2,7 @@ export const createCanvasFromSrc = (sourceCanvas, w, h) => {
   const outCanvas = document.createElement("canvas");
   outCanvas.width = w ? w : sourceCanvas.width;
   outCanvas.height = h ? h : sourceCanvas.height;
-  const ctx = outCanvas.getContext("2d");
+  const ctx = outCanvas.getContext("2d", { alpha: false });
 
   ctx.drawImage(
     sourceCanvas,
@@ -20,7 +20,7 @@ export const createCanvasFromSrc = (sourceCanvas, w, h) => {
 };
 
 export const drawToCanvas = (sourceCanvas, targCanvas, w, h) => {
-  const ctx = targCanvas.getContext("2d");
+  const ctx = targCanvas.getContext("2d", { alpha: false });
   ctx.clearRect(0, 0, targCanvas.width, targCanvas.height);
 
   targCanvas.width = w;
@@ -89,7 +89,7 @@ export const createOrientatedCanvas = (sourceCanvas, orientation) => {
   let canvasW = isPortrait ? sourceCanvas.height : sourceCanvas.width;
   let canvasH = isPortrait ? sourceCanvas.width : sourceCanvas.height;
 
-  const ctx = outputCanvas.getContext("2d");
+  const ctx = outputCanvas.getContext("2d", { alpha: false });
 
   outputCanvas.width = canvasW;
   outputCanvas.height = canvasH;
@@ -152,7 +152,7 @@ export function createMaxSizeCanvas(
   outputCanvas.height = outputHeight;
 
   // draw input to output at the restricted size
-  const ctx = outputCanvas.getContext("2d");
+  const ctx = outputCanvas.getContext("2d", { alpha: false });
   ctx.drawImage(
     inputCanvas,
     0,
