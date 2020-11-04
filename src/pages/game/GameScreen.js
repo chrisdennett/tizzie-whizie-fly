@@ -49,6 +49,10 @@ const GameScreen = ({
 
   useEffect(updateGame, [tickCount]);
 
+  const onCollisionTrigger = () => {
+    onCollision(gameState);
+  };
+
   return (
     <GameScreenOuter>
       <GameTopBar>
@@ -63,7 +67,7 @@ const GameScreen = ({
       </MapHolder>
 
       <GameCanvas
-        onCollision={() => onCollision(gameState)}
+        onCollision={onCollisionTrigger}
         spriteCanvas={spriteData.canvas}
         gameState={gameState}
         spriteData={spriteData.data}

@@ -3,8 +3,7 @@ export const drawGame = (
   gameState,
   spriteCanvas,
   spriteData,
-  onCollision,
-  scale = 0.5
+  onCollision
 ) => {
   const IN_DRAWING_TEST_MODE = false;
 
