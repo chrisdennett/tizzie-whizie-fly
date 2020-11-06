@@ -113,7 +113,8 @@ const GameMaker = ({
             <SampleCards>
               <SampleCard
                 onSelect={onSampleSelect}
-                img={"tizzie-full-colour.jpg"}
+                img={"tizzie-full-colour-enhanced.jpg"}
+                // img={"tizzie-full-colour.jpg"}
                 thumb={"tizzie-full-colour_250x141.jpg"}
                 label={"Crayon Wonder"}
                 details={"by me!"}
