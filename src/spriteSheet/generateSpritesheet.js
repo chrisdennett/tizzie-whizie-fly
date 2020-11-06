@@ -1,6 +1,6 @@
 import AR from "../libs/aruco";
 import fx from "glfx";
-import { spriteData, maskData } from "../pages/game/gameLogic/gameState";
+import { spriteData, maskData } from "../pages/game/gameLogic/gameItems";
 import { createCanvasFromSrc } from "./helper";
 
 const gameW = 1089;
@@ -219,13 +219,28 @@ export const createGameData = (
   );
 
   // Draw boat
-  gameSpriteSheet.boat = drawMaskedSprite(
+  gameSpriteSheet.boat = drawBoatWithSteam(
     ctx,
     spriteCanvas,
     maskCanvas,
     spriteData.boat,
     maskData.boat,
+    spriteData.cloud,
+    maskData.cloud,
     gameSpriteSheet.tail.y + gameSpriteSheet.tail.h + padding,
+    0.8,
+    tempCanvas,
+    tempCtx
+  );
+
+  // Draw wreck
+  gameSpriteSheet.wreck = drawMaskedSprite(
+    ctx,
+    spriteCanvas,
+    maskCanvas,
+    spriteData.wreck,
+    maskData.wreck,
+    gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding,
     0.8,
     tempCanvas,
     tempCtx
@@ -238,7 +253,7 @@ export const createGameData = (
     maskCanvas,
     spriteData.pike,
     maskData.pike,
-    gameSpriteSheet.boat.y + gameSpriteSheet.boat.h + padding,
+    gameSpriteSheet.wreck.y + gameSpriteSheet.wreck.h + padding,
     1,
     tempCanvas,
     tempCtx
@@ -274,7 +289,7 @@ export const createGameData = (
     spriteData.island,
     maskData.island,
     gameSpriteSheet.underwater.y + gameSpriteSheet.underwater.h + padding,
-    1,
+    0.9,
     tempCanvas,
     tempCtx
   );
@@ -314,41 +329,114 @@ export const createGameData = (
   //   return { outCanvas: scaledCanvas, gameSpriteSheet: scaledData };
 };
 
-// function scaleSpriteSheet(srcCanvas, srcData, scale) {
-//   const { width: srcWidth, height: srcHeight } = srcCanvas;
-//   const scaledWidth = Math.floor(srcWidth * scale);
-//   const scaledHeight = Math.floor(srcHeight * scale);
+// DRAW BOAT WITH STEAM
+function drawBoatWithSteam(
+  ctx,
+  spriteCanvas,
+  maskCanvas,
+  sprite,
+  mask,
+  cloudSprite,
+  cloudMaskSprite,
+  startY,
+  scale = 1,
+  tempCanvas,
+  tempCtx
+) {
+  tempCtx.save();
+  tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+  //draw the mask
+  tempCtx.drawImage(
+    maskCanvas,
+    mask.x,
+    mask.y,
+    mask.w,
+    mask.h,
+    0,
+    0,
+    mask.w,
+    mask.h
+  );
+  tempCtx.globalCompositeOperation = "source-in";
+  //draw the sprite
+  tempCtx.drawImage(
+    spriteCanvas,
+    sprite.x,
+    sprite.y,
+    sprite.w,
+    sprite.h,
+    0,
+    0,
+    sprite.w,
+    sprite.h
+  );
+  tempCtx.restore();
+  // draw temp canvas to main canvas
+  ctx.drawImage(
+    tempCanvas,
+    0,
+    0,
+    sprite.w,
+    sprite.h,
+    0,
+    startY + 160,
+    Math.round(sprite.w * scale),
+    Math.round(sprite.h * scale)
+  );
 
-//   const scaledCanvas = document.createElement("canvas");
-//   scaledCanvas.width = scaledWidth;
-//   scaledCanvas.height = scaledHeight;
+  // now draw the steam
+  tempCtx.save();
+  tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+  tempCtx.drawImage(
+    maskCanvas,
+    cloudMaskSprite.x,
+    cloudMaskSprite.y,
+    cloudMaskSprite.w,
+    cloudMaskSprite.h,
+    0,
+    0,
+    cloudMaskSprite.w,
+    cloudMaskSprite.h
+  );
+  tempCtx.globalCompositeOperation = "source-in";
+  tempCtx.drawImage(
+    spriteCanvas,
+    cloudSprite.x,
+    cloudSprite.y,
+    cloudSprite.w,
+    cloudSprite.h,
+    0,
+    0,
+    cloudSprite.w,
+    cloudSprite.h
+  );
+  tempCtx.restore();
+  // draw temp canvas to main canvas
+  ctx.save();
+  ctx.translate(cloudSprite.w / 2, startY + cloudSprite.h / 2);
+  ctx.rotate(degToRad(-45));
+  ctx.drawImage(
+    tempCanvas,
+    0,
+    0,
+    cloudSprite.w,
+    cloudSprite.h,
+    -65,
+    0,
+    cloudSprite.w,
+    cloudSprite.h
+  );
+  ctx.restore();
 
-//   const ctx = scaledCanvas.getContext("2d");
-//   ctx.drawImage(
-//     srcCanvas,
-//     0,
-//     0,
-//     srcWidth,
-//     srcHeight,
-//     0,
-//     0,
-//     scaledWidth,
-//     scaledHeight
-//   );
+  return {
+    x: 0,
+    y: startY,
+    w: sprite.w,
+    h: sprite.h * 2.5,
+  };
+}
 
-//   const scaledData = {};
-//   const keys = Object.keys(srcData);
-
-//   for (let k of keys) {
-//     scaledData[k] = {};
-//     scaledData[k].x = srcData[k].x * scale;
-//     scaledData[k].y = srcData[k].y * scale;
-//     scaledData[k].w = srcData[k].w * scale;
-//     scaledData[k].h = srcData[k].h * scale;
-//   }
-
-//   return { scaledCanvas, scaledData };
-// }
+const degToRad = (deg) => (deg * Math.PI) / 180;
 
 // DRAW MASKED SHORE AND RETURN DATA
 function drawMaskedShore(
@@ -428,8 +516,8 @@ function drawMaskedShore(
   );
   ctx.restore();
   // draw ripples over reflection
-  ctx.save();
-  ctx.globalAlpha = 0.1;
+  // ctx.save();
+  // ctx.globalAlpha = 0.9;
   ctx.drawImage(
     maskCanvas,
     ripples.x,
@@ -441,8 +529,8 @@ function drawMaskedShore(
     ripples.w,
     ripples.h * 0.5
   );
-  ctx.globalAlpha = 1;
-  ctx.restore();
+  // ctx.globalAlpha = 1;
+  // ctx.restore();
   tempCtx.restore();
 
   return {

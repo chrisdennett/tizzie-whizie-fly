@@ -31,7 +31,7 @@ const GameMaker = ({
     }
     // FOR TESTING - LOAD SAMPLE IMMEDIATELY
     else if (IN_TEST_MODE || IN_LOCAL_TEST_MODE) {
-      loadImage("./tizzie-crayon.jpg", createSpritesheet, true);
+      loadImage("./spritesheet-for-pdf2.png", createSpritesheet, true);
       // loadImage("./tizzie-crayon.jpg", createSpritesheet, true);
     }
     // eslint-disable-next-line

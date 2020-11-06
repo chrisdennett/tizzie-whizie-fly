@@ -1,8 +1,10 @@
 export const msPerFrame = 16.7; // this is what use animation frame gives us
 const msPerSecond = 1000;
+
 export const getFrameFromSeconds = (seconds) =>
   (seconds * msPerSecond) / msPerFrame;
 
+// gets just the data needed during the game
 export const obstacles = () => {
   const arrWithTimings = obstacleArr.map((obs, i) => {
     const { type } = obs;
@@ -14,6 +16,7 @@ export const obstacles = () => {
 };
 
 export const obstacleArr = [
+  // { type: "bownessie", name: "Wreck Name", position: "0", link: "" },
   {
     type: "boat",
     name: "Margaret",
@@ -21,7 +24,7 @@ export const obstacleArr = [
     date: "1780",
     link: "https://lakelandarts.org.uk/items/margaret-around-1780/",
   },
-  { type: "island", name: "Blake Holme", position: "2", link: "" },
+  { type: "wreck", name: "Wreck Name", position: "2", link: "" },
   {
     type: "boat",
     name: "Esperance",
@@ -149,4 +152,183 @@ export const obstacleArr = [
   { type: "island", name: "Rough Holme", position: "36", link: "" },
   { type: "island", name: "Green Tuft Island", position: "38", link: "" },
   { type: "island", name: "Bee Holme", position: "40", link: "" },
+  { type: "island", name: "Blake Holme", position: "42", link: "" },
 ];
+
+export const spriteData = {
+  title: {
+    x: 110,
+    y: 20,
+    w: 447,
+    h: 71,
+  },
+  cloud: {
+    x: 434,
+    y: 640,
+    w: 155,
+    h: 92,
+  },
+  island: {
+    x: 556,
+    y: 366,
+    w: 300,
+    h: 345,
+  },
+  boat: {
+    x: 603,
+    y: 233,
+    w: 439,
+    h: 106,
+  },
+  shore: {
+    x: 22,
+    y: 103,
+    w: 1028,
+    h: 121,
+  },
+  pike: {
+    x: 86,
+    y: 385,
+    w: 415,
+    h: 229,
+  },
+  bownessie: {
+    x: 10,
+    y: 367,
+    w: 402,
+    h: 388,
+  },
+  wreck: {
+    x: 760,
+    y: 357,
+    w: 316,
+    h: 399,
+  },
+  player: {
+    body: {
+      x: 360,
+      y: 322,
+      w: 192,
+      h: 110,
+    },
+    wing: {
+      x: 434,
+      y: 230,
+      w: 36,
+      h: 103,
+    },
+    tail: {
+      x: 291,
+      y: 264,
+      w: 62,
+      h: 139,
+    },
+    leg: {
+      x: 387,
+      y: 439,
+      w: 24,
+      h: 28,
+    },
+  },
+  ripples: {
+    x: 31,
+    y: 903,
+    w: 1029,
+    h: 566,
+  },
+  underwater: {
+    x: 30,
+    y: 1474,
+    w: 1029,
+    h: 263,
+  },
+};
+
+export const maskData = {
+  title: {
+    x: 30,
+    y: 36,
+    w: 447,
+    h: 71,
+  },
+  cloud: {
+    x: 490,
+    y: 628,
+    w: 155,
+    h: 92,
+  },
+  island: {
+    x: 444,
+    y: 262,
+    w: 300,
+    h: 345,
+  },
+  boat: {
+    x: 631,
+    y: 19,
+    w: 439,
+    h: 106,
+  },
+  shore: {
+    x: 30,
+    y: 131,
+    w: 1028,
+    h: 121,
+  },
+  pike: {
+    x: 684,
+    y: 665,
+    w: 415,
+    h: 229,
+  },
+  bownessie: {
+    x: 30,
+    y: 407,
+    w: 402,
+    h: 388,
+  },
+  wreck: {
+    x: 770,
+    y: 259,
+    w: 316,
+    h: 399,
+  },
+  player: {
+    body: {
+      x: 236,
+      y: 264,
+      w: 192,
+      h: 110,
+    },
+    wing: {
+      x: 182,
+      y: 274,
+      w: 36,
+      h: 103,
+    },
+    tail: {
+      x: 30,
+      y: 260,
+      w: 62,
+      h: 139,
+    },
+    leg: {
+      x: 126,
+      y: 335,
+      w: 24,
+      h: 28,
+    },
+  },
+  ripples: {
+    x: 31,
+    y: 903,
+    w: 1029,
+    h: 566,
+  },
+  underwater: {
+    x: 30,
+    y: 1474,
+    w: 1029,
+    h: 263,
+  },
+};

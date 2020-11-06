@@ -42,67 +42,79 @@ export const drawGame = (
 
     const obXpos =
       IN_DRAWING_TEST_MODE && gameState.nextObstacleIndex === 0
-        ? gameState.obstacleX - (currObstacleSprite.w + 50)
+        ? gameState.obstacleX - (currObstacleSprite.w + 200)
         : gameState.obstacleX;
 
     let obstacleBoundsArr = [];
     let yPos = 0;
     if (currObstacle.type === "boat") {
-      yPos = 85;
+      yPos = 60;
       obstacleBoundsArr = [
         {
           x: obXpos,
-          y: yPos + 180,
-          w: currObstacleSprite.w - 30,
-          h: currObstacleSprite.h - 180,
+          y: yPos + 210,
+          w: currObstacleSprite.w - 110,
+          h: currObstacleSprite.h - 230,
         },
         {
-          x: obXpos + 105,
-          y: yPos + 70,
-          w: 40,
-          h: 110,
+          x: obXpos + 90,
+          y: yPos + 60,
+          w: currObstacleSprite.w - 400,
+          h: currObstacleSprite.h - 80,
         },
         {
-          x: obXpos + 140,
-          y: yPos,
-          w: 40,
-          h: 110,
-        },
-        {
-          x: obXpos + 160,
-          y: yPos + 145,
-          w: 200,
-          h: 40,
-        },
-        {
-          x: obXpos + 390,
-          y: yPos + 135,
-          w: 20,
-          h: 60,
+          x: obXpos + 130,
+          y: yPos + 10,
+          w: currObstacleSprite.w - 400,
+          h: currObstacleSprite.h - 200,
         },
       ];
     }
 
     if (currObstacle.type === "island") {
+      yPos = 170;
+      obstacleBoundsArr = [
+        {
+          x: obXpos + 70,
+          y: yPos + 20,
+          w: 100,
+          h: 240,
+        },
+        {
+          x: obXpos + 50,
+          y: yPos + 145,
+          w: 190,
+          h: 70,
+        },
+      ];
+    }
+
+    if (currObstacle.type === "wreck") {
       yPos = 190;
       obstacleBoundsArr = [
         {
-          x: obXpos,
-          y: yPos + currObstacleSprite.h - 20,
-          w: currObstacleSprite.w,
-          h: 10,
+          x: obXpos + 135,
+          y: yPos,
+          w: 20,
+          h: 320,
         },
         {
-          x: obXpos + 40,
-          y: yPos + 55,
-          w: 260,
-          h: 50,
+          x: obXpos + 70,
+          y: yPos + 52,
+          w: 160,
+          h: 15,
+        },
+        {
+          x: obXpos + 120,
+          y: yPos + 200,
+          w: 20,
+          h: 100,
         },
         {
           x: obXpos + 100,
-          y: yPos + 10,
-          w: 160,
-          h: 40,
+          y: yPos + 250,
+          w: 20,
+          h: 20,
         },
       ];
     }
@@ -148,27 +160,27 @@ export const drawGame = (
 
       obstacleBoundsArr = [
         {
-          x: obXpos,
+          x: obXpos + 10,
           y: yPos,
-          w: 70,
-          h: 40,
+          w: 30,
+          h: 25,
         },
         {
-          x: obXpos + 40,
+          x: obXpos + 30,
           y: yPos + 40,
           w: 30,
-          h: 100,
+          h: 80,
         },
         {
-          x: obXpos + 90,
-          y: yPos + 140,
+          x: obXpos + 70,
+          y: yPos + 150,
           w: 80,
           h: 30,
         },
         {
-          x: obXpos + 150,
-          y: yPos + 170,
-          w: 300,
+          x: obXpos + 100,
+          y: yPos + 180,
+          w: 70,
           h: 60,
         },
       ];
@@ -243,7 +255,6 @@ function drawBounds(ctx, bounds) {
 
 export const drawSprite = (ctx, spriteCanvas, sprite, targX, targY) => {
   const { x, y, h, w } = sprite;
-
   ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
 };
 
@@ -284,12 +295,8 @@ const drawUnderwater = (ctx, spriteCanvas, spriteData, gameState) => {
   // const xPos = Math.round(gameState.underwaterX
 
   ctx.save();
-  ctx.globalAlpha = 0.6;
-  // ctx.globalCompositeOperation = "source-over"; //
-  // ctx.globalCompositeOperation = "lighten";
-  // ctx.globalCompositeOperation = "color-burn"; // makes color better
-  ctx.globalCompositeOperation = "multiply";
-  // ctx.globalCompositeOperation = "difference";
+  // ctx.globalAlpha = 0.8;
+  // ctx.globalCompositeOperation = "multiply";
 
   // draw flipped copy
   ctx.save();
@@ -317,12 +324,12 @@ const drawUnderwater = (ctx, spriteCanvas, spriteData, gameState) => {
       ctx,
       spriteCanvas,
       spriteData.underwater,
-      gameState.underwaterX - gameState.underwaterW - 1,
+      gameState.underwaterX - gameState.underwaterW,
       underwaterY
     );
   }
-  ctx.globalCompositeOperation = "source-in";
-  ctx.restore();
+  // ctx.globalCompositeOperation = "source-in";
+  // ctx.restore();
 };
 
 // PLAYER

@@ -2,7 +2,7 @@ import React from "react";
 
 export const Map = ({ progress = 0 }) => {
   const lakeOutline = `rgba(0, 0, 0, 0.5)`;
-  const lakeFill = `rgba(0, 0, 0, 0.3)`;
+  const lakeFill = `rgba(0, 0, 0, 0)`;
   const islandFill = `rgba(255,255,255,0.8)`;
   // without this there's a tiny blob at the line at the start
   const progressStroke = progress > 0 ? `rgba(5, 5, 5, 1)` : "rgba(0, 0, 0, 0)";
