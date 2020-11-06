@@ -31,7 +31,7 @@ const GameMaker = ({
     }
     // FOR TESTING - LOAD SAMPLE IMMEDIATELY
     else if (IN_TEST_MODE || IN_LOCAL_TEST_MODE) {
-      loadImage("./spritesheet-for-pdf2.png", createSpritesheet, true);
+      loadImage("./filled-in-sheet.png", createSpritesheet, true);
       // loadImage("./tizzie-crayon.jpg", createSpritesheet, true);
     }
     // eslint-disable-next-line
@@ -113,14 +113,14 @@ const GameMaker = ({
             <SampleCards>
               <SampleCard
                 onSelect={onSampleSelect}
-                img={"tizzie-crayon.jpg"}
-                thumb={"tizzie-crayon_250x141.jpg"}
+                img={"tizzie-full-colour.jpg"}
+                thumb={"tizzie-full-colour_250x141.jpg"}
                 label={"Crayon Wonder"}
                 details={"by me!"}
               />
               <SampleCard
                 onSelect={onSampleSelect}
-                img={"extreme.jpg"}
+                img={"filled-in-sheet.png"}
                 thumb={"extreme_250x141.jpg"}
                 label={"Extreme Test"}
                 details={"by A.Bad Photographer"}

@@ -10,8 +10,13 @@ const gameH = 760;
 export const findSheetCorners = (sourceImg) => {
   if (!sourceImg) return;
 
-  const sourceCanvas = createCanvasFromSrc(sourceImg);
-  const ctx = sourceCanvas.getContext("2d", { alpha: false });
+  const webGlCanvas = fx.canvas();
+
+  var texture = webGlCanvas.texture(sourceImg);
+  webGlCanvas.draw(texture).unsharpMask(20, 0.47).update();
+
+  const sourceCanvas = createCanvasFromSrc(webGlCanvas);
+  const ctx = sourceCanvas.getContext("2d");
   const imageData = ctx.getImageData(
     0,
     0,
@@ -24,10 +29,12 @@ export const findSheetCorners = (sourceImg) => {
   let a, b, c, d;
 
   if (markers.length === 4) {
-    a = markers[0].corners[0]; // top left
-    b = markers[1].corners[0]; // top right
-    c = markers[3].corners[0]; // bottom right
-    d = markers[2].corners[0]; // bottom left
+    const sortedMarkers = sortMarkers(markers);
+
+    a = sortedMarkers[0].corners[0]; // top left
+    b = sortedMarkers[1].corners[0]; // top right
+    c = sortedMarkers[2].corners[0]; // bottom right
+    d = sortedMarkers[3].corners[0]; // bottom left
   } else {
     a = { x: 0, y: 0 }; // top left
     b = { x: sourceCanvas.width, y: 0 }; // top right
@@ -36,6 +43,22 @@ export const findSheetCorners = (sourceImg) => {
   }
 
   return { a, b, c, d };
+};
+
+export const sortMarkers = (markers) => {
+  // find two on left
+  // let topLeft, topRight, bottomRight, bottomLeft;
+  markers.sort((a, b) => {
+    return a.corners[0].x < b.corners[0].x ? -1 : 1;
+  });
+
+  const leftMarkers = [markers[0], markers[1]];
+  const rightMarkers = [markers[2], markers[3]];
+
+  leftMarkers.sort((a, b) => (a.corners[0].y < b.corners[0].y ? -1 : 1));
+  rightMarkers.sort((a, b) => (a.corners[0].y < b.corners[0].y ? -1 : 1));
+
+  return [leftMarkers[0], rightMarkers[0], rightMarkers[1], leftMarkers[1]];
 };
 
 export const generateSpritesheet = (unwarpedCanvas, maskImg) => {
