@@ -1,11 +1,9 @@
-import { obstacles, getFrameFromSeconds, spriteData } from "./gameItems";
+import { obstacles, spriteData } from "./gameItems";
 
 const water = 230;
-// const totalDurationSeconds = 45;
-// const durationMs = getFrameFromSeconds(totalDurationSeconds);
-
 const _obstacles = obstacles();
-const duration = _obstacles[_obstacles.length - 1].triggerMs;
+const lastObstacleMs = _obstacles[_obstacles.length - 1].triggerMs;
+const duration = lastObstacleMs + 250;
 
 export const defaultGameState = {
   topScore: 123456,
@@ -69,7 +67,6 @@ export const getNextGameState = (prevGameState, goUp, goDown, tickCount) => {
 
 function getGameProgress(prevGameState) {
   const newGameTick = prevGameState.gameTick + 1;
-  const newGameOver = newGameTick >= prevGameState.duration;
   const newProgress = newGameTick / prevGameState.duration;
   const cardsWon = prevGameState.nextObstacleIndex;
   const pointsWon =
@@ -79,7 +76,6 @@ function getGameProgress(prevGameState) {
 
   return {
     gameTick: newGameTick,
-    gameOver: newGameOver,
     progress: newProgress,
     cardsWon,
     pointsWon,
@@ -108,7 +104,10 @@ function getObstacleState(prevGameState) {
   let newObstacleInPlay = prevGameState.obstacleInPlay;
   let newNextObstacleIndex = prevGameState.nextObstacleIndex;
   let newMaxObstacleIndexCollected = prevGameState.maxObstacleIndexCollected;
-  if (newNextObstacleIndex >= prevGameState.obstacles.length) return {};
+  if (newNextObstacleIndex >= prevGameState.obstacles.length)
+    return {
+      gameOver: true,
+    };
   const currObstacle = prevGameState.obstacles[newNextObstacleIndex];
   const obstacleSprite = spriteData[currObstacle.type];
 

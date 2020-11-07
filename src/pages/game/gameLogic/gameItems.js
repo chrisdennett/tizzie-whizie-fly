@@ -1,15 +1,9 @@
-export const msPerFrame = 16.7; // this is what use animation frame gives us
-const msPerSecond = 1000;
-
-export const getFrameFromSeconds = (seconds) =>
-  (seconds * msPerSecond) / msPerFrame;
-
 // gets just the data needed during the game
 export const obstacles = () => {
   const arrWithTimings = obstacleArr.map((obs, i) => {
     const { type } = obs;
 
-    return { type, triggerMs: getFrameFromSeconds(2 + i * 2), position: i };
+    return { type, triggerMs: 2 + i * 250, position: i };
   });
 
   return arrWithTimings;
@@ -31,12 +25,6 @@ export const obstacleArr = [
     link: "https://lakelandarts.org.uk/items/esperance-1869/",
   },
   { type: "island", name: "Silver Holme.", link: "" },
-  {
-    type: "pike",
-    name: "The Pike",
-    date: "XXXX",
-    link: "XXXX",
-  },
   { type: "island", name: "Crag Holme", link: "" },
   {
     type: "boat",
@@ -46,10 +34,10 @@ export const obstacleArr = [
   },
   { type: "island", name: "Grass Holme,", link: "" },
   {
-    type: "bownessie",
-    name: "Kittiwake",
-    date: "1898",
-    link: "https://lakelandarts.org.uk/items/kittiwake-1898/",
+    type: "pike",
+    name: "The Pike",
+    date: "XXXX",
+    link: "XXXX",
   },
   { type: "island", name: "Ling Holme", link: "" },
   {
@@ -65,14 +53,21 @@ export const obstacleArr = [
     date: "1900",
     link: "https://lakelandarts.org.uk/items/lady-elizabeth-around-1900/",
   },
+  {
+    type: "bownessie",
+    name: "Kittiwake",
+    date: "1898",
+    link: "https://lakelandarts.org.uk/items/kittiwake-1898/",
+  },
   { type: "island", name: "Crow Holme,", link: "" },
+  { type: "island", name: "Maiden Holme", link: "" },
   {
     type: "boat",
     name: "Osprey",
     date: "1902",
     link: "https://lakelandarts.org.uk/items/osprey-1902/",
   },
-  { type: "island", name: "Maiden Holme", link: "" },
+  { type: "island", name: "Belle Isle", link: "" },
   {
     type: "boat",
     name: "Swallow",
@@ -80,7 +75,6 @@ export const obstacleArr = [
     date: "1911",
     link: "https://lakelandarts.org.uk/items/swallow-1911/",
   },
-  { type: "island", name: "Belle Isle", link: "" },
   {
     type: "boat",
     name: "Canfly",
@@ -118,25 +112,28 @@ export const obstacleArr = [
     link: "https://lakelandarts.org.uk/items/jane-1937/",
   },
   { type: "island", name: "Birk or Birch Holme", link: "" },
+  { type: "island", name: "Thompson Holme ", link: "" },
   {
     type: "boat",
     name: "Slingsby Falcon 1 Glider",
     date: "1943",
     link: "https://lakelandarts.org.uk/items/slingsby-falcon-1-glider-1943/",
   },
-  { type: "island", name: "Thompson Holme ", link: "" },
+  { type: "wreck", name: "Wreck Name", link: "" },
+  { type: "island", name: "Hawes Holme", link: "" },
+  { type: "island", name: "Hen Holme", link: "" },
   {
     type: "boat",
     name: "Miss Windermere IV",
     date: "1958",
     link: "https://lakelandarts.org.uk/items/miss-windermere-iv-1958/",
   },
-  { type: "island", name: "Hawes Holme", link: "" },
-  { type: "island", name: "Hen Holme", link: "" },
   { type: "island", name: "Ladyholme", link: "" },
+  { type: "wreck", name: "Wreck Name", link: "" },
   { type: "island", name: "Rough Holme", link: "" },
   { type: "island", name: "Green Tuft Island", link: "" },
   { type: "island", name: "Bee Holme", link: "" },
+  { type: "wreck", name: "Wreck Name", link: "" },
   { type: "island", name: "Blake Holme", link: "" },
 ];
 
