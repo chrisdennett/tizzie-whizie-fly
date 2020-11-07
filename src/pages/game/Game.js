@@ -30,7 +30,7 @@ export const Game = ({
 
   // const [endState, setEndState] = useState(defaultGameState);
   const [showInstructions, setShowInstructions] = useState(!AUTO_PLAY_GAME);
-  const [isPaused, setIsPaused] = useState(true);
+  const [isPaused, setIsPaused] = useState(!AUTO_PLAY_GAME);
   // TODO - if go away from game and back this resets - move to App maybe
 
   const goUp = () => setFlyUp(true);

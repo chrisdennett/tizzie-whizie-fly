@@ -121,8 +121,8 @@ const GameMaker = ({
               />
               <SampleCard
                 onSelect={onSampleSelect}
-                img={"filled-in-sheet.png"}
-                thumb={"extreme_250x141.jpg"}
+                img={"extreme2.jpg"}
+                thumb={"extreme2_250x141.jpg"}
                 label={"Extreme Test"}
                 details={"by A.Bad Photographer"}
               />

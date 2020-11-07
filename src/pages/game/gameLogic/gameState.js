@@ -1,13 +1,15 @@
 import { obstacles, getFrameFromSeconds, spriteData } from "./gameItems";
 
 const water = 230;
-const totalDurationSeconds = 45;
-const durationMs = getFrameFromSeconds(totalDurationSeconds);
+// const totalDurationSeconds = 45;
+// const durationMs = getFrameFromSeconds(totalDurationSeconds);
+
+const _obstacles = obstacles();
+const duration = _obstacles[_obstacles.length - 1].triggerMs;
 
 export const defaultGameState = {
   topScore: 123456,
   gameTick: 0,
-  duration: durationMs,
   gameOver: false,
   progress: 0,
   nextObstacleIndex: 0,
@@ -15,7 +17,8 @@ export const defaultGameState = {
   maxObstacleIndexCollected: -1,
   soundOn: false,
 
-  obstacles: obstacles(),
+  obstacles: _obstacles,
+  duration,
 
   gameW: 1089,
   gameH: 760,
