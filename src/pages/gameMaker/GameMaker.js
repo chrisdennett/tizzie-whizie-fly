@@ -128,14 +128,6 @@ const GameMaker = ({
               />
             </SampleCards>
           </Section>
-
-          <Section>
-            <h3>Tips:</h3>
-            <p>
-              <b>Just keep clear of those weird corner bits</b>. Those need to
-              be clearly visible for the magic to happen!
-            </p>
-          </Section>
         </div>
       )}
 

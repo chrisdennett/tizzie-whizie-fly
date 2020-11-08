@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 // import useSound from "use-sound";
-import { useKeyboardBindings } from "../../../hooks/useKeyboardBindings";
 import { ArrowButton } from "./ArrowButtons";
 
-const GameControlsLeft = ({ gameState, goUp, goDown, showAsRow }) => {
+const GameControlsLeft = ({ goUp, goDown, showAsRow }) => {
   // const [playPlip] = useSound("/sounds/plip.wav", { volume: 1 });
   // const [playWhoosh] = useSound(
   //   "/sounds/zapsplat_cartoon_swipe_fast_swish_001_49164.mp3",
@@ -12,10 +11,6 @@ const GameControlsLeft = ({ gameState, goUp, goDown, showAsRow }) => {
   //     volume: 1,
   //   }
   // );
-  useKeyboardBindings({
-    ArrowUp: () => onGoUp(),
-    ArrowDown: () => onGoDown()
-  });
 
   const onGoDown = () => {
     goDown();

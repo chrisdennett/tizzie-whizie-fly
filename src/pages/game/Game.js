@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import GameControlsRight from "./gameControls/GameControlsRight";
-// import CollectionCard from "../collectionCards/CollectionCards";
+import { useKeyboardBindings } from "../../hooks/useKeyboardBindings";
 // import useSound from "use-sound";
 
 import GameControlsLeft from "./gameControls/GameControlsLeft";
@@ -17,15 +17,19 @@ export const Game = ({
   AUTO_PLAY_GAME,
   IN_INVINCIBLE_MODE,
 }) => {
+  const [flyUp, setFlyUp] = useState(false);
+  const [diveDown, setDiveDown] = useState(false);
   // const [playLoseSound] = useSound("/sounds/zapsplat_impact.mp3", {
   //   volume: 1,
   // });
+  useKeyboardBindings({
+    ArrowUp: () => goUp(),
+    ArrowDown: () => goDown(),
+  });
 
   const showPortraitMode =
     windowSize.width < windowSize.height && windowSize.width < 600;
 
-  const [flyUp, setFlyUp] = useState(false);
-  const [diveDown, setDiveDown] = useState(false);
   // const [, setShowCollectionCards] = useState(false);
 
   // const [endState, setEndState] = useState(defaultGameState);
