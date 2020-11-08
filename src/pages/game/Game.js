@@ -19,30 +19,29 @@ export const Game = ({
 }) => {
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(!AUTO_PLAY_GAME);
+  const [isPaused, setIsPaused] = useState(!AUTO_PLAY_GAME);
+
   // const [playLoseSound] = useSound("/sounds/zapsplat_impact.mp3", {
   //   volume: 1,
   // });
+
   useKeyboardBindings({
     ArrowUp: () => goUp(),
     ArrowDown: () => goDown(),
+    Enter: () => {
+      if (showInstructions) {
+        onPlay();
+      }
+    },
   });
 
   const showPortraitMode =
     windowSize.width < windowSize.height && windowSize.width < 600;
 
-  // const [, setShowCollectionCards] = useState(false);
-
-  // const [endState, setEndState] = useState(defaultGameState);
-  const [showInstructions, setShowInstructions] = useState(!AUTO_PLAY_GAME);
-  const [isPaused, setIsPaused] = useState(!AUTO_PLAY_GAME);
-  // TODO - if go away from game and back this resets - move to App maybe
-
   const goUp = () => setFlyUp(true);
   const goDown = () => setDiveDown(true);
   const onPlayPauseToggle = () => setIsPaused((prev) => !prev);
-  const replay = () => {
-    // setGameState(defaultGameState);
-  };
 
   const onCollision = (gameState) => {
     if (!IN_INVINCIBLE_MODE) {
@@ -57,11 +56,8 @@ export const Game = ({
 
   const onPauseAndCloseGame = () => {
     setIsPaused(true);
-    // setGameState(defaultGameState);
     onCloseGame();
   };
-
-  // const onShowCardsCollected = () => setShowCollectionCards((prev) => !prev);
 
   const onHelp = () => {
     setIsPaused(true);
@@ -79,7 +75,6 @@ export const Game = ({
 
   const rightControlsProps = {
     onEndGame: onPauseAndCloseGame,
-    replay,
     onPlayPauseToggle,
     isPaused,
     onHelp: onHelp,
