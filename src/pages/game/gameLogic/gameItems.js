@@ -1,8 +1,8 @@
 // gets just the data needed during the game
 export const obstacles = () => {
-  const TEST_ARR = obstacleArr.slice(0, 5);
+  // const TEST_ARR = obstacleArr.slice(0, 5);
 
-  const arrWithTimings = TEST_ARR.map((obs, i) => {
+  const arrWithTimings = obstacleArr.map((obs, i) => {
     const { type } = obs;
 
     return { type, triggerMs: 2 + i * 250, position: i };
@@ -17,6 +17,7 @@ export const obstacleArr = [
     type: "boat",
     name: "Margaret",
     date: "1780",
+    img: "/img/boats/Margaret-1-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/margaret-around-1780/",
   },
   { type: "wreck", name: "Wreck Name", link: "" },
@@ -24,6 +25,7 @@ export const obstacleArr = [
     type: "boat",
     name: "Esperance",
     date: "1869",
+    img: "/img/boats/Esperance_ret-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/esperance-1869/",
   },
   { type: "island", name: "Silver Holme.", link: "" },
@@ -32,6 +34,7 @@ export const obstacleArr = [
     type: "boat",
     name: "Branksome",
     date: "1896",
+    img: "/img/boats/WJ-Branksome-2-H-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/branksome/",
   },
   { type: "island", name: "Grass Holme,", link: "" },
@@ -46,6 +49,7 @@ export const obstacleArr = [
     type: "boat",
     name: "Motorboat",
     date: "1898",
+    img: "/img/boats/Early-Motor-Boat-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/motorboat-1898/",
   },
   { type: "island", name: "Ramp Holme", link: "" },
@@ -53,12 +57,14 @@ export const obstacleArr = [
     type: "boat",
     name: "Lady Elizabeth",
     date: "1900",
+    img: "/img/boats/WJ-Lady-Elizabeth-1-H-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/lady-elizabeth-around-1900/",
   },
   {
     type: "bownessie",
     name: "Kittiwake",
     date: "1898",
+    img: "/img/boats/SL-Kittiwake-H-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/kittiwake-1898/",
   },
   { type: "island", name: "Crow Holme,", link: "" },
@@ -67,6 +73,7 @@ export const obstacleArr = [
     type: "boat",
     name: "Osprey",
     date: "1902",
+    img: "/img/boats/WJ-SL-Osprey-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/osprey-1902/",
   },
   { type: "island", name: "Belle Isle", link: "" },
@@ -75,6 +82,7 @@ export const obstacleArr = [
     name: "Swallow",
     position: "17",
     date: "1911",
+    img: "/img/boats/swallow_280x174.jpg",
     link: "https://lakelandarts.org.uk/items/swallow-1911/",
   },
   {
@@ -82,6 +90,7 @@ export const obstacleArr = [
     name: "Canfly",
     position: "19",
     date: "1922",
+    img: "/img/boats/Canfly-©-Paul-Allonby-H-280x188",
     link: "https://lakelandarts.org.uk/items/canfly-1922/",
   },
   {
@@ -93,6 +102,7 @@ export const obstacleArr = [
     type: "boat",
     name: "White Lady II",
     date: "1930",
+    img: "/img/boats/White-Lady-II-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/white-lady-ii/",
   },
   {
@@ -104,6 +114,7 @@ export const obstacleArr = [
     type: "boat",
     name: "Penelope II",
     date: "1930",
+    img: "/img/boats/Penelope-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/penelope-ii-1930/",
   },
   { type: "island", name: "Snake Holme,", link: "" },
@@ -111,6 +122,7 @@ export const obstacleArr = [
     type: "boat",
     name: "Jane",
     date: "1937",
+    img: "/img/boats/Jane-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/jane-1937/",
   },
   { type: "island", name: "Birk or Birch Holme", link: "" },
@@ -121,6 +133,7 @@ export const obstacleArr = [
     type: "boat",
     name: "Slingsby Falcon 1 Glider",
     date: "1943",
+    img: "/img/boats/Slingsby-Falcon-1-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/slingsby-falcon-1-glider-1943/",
   },
   { type: "island", name: "Ladyholme", link: "" },
@@ -130,6 +143,7 @@ export const obstacleArr = [
     type: "boat",
     name: "Miss Windermere IV",
     date: "1958",
+    img: "/img/boats/Miss-Windermere-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/miss-windermere-iv-1958/",
   },
   { type: "island", name: "Green Tuft Island", link: "" },

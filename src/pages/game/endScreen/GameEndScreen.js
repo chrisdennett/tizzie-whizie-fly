@@ -22,8 +22,8 @@ export const GameEndScreen = ({ onReplay, endState, onFinish, spriteData }) => {
           <CallToActionButton onClick={onReplay}>REPLAY</CallToActionButton>
         </Header>
 
-        {!gameIsWon && <WinningHeader spriteData={spriteData} />}
-        {/* {gameIsWon && <WinningHeader />} */}
+        {/* {!gameIsWon && <WinningHeader spriteData={spriteData} />} */}
+        {gameIsWon && <WinningHeader spriteData={spriteData} />}
 
         {!gameIsWon && <LosingHeader />}
 
@@ -45,27 +45,11 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   min-height: 100%;
-  /* background-color: rgba(255, 255, 255, 0.4); */
-  /* position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0; */
-  /* display: flex; */
-  /* z-index: 100; */
-  /* padding: 2%; */
 `;
 
 const Content = styled.div`
   padding: 4% 3% 4% 6%;
   text-align: center;
-  /* max-width: 450px; */
-  /* background-color: whitesmoke; */
-  /* margin: auto;
-  text-align: center;
-  border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); */
 
   h2 {
     margin: 0;

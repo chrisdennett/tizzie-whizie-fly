@@ -7,8 +7,6 @@ export const WinningHeader = ({ spriteData }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    console.log("spriteData: ", spriteData);
-
     if (canvasRef && canvasRef.current && spriteData) {
       const c = canvasRef.current;
       const ctx = c.getContext("2d");
@@ -28,7 +26,7 @@ export const WinningHeader = ({ spriteData }) => {
   });
 
   return (
-    <div>
+    <Container>
       <ConfettiHolder>
         <ConfettiCanvas />
       </ConfettiHolder>
@@ -38,9 +36,15 @@ export const WinningHeader = ({ spriteData }) => {
         card. BOOM!
       </h3>
       <canvas ref={canvasRef} />
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  h3 {
+    font-weight: normal;
+  }
+`;
 
 const ConfettiHolder = styled.div`
   position: absolute;
