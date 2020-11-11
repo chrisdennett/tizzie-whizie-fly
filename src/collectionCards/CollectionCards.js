@@ -13,12 +13,29 @@ import { obstacleArr } from "../pages/game/gameLogic/gameItems";
 //   },
 // ];
 
-export const CollectionCards = ({ maxIndexCollected = 0 }) => {
+export const CollectionCards = ({
+  maxIndexCollected = 0,
+  demoMode = false,
+}) => {
+  const tizzieData = {
+    type: "story",
+    name: "Tizzie Whizie",
+    date: "1900",
+    img: "/img/stories/tizzie-whizie-postcard_280x200.jpg",
+    link: "https://www.rabbies.com/en/blog/tizzie-whizie-legend-lake-district",
+  };
+
   return (
     <div>
       <CardList>
+        <Card data={tizzieData} showCard={true} />
+
         {obstacleArr.map((item, index) => (
-          <Card key={index} data={item} showCard={index <= maxIndexCollected} />
+          <Card
+            key={index}
+            data={item}
+            showCard={index <= maxIndexCollected || demoMode}
+          />
         ))}
       </CardList>
     </div>

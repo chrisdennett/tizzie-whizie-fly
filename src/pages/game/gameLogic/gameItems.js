@@ -41,8 +41,9 @@ export const obstacleArr = [
   {
     type: "pike",
     name: "The Pike",
-    date: "XXXX",
-    link: "XXXX",
+    date: "1982",
+    img: "/img/stories/pike-joancollins_280x214.jpg",
+    link: "https://reprobatepress.com/2018/10/30/cliff-twemlows-the-pike/",
   },
   { type: "island", name: "Ling Holme", link: "" },
   {
@@ -59,13 +60,6 @@ export const obstacleArr = [
     date: "1900",
     img: "/img/boats/WJ-Lady-Elizabeth-1-H-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/lady-elizabeth-around-1900/",
-  },
-  {
-    type: "bownessie",
-    name: "Kittiwake",
-    date: "1898",
-    img: "/img/boats/SL-Kittiwake-H-280x188.jpg",
-    link: "https://lakelandarts.org.uk/items/kittiwake-1898/",
   },
   { type: "island", name: "Crow Holme,", link: "" },
   { type: "island", name: "Maiden Holme", link: "" },
@@ -90,7 +84,7 @@ export const obstacleArr = [
     name: "Canfly",
     position: "19",
     date: "1922",
-    img: "/img/boats/Canfly-©-Paul-Allonby-H-280x188",
+    img: "/img/boats/Canfly-©-Paul-Allonby-H-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/canfly-1922/",
   },
   {
@@ -127,6 +121,13 @@ export const obstacleArr = [
   },
   { type: "island", name: "Birk or Birch Holme", link: "" },
   { type: "island", name: "Thompson Holme ", link: "" },
+  {
+    type: "bownessie",
+    name: "Bownessie",
+    date: "???",
+    img: "/img/stories/bownessie_280x175.jpeg",
+    link: "https://www.lakelovers.co.uk/blog/windermeres-bownessie/",
+  },
   { type: "island", name: "Hawes Holme", link: "" },
   { type: "island", name: "Hen Holme", link: "" },
   {
