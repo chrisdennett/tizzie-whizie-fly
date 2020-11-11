@@ -1,6 +1,8 @@
 // gets just the data needed during the game
 export const obstacles = () => {
-  const arrWithTimings = obstacleArr.map((obs, i) => {
+  const TEST_ARR = obstacleArr.slice(0, 5);
+
+  const arrWithTimings = TEST_ARR.map((obs, i) => {
     const { type } = obs;
 
     return { type, triggerMs: 2 + i * 250, position: i };

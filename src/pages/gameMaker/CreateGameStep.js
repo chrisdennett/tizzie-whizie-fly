@@ -29,7 +29,7 @@ export const CreateGameStep = ({
 
   useEffect(() => {
     if (currStep > 0) {
-      setTimeout(nextStep, 900);
+      setTimeout(nextStep, 500);
     }
     // eslint-disable-next-line
   }, [currStep]);
@@ -82,7 +82,7 @@ export const CreateGameStep = ({
               Cancel
             </ReplcePhotoButton>
             <CallToActionButton onClick={startSequence} disabled={isRunning}>
-              {isRunning ? "Making Game" : "DO IT!"}
+              {isRunning ? "Making Game" : "Generate Game"}
             </CallToActionButton>
           </NextButtonHolder>
         </div>

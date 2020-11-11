@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { CallToActionButton } from "../../components/CallToActionButton";
-import { CollectionCards } from "../../collectionCards/CollectionCards";
+import { CallToActionButton } from "../../../components/CallToActionButton";
+import { CollectionCards } from "../../../collectionCards/CollectionCards";
+import { WinningHeader } from "./WinningHeader";
+import { LosingHeader } from "./LosingHeader";
 
-export const GameEndScreen = ({ onReplay, endState, onFinish }) => {
+export const GameEndScreen = ({ onReplay, endState, onFinish, spriteData }) => {
+  const gameIsWon =
+    endState.maxObstacleIndexCollected >= endState.obstacles.length - 1;
+
   return (
     <Container>
       <Content>
@@ -12,11 +17,16 @@ export const GameEndScreen = ({ onReplay, endState, onFinish }) => {
             style={{ background: "#d86a6a" }}
             onClick={onFinish}
           >
-            FINISH
+            CLOSE
           </CallToActionButton>
           <CallToActionButton onClick={onReplay}>REPLAY</CallToActionButton>
         </Header>
-        <h2>Game Over</h2>
+
+        {!gameIsWon && <WinningHeader spriteData={spriteData} />}
+        {/* {gameIsWon && <WinningHeader />} */}
+
+        {!gameIsWon && <LosingHeader />}
+
         <p>
           <b>SCORE:</b> {endState.pointsWon | 0} out of {endState.topScore}
         </p>
@@ -32,6 +42,7 @@ export const GameEndScreen = ({ onReplay, endState, onFinish }) => {
 };
 
 const Container = styled.div`
+  position: relative;
   width: 100%;
   min-height: 100%;
   /* background-color: rgba(255, 255, 255, 0.4); */
@@ -85,8 +96,13 @@ const Content = styled.div`
 `;
 
 const Header = styled.div`
+  position: absolute;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin: 10px 0 20px 0;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
 `;
