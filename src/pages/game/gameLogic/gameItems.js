@@ -20,7 +20,6 @@ export const obstacleArr = [
     img: "/img/boats/Margaret-1-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/margaret-around-1780/",
   },
-  { type: "wreck", name: "Wreck Name", link: "" },
   {
     type: "boat",
     name: "Esperance",
@@ -45,6 +44,7 @@ export const obstacleArr = [
     img: "/img/stories/pike-joancollins_280x214.jpg",
     link: "https://reprobatepress.com/2018/10/30/cliff-twemlows-the-pike/",
   },
+  { type: "wreck", name: "Wreck Name", link: "" },
   { type: "island", name: "Ling Holme", link: "" },
   {
     type: "boat",
@@ -99,6 +99,7 @@ export const obstacleArr = [
     img: "/img/boats/White-Lady-II-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/white-lady-ii/",
   },
+  { type: "wreck", name: "Wreck Name", link: "" },
   {
     type: "island",
     name: "Lilies of the Valley (West),",
