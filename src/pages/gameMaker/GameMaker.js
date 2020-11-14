@@ -12,6 +12,7 @@ import { SampleCard, SampleCards } from "./SampleCard";
 import styled from "styled-components";
 import { MdPhotoCamera } from "react-icons/md";
 import { FaRegImages } from "react-icons/fa";
+import { Machine } from "../../components/Machine";
 
 const IN_LOCAL_TEST_MODE = false;
 
@@ -68,7 +69,8 @@ const GameMaker = ({
 
   return (
     <Container>
-      <h1>Get making!</h1>
+      <Machine />
+
       {!showGameCreateStep && (
         <div>
           <Section>
@@ -169,7 +171,7 @@ const Container = styled.div`
 `;
 
 const Section = styled.div`
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  /* border-top: 1px solid rgba(0, 0, 0, 0.2); */
   padding-top: 25px;
   margin: 0 0 25px 0;
 `;
