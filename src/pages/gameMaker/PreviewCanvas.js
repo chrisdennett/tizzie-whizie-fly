@@ -8,7 +8,13 @@ import {
 } from "../../components/SideConnector";
 // import { Machine } from "../../components/Machine";
 
-const PreviewCanvas = ({ source, corners, firstInput, secondInput }) => {
+const PreviewCanvas = ({
+  source,
+  gameCanvas,
+  corners,
+  firstInput,
+  secondInput,
+}) => {
   const canvasRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -41,9 +47,11 @@ const PreviewCanvas = ({ source, corners, firstInput, secondInput }) => {
 
       <RivotBar />
       <Holder>
-        {!source && <AwaitingInput />}
+        {!source && !gameCanvas && <AwaitingInput />}
 
         {source && <StyledCanvas ref={canvasRef} />}
+
+        {gameCanvas && gameCanvas}
       </Holder>
       <RivotBar />
     </Container>

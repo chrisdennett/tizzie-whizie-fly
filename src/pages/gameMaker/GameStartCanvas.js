@@ -13,14 +13,38 @@ const GameStartCanvas = ({ spriteData }) => {
       spriteData.canvas
     ) {
       const previewCanvas = maskedCanvasRef.current;
-      previewCanvas.width = 500;
-      previewCanvas.height = 170;
+      previewCanvas.width = 700;
+      previewCanvas.height = 300;
       const ctx = previewCanvas.getContext("2d");
 
       const { x, y, w, h } = spriteData.data.title;
 
+      const titleY = 50;
+      const titleScale = 0.75;
+
       // Draw title
-      ctx.drawImage(spriteData.canvas, x, y, w, h, 10, 20, w * 0.65, h * 0.65);
+      ctx.drawImage(
+        spriteData.canvas,
+        x,
+        y,
+        w,
+        h,
+        100,
+        titleY,
+        w * titleScale,
+        h * titleScale
+      );
+      ctx.drawImage(
+        spriteData.canvas,
+        x,
+        y,
+        160,
+        h,
+        450,
+        titleY,
+        160 * titleScale,
+        h * titleScale
+      );
 
       // Draw Tizzy
       drawPlayer(ctx, spriteData.canvas, spriteData.data, 100, 180);
@@ -37,11 +61,11 @@ const GameStartCanvas = ({ spriteData }) => {
 export default GameStartCanvas;
 
 const StyledCanvas = styled.canvas`
-  width: 100%;
-  max-width: 450px;
+  /* width: 100%; */
   /* background-color: rgba(255, 255, 255, 0.9); */
   /* border: 1px solid black; */
-  /* border-radius: 3px; */
+  border-radius: 31px;
+  background-image: url("/img/bg/linedpaper.png");
 `;
 
 const CanvasHolder = styled.div`

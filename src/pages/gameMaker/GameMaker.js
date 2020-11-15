@@ -4,7 +4,7 @@ import PhotoSelector from "../../components/imageInput/PhotoSelector";
 import { createMaxSizeCanvas } from "../../spriteSheet/helper";
 import {
   generateSpritesheet,
-  generateSpritesheetFromScratch,
+  // generateSpritesheetFromScratch,
 } from "../../spriteSheet/generateSpritesheet";
 import { CreateGameStep } from "./CreateGameStep";
 import { CallToActionButton } from "../../components/CallToActionButton";
@@ -12,7 +12,7 @@ import { SampleCard, SampleCards } from "./SampleCard";
 import styled from "styled-components";
 import { MdPhotoCamera } from "react-icons/md";
 import { FaRegImages } from "react-icons/fa";
-import { Machine } from "../../components/Machine";
+// import { Machine } from "../../components/Machine";
 import PreviewCanvas from "./PreviewCanvas";
 
 const IN_LOCAL_TEST_MODE = false;
@@ -40,14 +40,14 @@ const GameMaker = ({
   }, [spritesheetMask, IN_TEST_MODE]);
 
   // USED IN TEST TO GO STRAIGHT TO A GAME
-  const createSpritesheet = (sourceImg) => {
-    const generatedSheetData = generateSpritesheetFromScratch(
-      sourceImg,
-      spritesheetMask
-    );
-    setSpriteData(generatedSheetData);
-    setShowGame(true);
-  };
+  // const createSpritesheet = (sourceImg) => {
+  //   const generatedSheetData = generateSpritesheetFromScratch(
+  //     sourceImg,
+  //     spritesheetMask
+  //   );
+  //   setSpriteData(generatedSheetData);
+  //   setShowGame(true);
+  // };
 
   const onCreateGame = (unwarpedCanvas) => {
     const generatedSheetData = generateSpritesheet(
@@ -75,14 +75,14 @@ const GameMaker = ({
           <Section>
             <h4>Create your own...</h4>
             <p>
-              Print a template. Paint or decorate however you like. Add a photo
-              of your sheet to the Game Maker 3000.
+              Print a template, paint or decorate however you like, then add a
+              photo of your sheet to the Game Maker 3000.
             </p>
 
             <PreviewCanvas
               firstInput={
                 <CallToActionButton href={"/tizzie-fly-template.pdf"}>
-                  Template
+                  Print
                 </CallToActionButton>
               }
               secondInput={
@@ -104,7 +104,7 @@ const GameMaker = ({
                     photoCanvas={photoCanvas}
                     isFileSelector={true}
                   >
-                    <FaRegImages /> <span>Select</span>
+                    <FaRegImages /> <span>Add</span>
                   </PhotoSelector>
                 </div>
               }

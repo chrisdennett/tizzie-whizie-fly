@@ -90,30 +90,23 @@ export const CreateGameStep = ({
               />
             </PreviewCanvasHolder>
           )}
-          {/* <NextButtonHolder>
-            <ReplcePhotoButton onClick={onChangePhoto}>
-              Cancel
-            </ReplcePhotoButton>
-            <CallToActionButton onClick={startSequence} disabled={isRunning}>
-              {isRunning ? "Making Game" : "Generate Game"}
-            </CallToActionButton>
-          </NextButtonHolder> */}
         </div>
       )}
 
       {spriteData && (
-        <div>
-          <GameStartCanvas spriteData={spriteData} />
-          <NextButtonHolder>
+        <PreviewCanvas
+          gameCanvas={<GameStartCanvas spriteData={spriteData} />}
+          firstInput={
             <ReplcePhotoButton onClick={onChangePhoto}>
               Cancel
             </ReplcePhotoButton>
-
+          }
+          secondInput={
             <CallToActionButton onClick={() => setShowGame(true)}>
               LAUNCH GAME
             </CallToActionButton>
-          </NextButtonHolder>
-        </div>
+          }
+        />
       )}
     </Container>
   );
@@ -121,12 +114,12 @@ export const CreateGameStep = ({
 
 const Container = styled.div``;
 
-const NextButtonHolder = styled.div`
-  margin-top: 15px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;
+// const NextButtonHolder = styled.div`
+//   margin-top: 15px;
+//   width: 100%;
+//   display: flex;
+//   justify-content: space-between;
+// `;
 
 const PreviewCanvasHolder = styled.div`
   position: relative;
