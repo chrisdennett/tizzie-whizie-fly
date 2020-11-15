@@ -74,17 +74,30 @@ export const CreateGameStep = ({
               <PreviewCanvas
                 source={unwarpedCanvas ? unwarpedCanvas : photoCanvas}
                 corners={corners}
+                firstInput={
+                  <ReplcePhotoButton onClick={onChangePhoto}>
+                    Cancel
+                  </ReplcePhotoButton>
+                }
+                secondInput={
+                  <CallToActionButton
+                    onClick={startSequence}
+                    disabled={isRunning}
+                  >
+                    {isRunning ? "Making Game" : "Generate Game"}
+                  </CallToActionButton>
+                }
               />
             </PreviewCanvasHolder>
           )}
-          <NextButtonHolder>
+          {/* <NextButtonHolder>
             <ReplcePhotoButton onClick={onChangePhoto}>
               Cancel
             </ReplcePhotoButton>
             <CallToActionButton onClick={startSequence} disabled={isRunning}>
               {isRunning ? "Making Game" : "Generate Game"}
             </CallToActionButton>
-          </NextButtonHolder>
+          </NextButtonHolder> */}
         </div>
       )}
 
@@ -142,10 +155,11 @@ const StepLabel = styled.div`
 `;
 
 const ReplcePhotoButton = styled.button`
-  padding: 5px 10px;
+  padding: 10px;
+  cursor: pointer;
   opacity: ${(props) => (props.disabled ? 0.7 : 1)};
   background-color: ${(props) => (props.disabled ? "#ccc" : "#b92c2cb0")};
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 3px;
   font-size: 1.1em;
 `;

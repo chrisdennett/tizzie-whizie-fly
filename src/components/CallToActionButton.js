@@ -35,12 +35,13 @@ export const CallToActionButton = ({
 
 const StyledAnchor = styled.a`
   display: inline-block;
+  white-space: nowrap;
   padding: 10px 12px;
   text-decoration: none;
   color: black;
   opacity: ${(props) => (props.disabled ? 0.7 : 1)};
   background-color: ${(props) => (props.disabled ? "#ccc" : "#78b92cb0")};
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 3px;
   cursor: pointer;
 
@@ -52,9 +53,10 @@ const StyledAnchor = styled.a`
 
 const StyledButton = styled.button`
   padding: 10px;
+  white-space: nowrap;
   opacity: ${(props) => (props.disabled ? 0.7 : 1)};
   background-color: ${(props) => (props.disabled ? "#ccc" : "#78b92cb0")};
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 3px;
   font-size: 1.1em;
   cursor: pointer;

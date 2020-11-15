@@ -13,6 +13,7 @@ import styled from "styled-components";
 import { MdPhotoCamera } from "react-icons/md";
 import { FaRegImages } from "react-icons/fa";
 import { Machine } from "../../components/Machine";
+import PreviewCanvas from "./PreviewCanvas";
 
 const IN_LOCAL_TEST_MODE = false;
 
@@ -32,8 +33,8 @@ const GameMaker = ({
     }
     // FOR TESTING - LOAD SAMPLE IMMEDIATELY
     else if (IN_TEST_MODE || IN_LOCAL_TEST_MODE) {
-      loadImage("./filled-in-sheet.png", createSpritesheet, true);
-      // loadImage("./tizzie-crayon.jpg", createSpritesheet, true);
+      loadImage("./tizzie-full-colour.jpg", setPhotoCanvas, true);
+      // loadImage("./filled-in-sheet.png", createSpritesheet, true);
     }
     // eslint-disable-next-line
   }, [spritesheetMask, IN_TEST_MODE]);
@@ -69,43 +70,45 @@ const GameMaker = ({
 
   return (
     <Container>
-      <Machine />
-
       {!showGameCreateStep && (
         <div>
           <Section>
             <h4>Create your own...</h4>
-            <ol>
-              <li>
-                Print the{" "}
+            <p>
+              Print a template. Paint or decorate however you like. Add a photo
+              of your sheet to the Game Maker 3000.
+            </p>
+
+            <PreviewCanvas
+              firstInput={
                 <CallToActionButton href={"/tizzie-fly-template.pdf"}>
                   Template
                 </CallToActionButton>
-              </li>
-              <li>Paint or decorate however you like.</li>
-              <li>
-                {isMobile && (
-                  <>
-                    <PhotoSelector
-                      setPhotoCanvas={setPhotoCanvas}
-                      photoCanvas={photoCanvas}
-                    >
-                      <MdPhotoCamera /> <span>Snap</span>
-                    </PhotoSelector>
-                    or{" "}
-                  </>
-                )}
-                {!isMobile && <>Snap and </>}
-                <PhotoSelector
-                  setPhotoCanvas={setPhotoCanvas}
-                  photoCanvas={photoCanvas}
-                  isFileSelector={true}
-                >
-                  <FaRegImages /> <span>Select</span>
-                </PhotoSelector>
-                your finished sheet.
-              </li>
-            </ol>
+              }
+              secondInput={
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  {isMobile && (
+                    <>
+                      <PhotoSelector
+                        setPhotoCanvas={setPhotoCanvas}
+                        photoCanvas={photoCanvas}
+                      >
+                        <MdPhotoCamera />
+                      </PhotoSelector>
+                      or{" "}
+                    </>
+                  )}
+
+                  <PhotoSelector
+                    setPhotoCanvas={setPhotoCanvas}
+                    photoCanvas={photoCanvas}
+                    isFileSelector={true}
+                  >
+                    <FaRegImages /> <span>Select</span>
+                  </PhotoSelector>
+                </div>
+              }
+            />
           </Section>
 
           <Section>
@@ -135,7 +138,6 @@ const GameMaker = ({
 
       {showGameCreateStep && (
         <div>
-          <h4>Make the game...</h4>
           <CreateGameStep
             onChangePhoto={onChangePhoto}
             photoCanvas={photoCanvas}

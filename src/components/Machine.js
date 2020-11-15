@@ -1,23 +1,25 @@
 import React from "react";
+import styled from "styled-components";
 
 export const Machine = ({
-  showAwaitingScreen = true,
+  showAwaitingScreen = false,
   showPhotoButts = true,
   showPrintButt = true,
   showLaunchButt = false,
   showGenerateButt = false,
   showAbortButton = false,
+  children,
 }) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      id="svg9893"
-      version="1.1"
-      viewBox="0 0 138.26 152.56"
-    >
-      <g id="layer1">
+    <Outer>
+      {/* <ContentHolder>{children}</ContentHolder> */}
+
+      {/* <MachineSvgHolder> */}
+      <MachineSvg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 138.26 152.56"
+      >
         <g
-          id="g22022"
           strokeDasharray="none"
           strokeDashoffset="0"
           strokeLinecap="round"
@@ -1582,6 +1584,12 @@ export const Machine = ({
           </g>
         )}
 
+        <g transform={`translate(5, 38.5)`}>
+          <foreignObject width={128} height={73}>
+            {children}
+          </foreignObject>
+        </g>
+
         <path
           id="rect12480"
           fill="#ccc"
@@ -1713,7 +1721,24 @@ export const Machine = ({
             </g>
           </g>
         )}
-      </g>
-    </svg>
+      </MachineSvg>
+      {/* </MachineSvgHolder> */}
+    </Outer>
   );
 };
+
+const Outer = styled.div`
+  /* position: relative; */
+`;
+
+const MachineSvgHolder = styled.div`
+  /* position: absolute; */
+`;
+
+const MachineSvg = styled.svg`
+  /* position: absolute; */
+`;
+
+const ContentHolder = styled.div`
+  /* position: absolute; */
+`;
