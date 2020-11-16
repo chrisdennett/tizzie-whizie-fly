@@ -2,10 +2,12 @@
 export const obstacles = () => {
   // const TEST_ARR = obstacleArr.slice(0, 5);
 
+  const firstObstacle = 250;
+
   const arrWithTimings = obstacleArr.map((obs, i) => {
     const { type } = obs;
 
-    return { type, triggerMs: 2 + i * 250, position: i };
+    return { type, triggerMs: firstObstacle + (2 + i * 250), position: i };
   });
 
   return arrWithTimings;
