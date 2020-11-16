@@ -478,8 +478,6 @@ function drawMaskedShore(
   tempCtx.save();
   tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
 
-  console.log("mask.w: ", mask.w);
-
   // draw the mask to temp canvas
   tempCtx.drawImage(
     maskCanvas,
