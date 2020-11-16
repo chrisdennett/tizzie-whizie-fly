@@ -287,8 +287,8 @@ export const createGameData = (
     ctx,
     spriteCanvas,
     maskCanvas,
-    { ...spriteData.shore, w: 1029 },
-    { ...maskData.shore, w: 1029 },
+    { ...spriteData.shore, w: 1024 },
+    { ...maskData.shore, w: 1024 },
     maskData.ripples,
     gameSpriteSheet.pike.y + gameSpriteSheet.pike.h + padding,
     1,
@@ -444,7 +444,7 @@ function drawBoatWithSteam(
     0,
     cloudSprite.w,
     cloudSprite.h,
-    -65,
+    -85,
     0,
     cloudSprite.w,
     cloudSprite.h
@@ -477,6 +477,8 @@ function drawMaskedShore(
   ctx.save();
   tempCtx.save();
   tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+  console.log("mask.w: ", mask.w);
 
   // draw the mask to temp canvas
   tempCtx.drawImage(

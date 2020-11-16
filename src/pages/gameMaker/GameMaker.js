@@ -4,7 +4,7 @@ import PhotoSelector from "../../components/imageInput/PhotoSelector";
 import { createMaxSizeCanvas } from "../../spriteSheet/helper";
 import {
   generateSpritesheet,
-  // generateSpritesheetFromScratch,
+  generateSpritesheetFromScratch,
 } from "../../spriteSheet/generateSpritesheet";
 import { CreateGameStep } from "./CreateGameStep";
 import { CallToActionButton } from "../../components/CallToActionButton";
@@ -33,21 +33,21 @@ const GameMaker = ({
     }
     // FOR TESTING - LOAD SAMPLE IMMEDIATELY
     else if (IN_TEST_MODE || IN_LOCAL_TEST_MODE) {
-      loadImage("./tizzie-full-colour.jpg", setPhotoCanvas, true);
-      // loadImage("./filled-in-sheet.png", createSpritesheet, true);
+      // loadImage("./tizzie-full-colour.jpg", setPhotoCanvas, true);
+      loadImage("./filled-in-sheet.png", createSpritesheet, true);
     }
     // eslint-disable-next-line
   }, [spritesheetMask, IN_TEST_MODE]);
 
   // USED IN TEST TO GO STRAIGHT TO A GAME
-  // const createSpritesheet = (sourceImg) => {
-  //   const generatedSheetData = generateSpritesheetFromScratch(
-  //     sourceImg,
-  //     spritesheetMask
-  //   );
-  //   setSpriteData(generatedSheetData);
-  //   setShowGame(true);
-  // };
+  const createSpritesheet = (sourceImg) => {
+    const generatedSheetData = generateSpritesheetFromScratch(
+      sourceImg,
+      spritesheetMask
+    );
+    setSpriteData(generatedSheetData);
+    setShowGame(true);
+  };
 
   const onCreateGame = (unwarpedCanvas) => {
     const generatedSheetData = generateSpritesheet(

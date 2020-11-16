@@ -48,7 +48,7 @@ export const drawGame = (
     let obstacleBoundsArr = [];
     let yPos = 0;
     if (currObstacle.type === "boat") {
-      yPos = 60;
+      yPos = 65;
       obstacleBoundsArr = [
         {
           x: obXpos,

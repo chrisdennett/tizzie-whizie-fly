@@ -180,9 +180,9 @@ export const spriteData = {
     h: 106,
   },
   shore: {
-    x: 22,
+    x: 24,
     y: 103,
-    w: 1028,
+    w: 1024,
     h: 121,
   },
   pike: {
@@ -232,7 +232,7 @@ export const spriteData = {
   ripples: {
     x: 31,
     y: 903,
-    w: 1029,
+    w: 1024,
     h: 566,
   },
   underwater: {
@@ -269,9 +269,9 @@ export const maskData = {
     h: 106,
   },
   shore: {
-    x: 30,
+    x: 32,
     y: 131,
-    w: 1028,
+    w: 1024,
     h: 121,
   },
   pike: {
@@ -321,7 +321,7 @@ export const maskData = {
   ripples: {
     x: 31,
     y: 903,
-    w: 1029,
+    w: 1024,
     h: 566,
   },
   underwater: {
