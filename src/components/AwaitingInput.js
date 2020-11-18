@@ -393,7 +393,9 @@ export const AwaitingInput = () => {
 };
 
 const Holder = styled.div`
-  background: black;
+  background: #110d48;
+  border: 2px solid black;
+
   border-radius: 30px;
   padding: 60px 30px;
 

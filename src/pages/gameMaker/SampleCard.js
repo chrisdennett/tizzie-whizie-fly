@@ -50,5 +50,10 @@ export const SampleCards = ({ children }) => <Holder>{children}</Holder>;
 const Holder = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 20px;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.4);
+  background: url("./img/bg/redox_01-min.png");
+  border-bottom: 2px solid;
 `;

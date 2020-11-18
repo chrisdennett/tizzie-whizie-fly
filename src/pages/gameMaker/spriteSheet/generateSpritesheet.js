@@ -28,7 +28,7 @@ export const findSheetCorners = (sourceImg) => {
   var markers = detector.detect(imageData);
   let a, b, c, d;
 
-  if (markers.length === 4) {
+  if (markers.length >= 4) {
     const sortedMarkers = sortMarkers(markers);
 
     a = sortedMarkers[0].corners[0]; // top left
@@ -42,7 +42,7 @@ export const findSheetCorners = (sourceImg) => {
     d = { x: 0, y: sourceCanvas.height }; // bottom left
   }
 
-  return { a, b, c, d };
+  return [{ a, b, c, d }, markers];
 };
 
 export const sortMarkers = (markers) => {
@@ -82,7 +82,7 @@ export const generateSpritesheet = (unwarpedCanvas, maskImg) => {
 export const generateSpritesheetFromScratch = (sourceImg, maskImg) => {
   if (!sourceImg || !maskImg) return;
 
-  const corners = findSheetCorners(sourceImg);
+  const [corners] = findSheetCorners(sourceImg);
   let unwarpedCanvas = getUnwarpedCanvas(sourceImg, corners, gameW, gameH);
   const gameData = createGameData(
     spriteData,

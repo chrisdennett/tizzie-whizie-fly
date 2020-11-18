@@ -18,6 +18,7 @@ export const CreateGameStep = ({
   const [currStep, setCurrStep] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [corners, setCorners] = useState(null);
+  const [allMarkers, setAllMarkers] = useState(null);
   const [unwarpedCanvas, setUnwarpedCanvas] = useState(null);
 
   const steps = [
@@ -41,12 +42,14 @@ export const CreateGameStep = ({
 
   const nextStep = () => {
     if (currStep === 0) {
-      const c = findSheetCorners(photoCanvas);
-      setCorners(c);
+      const [_corners, _allMarkers] = findSheetCorners(photoCanvas);
+      setAllMarkers(_allMarkers);
+      setCorners(_corners);
     } else if (currStep === 1 && corners) {
       const uc = getUnwarpedCanvas(photoCanvas, corners);
       setUnwarpedCanvas(uc);
       setCorners(null);
+      setAllMarkers(null);
     } else if (currStep === 2 && unwarpedCanvas) {
       onCreateGame(unwarpedCanvas);
     } else if (currStep === 3 && spriteData) {
@@ -74,6 +77,7 @@ export const CreateGameStep = ({
               <PreviewCanvas
                 source={unwarpedCanvas ? unwarpedCanvas : photoCanvas}
                 corners={corners}
+                allMarkers={allMarkers}
                 firstInput={
                   <ReplcePhotoButton onClick={onChangePhoto}>
                     Cancel

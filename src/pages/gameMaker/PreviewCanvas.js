@@ -12,6 +12,7 @@ const PreviewCanvas = ({
   source,
   gameCanvas,
   corners,
+  allMarkers,
   firstInput,
   secondInput,
 }) => {
@@ -22,12 +23,12 @@ const PreviewCanvas = ({
     if (!c) return null;
 
     if (source) {
-      drawSourceToCanvas(source, c, corners);
+      drawSourceToCanvas(source, c, corners, allMarkers);
     } else {
       const ctx = c.getContext("2d");
       ctx.clearRect(0, 0, c.width, c.height);
     }
-  }, [source, canvasRef, corners]);
+  }, [source, canvasRef, corners, allMarkers]);
 
   return (
     <Container>
@@ -60,7 +61,7 @@ const PreviewCanvas = ({
 
 export default PreviewCanvas;
 
-const drawSourceToCanvas = (source, canvas, corners) => {
+const drawSourceToCanvas = (source, canvas, corners, allMarkers) => {
   const { width: sWidth, height: sHeight } = source;
 
   //   const wToHRatio = 1; //sHeight / sWidth;
@@ -90,6 +91,30 @@ const drawSourceToCanvas = (source, canvas, corners) => {
     ctx.closePath();
     ctx.strokeStyle = "red";
     ctx.lineWidth = 10;
+    ctx.stroke();
+  }
+
+  drawAllMarkers(ctx, allMarkers);
+};
+
+const drawAllMarkers = (ctx, allMarkers) => {
+  if (!allMarkers) return;
+
+  for (let m of allMarkers) {
+    ctx.beginPath();
+    for (let i = 0; i < m.corners.length; i++) {
+      const c = m.corners[i];
+
+      if (i === 0) {
+        ctx.moveTo(c.x, c.y);
+      } else {
+        ctx.lineTo(c.x, c.y);
+      }
+    }
+
+    ctx.closePath();
+    ctx.strokeStyle = "blue";
+    ctx.lineWidth = 5;
     ctx.stroke();
   }
 };
@@ -136,7 +161,9 @@ const InputContent = styled.div`
 
 const Holder = styled.div`
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
+  border-left: 2px solid black;
+  border-right: 2px solid black;
   /* border: 3px solid rgba(0, 0, 0, 0.5); */
   padding: 16px;
   /* border-radius: 15px; */
@@ -147,7 +174,7 @@ const StyledCanvas = styled.canvas`
   /* width: 100%; */
   /* max-width: 450px; */
   /* background-color: rgba(255, 255, 255, 0.9); */
-  border: 3px solid rgba(0, 0, 0, 0.8);
+  border: 3px solid black;
   border-radius: 31px;
   margin: 0;
 `;

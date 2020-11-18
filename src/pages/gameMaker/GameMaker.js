@@ -14,6 +14,7 @@ import { MdPhotoCamera } from "react-icons/md";
 import { FaRegImages } from "react-icons/fa";
 // import { Machine } from "../../components/Machine";
 import PreviewCanvas from "./PreviewCanvas";
+import { RivotBar } from "../../components/RivotBar";
 
 const IN_LOCAL_TEST_MODE = false;
 
@@ -111,41 +112,43 @@ const GameMaker = ({
             />
           </Section>
 
-          <Section>
-            <h4>Or try on one of these beauties...</h4>
-            <p>[Add artwork from the sixth formers here...]</p>
+          <ExamplesOuter>
+            <ExamplesContent>
+              <h4>Or try on one of these beauties...</h4>
 
-            <SampleCards>
-              <SampleCard
-                onSelect={onSampleSelect}
-                img={"jennie-inkpen.jpg"}
-                thumb={"jennie-inkpen_250x141.jpg"}
-                label={"Fine Fineliner"}
-                details={"by Jennie"}
-              />
-              <SampleCard
-                onSelect={onSampleSelect}
-                img={"jennie-paint.jpg"}
-                thumb={"jennie-paint_250x141.jpg"}
-                label={"Fine Fineliner"}
-                details={"by Jennie"}
-              />
-              <SampleCard
+              <SampleCards>
+                <SampleCard
+                  onSelect={onSampleSelect}
+                  img={"jennie-inkpen.jpg"}
+                  thumb={"jennie-inkpen_250x141.jpg"}
+                  label={"Fine Fineliner"}
+                  details={"by Jennie"}
+                />
+                <SampleCard
+                  onSelect={onSampleSelect}
+                  img={"jennie-paint.jpg"}
+                  thumb={"jennie-paint_250x141.jpg"}
+                  label={"Fine Fineliner"}
+                  details={"by Jennie"}
+                />
+                {/* <SampleCard
                 onSelect={onSampleSelect}
                 img={"tizzie-full-colour-enhanced.jpg"}
                 thumb={"tizzie-full-colour_250x141.jpg"}
                 label={"Crayon Wonder"}
                 details={"by me!"}
-              />
-              <SampleCard
-                onSelect={onSampleSelect}
-                img={"extreme2.jpg"}
-                thumb={"extreme2_250x141.jpg"}
-                label={"Extreme Test"}
-                details={"by A.Bad Photographer"}
-              />
-            </SampleCards>
-          </Section>
+              /> */}
+                <SampleCard
+                  onSelect={onSampleSelect}
+                  img={"extreme2.jpg"}
+                  thumb={"extreme2_250x141.jpg"}
+                  label={"Extreme Test"}
+                  details={"by A.Bad Photographer"}
+                />
+              </SampleCards>
+            </ExamplesContent>
+          </ExamplesOuter>
+          <RivotBar />
         </div>
       )}
 
@@ -165,6 +168,15 @@ const GameMaker = ({
 };
 
 export default GameMaker;
+
+const ExamplesOuter = styled.div`
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 0 10px;
+  padding: 15px;
+  text-align: center;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+`;
 
 const Container = styled.div`
   h1 {
@@ -186,9 +198,23 @@ const Container = styled.div`
 `;
 
 const Section = styled.div`
-  /* border-top: 1px solid rgba(0, 0, 0, 0.2); */
-  padding-top: 25px;
-  margin: 0 0 25px 0;
+  margin: 0;
+  padding: 0;
+`;
+
+const ExamplesContent = styled.div`
+  //background: url("./img/bg/redox_01-min.png");
+  background: #ffedb9b0;
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.4);
+  border-radius: 31px;
+  padding: 0 0 40px 0;
+  border: 2px solid black;
+
+  h4 {
+    padding: 30px 10px 20px 10px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.7);
+    margin: 0;
+  }
 `;
 
 const loadImage = (imgUrl, callback, setMax = false) => {
