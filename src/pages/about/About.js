@@ -5,7 +5,7 @@ import ExternalLink from "../../components/ExternalLink";
 const About = () => {
   return (
     <Content>
-      <h1>About</h1>
+      {/* <h1>About</h1> */}
       <ul>
         <li>
           Made as part of{" "}
@@ -40,16 +40,30 @@ const About = () => {
         .{" "}
       </p>
 
-      <img src="./img/tizzie-whizie-postcard_600x429.jpg" />
+      <CenteredSection>
+        <img
+          src="./img/tizzie-whizie-postcard_600x429.jpg"
+          alt={"Tizzie Whizie Postcard"}
+        />
+      </CenteredSection>
     </Content>
   );
 };
 
 export default About;
 
+const CenteredSection = styled.div`
+  padding: 20px 0;
+  text-align: center;
+`;
+
 const Content = styled.div`
   max-width: 900px;
   margin: 0 auto;
+
+  h1 {
+    margin-top: 0;
+  }
 
   li {
     padding-bottom: 15px;

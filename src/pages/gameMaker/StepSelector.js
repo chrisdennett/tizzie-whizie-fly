@@ -9,7 +9,6 @@ export const StepSelector = ({ currStep, setCurrStep, children }) => {
         <List>
           {screens.map(({ title, color }, i) => (
             <ListItem
-              animate
               key={i}
               style={{
                 color: i === currStep ? color : "#333",
@@ -20,8 +19,12 @@ export const StepSelector = ({ currStep, setCurrStep, children }) => {
                 <motion.div
                   layoutId="underline"
                   className="underline"
-                  style={{ backgroundColor: color }}
-                />
+                  style={{ backgroundColor: color, textAlign: "center" }}
+                >
+                  <svg width={40} height={50}>
+                    <polygon points="0,0 40,0 20,15" fill={color} />
+                  </svg>
+                </motion.div>
               )}
               {title}
             </ListItem>

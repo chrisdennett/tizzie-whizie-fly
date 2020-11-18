@@ -74,7 +74,7 @@ const GameMaker = ({
       {!showGameCreateStep && (
         <div>
           <Section>
-            <h4>Create your own...</h4>
+            {/* <h4>Create your own...</h4> */}
             <p>
               Print a template, paint or decorate however you like, then add a
               photo of your sheet to the Game Maker 3000.
