@@ -23,7 +23,10 @@ export const Home = ({ onGetMaking }) => {
         </CallToActionButton>
       </ActionHolder>
       <SiteUnderContruction>
-        <h2>SITE UNDER CONSTRUCTION</h2>
+        <h2>
+          <Emoji symbol="🚧" name="construction" /> SITE UNDER CONSTRUCTION{" "}
+          <Emoji symbol="🚧" name="construction" />
+        </h2>
         <p>
           Completion target date: <strong>14th December 2020</strong>
         </p>
@@ -47,7 +50,7 @@ export const Home = ({ onGetMaking }) => {
           </a>
           .
         </p>
-        <p>Still TODO:</p>
+        {/* <p>Still TODO:</p>
         <ul>
           <li>Test and fix bugs</li>
           <li>Finish all the game card content</li>
@@ -60,11 +63,17 @@ export const Home = ({ onGetMaking }) => {
             and add them.
           </li>
           <li>Add intro video explaining what this is and how it works.</li>
-        </ul>
+        </ul> */}
       </SiteUnderContruction>
     </Content>
   );
 };
+
+const Emoji = ({ symbol, name }) => (
+  <span role="img" aria-label={name}>
+    {symbol}
+  </span>
+);
 
 const SiteUnderContruction = styled.div`
   margin: 30px 0;
@@ -75,10 +84,11 @@ const SiteUnderContruction = styled.div`
 
   h2 {
     margin: 0;
-    background-color: yellow;
+    padding: 10px;
+    background-color: #ffeb00;
     /* padding: 10px; */
-    /* border: black 2px solid; */
-    /* text-align: center; */
+    border: black 2px solid;
+    text-align: center;
   }
 
   a {

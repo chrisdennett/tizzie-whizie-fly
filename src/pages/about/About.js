@@ -32,7 +32,13 @@ const About = () => {
           </ExternalLink>
         </li>
       </ul>
-      <p>Add more information about the project here...</p>
+      <p>
+        I've written more about{" "}
+        <ExternalLink href={"https://artfly.io/fly-tizzie-fly"}>
+          how it works here
+        </ExternalLink>
+        .{" "}
+      </p>
     </Content>
   );
 };
