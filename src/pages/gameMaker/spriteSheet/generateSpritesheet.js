@@ -1,6 +1,6 @@
-import AR from "../libs/aruco";
 import fx from "glfx";
-import { spriteData, maskData } from "../pages/game/gameLogic/gameItems";
+import AR from "../../../libs/aruco";
+import { spriteData, maskData } from "../../game/gameLogic/gameItems";
 import { createCanvasFromSrc } from "./helper";
 
 const gameW = 1089;

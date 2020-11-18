@@ -5,7 +5,7 @@ import PreviewCanvas from "./PreviewCanvas";
 import {
   findSheetCorners,
   getUnwarpedCanvas,
-} from "../../spriteSheet/generateSpritesheet";
+} from "./spriteSheet/generateSpritesheet";
 import GameStartCanvas from "./GameStartCanvas";
 
 export const CreateGameStep = ({

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import PhotoSelector from "../../components/imageInput/PhotoSelector";
-import { createMaxSizeCanvas } from "../../spriteSheet/helper";
+import { createMaxSizeCanvas } from "./spriteSheet/helper";
 import {
   generateSpritesheet,
   generateSpritesheetFromScratch,
-} from "../../spriteSheet/generateSpritesheet";
+} from "./spriteSheet/generateSpritesheet";
 import { CreateGameStep } from "./CreateGameStep";
 import { CallToActionButton } from "../../components/CallToActionButton";
 import { SampleCard, SampleCards } from "./SampleCard";
@@ -118,8 +118,21 @@ const GameMaker = ({
             <SampleCards>
               <SampleCard
                 onSelect={onSampleSelect}
+                img={"jennie-inkpen.jpg"}
+                thumb={"jennie-inkpen_250x141.jpg"}
+                label={"Fine Fineliner"}
+                details={"by Jennie"}
+              />
+              <SampleCard
+                onSelect={onSampleSelect}
+                img={"jennie-paint.jpg"}
+                thumb={"jennie-paint_250x141.jpg"}
+                label={"Fine Fineliner"}
+                details={"by Jennie"}
+              />
+              <SampleCard
+                onSelect={onSampleSelect}
                 img={"tizzie-full-colour-enhanced.jpg"}
-                // img={"tizzie-full-colour.jpg"}
                 thumb={"tizzie-full-colour_250x141.jpg"}
                 label={"Crayon Wonder"}
                 details={"by me!"}
