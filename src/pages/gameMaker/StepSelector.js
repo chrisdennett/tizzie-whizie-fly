@@ -13,7 +13,6 @@ export const StepSelector = ({ currStep, setCurrStep, children }) => {
               key={i}
               style={{
                 color: i === currStep ? color : "#333",
-                fontSize: i === currStep ? 28 : 24,
               }}
               onClick={() => setCurrStep(i)}
             >
@@ -43,12 +42,11 @@ const List = styled.div`
 
 const ListItem = styled(motion.div)`
   padding: 0;
-  margin: 20px;
+  margin: 20px 4%;
   user-select: none;
-  font-size: 14px;
   font-weight: bold;
-  font-size: 20px;
-  margin-left: 20px;
+  font-size: 1.2em;
+  /* margin-left: 20px; */
   position: relative;
   cursor: pointer;
 `;

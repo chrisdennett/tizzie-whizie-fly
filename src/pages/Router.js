@@ -13,7 +13,7 @@ export const Router = ({
   setShowGame,
   IN_TEST_MODE,
 }) => {
-  const [currStep, setCurrStep] = useState(0);
+  const [currStep, setCurrStep] = useState(2);
   const _currStep = IN_TEST_MODE ? 1 : currStep;
 
   // const gameCreated = spriteData && spriteData.canvas;
@@ -23,7 +23,7 @@ export const Router = ({
       <StepSelector currStep={currStep} setCurrStep={setCurrStep}>
         {_currStep === 0 && (
           <StepHolder>
-            <Home onGetMaking={() => setCurrStep(0)} />
+            <Home onGetMaking={() => setCurrStep(2)} />
           </StepHolder>
         )}
         {_currStep === 1 && (

@@ -28,9 +28,6 @@ export const Home = ({ onGetMaking }) => {
           <Emoji symbol="🚧" name="construction" />
         </h2>
         <p>
-          Completion target date: <strong>14th December 2020</strong>
-        </p>
-        <p>
           The site should already work properly so feel free to have a play. I'd
           love to hear your feedback by{" "}
           <a
@@ -49,6 +46,9 @@ export const Home = ({ onGetMaking }) => {
             quick feedback form
           </a>
           .
+        </p>
+        <p>
+          Completion target date: <strong>14th December 2020</strong>
         </p>
         {/* <p>Still TODO:</p>
         <ul>

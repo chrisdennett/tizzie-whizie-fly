@@ -39,6 +39,8 @@ const About = () => {
         </ExternalLink>
         .{" "}
       </p>
+
+      <img src="./img/tizzie-whizie-postcard_600x429.jpg" />
     </Content>
   );
 };
@@ -51,5 +53,11 @@ const Content = styled.div`
 
   li {
     padding-bottom: 15px;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
   }
 `;
