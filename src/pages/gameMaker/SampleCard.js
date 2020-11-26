@@ -16,6 +16,7 @@ export const SampleCard = ({ onSelect, img, thumb, label, details }) => {
 };
 
 const Card = styled.div`
+  cursor: pointer;
   display: inline-flex;
   flex-direction: column;
   background-color: white;

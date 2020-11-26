@@ -59,6 +59,8 @@ const GameMaker = ({
   };
 
   const onSampleSelect = (imgName) => {
+    setSpriteData(null);
+    setPhotoCanvas(null);
     loadImage(imgName, setPhotoCanvas, true);
   };
 
@@ -71,15 +73,14 @@ const GameMaker = ({
 
   return (
     <Container>
+      <p>
+        Print a template, paint or decorate however you like, then add a photo
+        of your sheet to the Game Maker 3000.
+      </p>
+
       {!showGameCreateStep && (
         <div>
           <Section>
-            {/* <h4>Create your own...</h4> */}
-            <p>
-              Print a template, paint or decorate however you like, then add a
-              photo of your sheet to the Game Maker 3000.
-            </p>
-
             <PreviewCanvas
               firstInput={
                 <CallToActionButton href={"/tizzie-fly-template.pdf"}>
@@ -111,44 +112,6 @@ const GameMaker = ({
               }
             />
           </Section>
-
-          <ExamplesOuter>
-            <ExamplesContent>
-              <h4>Or try on one of these beauties...</h4>
-
-              <SampleCards>
-                <SampleCard
-                  onSelect={onSampleSelect}
-                  img={"jennie-inkpen.jpg"}
-                  thumb={"jennie-inkpen_250x141.jpg"}
-                  label={"Fine Fineliner"}
-                  details={"by Jennie"}
-                />
-                <SampleCard
-                  onSelect={onSampleSelect}
-                  img={"jennie-paint.jpg"}
-                  thumb={"jennie-paint_250x141.jpg"}
-                  label={"Fine Fineliner"}
-                  details={"by Jennie"}
-                />
-                {/* <SampleCard
-                onSelect={onSampleSelect}
-                img={"tizzie-full-colour-enhanced.jpg"}
-                thumb={"tizzie-full-colour_250x141.jpg"}
-                label={"Crayon Wonder"}
-                details={"by me!"}
-              /> */}
-                <SampleCard
-                  onSelect={onSampleSelect}
-                  img={"extreme2.jpg"}
-                  thumb={"extreme2_250x141.jpg"}
-                  label={"Extreme Test"}
-                  details={"by A.Bad Photographer"}
-                />
-              </SampleCards>
-            </ExamplesContent>
-          </ExamplesOuter>
-          <RivotBar />
         </div>
       )}
 
@@ -163,6 +126,44 @@ const GameMaker = ({
           />
         </div>
       )}
+
+      <ExamplesOuter>
+        <ExamplesContent>
+          <h4>Or try on one of these beauties...</h4>
+
+          <SampleCards>
+            <SampleCard
+              onSelect={onSampleSelect}
+              img={"jennie-inkpen.jpg"}
+              thumb={"jennie-inkpen_250x141.jpg"}
+              label={"Fine Fineliner"}
+              details={"by Jennie"}
+            />
+            <SampleCard
+              onSelect={onSampleSelect}
+              img={"jennie-paint.jpg"}
+              thumb={"jennie-paint_250x141.jpg"}
+              label={"Painted"}
+              details={"by Jennie"}
+            />
+            {/* <SampleCard
+                onSelect={onSampleSelect}
+                img={"tizzie-full-colour-enhanced.jpg"}
+                thumb={"tizzie-full-colour_250x141.jpg"}
+                label={"Crayon Wonder"}
+                details={"by me!"}
+              /> */}
+            <SampleCard
+              onSelect={onSampleSelect}
+              img={"extreme2.jpg"}
+              thumb={"extreme2_250x141.jpg"}
+              label={"Angled Photo Test"}
+              details={"by A.Bad Photographer"}
+            />
+          </SampleCards>
+        </ExamplesContent>
+      </ExamplesOuter>
+      <RivotBar />
     </Container>
   );
 };
