@@ -17,7 +17,7 @@ export const drawGame = (
   // }
 
   // game title
-  drawSprite(ctx, spriteCanvas, spriteData.title, 90, 45, true);
+  drawTitle(ctx, spriteCanvas, spriteData.title, 90, 45, true);
 
   // shoreline
   drawShoreline(ctx, spriteCanvas, spriteData, gameState);
@@ -256,6 +256,13 @@ function drawBounds(ctx, bounds) {
 export const drawSprite = (ctx, spriteCanvas, sprite, targX, targY) => {
   const { x, y, h, w } = sprite;
   ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
+};
+
+export const drawTitle = (ctx, spriteCanvas, sprite, targX, targY) => {
+  const { x, y, h, w } = sprite;
+  ctx.drawImage(spriteCanvas, x, y, w, h, targX, targY, w, h);
+
+  ctx.drawImage(spriteCanvas, x, y, 160, h, 560, targY, 160, h);
 };
 
 // SHORELINE

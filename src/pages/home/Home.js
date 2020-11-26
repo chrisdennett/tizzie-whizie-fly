@@ -48,7 +48,7 @@ export const Home = ({ onGetMaking }) => {
           .
         </p>
         <p>
-          Completion target date: <strong>14th December 2020</strong>
+          Target completion date: <strong>14th December 2020</strong>
         </p>
         {/* <p>Still TODO:</p>
         <ul>

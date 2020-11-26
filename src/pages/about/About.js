@@ -5,6 +5,12 @@ import ExternalLink from "../../components/ExternalLink";
 const About = () => {
   return (
     <Content>
+      <CenteredSection>
+        <img
+          src="./img/tizzie-whizie-postcard_420x300.jpg"
+          alt={"Tizzie Whizie Postcard"}
+        />
+      </CenteredSection>
       {/* <h1>About</h1> */}
       <ul>
         <li>
@@ -39,13 +45,6 @@ const About = () => {
         </ExternalLink>
         .{" "}
       </p>
-
-      <CenteredSection>
-        <img
-          src="./img/tizzie-whizie-postcard_600x429.jpg"
-          alt={"Tizzie Whizie Postcard"}
-        />
-      </CenteredSection>
     </Content>
   );
 };
@@ -55,6 +54,12 @@ export default About;
 const CenteredSection = styled.div`
   padding: 20px 0;
   text-align: center;
+  max-width: 420px;
+  margin: 0 auto;
+
+  img {
+    width: 100%;
+  }
 `;
 
 const Content = styled.div`
