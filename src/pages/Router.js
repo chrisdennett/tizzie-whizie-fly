@@ -23,7 +23,7 @@ export const Router = ({
       <StepSelector currStep={currStep} setCurrStep={setCurrStep}>
         {_currStep === 0 && (
           <StepHolder>
-            <Home onGetMaking={() => setCurrStep(0)} />
+            <Home onGetMaking={() => setCurrStep(1)} />
           </StepHolder>
         )}
         {_currStep === 1 && (
