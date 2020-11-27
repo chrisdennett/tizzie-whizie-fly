@@ -15,6 +15,7 @@ const PreviewCanvas = ({
   allMarkers,
   firstInput,
   secondInput,
+  isLoading,
 }) => {
   const canvasRef = React.useRef(null);
 
@@ -48,7 +49,7 @@ const PreviewCanvas = ({
 
       <RivotBar />
       <Holder>
-        {!source && !gameCanvas && <AwaitingInput />}
+        {!source && !gameCanvas && <AwaitingInput isLoading={isLoading} />}
 
         {source && <StyledCanvas ref={canvasRef} />}
 

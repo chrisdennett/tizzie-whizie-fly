@@ -24,6 +24,7 @@ const GameMaker = ({
   setShowGame,
   IN_TEST_MODE,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [photoCanvas, setPhotoCanvas] = useState(null);
   const [spritesheetMask, setSpritesheetMask] = useState(null);
 
@@ -59,9 +60,17 @@ const GameMaker = ({
   };
 
   const onSampleSelect = (imgName) => {
+    setIsLoading(true);
     setSpriteData(null);
     setPhotoCanvas(null);
-    loadImage(imgName, setPhotoCanvas, true);
+    loadImage(
+      imgName,
+      (canvas) => {
+        setPhotoCanvas(canvas);
+        setIsLoading(false);
+      },
+      true
+    );
 
     try {
       // trying to use new API - https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
@@ -94,6 +103,7 @@ const GameMaker = ({
         <div>
           <Section>
             <PreviewCanvas
+              isLoading={isLoading}
               firstInput={
                 <CallToActionButton href={"/tizzie-fly-template.pdf"}>
                   Print
