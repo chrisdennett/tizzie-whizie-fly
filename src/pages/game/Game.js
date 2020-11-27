@@ -8,18 +8,21 @@ import GameControlsLeft from "./gameControls/GameControlsLeft";
 import GameScreen from "./GameScreen";
 import GameInstructions from "./GameInstructions";
 import { defaultGameState } from "./gameLogic/gameState";
+import { StartGameModal } from "./StartGameModal";
+import { EndGameModal } from "./EndGameModal";
 
 export const Game = ({
   spriteData,
   onCloseGame,
   windowSize,
-  onGameOver,
+  showEndScreen,
   AUTO_PLAY_GAME,
   IN_INVINCIBLE_MODE,
 }) => {
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
-  const [showInstructions, setShowInstructions] = useState(!AUTO_PLAY_GAME);
+  const [showInstructions, setShowInstructions] = useState(false);
+  const [showGameModal, setShowGameModal] = useState("start");
   const [isPaused, setIsPaused] = useState(!AUTO_PLAY_GAME);
 
   // const [playLoseSound] = useSound("/sounds/zapsplat_impact.mp3", {
@@ -45,8 +48,10 @@ export const Game = ({
 
   const onCollision = (gameState) => {
     if (!IN_INVINCIBLE_MODE) {
-      onGameOver(gameState);
+      // showEndScreen(gameState);
+      setShowGameModal("replay");
       setIsPaused(true);
+      // setTimeout(() => );
     }
 
     // if (gameState.soundOn) {
@@ -86,7 +91,7 @@ export const Game = ({
       : {};
 
   const onReplay = () => {
-    onGameOver(defaultGameState);
+    showEndScreen(defaultGameState);
     setShowInstructions(true);
   };
 
@@ -94,6 +99,14 @@ export const Game = ({
     <GameScreenOuter id="GameScreenOuter" style={outerStyle}>
       {spriteData && (
         <>
+          {showGameModal === "start" && isPaused && (
+            <StartGameModal onStart={onPlay} />
+          )}
+
+          {showGameModal === "replay" && isPaused && (
+            <EndGameModal onReplay={onReplay} onSeeScoreCard={showEndScreen} />
+          )}
+
           {showInstructions && (
             <GameInstructions
               onPlay={onPlay}
@@ -115,7 +128,7 @@ export const Game = ({
             <GameScreen
               spriteData={spriteData}
               isPaused={isPaused}
-              onGameOver={onGameOver}
+              showEndScreen={showEndScreen}
               onReplay={onReplay}
               setFlyUp={setFlyUp}
               setDiveDown={setDiveDown}

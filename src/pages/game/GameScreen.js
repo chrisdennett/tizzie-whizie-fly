@@ -10,7 +10,7 @@ const GameScreen = ({
   spriteData,
   isPaused,
   flyUp,
-  onGameOver,
+  showEndScreen,
   diveDown,
   setFlyUp,
   setDiveDown,
@@ -29,7 +29,7 @@ const GameScreen = ({
     if (!spriteData || isPaused) return;
 
     if (gameState.gameOver) {
-      onGameOver(gameState);
+      showEndScreen(gameState);
       return;
     }
 
