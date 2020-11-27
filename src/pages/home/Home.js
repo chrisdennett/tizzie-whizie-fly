@@ -29,23 +29,22 @@ export const Home = ({ onGetMaking }) => {
         </h2>
         <p>
           The site should already work properly so feel free to have a play. I'd
-          love to hear your feedback by{" "}
+          love to hear your feedback by through a{" "}
+          <CallToActionButton
+            href="https://forms.gle/tyMemgSL8qLbrbzA8"
+            style={{ padding: "2px 10px", textTransform: "uppercase" }}
+          >
+            quick feedback form
+          </CallToActionButton>
+          . Or by email at{" "}
           <a
             href="mailto:chrisdennett@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            email (chrisdennett@gmail.com)
+            chrisdennett@gmail.com
           </a>{" "}
-          or through this{" "}
-          <a
-            href="https://forms.gle/tyMemgSL8qLbrbzA8"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            quick feedback form
-          </a>
-          .
+          if you'd rather.
         </p>
         <p>
           Target completion date: <strong>14th December 2020</strong>
