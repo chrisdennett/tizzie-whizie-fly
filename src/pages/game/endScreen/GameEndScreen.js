@@ -48,7 +48,7 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 4% 3% 4% 6%;
+  padding: 60px 3% 4% 6%;
   text-align: center;
 
   h2 {
