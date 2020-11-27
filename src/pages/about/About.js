@@ -7,6 +7,8 @@ const About = () => {
     <Content>
       <CenteredSection>
         <img
+          width={420}
+          height={300}
           src="./img/tizzie-whizie-postcard_420x300.jpg"
           alt={"Tizzie Whizie Postcard"}
         />
