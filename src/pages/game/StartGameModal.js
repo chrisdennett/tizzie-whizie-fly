@@ -28,8 +28,11 @@ const GameModalOuter = styled.div`
   right: 0;
   left: 0;
   bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const GameModalContent = styled.div`
-  background-color: white;
+  /* background-color: rgba(255, 255, 255, 0.6); ; */
 `;

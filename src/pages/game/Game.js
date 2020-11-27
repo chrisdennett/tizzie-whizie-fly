@@ -2,20 +2,19 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import GameControlsRight from "./gameControls/GameControlsRight";
 import { useKeyboardBindings } from "../../hooks/useKeyboardBindings";
-// import useSound from "use-sound";
-
 import GameControlsLeft from "./gameControls/GameControlsLeft";
 import GameScreen from "./GameScreen";
 import GameInstructions from "./GameInstructions";
-import { defaultGameState } from "./gameLogic/gameState";
 import { StartGameModal } from "./StartGameModal";
 import { EndGameModal } from "./EndGameModal";
 
 export const Game = ({
   spriteData,
   onCloseGame,
+  setEndState,
   windowSize,
   showEndScreen,
+  onResetGame,
   AUTO_PLAY_GAME,
   IN_INVINCIBLE_MODE,
 }) => {
@@ -24,10 +23,6 @@ export const Game = ({
   const [showInstructions, setShowInstructions] = useState(false);
   const [showGameModal, setShowGameModal] = useState("start");
   const [isPaused, setIsPaused] = useState(!AUTO_PLAY_GAME);
-
-  // const [playLoseSound] = useSound("/sounds/zapsplat_impact.mp3", {
-  //   volume: 1,
-  // });
 
   useKeyboardBindings({
     ArrowUp: () => goUp(),
@@ -48,15 +43,10 @@ export const Game = ({
 
   const onCollision = (gameState) => {
     if (!IN_INVINCIBLE_MODE) {
-      // showEndScreen(gameState);
-      setShowGameModal("replay");
+      setEndState(gameState);
       setIsPaused(true);
-      // setTimeout(() => );
+      setShowGameModal("replay");
     }
-
-    // if (gameState.soundOn) {
-    //   playLoseSound();
-    // }
   };
 
   const onPauseAndCloseGame = () => {
@@ -70,6 +60,7 @@ export const Game = ({
   };
   const onPlay = () => {
     setIsPaused(false);
+    setShowGameModal("false");
     setShowInstructions(false);
   };
 
@@ -91,8 +82,12 @@ export const Game = ({
       : {};
 
   const onReplay = () => {
-    showEndScreen(defaultGameState);
-    setShowInstructions(true);
+    onResetGame();
+    setShowGameModal("start");
+  };
+
+  const onSeeScoreCard = () => {
+    showEndScreen();
   };
 
   return (
@@ -104,7 +99,7 @@ export const Game = ({
           )}
 
           {showGameModal === "replay" && isPaused && (
-            <EndGameModal onReplay={onReplay} onSeeScoreCard={showEndScreen} />
+            <EndGameModal onReplay={onReplay} onSeeScoreCard={onSeeScoreCard} />
           )}
 
           {showInstructions && (
@@ -119,28 +114,30 @@ export const Game = ({
             <GameControlsRight {...rightControlsProps} showAsRow={true} />
           )}
 
-          <MainGamePanel showPortraitMode={showPortraitMode}>
-            <GameControlsLeft
-              {...leftControlsProps}
-              showAsRow={showPortraitMode}
-            />
+          {showGameModal !== "start" && (
+            <MainGamePanel showPortraitMode={showPortraitMode}>
+              <GameControlsLeft
+                {...leftControlsProps}
+                showAsRow={showPortraitMode}
+              />
 
-            <GameScreen
-              spriteData={spriteData}
-              isPaused={isPaused}
-              showEndScreen={showEndScreen}
-              onReplay={onReplay}
-              setFlyUp={setFlyUp}
-              setDiveDown={setDiveDown}
-              flyUp={flyUp}
-              diveDown={diveDown}
-              onCollision={onCollision}
-            />
+              <GameScreen
+                spriteData={spriteData}
+                isPaused={isPaused}
+                showEndScreen={showEndScreen}
+                onReplay={onReplay}
+                setFlyUp={setFlyUp}
+                setDiveDown={setDiveDown}
+                flyUp={flyUp}
+                diveDown={diveDown}
+                onCollision={onCollision}
+              />
 
-            {!showPortraitMode && (
-              <GameControlsRight {...rightControlsProps} showAsRow={false} />
-            )}
-          </MainGamePanel>
+              {!showPortraitMode && (
+                <GameControlsRight {...rightControlsProps} showAsRow={false} />
+              )}
+            </MainGamePanel>
+          )}
         </>
       )}
     </GameScreenOuter>
