@@ -28,8 +28,9 @@ export const Home = ({ onGetMaking }) => {
           <Emoji symbol="🚧" name="construction" />
         </h2>
         <p>
-          The site should already work properly so feel free to have a play. I'd
-          love to hear your feedback by through a{" "}
+          Everything should work, but there might be some exciting bugs!{" "}
+          <Emoji symbol="🐞" name="bug" /> I'd love to hear your feedback
+          through a{" "}
           <CallToActionButton
             href="https://forms.gle/tyMemgSL8qLbrbzA8"
             style={{ padding: "2px 10px", textTransform: "uppercase" }}
