@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import ConfettiCanvas from "react-confetti-canvas";
+import Confetti from "react-confetti";
+// import ConfettiCanvas from "react-confetti-canvas";
 import styled from "styled-components";
+import { useWindowSize } from "../../../hooks/useWindowSize";
 import { drawPlayer } from "../gameLogic/drawGame";
 
 export const WinningHeader = ({ spriteData }) => {
+  const { width, height } = useWindowSize();
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -28,7 +31,8 @@ export const WinningHeader = ({ spriteData }) => {
   return (
     <Container>
       <ConfettiHolder>
-        <ConfettiCanvas />
+        {/* <ConfettiCanvas /> */}
+        <Confetti width={width} height={height} />
       </ConfettiHolder>
       <h1>YOU WIN!</h1>
       <h3>
