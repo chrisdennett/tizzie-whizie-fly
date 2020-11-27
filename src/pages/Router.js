@@ -13,7 +13,7 @@ export const Router = ({
   setShowGame,
   IN_TEST_MODE,
 }) => {
-  const [currStep, setCurrStep] = useState(1);
+  const [currStep, setCurrStep] = useState(0);
   const _currStep = IN_TEST_MODE ? 1 : currStep;
 
   // const gameCreated = spriteData && spriteData.canvas;
