@@ -1,17 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { CallToActionButton } from "../../components/CallToActionButton";
+import { Boop } from "../../components/Boop";
 
 export const SampleCard = ({ onSelect, img, thumb, label, details }) => {
   return (
-    <Card onClick={() => onSelect(img)}>
-      <img src={"/" + thumb} alt={label} />
-      <LabelHolder>
-        <h3>{label}</h3>
-        <p>{details}</p>
-        <CallToActionButton>PICK ME!</CallToActionButton>
-      </LabelHolder>
-    </Card>
+    <Boop>
+      <Card onClick={() => onSelect(img)}>
+        <img src={"/" + thumb} alt={label} />
+        <LabelHolder>
+          <h3>{label}</h3>
+          <p>{details}</p>
+          <CallToActionButton>PICK ME!</CallToActionButton>
+        </LabelHolder>
+      </Card>
+    </Boop>
   );
 };
 
