@@ -110,33 +110,38 @@ export const Game = ({
             />
           )}
 
-          {showPortraitMode && showGameModal === "false" && (
-            <GameControlsRight {...rightControlsProps} showAsRow={true} />
-          )}
-
           {showGameModal !== "start" && (
-            <MainGamePanel showPortraitMode={showPortraitMode}>
-              <GameControlsLeft
-                {...leftControlsProps}
-                showAsRow={showPortraitMode}
-              />
-
-              <GameScreen
-                spriteData={spriteData}
-                isPaused={isPaused}
-                showEndScreen={showEndScreen}
-                onReplay={onReplay}
-                setFlyUp={setFlyUp}
-                setDiveDown={setDiveDown}
-                flyUp={flyUp}
-                diveDown={diveDown}
-                onCollision={onCollision}
-              />
-
-              {!showPortraitMode && (
-                <GameControlsRight {...rightControlsProps} showAsRow={false} />
+            <>
+              {showPortraitMode && (
+                <GameControlsRight {...rightControlsProps} showAsRow={true} />
               )}
-            </MainGamePanel>
+
+              <MainGamePanel showPortraitMode={showPortraitMode}>
+                <GameControlsLeft
+                  {...leftControlsProps}
+                  showAsRow={showPortraitMode}
+                />
+
+                <GameScreen
+                  spriteData={spriteData}
+                  isPaused={isPaused}
+                  showEndScreen={showEndScreen}
+                  onReplay={onReplay}
+                  setFlyUp={setFlyUp}
+                  setDiveDown={setDiveDown}
+                  flyUp={flyUp}
+                  diveDown={diveDown}
+                  onCollision={onCollision}
+                />
+
+                {!showPortraitMode && (
+                  <GameControlsRight
+                    {...rightControlsProps}
+                    showAsRow={false}
+                  />
+                )}
+              </MainGamePanel>
+            </>
           )}
         </>
       )}

@@ -7,7 +7,7 @@ import { Border } from "./components/Border";
 import { GameEndScreen } from "./pages/game/endScreen/GameEndScreen";
 import { defaultGameState } from "./pages/game/gameLogic/gameState";
 
-const IN_TEST_MODE = true;
+const IN_TEST_MODE = false;
 const IN_INVINCIBLE_MODE = false;
 const AUTO_PLAY_GAME = false;
 const SHOW_END_SCREEN = false;
