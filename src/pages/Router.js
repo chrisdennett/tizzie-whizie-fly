@@ -18,6 +18,18 @@ export const Router = ({
   const _currStep = IN_TEST_MODE ? 1 : currStep;
 
   // const gameCreated = spriteData && spriteData.canvas;
+  const onSetCurrStep = (newStepNum) => {
+    try {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    } catch (error) {
+      window.scrollTo(0, 0);
+    }
+    setCurrStep(newStepNum);
+  };
 
   return (
     <Container>
@@ -28,7 +40,7 @@ export const Router = ({
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <Home onGetMaking={() => setCurrStep(1)} />
+            <Home onGetMaking={() => onSetCurrStep(1)} />
           </StepHolder>
         )}
         {_currStep === 1 && (
