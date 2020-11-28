@@ -75,7 +75,7 @@ const GameMaker = ({
     try {
       // trying to use new API - https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
       window.scroll({
-        top: 0,
+        top: 145,
         left: 0,
         behavior: "smooth",
       });

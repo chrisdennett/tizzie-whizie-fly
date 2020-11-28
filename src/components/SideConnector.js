@@ -1,11 +1,11 @@
 import React from "react";
 
-export const SideConnectorLeft = ({ isGreen = false }) => {
+export const SideConnectorLeft = ({ isGreen = false, className }) => {
   const fillOne = isGreen ? "#008033" : "#a00";
   const fillTwo = isGreen ? "#71c837" : "red";
 
   return (
-    <svg viewBox="0 0 14.33 17.28" height={65}>
+    <svg viewBox="0 0 14.33 17.28" height={65} className={className}>
       <g
         strokeDasharray="none"
         strokeLinejoin="round"
@@ -104,11 +104,11 @@ export const SideConnectorLeft = ({ isGreen = false }) => {
   );
 };
 
-export const SideConnectorRight = ({ isGreen = false }) => {
+export const SideConnectorRight = ({ isGreen = false, className }) => {
   const fillOne = isGreen ? "#008033" : "#a00";
   const fillTwo = isGreen ? "#71c837" : "red";
   return (
-    <svg viewBox="0 0 14.33 17.28" height={65}>
+    <svg viewBox="0 0 14.33 17.28" height={65} className={className}>
       <g
         strokeDasharray="none"
         strokeLinejoin="round"

@@ -71,7 +71,7 @@ const Container = styled.div`
 `;
 
 const StepHolder = styled(motion.div)`
-  padding: 20px;
+  padding: 2%;
 `;
 
 // const GamePreviewHolder = styled.div`

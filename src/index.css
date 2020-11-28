@@ -32,9 +32,9 @@ canvas {
   bottom: -6px;
 }
 
-@media (max-width: 430px) {
+@media (max-width: 560px) {
   body,
   button {
-    font-size: 100%;
+    font-size: 0.9em;
   }
 }

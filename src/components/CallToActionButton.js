@@ -47,7 +47,7 @@ const StyledAnchor = styled.a`
 
   @media (max-width: 430px) {
     font-size: 0.9em;
-    padding: 5px 8px;
+    /* padding: 5px 8px; */
   }
 `;
 
@@ -65,10 +65,5 @@ const StyledButton = styled.button`
   svg {
     font-size: 120%;
     margin: 0 5px;
-  }
-
-  @media (max-width: 430px) {
-    font-size: 0.9em;
-    padding: 5px 8px;
   }
 `;

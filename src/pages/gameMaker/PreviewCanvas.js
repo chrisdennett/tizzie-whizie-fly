@@ -35,15 +35,15 @@ const PreviewCanvas = ({
     <Container>
       <InputRow>
         <InputContainer>
-          <SideConnectorLeft />
+          <SideConnectorLeft className={"connector"} />
           <InputContent>{firstInput}</InputContent>
-          <SideConnectorRight />
+          <SideConnectorRight className={"connector"} />
         </InputContainer>
 
         <InputContainer>
-          <SideConnectorLeft isGreen={true} />
+          <SideConnectorLeft isGreen={true} className={"connector"} />
           <InputContent>{secondInput}</InputContent>
-          <SideConnectorRight isGreen={true} />
+          <SideConnectorRight isGreen={true} className={"connector"} />
         </InputContainer>
       </InputRow>
 
@@ -121,7 +121,7 @@ const drawAllMarkers = (ctx, allMarkers) => {
 };
 
 const Container = styled.div`
-  padding-top: 30px;
+  padding-top: 3%;
   display: flex;
   flex-direction: column;
 `;
@@ -132,7 +132,9 @@ const InputRow = styled.div`
   align-items: center;
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    .connector {
+      display: none;
+    }
   }
 `;
 
