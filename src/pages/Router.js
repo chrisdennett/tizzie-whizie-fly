@@ -6,6 +6,7 @@ import About from "./about/About";
 import { StepSelector } from "./gameMaker/StepSelector";
 // import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Home } from "./home/Home";
+import { motion } from "framer-motion";
 
 export const Router = ({
   spriteData,
@@ -22,12 +23,20 @@ export const Router = ({
     <Container>
       <StepSelector currStep={currStep} setCurrStep={setCurrStep}>
         {_currStep === 0 && (
-          <StepHolder>
+          <StepHolder
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
             <Home onGetMaking={() => setCurrStep(1)} />
           </StepHolder>
         )}
         {_currStep === 1 && (
-          <StepHolder>
+          <StepHolder
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
             <GameMaker
               setShowGame={setShowGame}
               spriteData={spriteData}
@@ -37,7 +46,11 @@ export const Router = ({
           </StepHolder>
         )}
         {_currStep === 2 && (
-          <StepHolder>
+          <StepHolder
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
             <About />
           </StepHolder>
         )}
@@ -57,7 +70,7 @@ const Container = styled.div`
   margin: auto;
 `;
 
-const StepHolder = styled.div`
+const StepHolder = styled(motion.div)`
   padding: 20px;
 `;
 

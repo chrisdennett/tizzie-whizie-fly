@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import useSound from "use-sound";
-import plip from "../../sounds/plip.wav";
+// import useSound from "use-sound";
+// import plip from "../../sounds/plip.wav";
 
 export const BubbleButton = ({ children, onClick }) => {
   const [isAnimating, setIsAnimating] = useState(false);
-  const [play] = useSound(plip);
+  // const [play] = useSound(plip);
 
   useEffect(() => {
     if (isAnimating) {
@@ -15,7 +15,7 @@ export const BubbleButton = ({ children, onClick }) => {
 
   const onMouseOver = () => {
     setIsAnimating(true);
-    play();
+    // play();
   };
 
   const onButtClick = () => {
@@ -113,7 +113,7 @@ const Butt = styled.button`
   /* background-color: darken(#78b92cb0, 5%); */
   /* box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2); */
 
-  transform: scale(0.9);
+  transform: scale(1);
   &.animate {
     transition: transform ease-in 0.1s;
 
