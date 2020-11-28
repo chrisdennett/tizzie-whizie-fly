@@ -8,9 +8,12 @@ export const BubbleButton = ({ children, onClick }) => {
   // const [play] = useSound(plip);
 
   useEffect(() => {
-    if (isAnimating) {
-      setTimeout(() => setIsAnimating(false), 700);
-    }
+    if (!isAnimating) return;
+    let t = setTimeout(() => setIsAnimating(false), 700);
+
+    return () => {
+      clearTimeout(t);
+    };
   }, [isAnimating]);
 
   const onMouseOver = () => {
