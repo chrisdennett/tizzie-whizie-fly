@@ -46,19 +46,31 @@ export const findSheetCorners = (sourceImg) => {
 };
 
 export const sortMarkers = (markers) => {
-  // find two on left
-  // let topLeft, topRight, bottomRight, bottomLeft;
-  markers.sort((a, b) => {
+  // order by how far left the first corner is
+  const orderedMarkers = markers.sort((a, b) => {
     return a.corners[0].x < b.corners[0].x ? -1 : 1;
   });
 
-  const leftMarkers = [markers[0], markers[1]];
-  const rightMarkers = [markers[2], markers[3]];
+  const minX = orderedMarkers[0].corners[0].x;
+  const maxX = orderedMarkers[orderedMarkers.length - 1].corners[0].x;
+  const halfWayX = (maxX - minX) / 2;
 
+  // get all the markers on the left hand side
+  const leftMarkers = orderedMarkers.filter((m) => m.corners[0].x < halfWayX);
+
+  // get all the markers on the right hand side
+  const rightMarkers = orderedMarkers.filter((m) => m.corners[0].x > halfWayX);
+
+  // order markers in groups from top to bottom
   leftMarkers.sort((a, b) => (a.corners[0].y < b.corners[0].y ? -1 : 1));
   rightMarkers.sort((a, b) => (a.corners[0].y < b.corners[0].y ? -1 : 1));
 
-  return [leftMarkers[0], rightMarkers[0], rightMarkers[1], leftMarkers[1]];
+  return [
+    leftMarkers[0], // top left
+    rightMarkers[0], // top right
+    rightMarkers[rightMarkers.length - 1], // bottom right
+    leftMarkers[leftMarkers.length - 1], // bottom left
+  ];
 };
 
 export const generateSpritesheet = (unwarpedCanvas, maskImg) => {
