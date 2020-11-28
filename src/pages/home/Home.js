@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { BubbleButton } from "../../components/bubbleButton/BubbleButton";
 import { CallToActionButton } from "../../components/CallToActionButton";
 import { TizzieLogo } from "../../components/TizzieLogo";
 
@@ -18,9 +19,10 @@ export const Home = ({ onGetMaking }) => {
         </StyledIntro>
       </header>
       <ActionHolder>
-        <CallToActionButton onClick={onGetMaking}>
+        <BubbleButton onClick={onGetMaking}>GET MAKING!</BubbleButton>
+        {/* <CallToActionButton onClick={onGetMaking}>
           Get Making!
-        </CallToActionButton>
+        </CallToActionButton> */}
       </ActionHolder>
       <SiteUnderContruction>
         <h2>
@@ -29,8 +31,10 @@ export const Home = ({ onGetMaking }) => {
         </h2>
         <p>
           Everything should work, but there might be some exciting bugs!{" "}
-          <Emoji symbol="🐞" name="bug" /> I'd love to hear your feedback
-          through a{" "}
+          <Emoji symbol="🐞" name="bug" />
+        </p>
+        <p>
+          I'd love to hear your feedback through a{" "}
           <CallToActionButton
             href="https://forms.gle/tyMemgSL8qLbrbzA8"
             style={{ padding: "2px 10px", textTransform: "uppercase" }}

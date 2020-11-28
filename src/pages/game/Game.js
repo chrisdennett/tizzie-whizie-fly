@@ -110,7 +110,7 @@ export const Game = ({
             />
           )}
 
-          {showPortraitMode && (
+          {showPortraitMode && showGameModal === "false" && (
             <GameControlsRight {...rightControlsProps} showAsRow={true} />
           )}
 
