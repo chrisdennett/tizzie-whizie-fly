@@ -8,7 +8,7 @@ const duration = lastObstacleMs + 250;
 export const defaultGameState = {
   topScore: 123456,
   gameTick: 0,
-  gameOver: false,
+  gameWon: false,
   progress: 0,
   nextObstacleIndex: 0,
   obstacleInPlay: false,
@@ -105,8 +105,9 @@ function getObstacleState(prevGameState) {
   let newNextObstacleIndex = prevGameState.nextObstacleIndex;
   let newMaxObstacleIndexCollected = prevGameState.maxObstacleIndexCollected;
   if (newNextObstacleIndex >= prevGameState.obstacles.length)
+    /// YEAH BABY! WINNER
     return {
-      gameOver: true,
+      gameWon: true,
     };
   const currObstacle = prevGameState.obstacles[newNextObstacleIndex];
   const obstacleSprite = spriteData[currObstacle.type];

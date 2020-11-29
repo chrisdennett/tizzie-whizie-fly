@@ -49,6 +49,12 @@ export const Game = ({
     }
   };
 
+  const onGameWon = (gameState) => {
+    setEndState(gameState);
+    setIsPaused(true);
+    showEndScreen();
+  };
+
   const onPauseAndCloseGame = () => {
     setIsPaused(true);
     onCloseGame();
@@ -132,6 +138,7 @@ export const Game = ({
                   flyUp={flyUp}
                   diveDown={diveDown}
                   onCollision={onCollision}
+                  onGameWon={onGameWon}
                 />
 
                 {!showPortraitMode && (

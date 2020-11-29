@@ -10,11 +10,11 @@ const GameScreen = ({
   spriteData,
   isPaused,
   flyUp,
-  showEndScreen,
   diveDown,
   setFlyUp,
   setDiveDown,
   onCollision,
+  onGameWon,
 }) => {
   const [gameState, setGameState] = useState(defaultGameState);
   const [tickCount, setTickCount] = useState(0);
@@ -28,8 +28,8 @@ const GameScreen = ({
   const updateGame = () => {
     if (!spriteData || isPaused) return;
 
-    if (gameState.gameOver) {
-      showEndScreen(gameState);
+    if (gameState.gameWon) {
+      onGameWon(gameState);
       return;
     }
 

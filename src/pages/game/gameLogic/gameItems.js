@@ -13,6 +13,25 @@ export const obstacles = () => {
   return arrWithTimings;
 };
 
+// switch out for testing
+// export const obstacleArr = [
+//   {
+//     type: "pike",
+//     name: "The Pike",
+//     date: "1982",
+//     img: "/img/stories/pike-joancollins_280x214.jpg",
+//     link: "https://reprobatepress.com/2018/10/30/cliff-twemlows-the-pike/",
+//   },
+//   {
+//     type: "pike",
+//     name: "The Pike",
+//   },
+//   {
+//     type: "pike",
+//     name: "The Pike",
+//   },
+// ];
+
 export const obstacleArr = [
   // { type: "bownessie", name: "Wreck Name", position: "0", link: "" },
   {
@@ -22,6 +41,7 @@ export const obstacleArr = [
     img: "/img/boats/Margaret-1-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/margaret-around-1780/",
   },
+  { type: "island", name: "Silver Holme.", link: "" },
   {
     type: "boat",
     name: "Esperance",
@@ -29,7 +49,7 @@ export const obstacleArr = [
     img: "/img/boats/Esperance_ret-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/esperance-1869/",
   },
-  { type: "island", name: "Silver Holme.", link: "" },
+  { type: "wreck", name: "Wreck Name", link: "" },
   { type: "island", name: "Crag Holme", link: "" },
   {
     type: "boat",
@@ -38,6 +58,7 @@ export const obstacleArr = [
     img: "/img/boats/WJ-Branksome-2-H-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/branksome/",
   },
+
   { type: "island", name: "Grass Holme,", link: "" },
   {
     type: "pike",
@@ -46,7 +67,6 @@ export const obstacleArr = [
     img: "/img/stories/pike-joancollins_280x214.jpg",
     link: "https://reprobatepress.com/2018/10/30/cliff-twemlows-the-pike/",
   },
-  { type: "wreck", name: "Wreck Name", link: "" },
   { type: "island", name: "Ling Holme", link: "" },
   {
     type: "boat",
@@ -82,6 +102,10 @@ export const obstacleArr = [
     link: "https://lakelandarts.org.uk/items/swallow-1911/",
   },
   {
+    type: "pike",
+    name: "The Pike",
+  },
+  {
     type: "boat",
     name: "Canfly",
     position: "19",
@@ -93,6 +117,13 @@ export const obstacleArr = [
     type: "island",
     name: "Lilies of the Valley (East)",
     link: "",
+  },
+  {
+    type: "bownessie",
+    name: "Bownessie",
+    date: "???",
+    img: "/img/stories/bownessie_280x175.jpeg",
+    link: "https://www.lakelovers.co.uk/blog/windermeres-bownessie/",
   },
   {
     type: "boat",
@@ -127,11 +158,12 @@ export const obstacleArr = [
   {
     type: "bownessie",
     name: "Bownessie",
-    date: "???",
-    img: "/img/stories/bownessie_280x175.jpeg",
-    link: "https://www.lakelovers.co.uk/blog/windermeres-bownessie/",
   },
   { type: "island", name: "Hawes Holme", link: "" },
+  {
+    type: "pike",
+    name: "The Pike",
+  },
   { type: "island", name: "Hen Holme", link: "" },
   {
     type: "boat",
@@ -142,6 +174,10 @@ export const obstacleArr = [
   },
   { type: "island", name: "Ladyholme", link: "" },
   { type: "wreck", name: "Wreck Name", link: "" },
+  {
+    type: "pike",
+    name: "The Pike",
+  },
   { type: "island", name: "Rough Holme", link: "" },
   {
     type: "boat",
@@ -151,6 +187,10 @@ export const obstacleArr = [
     link: "https://lakelandarts.org.uk/items/miss-windermere-iv-1958/",
   },
   { type: "island", name: "Green Tuft Island", link: "" },
+  {
+    type: "bownessie",
+    name: "Bownessie",
+  },
   { type: "island", name: "Bee Holme", link: "" },
   { type: "wreck", name: "Wreck Name", link: "" },
   { type: "island", name: "Blake Holme", link: "" },
