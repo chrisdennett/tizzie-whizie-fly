@@ -101,7 +101,10 @@ export const Game = ({
       {spriteData && (
         <>
           {showGameModal === "start" && isPaused && (
-            <StartGameModal onStart={onPlay} />
+            <StartGameModal
+              onStart={onPlay}
+              countdownFrom={IN_INVINCIBLE_MODE ? 0 : 3}
+            />
           )}
 
           {showGameModal === "replay" && isPaused && (

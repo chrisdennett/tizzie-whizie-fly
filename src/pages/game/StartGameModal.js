@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-export const StartGameModal = ({ onStart }) => {
-  const [counter, setCounter] = useState(3);
+export const StartGameModal = ({ onStart, countdownFrom = 3 }) => {
+  const [counter, setCounter] = useState(countdownFrom);
 
   useEffect(() => {
     if (counter > 0) {
