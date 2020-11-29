@@ -48,7 +48,7 @@ export const CollectionCards = ({
 };
 
 const CardList = styled.div`
-  margin: 30px;
+  margin: 3%;
   min-height: 300px;
   display: flex;
   flex-wrap: wrap;

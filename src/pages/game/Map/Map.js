@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { obstacles } from "../gameLogic/gameItems";
 
 export const Map = ({ progress = 0 }) => {
+  const [markers, setMarkers] = useState([]);
+  const pathRef = useRef(null);
+
   const lakeOutline = `#3b6b98c2`;
   const lakeFill = `#3b6b9833`;
   const islandFill = `rgba(255,255,255,0.8)`;
@@ -10,6 +14,30 @@ export const Map = ({ progress = 0 }) => {
   const dashedStroke = `rgba(255,255,255,0.5)`;
 
   const len = 186.47337341308594;
+
+  useEffect(() => {
+    if (pathRef) {
+      const obArr = obstacles();
+      const paddingAtEnd = 200;
+      const totalTime = obArr[obArr.length - 1].triggerMs + paddingAtEnd;
+
+      let pts = [];
+
+      for (let ob of obArr) {
+        const obPos = ob.triggerMs / totalTime;
+        const distAlongPath = obPos * len;
+        const pt = pathRef.current.getPointAtLength(distAlongPath);
+        let colour = "brown";
+        if (ob.type === "island") colour = "green";
+        if (ob.type === "pike") colour = "salmon";
+        if (ob.type === "bownessie") colour = "yellow";
+
+        pts.push({ x: pt.x, y: pt.y, colour });
+      }
+
+      setMarkers(pts);
+    }
+  }, [pathRef]);
 
   const outlineVariants = {
     hidden: { pathLength: 0, fillOpacity: 0 },
@@ -21,7 +49,15 @@ export const Map = ({ progress = 0 }) => {
     visible: {
       pathLength: 1,
       fillOpacity: 1,
-      transition: { duration: 5, delay: 1 },
+      transition: { duration: 3, delay: 0.5 },
+    },
+  };
+
+  const markerVarients = {
+    hidden: { fillOpacity: 0 },
+    visible: {
+      fillOpacity: 1,
+      transition: { duration: 3, when: "beforeChildren", delay: 0.3 },
     },
   };
 
@@ -186,6 +222,7 @@ export const Map = ({ progress = 0 }) => {
       {/* GUIDE LINE */}
       <g display="inline" transform="translate(65.43 -65.43)">
         <motion.path
+          ref={pathRef}
           fill="none"
           stroke={dashedStroke}
           initial={"hidden"}
@@ -202,7 +239,27 @@ export const Map = ({ progress = 0 }) => {
           overflow="visible"
           paintOrder="markers stroke fill"
         />
+
+        {/* MARKERS */}
+        <motion.g
+          initial={"hidden"}
+          animate={"visible"}
+          variants={markerVarients}
+        >
+          {markers.map((marker, index) => (
+            <ellipse
+              custom={index}
+              key={index}
+              cx={marker.x}
+              cy={marker.y}
+              rx="0.5"
+              ry="0.5"
+              fill={marker.colour}
+            />
+          ))}
+        </motion.g>
       </g>
+
       {/* PROGRESS LINE */}
       <g display="inline" transform="translate(65.43 -65.43)">
         <path
