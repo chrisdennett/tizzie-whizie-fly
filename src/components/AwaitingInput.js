@@ -58,7 +58,7 @@ const Holder = styled.div`
   border: 2px solid black;
 
   border-radius: 30px;
-  padding: 60px 30px;
+  padding: 10% 4%;
 
   svg {
     max-width: 400px;

@@ -149,7 +149,9 @@ const GameMaker = ({
 
       <ExamplesOuter>
         <ExamplesContent>
-          <h4>Or try on one of these beauties...</h4>
+          <h4>
+            Or try with sheet created by local artists to see how it works...
+          </h4>
 
           <SampleCards>
             <SampleCard
