@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { drawPlayer } from "../game/gameLogic/drawGame";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 const GameStartCanvas = ({ spriteData }) => {
   const maskedCanvasRef = useRef(null);
@@ -52,7 +53,11 @@ const GameStartCanvas = ({ spriteData }) => {
   });
 
   return (
-    <CanvasHolder>
+    <CanvasHolder
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <StyledCanvas ref={maskedCanvasRef} />
     </CanvasHolder>
   );
@@ -68,7 +73,7 @@ const StyledCanvas = styled.canvas`
   background-image: url("/img/bg/linedpaper.png");
 `;
 
-const CanvasHolder = styled.div`
+const CanvasHolder = styled(motion.div)`
   text-align: center;
   /* background-color: rgba(255, 255, 255, 0.9); */
   /* border: 1px solid black;

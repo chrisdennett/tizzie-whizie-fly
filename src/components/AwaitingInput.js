@@ -1,9 +1,15 @@
+import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 
 export const AwaitingInput = ({ isLoading }) => {
   return (
-    <Holder isLoading={isLoading}>
+    <Holder
+      isLoading={isLoading}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <svg viewBox="0 0 78.04 38.09">
         {isLoading && (
           <g transform="translate(15,31)">
@@ -52,7 +58,7 @@ export const AwaitingInput = ({ isLoading }) => {
   );
 };
 
-const Holder = styled.div`
+const Holder = styled(motion.div)`
   /* background: #110d48; */
   background: ${(props) => (props.isLoading ? "#008033" : "#480d41")};
   border: 2px solid black;

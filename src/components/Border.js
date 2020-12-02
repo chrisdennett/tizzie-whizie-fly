@@ -15,7 +15,7 @@ const BorderTop = styled.div`
   left: 0;
   right: 0;
   height: 10px;
-  opacity: 0.3;
+  opacity: 0.9;
   background-image: url("/img/bg/border-top.png");
 `;
 
@@ -25,6 +25,6 @@ const BorderBottom = styled.div`
   left: 0;
   right: 0;
   height: 10px;
-  opacity: 0.3;
+  opacity: 0.9;
   background-image: url("/img/bg/border-bottom.png");
 `;

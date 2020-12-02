@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 import { AwaitingInput } from "../../components/AwaitingInput";
@@ -49,11 +50,23 @@ const PreviewCanvas = ({
 
       <RivotBar />
       <Holder>
-        {!source && !gameCanvas && <AwaitingInput isLoading={isLoading} />}
+        <AnimatePresence>
+          {!source && !gameCanvas && <AwaitingInput isLoading={isLoading} />}
+        </AnimatePresence>
 
-        {source && <StyledCanvas ref={canvasRef} />}
+        <AnimatePresence>
+          {source && (
+            <StyledCanvas
+              ref={canvasRef}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            />
+          )}
+        </AnimatePresence>
 
-        {gameCanvas && gameCanvas}
+        <AnimatePresence>{gameCanvas && gameCanvas}</AnimatePresence>
       </Holder>
       <RivotBar />
     </Container>
@@ -162,7 +175,7 @@ const InputContent = styled.div`
   }
 `;
 
-const Holder = styled.div`
+const Holder = styled(motion.div)`
   text-align: center;
   background-color: rgba(0, 0, 0, 0.7);
   border-left: 2px solid black;
@@ -173,7 +186,7 @@ const Holder = styled.div`
   margin: 0 10px;
 `;
 
-const StyledCanvas = styled.canvas`
+const StyledCanvas = styled(motion.canvas)`
   /* width: 100%; */
   /* max-width: 450px; */
   /* background-color: rgba(255, 255, 255, 0.9); */
