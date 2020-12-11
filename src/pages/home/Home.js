@@ -1,4 +1,6 @@
 import React from "react";
+import ReactPlayer from "react-player/youtube";
+
 import styled from "styled-components";
 import { BubbleButton } from "../../components/bubbleButton/BubbleButton";
 import { CallToActionButton } from "../../components/CallToActionButton";
@@ -24,6 +26,29 @@ export const Home = ({ onGetMaking }) => {
           Get Making!
         </CallToActionButton> */}
       </ActionHolder>
+
+      <section>
+        <h2>How it works</h2>
+        <p>
+          Print and paint a template, take a photo, press Generate and BAM!!!
+          You've playing your own painted game.{" "}
+          <Emoji symbol="😄" name="smile" />
+          <Emoji symbol="🕹️" name="joystick" />
+        </p>
+        <VidWrapper>
+          <StyledReactPlayer
+            config={{
+              youtube: {
+                playerVars: { controls: true },
+              },
+            }}
+            url={"https://youtu.be/Ov6FIntydEc"}
+            width="100%"
+            height="100%"
+          />
+        </VidWrapper>
+      </section>
+
       <SiteUnderContruction>
         <h2>
           <Emoji symbol="🚧" name="construction" /> SITE UNDER CONSTRUCTION{" "}
@@ -73,6 +98,17 @@ export const Home = ({ onGetMaking }) => {
   );
 };
 
+const StyledReactPlayer = styled(ReactPlayer)`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+const VidWrapper = styled.div`
+  position: relative;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+`;
+
 const Emoji = ({ symbol, name }) => (
   <span role="img" aria-label={name}>
     {symbol}
@@ -107,16 +143,6 @@ const ActionHolder = styled.div`
   justify-content: center;
 `;
 
-// const VidHolder = styled.div`
-//   min-width: 250px;
-//   min-height: 150px;
-//   border-radius: 5px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   border: 1px solid rgba(0, 0, 0, 0.8);
-// `;
-
 const StyledIntro = styled.div`
   max-width: 600px;
   margin: 10px auto;
@@ -144,6 +170,13 @@ const Content = styled.div`
     p {
       margin: 5px 0;
     }
+  }
+
+  section {
+    border-top: 1px solid rgba(0, 0, 0, 0.8);
+    margin-top: 40px;
+    padding-top: 10px;
+    /* text-align: center; */
   }
 
   @media (max-width: 430px) {
