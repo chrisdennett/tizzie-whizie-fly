@@ -31,7 +31,7 @@ export const Home = ({ onGetMaking }) => {
         <h2>How it works</h2>
         <p>
           Print and paint a template, take a photo, press Generate and BAM!!!
-          You've playing your own painted game.{" "}
+          You're playing your own painted game.{" "}
           <Emoji symbol="😄" name="smile" />
           <Emoji symbol="🕹️" name="joystick" />
         </p>
