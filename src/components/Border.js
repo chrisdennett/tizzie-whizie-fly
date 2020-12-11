@@ -10,21 +10,22 @@ export const Border = ({ type }) => {
 };
 
 const BorderTop = styled.div`
-  position: fixed;
+  /* position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  opacity: 0.9; */
   height: 10px;
-  opacity: 0.9;
+
   background-image: url("/img/bg/border-top.png");
 `;
 
 const BorderBottom = styled.div`
-  position: fixed;
+  /* position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  opacity: 0.9; */
   height: 10px;
-  opacity: 0.9;
   background-image: url("/img/bg/border-bottom.png");
 `;

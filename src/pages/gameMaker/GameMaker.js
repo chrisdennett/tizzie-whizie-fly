@@ -159,14 +159,14 @@ const GameMaker = ({
               img={"jennie-inkpen.jpg"}
               thumb={"jennie-inkpen_250x141.jpg"}
               label={"Fine Fineliner"}
-              details={"by Jennie"}
+              details={"by Jennie Dennett"}
             />
             <SampleCard
               onSelect={onSampleSelect}
               img={"jennie-paint.jpg"}
               thumb={"jennie-paint_250x141.jpg"}
               label={"Painted"}
-              details={"by Jennie"}
+              details={"by Jennie Dennett"}
             />
             {/* <SampleCard
                 onSelect={onSampleSelect}
@@ -175,13 +175,13 @@ const GameMaker = ({
                 label={"Crayon Wonder"}
                 details={"by me!"}
               /> */}
-            <SampleCard
+            {/* <SampleCard
               onSelect={onSampleSelect}
               img={"extreme2.jpg"}
               thumb={"extreme2_250x141.jpg"}
               label={"Angled Photo Test"}
               details={"by A.Bad Photographer"}
-            />
+            /> */}
           </SampleCards>
         </ExamplesContent>
       </ExamplesOuter>
