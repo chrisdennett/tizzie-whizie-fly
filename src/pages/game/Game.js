@@ -166,7 +166,7 @@ const GameScreenOuter = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  height: 100vh;
+  height: calc(100vh - 30px);
 `;
 
 const MainGamePanel = styled.div`
