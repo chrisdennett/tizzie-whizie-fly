@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { CallToActionButton } from "../../../components/CallToActionButton";
-import { CollectionCards } from "../../../collectionCards/CollectionCards";
+import { CollectionCards } from "../../../components/collectionCards/CollectionCards";
 import { WinningHeader } from "./WinningHeader";
 import { LosingHeader } from "./LosingHeader";
 

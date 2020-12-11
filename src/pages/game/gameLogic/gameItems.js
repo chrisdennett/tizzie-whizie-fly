@@ -41,7 +41,12 @@ export const obstacleArr = [
     img: "/img/boats/Margaret-1-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/margaret-around-1780/",
   },
-  { type: "island", name: "Silver Holme.", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Silver Holme.",
+    link: "",
+  },
   {
     type: "boat",
     name: "Esperance",
@@ -49,8 +54,13 @@ export const obstacleArr = [
     img: "/img/boats/Esperance_ret-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/esperance-1869/",
   },
-  { type: "wreck", name: "Wreck Name", link: "" },
-  { type: "island", name: "Crag Holme", link: "" },
+  { type: "wreck", img: "/img/wrecks/wreck.png", name: "Wreck Name", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Crag Holme",
+    link: "",
+  },
   {
     type: "boat",
     name: "Branksome",
@@ -59,7 +69,12 @@ export const obstacleArr = [
     link: "https://lakelandarts.org.uk/items/branksome/",
   },
 
-  { type: "island", name: "Grass Holme,", link: "" },
+  {
+    type: "island",
+    name: "Grass Holme,",
+    link: "",
+    img: "/img/islands/island.png",
+  },
   {
     type: "pike",
     name: "The Pike",
@@ -67,7 +82,12 @@ export const obstacleArr = [
     img: "/img/stories/pike-joancollins_280x214.jpg",
     link: "https://reprobatepress.com/2018/10/30/cliff-twemlows-the-pike/",
   },
-  { type: "island", name: "Ling Holme", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Ling Holme",
+    link: "",
+  },
   {
     type: "boat",
     name: "Motorboat",
@@ -75,7 +95,12 @@ export const obstacleArr = [
     img: "/img/boats/Early-Motor-Boat-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/motorboat-1898/",
   },
-  { type: "island", name: "Ramp Holme", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Ramp Holme",
+    link: "",
+  },
   {
     type: "boat",
     name: "Lady Elizabeth",
@@ -83,8 +108,18 @@ export const obstacleArr = [
     img: "/img/boats/WJ-Lady-Elizabeth-1-H-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/lady-elizabeth-around-1900/",
   },
-  { type: "island", name: "Crow Holme,", link: "" },
-  { type: "island", name: "Maiden Holme", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Crow Holme,",
+    link: "",
+  },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Maiden Holme",
+    link: "",
+  },
   {
     type: "boat",
     name: "Osprey",
@@ -92,7 +127,12 @@ export const obstacleArr = [
     img: "/img/boats/WJ-SL-Osprey-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/osprey-1902/",
   },
-  { type: "island", name: "Belle Isle", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Belle Isle",
+    link: "",
+  },
   {
     type: "boat",
     name: "Swallow",
@@ -132,7 +172,7 @@ export const obstacleArr = [
     img: "/img/boats/White-Lady-II-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/white-lady-ii/",
   },
-  { type: "wreck", name: "Wreck Name", link: "" },
+  { type: "wreck", img: "/img/wrecks/wreck.png", name: "Wreck Name", link: "" },
   {
     type: "island",
     name: "Lilies of the Valley (West),",
@@ -145,7 +185,12 @@ export const obstacleArr = [
     img: "/img/boats/Penelope-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/penelope-ii-1930/",
   },
-  { type: "island", name: "Snake Holme,", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Snake Holme,",
+    link: "",
+  },
   {
     type: "boat",
     name: "Jane",
@@ -153,18 +198,38 @@ export const obstacleArr = [
     img: "/img/boats/Jane-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/jane-1937/",
   },
-  { type: "island", name: "Birk or Birch Holme", link: "" },
-  { type: "island", name: "Thompson Holme ", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Birk or Birch Holme",
+    link: "",
+  },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Thompson Holme ",
+    link: "",
+  },
   {
     type: "bownessie",
     name: "Bownessie",
   },
-  { type: "island", name: "Hawes Holme", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Hawes Holme",
+    link: "",
+  },
   {
     type: "pike",
     name: "The Pike",
   },
-  { type: "island", name: "Hen Holme", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Hen Holme",
+    link: "",
+  },
   {
     type: "boat",
     name: "Slingsby Falcon 1 Glider",
@@ -172,13 +237,23 @@ export const obstacleArr = [
     img: "/img/boats/Slingsby-Falcon-1-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/slingsby-falcon-1-glider-1943/",
   },
-  { type: "island", name: "Ladyholme", link: "" },
-  { type: "wreck", name: "Wreck Name", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Ladyholme",
+    link: "",
+  },
+  { type: "wreck", img: "/img/wrecks/wreck.png", name: "Wreck Name", link: "" },
   {
     type: "pike",
     name: "The Pike",
   },
-  { type: "island", name: "Rough Holme", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Rough Holme",
+    link: "",
+  },
   {
     type: "boat",
     name: "Miss Windermere IV",
@@ -186,14 +261,29 @@ export const obstacleArr = [
     img: "/img/boats/Miss-Windermere-280x188.jpg",
     link: "https://lakelandarts.org.uk/items/miss-windermere-iv-1958/",
   },
-  { type: "island", name: "Green Tuft Island", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Green Tuft Island",
+    link: "",
+  },
   {
     type: "bownessie",
     name: "Bownessie",
   },
-  { type: "island", name: "Bee Holme", link: "" },
-  { type: "wreck", name: "Wreck Name", link: "" },
-  { type: "island", name: "Blake Holme", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Bee Holme",
+    link: "",
+  },
+  { type: "wreck", img: "/img/wrecks/wreck.png", name: "Wreck Name", link: "" },
+  {
+    type: "island",
+    img: "/img/islands/island.png",
+    name: "Blake Holme",
+    link: "",
+  },
 ];
 
 export const spriteData = {

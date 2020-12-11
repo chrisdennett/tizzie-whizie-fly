@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import PhotoCorner from "../components/PhotoCorner";
+import PhotoCorner from "../PhotoCorner";
 
 export const Card = ({ data, showCard }) => {
   return (

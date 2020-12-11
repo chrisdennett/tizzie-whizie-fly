@@ -80,6 +80,7 @@ export const Router = ({
 const Container = styled.div`
   max-width: 800px;
   margin: auto;
+  min-height: calc(100vh - 20px);
 `;
 
 const StepHolder = styled(motion.div)`

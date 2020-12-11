@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Card } from "./Card";
-import { obstacleArr } from "../pages/game/gameLogic/gameItems";
+import { obstacleArr } from "../../pages/game/gameLogic/gameItems";
 
 // const cards = [
 //   {
