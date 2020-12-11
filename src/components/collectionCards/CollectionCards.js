@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Card } from "./Card";
 import { obstacleArr } from "../../pages/game/gameLogic/gameItems";
@@ -17,6 +17,18 @@ export const CollectionCards = ({
   maxIndexCollected = 0,
   demoMode = false,
 }) => {
+  useEffect(() => {
+    try {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    } catch (error) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   const tizzieData = {
     type: "story",
     name: "Tizzie Whizie",
