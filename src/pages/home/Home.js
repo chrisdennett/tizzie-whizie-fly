@@ -3,98 +3,54 @@ import ReactPlayer from "react-player/youtube";
 
 import styled from "styled-components";
 import { BubbleButton } from "../../components/bubbleButton/BubbleButton";
-import { CallToActionButton } from "../../components/CallToActionButton";
+import { Emoji } from "../../components/Emoji";
 import { TizzieLogo } from "../../components/TizzieLogo";
 
 export const Home = ({ onGetMaking }) => {
   return (
-    <Content>
-      <header>
-        <TizzieLogo height={80} />
-        <h1>Fly Tizzie Fly</h1>
-        <StyledIntro>
-          <h2>Paint your own game</h2>
-          <p>
-            An experimental art project where you get to paint and play your own
-            online game.
-          </p>
-        </StyledIntro>
-      </header>
-      <ActionHolder>
-        <BubbleButton onClick={onGetMaking}>GET MAKING!</BubbleButton>
-        {/* <CallToActionButton onClick={onGetMaking}>
+    <>
+      <Content>
+        <header>
+          <TizzieLogo height={80} />
+          <h1>Fly Tizzie Fly</h1>
+          <StyledIntro>
+            <h2>Paint your own game</h2>
+            <p>
+              An experimental art project where you get to paint and play your
+              own online game.
+            </p>
+          </StyledIntro>
+        </header>
+        <ActionHolder>
+          <BubbleButton onClick={onGetMaking}>GET MAKING!</BubbleButton>
+          {/* <CallToActionButton onClick={onGetMaking}>
           Get Making!
         </CallToActionButton> */}
-      </ActionHolder>
+        </ActionHolder>
 
-      <section>
-        <h2>How it works</h2>
-        <p>
-          Print and paint a template, take a photo, press Generate and BAM!!!
-          You're playing your own painted game.{" "}
-          <Emoji symbol="😄" name="smile" />
-          <Emoji symbol="🕹️" name="joystick" />
-        </p>
-        <VidWrapper>
-          <StyledReactPlayer
-            config={{
-              youtube: {
-                playerVars: { controls: true },
-              },
-            }}
-            url={"https://youtu.be/Ov6FIntydEc"}
-            width="100%"
-            height="100%"
-          />
-        </VidWrapper>
-      </section>
-
-      <SiteUnderContruction>
-        <h2>
-          <Emoji symbol="🚧" name="construction" /> SITE UNDER CONSTRUCTION{" "}
-          <Emoji symbol="🚧" name="construction" />
-        </h2>
-        <p>
-          Everything should work, but there might be some exciting bugs!{" "}
-          <Emoji symbol="🐞" name="bug" />
-        </p>
-        <p>
-          I'd love to hear your feedback through a{" "}
-          <CallToActionButton
-            href="https://forms.gle/tyMemgSL8qLbrbzA8"
-            style={{ padding: "2px 10px", textTransform: "uppercase" }}
-          >
-            quick feedback form
-          </CallToActionButton>
-          . Or by email at{" "}
-          <a
-            href="mailto:chrisdennett@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            chrisdennett@gmail.com
-          </a>{" "}
-          if you'd rather.
-        </p>
-        <p>
-          Target completion date: <strong>14th December 2020</strong>
-        </p>
-        {/* <p>Still TODO:</p>
-        <ul>
-          <li>Test and fix bugs</li>
-          <li>Finish all the game card content</li>
-          <li>
-            Finish "About" content including a link to a more detailed project
-            blog post
-          </li>
-          <li>
-            Ask local art students if they'd like to paint some example sheets
-            and add them.
-          </li>
-          <li>Add intro video explaining what this is and how it works.</li>
-        </ul> */}
-      </SiteUnderContruction>
-    </Content>
+        <section>
+          <h2>How it works</h2>
+          <p>
+            Print and paint a template, take a photo, press Generate and BAM!!!
+            You're playing your own painted game.{" "}
+            <Emoji symbol="😄" name="smile" />
+            <Emoji symbol="🕹️" name="joystick" />
+          </p>
+          <VidWrapper>
+            <StyledReactPlayer
+              config={{
+                youtube: {
+                  playerVars: { controls: true },
+                },
+              }}
+              url={"https://youtu.be/Ov6FIntydEc"}
+              width="100%"
+              height="100%"
+            />
+          </VidWrapper>
+        </section>
+      </Content>
+    </>
   );
 };
 
@@ -109,32 +65,24 @@ const VidWrapper = styled.div`
   padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
 `;
 
-const Emoji = ({ symbol, name }) => (
-  <span role="img" aria-label={name}>
-    {symbol}
-  </span>
-);
+// const SiteUnderContruction = styled.div`
+//   margin: 30px 0;
+//   background-color: black;
+//   padding: 20px;
+//   color: white;
 
-const SiteUnderContruction = styled.div`
-  margin: 30px 0;
-  padding: 20px;
-  border-top: 5px dashed rgba(0, 0, 0, 0.5);
-  border-bottom: 5px dashed rgba(0, 0, 0, 0.5);
-  font-family: "Courier New", Courier, monospace;
+//   h2 {
+//     margin: 0;
+//     padding: 10px;
+//     /* padding: 10px; */
+//     border: black 2px solid;
+//     text-align: center;
+//   }
 
-  h2 {
-    margin: 0;
-    padding: 10px;
-    background-color: #ffeb00;
-    /* padding: 10px; */
-    border: black 2px solid;
-    text-align: center;
-  }
-
-  a {
-    font-weight: bold;
-  }
-`;
+//   a {
+//     font-weight: bold;
+//   }
+// `;
 
 const ActionHolder = styled.div`
   padding-bottom: 20px;
@@ -150,7 +98,7 @@ const StyledIntro = styled.div`
 
 const Content = styled.div`
   max-width: 900px;
-  margin: 0 auto;
+  margin: 0 auto 60px auto;
 
   header {
     padding: 20px 10px;
