@@ -10,6 +10,7 @@ import { EndGameModal } from "./EndGameModal";
 
 export const Game = ({
   spriteData,
+  endState,
   onCloseGame,
   setEndState,
   windowSize,
@@ -44,6 +45,7 @@ export const Game = ({
   const onCollision = (gameState) => {
     if (!IN_INVINCIBLE_MODE) {
       setEndState(gameState);
+      console.log("gameState.cardsWon: ", gameState.cardsWon);
       setIsPaused(true);
       setShowGameModal("replay");
     }
@@ -108,7 +110,12 @@ export const Game = ({
           )}
 
           {showGameModal === "replay" && isPaused && (
-            <EndGameModal onReplay={onReplay} onSeeScoreCard={onSeeScoreCard} />
+            <EndGameModal
+              cardsWon={endState.cardsWon}
+              onReplay={onReplay}
+              onSeeScoreCard={onSeeScoreCard}
+              onFinish={onPauseAndCloseGame}
+            />
           )}
 
           {showInstructions && (

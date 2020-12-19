@@ -93,8 +93,8 @@ const About = () => {
             style={{ padding: "2px 10px", textTransform: "uppercase" }}
           >
             quick feedback form
-          </CallToActionButton>
-          . Or by email at{" "}
+          </CallToActionButton>{" "}
+          or by email at{" "}
           <a
             href="mailto:chrisdennett@gmail.com"
             target="_blank"

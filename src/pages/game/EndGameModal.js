@@ -2,18 +2,46 @@ import React from "react";
 import styled from "styled-components";
 import { CallToActionButton } from "../../components/CallToActionButton";
 
-export const EndGameModal = ({ onReplay, onSeeScoreCard }) => {
+export const EndGameModal = ({
+  onReplay,
+  onSeeScoreCard,
+  onFinish,
+  cardsWon,
+}) => {
+  const totalCards = cardsWon + 1;
+  const cardsText = `${totalCards > 1 ? totalCards : ""} CARD${
+    totalCards > 1 ? "S" : ""
+  }`;
+
   return (
     <GameModalOuter>
       <GameModalContent>
         <CallToActionButton onClick={onSeeScoreCard}>
-          SEE SCORECARD
+          See the <b style={{ margin: "0 5px" }}>{cardsText}</b> you collected
         </CallToActionButton>
-        <CallToActionButton onClick={onReplay}>REPLAY</CallToActionButton>
+        <LowerButtons>
+          <CallToActionButton
+            onClick={onReplay}
+            style={{ background: "#63bbe4" }}
+          >
+            REPLAY
+          </CallToActionButton>
+
+          <CallToActionButton
+            style={{ background: "#d86a6a" }}
+            onClick={onFinish}
+          >
+            FINISH
+          </CallToActionButton>
+        </LowerButtons>
       </GameModalContent>
     </GameModalOuter>
   );
 };
+
+const LowerButtons = styled.div`
+  display: flex;
+`;
 
 const GameModalOuter = styled.div`
   z-index: 2;
@@ -25,7 +53,7 @@ const GameModalOuter = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
 `;
 
 const GameModalContent = styled.div`

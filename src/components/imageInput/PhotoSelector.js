@@ -6,7 +6,6 @@ const maxOutputCanvasSize = 1000;
 
 const PhotoSelector = ({
   setPhotoCanvas,
-  photoCanvas,
   children,
   isFileSelector = false,
 }) => {

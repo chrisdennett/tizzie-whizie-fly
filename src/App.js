@@ -57,6 +57,7 @@ function App() {
         <>
           <Game
             setEndState={setEndState}
+            endState={endState}
             showEndScreen={onShowEndScreen}
             onResetGame={onResetGame}
             spriteData={spriteData}
