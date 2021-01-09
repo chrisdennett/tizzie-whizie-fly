@@ -1,25 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { CallToActionButton } from "../../components/CallToActionButton";
 import { Boop } from "../../components/Boop";
+import { ArtistInfo } from "../../components/ArtistInfo";
 
-export const SampleCard = ({ onSelect, img, thumb, label, details }) => {
+export const SampleCard = ({ onSelect, artist }) => {
+  const [isShowing, setIsShowing] = useState(false);
+
+  const dir = "/img/artists/";
+
+  const onShowInfo = () => {
+    setIsShowing(true);
+  };
+
+  const onArtistInfoClose = () => {
+    setIsShowing(false);
+  };
+
+  const onArtistSelect = () => {
+    onSelect(dir + artist.img);
+    setIsShowing(false);
+  };
+
   return (
-    <Boop>
-      <Card onClick={() => onSelect(img)}>
-        <img src={"/" + thumb} alt={label} />
-        <LabelHolder>
-          <h3>{label}</h3>
-          <p>{details}</p>
-          <CallToActionButton>PICK ME!</CallToActionButton>
-        </LabelHolder>
-      </Card>
-    </Boop>
+    <>
+      <ArtistInfo
+        artist={artist}
+        isShowing={isShowing}
+        onClose={onArtistInfoClose}
+        onSelect={onArtistSelect}
+      />
+      <Boop>
+        <Card onClick={onShowInfo}>
+          <img
+            src={dir + artist.thumb}
+            alt={artist.label}
+            onClick={onShowInfo}
+          />
+          <LabelHolder>
+            <h3>{artist.label}</h3>
+            <p>by {artist.name}</p>
+            <CallToActionButton>PICK ME!</CallToActionButton>
+          </LabelHolder>
+        </Card>
+      </Boop>
+    </>
   );
 };
 
-const Card = styled.div`
+const InfoButt = styled.button`
   cursor: pointer;
+  background: none;
+  font-size: 36px;
+  border: none;
+  padding: 0;
+  height: 36px;
+  color: rgba(0, 0, 0, 0.5);
+  outline: none;
+`;
+
+const Card = styled.div`
   display: inline-flex;
   flex-direction: column;
   background-color: white;
@@ -30,7 +70,17 @@ const Card = styled.div`
   margin: 7px;
 
   img {
+    cursor: pointer;
     max-width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 `;
 
@@ -60,4 +110,5 @@ const Holder = styled.div`
   box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.4);
   background: url("./img/bg/redox_01-min.png");
   border-bottom: 2px solid;
+  align-items: center;
 `;

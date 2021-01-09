@@ -15,6 +15,7 @@ import { FaRegImages } from "react-icons/fa";
 // import { Machine } from "../../components/Machine";
 import PreviewCanvas from "./PreviewCanvas";
 import { RivotBar } from "../../components/RivotBar";
+import { artistData } from "../../artistData";
 
 const IN_LOCAL_TEST_MODE = false;
 
@@ -149,39 +150,16 @@ const GameMaker = ({
 
       <ExamplesOuter>
         <ExamplesContent>
-          <h4>
-            Or try with sheet created by local artists to see how it works...
-          </h4>
+          <h4>Or try one created by local artists to see how it works...</h4>
 
           <SampleCards>
-            <SampleCard
-              onSelect={onSampleSelect}
-              img={"jennie-inkpen.jpg"}
-              thumb={"jennie-inkpen_250x141.jpg"}
-              label={"Fine Fineliner"}
-              details={"by Jennie Dennett"}
-            />
-            <SampleCard
-              onSelect={onSampleSelect}
-              img={"jennie-paint.jpg"}
-              thumb={"jennie-paint_250x141.jpg"}
-              label={"Painted"}
-              details={"by Jennie Dennett"}
-            />
-            {/* <SampleCard
+            {artistData.map((artist) => (
+              <SampleCard
+                key={artist.img}
                 onSelect={onSampleSelect}
-                img={"tizzie-full-colour-enhanced.jpg"}
-                thumb={"tizzie-full-colour_250x141.jpg"}
-                label={"Crayon Wonder"}
-                details={"by me!"}
-              /> */}
-            {/* <SampleCard
-              onSelect={onSampleSelect}
-              img={"extreme2.jpg"}
-              thumb={"extreme2_250x141.jpg"}
-              label={"Angled Photo Test"}
-              details={"by A.Bad Photographer"}
-            /> */}
+                artist={artist}
+              />
+            ))}
           </SampleCards>
         </ExamplesContent>
       </ExamplesOuter>
