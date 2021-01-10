@@ -52,7 +52,7 @@ const About = () => {
             </ExternalLink>
           </li>
           <li>
-            By Artist:{" "}
+            By Artist{" "}
             <ExternalLink href="https://artfly.io/chris-dennett/">
               Chris Dennett
             </ExternalLink>{" "}
@@ -72,23 +72,18 @@ const About = () => {
           <ExternalLink href="https://www.rabbies.com/en/blog/tizzie-whizie-legend-lake-district">
             Tizzie Whizie
           </ExternalLink>{" "}
-          skimming over Windermere dodging boats, islands and legends to collect
-          as many stories as you can.
+          skimming over Windermere, dodging boats, islands and legends to
+          collect as many stories as you can.
         </p>
         <p>
-          I trying to introduce the boats and stories of Windermere in a way
-          that’s more palatable for those who’ll play on their phone rather than
-          read the information boards in the museum.
+          The idea is to introduce the boats and stories of Windermere in an
+          entertaining way with familes and kids in mind, providing an
+          opportunity for creative and experimental fun. Making a game rather
+          than simply consuming one.
         </p>
         <p>
-          I'm primarily aiming the game at families and kids. Hopefully shifting
-          people a little from the trance-like consumption of mobile games to
-          more of an experimental and creative experinece.
-        </p>
-        <p>
-          I'm particularly excited to experiment with ways of allowing people to
-          use quick art made in the real world art to simply generate cool
-          digital doodahs!
+          I love experimenting with ways that allow people to use quick art made
+          in the real world to simply generate cool digital doodahs!
         </p>
 
         <p>

@@ -94,8 +94,8 @@ const GameMaker = ({
   return (
     <Container>
       <p>
-        Print a template, paint or decorate however you like, then add a photo
-        of your sheet to the Game Maker 3000.
+        Print a template and decorate it however you'd like, then add a photo of
+        your sheet to the Game Maker 3000.
       </p>
 
       {!showGameCreateStep && (
