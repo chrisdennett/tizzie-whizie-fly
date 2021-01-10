@@ -1,3 +1,5 @@
+export const artistImgDir = "/img/artists/";
+
 export const artistData = [
   {
     img: "AlexandraVranceanu-1.jpg",
@@ -17,17 +19,29 @@ export const artistData = [
     ],
   },
   {
-    img: "jennie-inkpen.jpg",
-    mediumImg: "jennie-inkpen_800x450.jpg",
-    thumb: "jennie-inkpen_250x141.jpg",
+    img: "jennie-inkpen_1500x1061.jpg",
+    mediumImg: "jennie-inkpen_800x566.jpg",
+    thumb: "jennie-inkpen_250x177.jpg",
     label: "Fineliner",
     name: "Jennie Dennett",
+    links: [
+      {
+        label: "Ulverston Candlelit Walk",
+        url: "https://www.facebook.com/candlelitwalk",
+      },
+    ],
   },
   {
-    img: "jennie-paint.jpg",
-    mediumImg: "jennie-paint_800x450.jpg",
-    thumb: "jennie-paint_250x141.jpg",
+    img: "jennie-paint_1500x1075.jpg",
+    mediumImg: "jennie-paint_800x573.jpg",
+    thumb: "jennie-paint_250x179.jpg",
     label: "Acrylic",
     name: "Jennie Dennett",
+    links: [
+      {
+        label: "Ulverston Candlelit Walk",
+        url: "https://www.facebook.com/candlelitwalk",
+      },
+    ],
   },
 ];

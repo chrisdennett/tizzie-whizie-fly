@@ -3,7 +3,12 @@ import styled from "styled-components";
 import { CallToActionButton } from "./CallToActionButton";
 import ExternalLink from "./ExternalLink";
 
-export const ArtistInfo = ({ artist, isShowing, onClose, onSelect }) => {
+export const SampleArtworkModal = ({
+  artist,
+  isShowing,
+  onClose,
+  onSelect,
+}) => {
   if (!isShowing) return null;
 
   const dir = "/img/artists/";

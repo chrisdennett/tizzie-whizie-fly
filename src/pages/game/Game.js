@@ -45,7 +45,6 @@ export const Game = ({
   const onCollision = (gameState) => {
     if (!IN_INVINCIBLE_MODE) {
       setEndState(gameState);
-      console.log("gameState.cardsWon: ", gameState.cardsWon);
       setIsPaused(true);
       setShowGameModal("replay");
     }

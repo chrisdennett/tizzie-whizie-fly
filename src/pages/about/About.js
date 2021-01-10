@@ -1,10 +1,33 @@
 import React from "react";
 import styled from "styled-components";
-import { CallToActionButton } from "../../components/CallToActionButton";
+import { artistData } from "../../artistData";
+import { ArtistInfoCard } from "../../components/ArtistInfoCard";
 import { Emoji } from "../../components/Emoji";
 import ExternalLink from "../../components/ExternalLink";
 
 const About = () => {
+  let mergedArtistList = [];
+  for (let artist of artistData) {
+    const currObj = mergedArtistList.find((a) => artist.name === a.name);
+
+    if (!currObj) {
+      mergedArtistList.push({ ...artist, thumbList: [artist.thumb] });
+    } else {
+      currObj.thumbList.push(artist.thumb);
+    }
+  }
+
+  const artistNames = mergedArtistList.map((artist, index) => {
+    let txt = artist.name;
+    if (index === mergedArtistList.length - 2) {
+      txt += " and ";
+    } else if (index < mergedArtistList.length - 2) {
+      txt += ", ";
+    }
+
+    return txt;
+  });
+
   return (
     <Content>
       <CenteredSection>
@@ -79,6 +102,25 @@ const About = () => {
 
       <section>
         <h2>
+          <Emoji symbol="🙏" name="thank-you" /> Thank you to the artists who
+          contributed work
+        </h2>
+        <p>
+          Thank you to the artists <strong>{artistNames}</strong>. And to Mr
+          Hardy and Mrs Charlesworth from{" "}
+          <ExternalLink href="https://thelakesschool.com/the-lakes-school-cumbria/">
+            The Lakes School
+          </ExternalLink>
+          . And lastly thank you to my lovely wife Jennie who created the
+          initial test sheets and to my children for the endless testing.
+        </p>
+        {mergedArtistList.map((artist) => (
+          <ArtistInfoCard key={artist.img} artist={artist} />
+        ))}
+      </section>
+
+      <section>
+        <h2>
           <Emoji symbol="🧪" name="test-tube" /> It's all a bit experimental!{" "}
           <Emoji symbol="🧪" name="test-tube" />
         </h2>
@@ -88,12 +130,9 @@ const About = () => {
         </p>
         <p>
           If you're up for it, I'd love to hear your feedback through a{" "}
-          <CallToActionButton
-            href="https://forms.gle/tyMemgSL8qLbrbzA8"
-            style={{ padding: "2px 10px", textTransform: "uppercase" }}
-          >
+          <ExternalLink href="https://forms.gle/tyMemgSL8qLbrbzA8">
             quick feedback form
-          </CallToActionButton>{" "}
+          </ExternalLink>{" "}
           or by email at{" "}
           <a
             href="mailto:chrisdennett@gmail.com"
@@ -105,6 +144,7 @@ const About = () => {
           if you'd rather.
         </p>
       </section>
+
       <SignOff>
         <p>Toodle pip</p>
         <p>
@@ -125,6 +165,7 @@ const CenteredSection = styled.div`
 
   img {
     width: 100%;
+    height: auto;
   }
 `;
 

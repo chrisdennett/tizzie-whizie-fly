@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { CallToActionButton } from "../../components/CallToActionButton";
 import { Boop } from "../../components/Boop";
-import { ArtistInfo } from "../../components/ArtistInfo";
+import { SampleArtworkModal } from "../../components/SampleArtworkModal";
+import { artistImgDir } from "../../artistData";
 
 export const SampleCard = ({ onSelect, artist }) => {
   const [isShowing, setIsShowing] = useState(false);
-
-  const dir = "/img/artists/";
 
   const onShowInfo = () => {
     setIsShowing(true);
@@ -18,13 +17,13 @@ export const SampleCard = ({ onSelect, artist }) => {
   };
 
   const onArtistSelect = () => {
-    onSelect(dir + artist.img);
+    onSelect(artistImgDir + artist.img);
     setIsShowing(false);
   };
 
   return (
     <>
-      <ArtistInfo
+      <SampleArtworkModal
         artist={artist}
         isShowing={isShowing}
         onClose={onArtistInfoClose}
@@ -33,7 +32,7 @@ export const SampleCard = ({ onSelect, artist }) => {
       <Boop>
         <Card onClick={onShowInfo}>
           <img
-            src={dir + artist.thumb}
+            src={artistImgDir + artist.thumb}
             alt={artist.label}
             onClick={onShowInfo}
           />
@@ -48,18 +47,9 @@ export const SampleCard = ({ onSelect, artist }) => {
   );
 };
 
-const InfoButt = styled.button`
-  cursor: pointer;
-  background: none;
-  font-size: 36px;
-  border: none;
-  padding: 0;
-  height: 36px;
-  color: rgba(0, 0, 0, 0.5);
-  outline: none;
-`;
-
 const Card = styled.div`
+  max-width: 250px;
+  cursor: pointer;
   display: inline-flex;
   flex-direction: column;
   background-color: white;
