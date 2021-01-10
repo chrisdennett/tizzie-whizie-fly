@@ -68,6 +68,7 @@ const Outer = styled.div`
 
 const ModalContent = styled.div`
   margin: 5px;
+  max-height: 100%;
   overflow: auto;
   /* background-color: rgba(255, 255, 255, 0.5); */
   border-radius: 8px;
