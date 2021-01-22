@@ -35,7 +35,8 @@ export const GameEndScreen = ({ onReplay, endState, onFinish, spriteData }) => {
         <p>
           <b>CARDS:</b>{" "}
           <span>
-            {endState.cardsWon | 0} out of {endState.obstacles.length}
+            {/* plus one because I included the tizzy card */}
+            {endState.cardsWon | 0} out of {endState.obstacles.length + 1}
           </span>
         </p>
         <CollectionCards
