@@ -37,7 +37,7 @@ export const Card = ({ data, showCard }) => {
             <TextBit>
               <h3>{data.name}</h3>
               <div>
-                <p>TYPE: {data.type}</p>
+                <p>TYPE: {cardType}</p>
 
                 {data.date && <p>DATE: {data.date}</p>}
 
