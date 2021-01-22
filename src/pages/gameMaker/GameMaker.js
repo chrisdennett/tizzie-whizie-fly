@@ -37,13 +37,19 @@ const GameMaker = ({
     // FOR TESTING - LOAD SAMPLE IMMEDIATELY
     else if (IN_TEST_MODE || IN_LOCAL_TEST_MODE) {
       // loadImage("./tizzie-full-colour.jpg", setPhotoCanvas, true);
-      loadImage("./filled-in-sheet.png", createSpritesheet, true);
+      loadImage(
+        "./img/artists/AlexandraVranceanu-1.jpg",
+        createSpritesheet,
+        true
+      );
     }
     // eslint-disable-next-line
   }, [spritesheetMask, IN_TEST_MODE]);
 
   // USED IN TEST TO GO STRAIGHT TO A GAME
   const createSpritesheet = (sourceImg) => {
+    console.log("sourceImg: ", sourceImg);
+
     const generatedSheetData = generateSpritesheetFromScratch(
       sourceImg,
       spritesheetMask

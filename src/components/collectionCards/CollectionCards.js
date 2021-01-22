@@ -37,17 +37,17 @@ export const CollectionCards = ({
     link: "https://www.rabbies.com/en/blog/tizzie-whizie-legend-lake-district",
   };
 
-  const uniqueObstacles = obstacleArr.filter((obs, i, self) => {
-    // only return obstacles with a unique name property
-    return i === self.findIndex((t) => t.name === obs.name);
-  });
+  // const uniqueObstacles = obstacleArr.filter((obs, i, self) => {
+  //   // only return obstacles with a unique name property
+  //   return i === self.findIndex((t) => t.name === obs.name);
+  // });
 
   return (
     <div>
       <CardList>
         <Card data={tizzieData} showCard={true} />
 
-        {uniqueObstacles.map((item, index) => (
+        {obstacleArr.map((item, index) => (
           <Card
             key={index}
             data={item}

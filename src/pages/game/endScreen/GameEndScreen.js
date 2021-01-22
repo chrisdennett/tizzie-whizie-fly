@@ -9,6 +9,8 @@ export const GameEndScreen = ({ onReplay, endState, onFinish, spriteData }) => {
   const gameIsWon =
     endState.maxObstacleIndexCollected >= endState.obstacles.length - 1;
 
+  const finalScore = gameIsWon ? endState.topScore : endState.pointsWon;
+
   return (
     <Container>
       <Content>
@@ -28,10 +30,13 @@ export const GameEndScreen = ({ onReplay, endState, onFinish, spriteData }) => {
         {!gameIsWon && <LosingHeader />}
 
         <p>
-          <b>SCORE:</b> {endState.pointsWon | 0} out of {endState.topScore}
+          <b>SCORE:</b> {finalScore | 0} out of {endState.topScore}
         </p>
         <p>
-          <b>CARDS:</b> <span>{endState.cardsWon | 0} out of 42</span>
+          <b>CARDS:</b>{" "}
+          <span>
+            {endState.cardsWon | 0} out of {endState.obstacles.length}
+          </span>
         </p>
         <CollectionCards
           maxIndexCollected={endState.maxObstacleIndexCollected}

@@ -144,6 +144,9 @@ export const obstacleArr = [
   {
     type: "pike",
     name: "The Pike",
+    date: "1982",
+    img: "/img/stories/pike-joancollins_280x214.jpg",
+    link: "https://reprobatepress.com/2018/10/30/cliff-twemlows-the-pike/",
   },
   {
     type: "boat",
@@ -155,6 +158,7 @@ export const obstacleArr = [
   },
   {
     type: "island",
+    img: "/img/islands/island.png",
     name: "Lilies of the Valley (East)",
     link: "",
   },
@@ -175,6 +179,7 @@ export const obstacleArr = [
   { type: "wreck", img: "/img/wrecks/wreck.png", name: "Wreck Name", link: "" },
   {
     type: "island",
+    img: "/img/islands/island.png",
     name: "Lilies of the Valley (West),",
     link: "",
   },
@@ -213,6 +218,9 @@ export const obstacleArr = [
   {
     type: "bownessie",
     name: "Bownessie",
+    date: "???",
+    img: "/img/stories/bownessie_280x175.jpeg",
+    link: "https://www.lakelovers.co.uk/blog/windermeres-bownessie/",
   },
   {
     type: "island",
@@ -223,6 +231,9 @@ export const obstacleArr = [
   {
     type: "pike",
     name: "The Pike",
+    date: "1982",
+    img: "/img/stories/pike-joancollins_280x214.jpg",
+    link: "https://reprobatepress.com/2018/10/30/cliff-twemlows-the-pike/",
   },
   {
     type: "island",
@@ -247,6 +258,9 @@ export const obstacleArr = [
   {
     type: "pike",
     name: "The Pike",
+    date: "1982",
+    img: "/img/stories/pike-joancollins_280x214.jpg",
+    link: "https://reprobatepress.com/2018/10/30/cliff-twemlows-the-pike/",
   },
   {
     type: "island",
@@ -270,6 +284,9 @@ export const obstacleArr = [
   {
     type: "bownessie",
     name: "Bownessie",
+    date: "???",
+    img: "/img/stories/bownessie_280x175.jpeg",
+    link: "https://www.lakelovers.co.uk/blog/windermeres-bownessie/",
   },
   {
     type: "island",

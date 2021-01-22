@@ -16,14 +16,13 @@ export const Game = ({
   windowSize,
   showEndScreen,
   onResetGame,
-  AUTO_PLAY_GAME,
   IN_INVINCIBLE_MODE,
 }) => {
   const [flyUp, setFlyUp] = useState(false);
   const [diveDown, setDiveDown] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
   const [showGameModal, setShowGameModal] = useState("start");
-  const [isPaused, setIsPaused] = useState(!AUTO_PLAY_GAME);
+  const [isPaused, setIsPaused] = useState(true);
 
   useKeyboardBindings({
     ArrowUp: () => goUp(),

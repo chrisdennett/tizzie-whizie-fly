@@ -9,7 +9,6 @@ import { defaultGameState } from "./pages/game/gameLogic/gameState";
 
 const IN_TEST_MODE = false;
 const IN_INVINCIBLE_MODE = false;
-const AUTO_PLAY_GAME = false;
 const SHOW_END_SCREEN = false;
 
 function App() {
@@ -63,7 +62,6 @@ function App() {
             spriteData={spriteData}
             onCloseGame={onCloseGame}
             windowSize={windowSize}
-            AUTO_PLAY_GAME={AUTO_PLAY_GAME}
             IN_INVINCIBLE_MODE={IN_INVINCIBLE_MODE}
           />
         </>

@@ -3,6 +3,11 @@ import styled from "styled-components";
 import PhotoCorner from "../PhotoCorner";
 
 export const Card = ({ data, showCard }) => {
+  let cardType = data.type;
+  if (cardType === "pike" || cardType === "bownessie") {
+    cardType = "story";
+  }
+
   return (
     <Outer>
       <Corner style={{ top: 0, left: 0 }}>
@@ -86,7 +91,7 @@ const EmptyCardContent = styled.div`
 const Content = styled.div`
   p,
   h3 {
-    margin: 0 0 10px 0;
+    margin: 0 0 5px 0;
   }
 `;
 
@@ -108,5 +113,5 @@ const CardHolder = styled.div`
 `;
 
 const TextBit = styled.div`
-  padding: 20px;
+  padding: 10px;
 `;
